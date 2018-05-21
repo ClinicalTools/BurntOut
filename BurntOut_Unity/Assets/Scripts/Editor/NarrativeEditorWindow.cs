@@ -9,6 +9,7 @@ public class NarrativeEditorWindow : EditorWindow
 {
     private readonly List<ScenarioEditor> scenarioEditors = new List<ScenarioEditor>();
     private int selectedScenario = 0;
+    private Vector2 scrollPosition = new Vector2();
 
     // Add menu named "Scene Manager" to the Window menu
     [MenuItem("Window/Narrative Manager")]
@@ -94,10 +95,9 @@ public class NarrativeEditorWindow : EditorWindow
         }
 
         // Draw the selected scenario
-        using (new EditorScrollView())
+        using (new EditorScrollView(ref scrollPosition))
         {
             scenarioEditors[selectedScenario].Edit();
         }
-
     }
 }

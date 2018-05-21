@@ -7,11 +7,9 @@ using UnityEngine;
 /// </summary>
 public class EditorScrollView : IDisposable
 {
-    private Vector2 vec = new Vector2();
-
-    public EditorScrollView()
+    public EditorScrollView(ref Vector2 scrollPosition)
     {
-        vec = EditorGUILayout.BeginScrollView(vec);
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
     }
 
     public void Dispose()
