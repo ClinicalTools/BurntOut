@@ -5,29 +5,29 @@ using System.Collections.Generic;
 /// <summary>
 /// Manages editing the scene's scenarios.
 /// </summary>
-public class SceneManagerEditor : EditorWindow
+public class NarrativeEditorWindow : EditorWindow
 {
     private readonly List<ScenarioEditor> scenarioEditors = new List<ScenarioEditor>();
     private int selectedScenario = 0;
 
     // Add menu named "Scene Manager" to the Window menu
-    [MenuItem("Window/Scene Manager")]
+    [MenuItem("Window/Narrative Manager")]
     static void Init()
     {
         // Get existing open window or if none, make a new one:
-        SceneManagerEditor window = (SceneManagerEditor)GetWindow(typeof(SceneManagerEditor));
+        NarrativeEditorWindow window = GetWindow<NarrativeEditorWindow>("Narrative");
         window.Show();
     }
 
     void OnGUI()
     {
         // If I don't reload this often, the editor will become disconnected from the object after a test play.
-        GameObject sceneManagerObj = GameObject.Find("SceneManager");
+        GameObject sceneManagerObj = GameObject.Find("NarrativeManager");
 
         // Initalize if null
         if (sceneManagerObj == null)
         {
-            sceneManagerObj = new GameObject("SceneManager");
+            sceneManagerObj = new GameObject("NarrativeManager");
             sceneManagerObj.AddComponent<NarrativeManager>();
         }
         NarrativeManager sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
@@ -38,7 +38,7 @@ public class SceneManagerEditor : EditorWindow
         }
 
         // Allows the scene to save changes and 'undo' to be possible
-        Undo.RecordObject(sceneManager, "SceneManager change");
+        Undo.RecordObject(sceneManager, "NarrativeManager change");
 
         // Ensure there's at least one scenario
         if (sceneManager.scenarios.Count == 0)
