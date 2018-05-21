@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using System;
+using UnityEngine.SceneManagement;
+using System.IO;
 
 /// <summary>
 /// Manages editing the scene's scenarios.
@@ -42,14 +46,15 @@ public class NarrativeEditorWindow : EditorWindow
         Undo.RecordObject(sceneManager, "NarrativeManager change");
 
         // Ensure there's at least one scenario
-        if (sceneManager.scenarios.Count == 0)
-            sceneManager.scenarios.Add(new Scenario());
+        if (sceneManager.sceneNarrative.scenarios.Count == 0)
+            sceneManager.sceneNarrative.scenarios.Add(new Scenario());
 
         // Ensure scenarios in the editor match the scenarios in the scene
-        if (scenarioEditors.Count != sceneManager.scenarios.Count || scenarioEditors[0].scenario != sceneManager.scenarios[0])
+        if (scenarioEditors.Count != sceneManager.sceneNarrative.scenarios.Count ||
+            scenarioEditors[0].scenario != sceneManager.sceneNarrative.scenarios[0])
         {
             scenarioEditors.Clear();
-            foreach (Scenario scenario in sceneManager.scenarios)
+            foreach (Scenario scenario in sceneManager.sceneNarrative.scenarios)
                 scenarioEditors.Add(new ScenarioEditor(scenario));
         }
 
@@ -57,9 +62,10 @@ public class NarrativeEditorWindow : EditorWindow
         using (new EditorHorizontal(EditorStyles.toolbar))
         {
             EditorStyles.toolbarButton.fontSize = 12;
-            for (int i = 0; i < sceneManager.scenarios.Count; i++)
+            for (int i = 0; i < sceneManager.sceneNarrative.scenarios.Count; i++)
             {
-                if (GUILayout.Toggle(i == selectedScenario, "Scenario " + (i + 1) + " - " + sceneManager.scenarios[i].Name, EditorStyles.toolbarButton))
+                if (GUILayout.Toggle(i == selectedScenario,
+                    "Scenario " + (i + 1) + " - " + sceneManager.sceneNarrative.scenarios[i].Name, EditorStyles.toolbarButton))
                 {
                     selectedScenario = i;
                 }
@@ -70,7 +76,7 @@ public class NarrativeEditorWindow : EditorWindow
             if (GUILayout.Button("+", EditorStyles.toolbarButton))
             {
                 Scenario scenario = new Scenario();
-                sceneManager.scenarios.Add(scenario);
+                sceneManager.sceneNarrative.scenarios.Add(scenario);
                 scenarioEditors.Add(new ScenarioEditor(scenario));
             }
             if (GUILayout.Button("-", EditorStyles.toolbarButton))
@@ -78,18 +84,117 @@ public class NarrativeEditorWindow : EditorWindow
                 if (EditorUtility.DisplayDialog("Remove Scenario",
                     "Are you sure you want to delete this scenario?", "Delete", "Cancel"))
                 {
-                    sceneManager.scenarios.RemoveAt(selectedScenario);
+                    sceneManager.sceneNarrative.scenarios.RemoveAt(selectedScenario);
                     scenarioEditors.RemoveAt(selectedScenario);
-                    selectedScenario--;
+                    if (selectedScenario > 0)
+                        selectedScenario--;
+
+                    // Ensure there's at least one scenario
+                    if (sceneManager.sceneNarrative.scenarios.Count == 0)
+                    {
+                        Scenario scenario = new Scenario();
+                        sceneManager.sceneNarrative.scenarios.Add(scenario);
+                        scenarioEditors.Add(new ScenarioEditor(scenario));
+                    }
+
                 }
             }
 
             EditorStyles.toolbarButton.fontStyle = FontStyle.Italic;
-            GUILayout.Button("Save Scenario", EditorStyles.toolbarButton);
-            GUILayout.Button("Load Scenario", EditorStyles.toolbarButton);
+            if (GUILayout.Button("Save Scenario", EditorStyles.toolbarButton))
+            {
+                // Get the folder to save the scenario in
+                string json = JsonUtility.ToJson(sceneManager.sceneNarrative.scenarios[selectedScenario]);
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
+                Directory.CreateDirectory(path);
+
+                // Name.yyyy.MM.dd.letter.json
+                string fileName = sceneManager.sceneNarrative.scenarios[selectedScenario].Name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
+
+                // Alphabetical character based on number of similar files saved today
+                char lastLetter = 'a';
+                foreach (var file in Directory.GetFiles(path))
+                {
+                    if (file.Contains(fileName) && file.EndsWith(".json"))
+                    {
+                        string str = Path.GetFileName(file);
+                        str = str.Replace(fileName + '.', "");
+                        if (str[0] >= lastLetter)
+                            lastLetter = (char)(str[0] + 1);
+                    }
+                }
+                fileName += "." + lastLetter + ".json";
+
+                path = EditorUtility.SaveFilePanel("Save Scenario", path, fileName, "json");
+
+                if (!String.IsNullOrEmpty(path))
+                    File.WriteAllText(path, json);
+            }
+            if (GUILayout.Button("Load Scenario", EditorStyles.toolbarButton))
+            {
+                // Get the folder to load the scenario from
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
+
+                path = EditorUtility.OpenFilePanel("Load Scenario", path, "json");
+
+                if (!String.IsNullOrEmpty(path))
+                {
+                    string json = File.ReadAllText(path);
+
+                    var scenario = JsonUtility.FromJson<Scenario>(json);
+                    sceneManager.sceneNarrative.scenarios[selectedScenario] = scenario;
+                    scenarioEditors[selectedScenario] = new ScenarioEditor(scenario);
+                }
+            }
             EditorStyles.toolbarButton.fontStyle = FontStyle.BoldAndItalic;
-            GUILayout.Button("Save All", EditorStyles.toolbarButton);
-            GUILayout.Button("Load All", EditorStyles.toolbarButton);
+            if (GUILayout.Button("Save All", EditorStyles.toolbarButton))
+            {
+                // Get the folder to save the scene in
+                string json = JsonUtility.ToJson(sceneManager.sceneNarrative);
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name;
+                Directory.CreateDirectory(path);
+
+                // Name.yyyy.MM.dd.letter.json
+                string fileName = SceneManager.GetActiveScene().name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
+
+                // Alphabetical character based on number of similar files saved today
+                char lastLetter = 'a';
+                foreach (var file in Directory.GetFiles(path))
+                {
+                    if (file.Contains(fileName) && file.EndsWith(".json"))
+                    {
+                        string str = Path.GetFileName(file);
+                        str = str.Replace(fileName + '.', "");
+                        if (str[0] >= lastLetter)
+                            lastLetter = (char)(str[0] + 1);
+                    }
+                }
+                fileName += "." + lastLetter + ".json";
+
+                path = EditorUtility.SaveFilePanel("Save Scene", path, fileName, "json");
+
+                if (!String.IsNullOrEmpty(path))
+                    File.WriteAllText(path, json);
+            }
+            if (GUILayout.Button("Load All", EditorStyles.toolbarButton))
+            {
+                // Get the folder to load the scene from
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name;
+
+                path = EditorUtility.OpenFilePanel("Load Scene", path, "json");
+
+                if (!String.IsNullOrEmpty(path))
+                {
+                    string json = File.ReadAllText(path);
+
+                    var sceneNarrative = JsonUtility.FromJson<SceneNarrative>(json);
+                    sceneManager.sceneNarrative = sceneNarrative;
+                }
+            }
             EditorStyles.toolbarButton.fontStyle = FontStyle.Normal;
             EditorStyles.toolbarButton.fontSize = 0;
         }
