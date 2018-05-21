@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 116756028}
   - component: {fileID: 116756027}
   - component: {fileID: 116756026}
+  - component: {fileID: 116756029}
   m_Layer: 5
   m_Name: BottonDOWN
   m_TagString: Untagged
@@ -314,6 +315,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 116756024}
+--- !u!114 &116756029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 116756024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0347dc74966b7ce42aac6f87734e5017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 
+  result: 0
+  stats: {fileID: 927959815}
+  narrativeManager: {fileID: 354923700}
 --- !u!114 &136936747 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
@@ -739,6 +755,249 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 289404370}
+--- !u!1 &354923699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 354923701}
+  - component: {fileID: 354923700}
+  m_Layer: 0
+  m_Name: NarrativeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &354923700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354923699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c75915c26191cf4cb3f40173bc200a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneNarrative:
+    scenarios:
+    - Name: Blood Test Results
+      actors:
+      - player
+      - Ms. Jackson
+      choices:
+      - Name: Ms. Jackson's concerns about the tests 1
+        Text: 'What do you say in response to Ms. Jackson? '
+        events:
+        - action: 2
+          actor: 1
+          emotion: 2
+          dialogue: 
+        - action: 0
+          actor: 1
+          emotion: 0
+          dialogue: Hello.
+        - action: 0
+          actor: 0
+          emotion: 0
+          dialogue: Good evening, Ms. Jackson. I heard you had a question for me.
+        - action: 0
+          actor: 1
+          emotion: 0
+          dialogue: 'Yes. '
+        - action: 2
+          actor: 1
+          emotion: 4
+          dialogue: 
+        - action: 0
+          actor: 0
+          emotion: 0
+          dialogue: "I\u2019m supposed to get my blood test results back tomorrow
+            and I\u2019m worried about what they might find."
+        options:
+        - Name: Tests are a common part of the process
+          Text: Tests are a common part of the process.
+          events:
+          - action: 2
+            actor: 1
+            emotion: 2
+            dialogue: 
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "I know they\u2019re common, but that doesn\u2019t help alleviate
+              my anxiety."
+          Result: 0
+          HealthChange: -30
+          Feedback: 'Patients are unique and see their situation as unique. From the
+            professional perspective the experiences seem similar. However, that''s
+            not how patients see it. It''s best for you not to express the commonality
+            of medicine to patients because that does not mesh with their perception. '
+        - Name: Whatever the results, we can address them together
+          Text: Whatever the results, we can address them together.
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: I appreciate that. The waiting is just killing me.
+          Result: 2
+          HealthChange: 10
+          Feedback: "It's nice to reassure the patient and convey a positive outlook.
+            In this case, the test is not a chance to find out really bad news, but
+            is indeed fairly routine part of medicine. You shouldn't be afraid to
+            console your patient when it is genuine.\r"
+        - Name: "You shouldn\u2019t be so worried"
+          Text: "You shouldn\u2019t be so worried."
+          events:
+          - action: 2
+            actor: 1
+            emotion: 3
+            dialogue: 
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "Well, it\u2019s my life, so of course I\u2019m worried! You
+              don\u2019t seem to care about what might be going on with me!"
+          Result: 1
+          HealthChange: -60
+          Feedback: At face value this sounds like a rejection of the patient's concern.
+            You should instead recognize and validate their concern in order to console
+            the patient and help them decrease their stress related to the test.
+      - Name: Ms. Jackson's concerns about the tests 2
+        Text: What is a good way to continue the conversation with Ms. Jackson?
+        events:
+        - action: 0
+          actor: 1
+          emotion: 0
+          dialogue: "My sister tells me I shouldn\u2019t be worried either, but it\u2019s
+            just my nature. I\u2019m the worrier in the family."
+        options:
+        - Name: Worrying never solves anything
+          Text: "\u201CI used to be that way, too, but worrying never solves anything.
+            Now I try to deal with things as they come.\u201D"
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "I guess you\u2019re a lot stronger than I am, then."
+          Result: 1
+          HealthChange: -60
+          Feedback: 'It''s okay to share a personal struggle with the patient, as
+            it enhances patient rapport if you can help the patient see that you are
+            human, too. However, it could also have the opposite effect and make the
+            patient feel like the comparison shows that they are weak for not dealing
+            with the situation in the same manner you did. '
+        - Name: Ask about anxiety
+          Text: "\u201CHave you spoken to anyone on staff about this anxiety prior?\u201D"
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "Not really. I\u2019m just an anxious person. And since I\u2019ve
+              got nothing to do most of the day except sit around and think about
+              the worse case scenario, it just makes it worse."
+          Result: 0
+          HealthChange: -30
+          Feedback: "While it\u2019s good to ascertain if Ms. Jackson might need help
+            dealing with her anxiety, it\u2019s best to address her immediate concerns
+            at the moment. This would offer an opportunity for you to provide a more
+            complete answer as well as to consult the patient about their stress. "
+        - Name: Ask about concerns
+          Text: "\u201CCan you tell me what your concerns are?\u201D"
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "My father died of acute myeloid leukemia and I\u2019m having
+              the same kinds of symptoms he had. I\u2019m always tired, been losing
+              weight, and I get fever and chills every night."
+          Result: 2
+          HealthChange: 10
+          Feedback: Presenting the question in this manner offers an opportunity for
+            you to provide a more complete answer as well as to consult the patient.
+            This will help them decrease their stress related to the test.
+      - Name: Ms. Jackson's concerns about the tests 3
+        Text: "Now that you know Ms. Jackson\u2019s concerns, you can better address
+          the situation. What is a good way to alleviate her stress regarding the
+          test results?"
+        events: []
+        options:
+        - Name: There are a number of possible reasons
+          Text: "\u201CI understand your concerns, but there are a number of reasons
+            why you might be experiencing these symptoms.\u201D"
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "And one of them might be leukemia! I just know that\u2019s
+              the reason."
+          Result: 0
+          HealthChange: -30
+          Feedback: Acknowledging her concerns and trying to assure Ms. Jackson about
+            her symptoms seems like a good idea, but it leaves the door open to having
+            her think that her suspicion is still correct.
+        - Name: Tell her it's very unlikely and express sympathy
+          Text: "\u201CI am sorry to hear about your father. But it\u2019s very unlikely
+            that you will have the same diagnosis.\u201D"
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: I hope not.
+          - action: 1
+            actor: 1
+            emotion: 0
+            dialogue: 
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "I guess we\u2019ll find out tomorrow and deal with whatever
+              comes."
+          Result: 2
+          HealthChange: 10
+          Feedback: "It was a good approach to acknowledge Ms. Jackson\u2019s concerns
+            regarding similarity to her father\u2019s diagnosis and the unlikelihood
+            that she will have a similar result."
+        - Name: Not necessarily passed down
+          Text: "\u201CAcute myeloid leukemia doesn\u2019t necessarily run in families,
+            so it wouldn\u2019t be passed down.\u201D"
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "But it could be, right? (She starts crying) And then I\u2019d
+              be dying of the same thing that took my father!"
+          Result: 1
+          HealthChange: -60
+          Feedback: "While the technical information may be correct, the way you deliver
+            your assurances makes a difference. Instead of denying Ms. Jackson\u2019s
+            concerns, instead you should acknowledge them and help to alleviate her
+            worries."
+      EndNarrative: 'Having a good relationship with patients is an important part
+        of avoiding burnout. If you see patients as tasks to be beaten, then patient
+        care does indeed become tedious and annoying. Without the human element and
+        without interactions with patients, you will lose the meaning that gives you
+        the ability to put the challenge into perspective. It may seem like a good
+        choice in the short-term to rush through the personal aspect of medicine,
+        but in the long-term you will be setting yourself up to more negative attitudes
+        toward patients and patient care, and more frustration with the process of
+        providing care to patients. '
+--- !u!4 &354923701
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354923699}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &459295823
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +1094,7 @@ GameObject:
   - component: {fileID: 469622541}
   - component: {fileID: 469622540}
   - component: {fileID: 469622539}
+  - component: {fileID: 469622542}
   m_Layer: 5
   m_Name: ButtonUP
   m_TagString: Untagged
@@ -935,6 +1195,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 469622537}
+--- !u!114 &469622542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 469622537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0347dc74966b7ce42aac6f87734e5017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: jsdahfkjashd
+  result: 0
+  stats: {fileID: 927959815}
+  narrativeManager: {fileID: 354923700}
 --- !u!1 &520145182
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,8 +3351,9 @@ GameObject:
   - component: {fileID: 1762709404}
   - component: {fileID: 1762709403}
   - component: {fileID: 1762709402}
+  - component: {fileID: 1762709405}
   m_Layer: 5
-  m_Name: ButtonRight
+  m_Name: ButtonRIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3176,6 +3452,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1762709400}
+--- !u!114 &1762709405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1762709400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0347dc74966b7ce42aac6f87734e5017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 
+  result: 0
+  stats: {fileID: 927959815}
+  narrativeManager: {fileID: 354923700}
 --- !u!1001 &1769386302
 Prefab:
   m_ObjectHideFlags: 0
@@ -3452,6 +3743,7 @@ GameObject:
   - component: {fileID: 1890029494}
   - component: {fileID: 1890029493}
   - component: {fileID: 1890029492}
+  - component: {fileID: 1890029495}
   m_Layer: 5
   m_Name: ButtonLEFT
   m_TagString: Untagged
@@ -3552,6 +3844,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1890029490}
+--- !u!114 &1890029495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1890029490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0347dc74966b7ce42aac6f87734e5017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 
+  result: 0
+  stats: {fileID: 927959815}
+  narrativeManager: {fileID: 354923700}
 --- !u!1 &2013814580
 GameObject:
   m_ObjectHideFlags: 0
