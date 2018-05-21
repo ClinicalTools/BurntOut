@@ -11,7 +11,7 @@ public class EditorScrollView : IDisposable
 
     public EditorScrollView()
     {
-        EditorGUILayout.BeginScrollView(vec);
+        vec = EditorGUILayout.BeginScrollView(vec);
     }
 
     public void Dispose()
