@@ -8,6 +8,8 @@ public class InteractableDoor : MonoBehaviour {
     public bool completed;
     public bool isAroundDoor;
 
+    public GameObject UI_ChoiceDia;
+
     void Update() {
 
         // if player is around door, allow player to interact with it
@@ -16,8 +18,22 @@ public class InteractableDoor : MonoBehaviour {
             if (isAroundDoor == true) {
 
                 // INTERACTION HERE
+                UI_ChoiceDia.SetActive(true);
+
                 Debug.Log("Door open");
                 completed = true;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -57,6 +73,8 @@ public class InteractableDoor : MonoBehaviour {
 
         Debug.Log("Player away from door");
         isAroundDoor = false;
+
+        UI_ChoiceDia.SetActive(false);
 
     }
 }

@@ -9,12 +9,20 @@ public class Main_GameManager : MonoBehaviour {
 
     public GameObject Canvas_Paused;
     public GameObject Canvas_Win;
+    public GameObject UI_ChoiceDia;
 
     //player controller
     public GameObject player;
-    //public UnityStandardAssets.Characters.FirstPerson.FirstPersonController playerController;
+    
 
     public bool gamePaused;
+
+    void Start() {
+
+        // hide unnessesary UI
+        UI_ChoiceDia.SetActive(false);
+
+    }
 
     void Update() {
 
