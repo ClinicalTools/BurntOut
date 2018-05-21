@@ -9,6 +9,9 @@ public class InteractableDoor : MonoBehaviour {
     public bool isAroundDoor;
 
     public GameObject UI_ChoiceDia;
+    public GameObject player;
+
+    public Main_GameManager gameManager;
 
     void Update() {
 
@@ -21,10 +24,16 @@ public class InteractableDoor : MonoBehaviour {
                 UI_ChoiceDia.SetActive(true);
 
                 Debug.Log("Door open");
-                completed = true;
 
+                // freeze player controller
+                player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
 
+                // enable mouse
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
 
+                // give the game manager the "name" of the door
+                gameManager.currentDoor = this;
 
 
 

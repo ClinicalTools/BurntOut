@@ -7,6 +7,9 @@ public class Main_GameManager : MonoBehaviour {
     public InteractableDoor room1;
     public InteractableDoor room2;
 
+    // store current door
+    public InteractableDoor currentDoor;
+
     public GameObject Canvas_Paused;
     public GameObject Canvas_Win;
     public GameObject UI_ChoiceDia;
@@ -21,6 +24,8 @@ public class Main_GameManager : MonoBehaviour {
 
         // hide unnessesary UI
         UI_ChoiceDia.SetActive(false);
+
+        currentDoor = null;
 
     }
 
@@ -58,6 +63,19 @@ public class Main_GameManager : MonoBehaviour {
         }
 
 	}
+
+    public void ExitRoom() {
+
+        // freeze player controller
+        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+
+    }
+
+    public void DoorComplete() {
+
+        currentDoor.completed = true;
+
+    }
 
 
 }
