@@ -24,6 +24,7 @@ public class Main_GameManager : MonoBehaviour {
             Debug.Log("Game Completed");
             Time.timeScale = 0;
             Canvas_Win.SetActive(true);
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         }
 
 
