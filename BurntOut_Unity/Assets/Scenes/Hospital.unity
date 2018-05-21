@@ -279,7 +279,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 116756027}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 116756029}
+        m_MethodName: SelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &116756027
@@ -327,9 +338,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: 
+  healthResult: 0
+  scenario: 0
   result: 0
+  optionNum: 1
   stats: {fileID: 927959815}
-  narrativeManager: {fileID: 354923700}
 --- !u!114 &136936747 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
@@ -813,7 +826,7 @@ MonoBehaviour:
           emotion: 4
           dialogue: 
         - action: 0
-          actor: 0
+          actor: 1
           emotion: 0
           dialogue: "I\u2019m supposed to get my blood test results back tomorrow
             and I\u2019m worried about what they might find."
@@ -866,6 +879,12 @@ MonoBehaviour:
           Feedback: At face value this sounds like a rejection of the patient's concern.
             You should instead recognize and validate their concern in order to console
             the patient and help them decrease their stress related to the test.
+        - Name: 
+          Text: 
+          events: []
+          Result: 0
+          HealthChange: 0
+          Feedback: 
       - Name: Ms. Jackson's concerns about the tests 2
         Text: What is a good way to continue the conversation with Ms. Jackson?
         events:
@@ -1159,7 +1178,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 469622540}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 469622542}
+        m_MethodName: SelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &469622540
@@ -1207,9 +1237,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: jsdahfkjashd
+  healthResult: 0
+  scenario: 0
   result: 0
+  optionNum: 0
   stats: {fileID: 927959815}
-  narrativeManager: {fileID: 354923700}
 --- !u!1 &520145182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1309,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Choice D
+  m_Text: Option D
 --- !u!222 &520145185
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2956,7 +2988,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Choice C
+  m_Text: Option C
 --- !u!222 &1421910529
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3030,7 +3062,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Choice A
+  m_Text: Option A
 --- !u!222 &1466634316
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3416,7 +3448,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1762709403}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1762709405}
+        m_MethodName: SelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1762709403
@@ -3464,9 +3507,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: 
+  healthResult: 0
+  scenario: 0
   result: 0
+  optionNum: 3
   stats: {fileID: 927959815}
-  narrativeManager: {fileID: 354923700}
 --- !u!1001 &1769386302
 Prefab:
   m_ObjectHideFlags: 0
@@ -3595,7 +3640,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Choice B
+  m_Text: Option B
 --- !u!222 &1769402500
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3808,7 +3853,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1890029493}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1890029495}
+        m_MethodName: SelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1890029493
@@ -3856,9 +3912,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: 
+  healthResult: 0
+  scenario: 0
   result: 0
+  optionNum: 2
   stats: {fileID: 927959815}
-  narrativeManager: {fileID: 354923700}
 --- !u!1 &2013814580
 GameObject:
   m_ObjectHideFlags: 0

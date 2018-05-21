@@ -6,29 +6,45 @@ using UnityEngine.UI;
 public class ChoiceData : MonoBehaviour {
 
     public string text;
-    public float result;
+    public float healthResult;
+    public int scenario;
+    public OptionResults result;
+    public int optionNum;
+    public static int choiceNum;
 
     public PlayerStats stats;
-    public NarrativeManager narrativeManager;
+    private NarrativeManager narrativeManager;
 
     private Text textComponent;
 
     public void Start() {
 
+        //init
+        choiceNum = 0;
+
         textComponent = GetComponentInChildren<Text>();
-        UpdateText();
+        narrativeManager = GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>();
+
+        UpdateButton();
 
     }
 
     public void ApplyResult() {
 
-        stats.currentHealth += result;
+        stats.currentHealth += healthResult;
 
     }
 
-    public void UpdateText() {
+    public void UpdateButton() {
+    
+        textComponent.text = narrativeManager.sceneNarrative.scenarios[scenario].Choices[choiceNum].Options[optionNum].Text;
+        healthResult = narrativeManager.sceneNarrative.scenarios[scenario].Choices[choiceNum].Options[optionNum].HealthChange;
 
-        textComponent.text = text;
-        
+    }
+
+    public void SelectButton() {
+
+        ApplyResult();
+
     }
 }
