@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableDoor : MonoBehaviour {
+public class Interact_Patient : MonoBehaviour {
 
-    public int doorNumber;
+    public int patientNumber;
     public bool completed;
-    public bool isAroundDoor;
+    public bool isAroundPatient;
 
     public GameObject UI_ChoiceDia;
     public GameObject player;
@@ -15,15 +15,15 @@ public class InteractableDoor : MonoBehaviour {
 
     void Update() {
 
-        // if player is around door, allow player to interact with it
+        // if player is around patient, allow player to interact with it
         if (Input.GetKeyDown(KeyCode.E)) {
 
-            if (isAroundDoor == true) {
+            if (isAroundPatient == true) {
 
                 // INTERACTION HERE
                 UI_ChoiceDia.SetActive(true);
 
-                Debug.Log("Door open");
+                Debug.Log("Patient interact");
 
                 // freeze player controller
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
@@ -32,8 +32,8 @@ public class InteractableDoor : MonoBehaviour {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
 
-                // give the game manager the "name" of the door
-                gameManager.currentDoor = this;
+                // give the game manager the "name" of the patient
+                gameManager.currentRoom = this;
 
 
 
@@ -66,12 +66,12 @@ public class InteractableDoor : MonoBehaviour {
         if (col.gameObject.name == "Player") {
 
             Debug.Log("Player Detected");
-            isAroundDoor = true;
+            isAroundPatient = true;
             
         } else {
 
             Debug.Log("Other obj detected");
-            isAroundDoor = false;
+            isAroundPatient = false;
 
         }
 
@@ -80,8 +80,8 @@ public class InteractableDoor : MonoBehaviour {
     // return to default state when out of range
     void OnTriggerExit (Collider col) {
 
-        Debug.Log("Player away from door");
-        isAroundDoor = false;
+        Debug.Log("Player away from patient");
+        isAroundPatient = false;
 
         UI_ChoiceDia.SetActive(false);
 

@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 23776067910128344}
   - component: {fileID: 65520698682864080}
   - component: {fileID: 65075098476840738}
-  - component: {fileID: 114481730873352972}
+  - component: {fileID: 114226582186580400}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Patient
   m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,9 +37,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1696981996037864}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.13, y: 1.99, z: 0}
-  m_LocalScale: {x: 0.55783236, y: 2.3085723, z: 2.0930986}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -476.2, y: -361.55, z: 0}
+  m_LocalScale: {x: 1.3720635, y: 1.470935, z: 1.3336434}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: b624f25bfa7dd474b9d5f339e09bb1e3, type: 2}
+  - {fileID: 2100000, guid: b438ead262d610a4c96885e6fb4c9b25, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,8 +96,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.1873803, y: 1, z: 0.99999994}
-  m_Center: {x: -0.1695604, y: 0, z: 0}
+  m_Size: {x: 2.7737257, y: 1.3851622, z: 2.225861}
+  m_Center: {x: -0.10681683, y: 0.19258183, z: -0.01077604}
 --- !u!65 &65520698682864080
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -110,7 +110,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114481730873352972
+--- !u!114 &114226582186580400
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -121,7 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760ba0815b09ed44d91f9a971a94a70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorNumber: 1
+  patientNumber: 0
   completed: 0
-  isAroundDoor: 0
+  isAroundPatient: 0
   UI_ChoiceDia: {fileID: 0}
+  player: {fileID: 0}
+  gameManager: {fileID: 0}

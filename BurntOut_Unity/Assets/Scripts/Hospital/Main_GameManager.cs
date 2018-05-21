@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Main_GameManager : MonoBehaviour {
 
-    public InteractableDoor room1;
-    public InteractableDoor room2;
+    public Interact_Patient room1;
+    public Interact_Patient room2;
 
-    // store current door
-    public InteractableDoor currentDoor;
+    // store current patient
+    public Interact_Patient currentRoom;
 
     public GameObject Canvas_Paused;
     public GameObject Canvas_Win;
@@ -25,7 +25,7 @@ public class Main_GameManager : MonoBehaviour {
         // hide unnessesary UI
         UI_ChoiceDia.SetActive(false);
 
-        currentDoor = null;
+        currentRoom = null;
 
     }
 
@@ -71,9 +71,9 @@ public class Main_GameManager : MonoBehaviour {
 
     }
 
-    public void DoorComplete() {
+    public void RoomComplete() {
 
-        currentDoor.completed = true;
+        currentRoom.completed = true;
 
     }
 
