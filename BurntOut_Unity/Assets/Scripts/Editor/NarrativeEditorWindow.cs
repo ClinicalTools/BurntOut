@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using System;
 using UnityEngine.SceneManagement;
 using System.IO;
@@ -12,7 +11,7 @@ using System.IO;
 public class NarrativeEditorWindow : EditorWindow
 {
     private readonly List<ScenarioEditor> scenarioEditors = new List<ScenarioEditor>();
-    private int selectedScenario = 0;
+    private int selectedScenario = -1;
     private Vector2 scrollPosition = new Vector2();
 
     // Add menu named "Scene Manager" to the Window menu
@@ -62,9 +61,14 @@ public class NarrativeEditorWindow : EditorWindow
         using (new EditorHorizontal(EditorStyles.toolbar))
         {
             EditorStyles.toolbarButton.fontSize = 12;
+            if (GUILayout.Toggle(selectedScenario == -1, "SCENE", EditorStyles.toolbarButton))
+            {
+                selectedScenario = -1;
+            }
+
             for (int i = 0; i < sceneManager.sceneNarrative.scenarios.Count; i++)
             {
-                if (GUILayout.Toggle(i == selectedScenario,
+                if (GUILayout.Toggle(selectedScenario == i,
                     "Scenario " + (i + 1) + " - " + sceneManager.sceneNarrative.scenarios[i].Name, EditorStyles.toolbarButton))
                 {
                     selectedScenario = i;
@@ -101,51 +105,55 @@ public class NarrativeEditorWindow : EditorWindow
             }
 
             EditorStyles.toolbarButton.fontStyle = FontStyle.Italic;
-            if (GUILayout.Button("Save Scenario", EditorStyles.toolbarButton))
+            if (selectedScenario > -1)
             {
-                // Get the folder to save the scenario in
-                string json = JsonUtility.ToJson(sceneManager.sceneNarrative.scenarios[selectedScenario]);
-                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
-                Directory.CreateDirectory(path);
 
-                // Name.yyyy.MM.dd.letter.json
-                string fileName = sceneManager.sceneNarrative.scenarios[selectedScenario].Name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
-
-                // Alphabetical character based on number of similar files saved today
-                char lastLetter = 'a';
-                foreach (var file in Directory.GetFiles(path))
+                if (GUILayout.Button("Save Scenario", EditorStyles.toolbarButton))
                 {
-                    if (file.Contains(fileName) && file.EndsWith(".json"))
+                    // Get the folder to save the scenario in
+                    string json = JsonUtility.ToJson(sceneManager.sceneNarrative.scenarios[selectedScenario]);
+                    var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
+                    Directory.CreateDirectory(path);
+
+                    // Name.yyyy.MM.dd.letter.json
+                    string fileName = sceneManager.sceneNarrative.scenarios[selectedScenario].Name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
+
+                    // Alphabetical character based on number of similar files saved today
+                    char lastLetter = 'a';
+                    foreach (var file in Directory.GetFiles(path))
                     {
-                        string str = Path.GetFileName(file);
-                        str = str.Replace(fileName + '.', "");
-                        if (str[0] >= lastLetter)
-                            lastLetter = (char)(str[0] + 1);
+                        if (file.Contains(fileName) && file.EndsWith(".json"))
+                        {
+                            string str = Path.GetFileName(file);
+                            str = str.Replace(fileName + '.', "");
+                            if (str[0] >= lastLetter)
+                                lastLetter = (char)(str[0] + 1);
+                        }
                     }
+                    fileName += "." + lastLetter + ".json";
+
+                    path = EditorUtility.SaveFilePanel("Save Scenario", path, fileName, "json");
+
+                    if (!String.IsNullOrEmpty(path))
+                        File.WriteAllText(path, json);
                 }
-                fileName += "." + lastLetter + ".json";
-
-                path = EditorUtility.SaveFilePanel("Save Scenario", path, fileName, "json");
-
-                if (!String.IsNullOrEmpty(path))
-                    File.WriteAllText(path, json);
-            }
-            if (GUILayout.Button("Load Scenario", EditorStyles.toolbarButton))
-            {
-                // Get the folder to load the scenario from
-                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
-
-                path = EditorUtility.OpenFilePanel("Load Scenario", path, "json");
-
-                if (!String.IsNullOrEmpty(path))
+                if (GUILayout.Button("Load Scenario", EditorStyles.toolbarButton))
                 {
-                    string json = File.ReadAllText(path);
+                    // Get the folder to load the scenario from
+                    var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
 
-                    var scenario = JsonUtility.FromJson<Scenario>(json);
-                    sceneManager.sceneNarrative.scenarios[selectedScenario] = scenario;
-                    scenarioEditors[selectedScenario] = new ScenarioEditor(scenario);
+                    path = EditorUtility.OpenFilePanel("Load Scenario", path, "json");
+
+                    if (!String.IsNullOrEmpty(path))
+                    {
+                        string json = File.ReadAllText(path);
+
+                        var scenario = JsonUtility.FromJson<Scenario>(json);
+                        sceneManager.sceneNarrative.scenarios[selectedScenario] = scenario;
+                        scenarioEditors[selectedScenario] = new ScenarioEditor(scenario);
+                    }
                 }
             }
             EditorStyles.toolbarButton.fontStyle = FontStyle.BoldAndItalic;
@@ -199,10 +207,22 @@ public class NarrativeEditorWindow : EditorWindow
             EditorStyles.toolbarButton.fontSize = 0;
         }
 
-        // Draw the selected scenario
+
         using (new EditorScrollView(ref scrollPosition))
         {
-            scenarioEditors[selectedScenario].Edit();
+            // Edit basic scene info
+            if (selectedScenario == -1)
+            {
+                EditorStyles.textField.wordWrap = true;
+                EditorGUILayout.LabelField("Start Narration:");
+                sceneManager.sceneNarrative.startNarration = EditorGUILayout.TextArea(sceneManager.sceneNarrative.startNarration);
+
+                EditorGUILayout.LabelField("End Narration:");
+                sceneManager.sceneNarrative.endNarration = EditorGUILayout.TextArea(sceneManager.sceneNarrative.endNarration);
+            }
+            // Edit selected scenario
+            else
+                scenarioEditors[selectedScenario].Edit();
         }
     }
 }
