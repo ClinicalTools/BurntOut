@@ -37,8 +37,6 @@ public class ChoiceEditor
     {
         choice.Name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), choice.Name);
 
-        choice.Text = EditorGUILayout.TextField(new GUIContent("Text: ", "Text to be displayed in game"), choice.Text);
-
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
         eventsFoldout = EditorGUILayout.Foldout(eventsFoldout, "Events", EditorStyles.foldout);
         EditorStyles.foldout.fontStyle = FontStyle.Normal;
@@ -46,6 +44,7 @@ public class ChoiceEditor
         if (eventsFoldout)
             tasksEditor.Edit();
 
+        choice.Text = EditorGUILayout.TextField(new GUIContent("Text: ", "Text to be displayed in game"), choice.Text);
 
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
         optionsFoldout = EditorGUILayout.Foldout(optionsFoldout, "Options", EditorStyles.foldout);
