@@ -9,4 +9,12 @@ public class PlayerStats : MonoBehaviour {
     public float maxHealth = 100;
 
 
+    private void Update() {
+        
+        if (currentHealth > 100) {
+            currentHealth = 100;
+        }
+
+    }
+
 }
