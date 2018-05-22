@@ -8,6 +8,5 @@ public class MainMenu_GameManager : MonoBehaviour {
 
         Application.LoadLevel("Hospital");
        
-
     }
 }

@@ -23,7 +23,7 @@ public class Interact_Patient : MonoBehaviour {
                 // INTERACTION HERE
                 UI_ChoiceDia.SetActive(true);
                 UI_ChoiceDia.GetComponent<DialogueManager>().StartScenario(
-                    GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().sceneNarrative.scenarios[0]);
+                GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().sceneNarrative.scenarios[0]);
 
                 Debug.Log("Patient interact");
 

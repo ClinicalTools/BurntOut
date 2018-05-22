@@ -12,12 +12,15 @@ public class Main_GameManager : MonoBehaviour {
 
     public GameObject Canvas_Paused;
     public GameObject Canvas_Win;
+    public GameObject Canvas_Loss;
     public GameObject UI_ChoiceDia;
+
 
     //player controller
     public GameObject player;
+    public PlayerStats playerStats;
 
-
+    public bool gameover;
     public bool gamePaused;
 
     void Start() {
@@ -30,6 +33,8 @@ public class Main_GameManager : MonoBehaviour {
         // make game active
         Time.timeScale = 1;
 
+        playerStats = player.GetComponent<PlayerStats>();
+
     }
 
     void Update() {
@@ -41,6 +46,17 @@ public class Main_GameManager : MonoBehaviour {
             Time.timeScale = 0;
             Canvas_Win.SetActive(true);
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+        }
+
+        // lose functionality HERE
+        if (playerStats.currentHealth <= 0) {
+
+            // call use lose once 
+            if (gameover == false) {
+                Lose();
+                gameover = true;
+            }
+            
         }
 
 
@@ -84,6 +100,16 @@ public class Main_GameManager : MonoBehaviour {
         currentRoom.completed = true;
 
     }
+
+    // on loss here
+    public void Lose() {
+
+        Canvas_Loss.SetActive(true);
+        Debug.Log("loss");
+
+
+    }
+
 
 
 }
