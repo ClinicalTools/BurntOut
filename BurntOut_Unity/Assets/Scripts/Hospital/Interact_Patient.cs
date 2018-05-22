@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Interact_Patient : MonoBehaviour {
 
@@ -8,7 +6,6 @@ public class Interact_Patient : MonoBehaviour {
     public bool completed;
     public bool isAroundPatient;
 
-    public GameObject UI_ChoiceDia;
     public GameObject player;
 
     public Main_GameManager gameManager;
@@ -22,14 +19,7 @@ public class Interact_Patient : MonoBehaviour {
             if (isAroundPatient == true) {
 
                 // INTERACTION HERE
-                UI_ChoiceDia.SetActive(true);
-
-
-                dialogueManager.StartScenario(GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().sceneNarrative.scenarios[0]);
-                /*
-                UI_ChoiceDia.GetComponent<DialogueManager>().StartScenario(
-                GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().sceneNarrative.scenarios[0]);
-                */
+                dialogueManager.StartDialogue();
 
                 Debug.Log("Patient interact");
 
@@ -42,25 +32,6 @@ public class Interact_Patient : MonoBehaviour {
 
                 // give the game manager the "name" of the patient
                 gameManager.currentRoom = this;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
 
         }
@@ -91,7 +62,6 @@ public class Interact_Patient : MonoBehaviour {
         Debug.Log("Player away from patient");
         isAroundPatient = false;
 
-        UI_ChoiceDia.SetActive(false);
-
+        dialogueManager.EndDialogue();
     }
 }

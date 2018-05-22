@@ -10,26 +10,37 @@ public class DialogueManager : MonoBehaviour
     public Text dialogueText;
     public Text feedbackText;
     public Text promptText;
+    public GameObject UI_ChoiceDia;
+    
     // Other references
     public PlayerStats stats;
     public Main_GameManager gameManager;
 
     
     private Text[] buttonsText;
+
     private Scenario scenario;
+    // -1 if dialogue hasn't started. 
+    // choice.Count if last correct option just finished
+    // choice.Count+1 if final narrative has been displayed
     private int choiceNum;
+    // Option selected. 0, 1, or 2.
     private int optionSelected;
+
+    // True if the player finished an option that made them lose the room
+    private bool lost;
+
+    // Indicates whether the auto progression should be running
+    private bool runAutoProgress;
+    private Coroutine autoProgress;
+    // Queue of tasks (actions, emotions, and dialogue) to perform in current choice or option
     private Queue<Task> tasks;
 
-    // Initialization
+
+    // Initialize references to button text
     void Start()
     {
         buttonsText = new Text[buttons.Length];
-
-        choiceNum = 0;
-        optionSelected = -1;
-
-
         for (int i = 0; i < buttons.Length; i++)
             buttonsText[i] = buttons[i].gameObject.GetComponentInChildren<Text>();
     }
@@ -39,20 +50,21 @@ public class DialogueManager : MonoBehaviour
     {
         for (; ; )
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2f);
 
             ProgressNarrative();
         }
     }
 
-    Coroutine autoProgress;
+    // Resets the dialogue manager to be used with a passed scenario
     public void StartScenario(Scenario scenario)
     {
         this.scenario = scenario;
-        choiceNum = 0;
+        choiceNum = -1;
         optionSelected = -1;
+        runAutoProgress = true;
 
-        tasks = new Queue<Task>(scenario.Choices[choiceNum].Events);
+        tasks = new Queue<Task>(scenario.Choices[0].Events);
 
         for (int i = 0; i < buttons.Length; i++)
             buttons[i].gameObject.SetActive(false);
@@ -61,10 +73,38 @@ public class DialogueManager : MonoBehaviour
         promptText.transform.parent.gameObject.SetActive(false);
         dialogueText.transform.parent.gameObject.SetActive(true);
 
-        ProgressNarrative();
-
-        autoProgress = StartCoroutine("AutoProgress");
+        UI_ChoiceDia.SetActive(false);
     }
+
+    /// <summary>
+    /// Start talking with the patient
+    /// </summary>
+    public void StartDialogue()
+    {
+        UI_ChoiceDia.SetActive(true);
+
+        // If dialogue hasn't started yet, start it
+        if (choiceNum < 0)
+        {
+            choiceNum = 0;
+            ProgressNarrative();
+        }
+
+        if (runAutoProgress)
+            autoProgress = StartCoroutine(AutoProgress());
+    }
+
+    /// <summary>
+    /// Finish talking with the patient
+    /// </summary>
+    public void EndDialogue()
+    {
+        UI_ChoiceDia.SetActive(false);
+
+        if (runAutoProgress)
+            StopCoroutine(autoProgress);
+    }
+
 
     private bool feedback;
     public void ProgressNarrative()
@@ -85,7 +125,7 @@ public class DialogueManager : MonoBehaviour
                 gameManager.ExitRoom();
             }
             // If the player lost the room because of a bad option
-            else if (choiceNum < 0)
+            else if (lost)
             {
                 gameManager.ExitRoom();
             }
@@ -126,7 +166,7 @@ public class DialogueManager : MonoBehaviour
                         ShowFeedback(option.Feedback);
                         break;
                     case OptionResults.END:
-                        choiceNum = -1;
+                        lost = true;
                         ShowFeedback(option.Feedback);
                         break;
                     case OptionResults.TRY_AGAIN:
@@ -159,7 +199,8 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void ShowFeedback(string feedback)
+    // Shows feedback after an option or for the final narrative
+    private void ShowFeedback(string feedback)
     {
         this.feedback = true;
 
@@ -172,7 +213,7 @@ public class DialogueManager : MonoBehaviour
 
     // Shows a line of dialogue
     // Actor should be used in the future
-    public void ShowText(string actor, string dialogue)
+    private void ShowText(string actor, string dialogue)
     {
         dialogueText.transform.parent.gameObject.SetActive(true);
         dialogueText.text = dialogue;
@@ -181,6 +222,7 @@ public class DialogueManager : MonoBehaviour
     // Show the player the options
     private void PromptChoice()
     {
+        runAutoProgress = false;
         StopCoroutine(autoProgress);
 
         promptText.transform.parent.gameObject.SetActive(true);
@@ -195,7 +237,8 @@ public class DialogueManager : MonoBehaviour
     // React to an option being chosen 
     public void OptionClicked(int option)
     {
-        autoProgress = StartCoroutine("AutoProgress");
+        runAutoProgress = true;
+        autoProgress = StartCoroutine(AutoProgress());
 
         for (int i = 0; i < buttons.Length; i++)
             buttons[i].gameObject.SetActive(false);

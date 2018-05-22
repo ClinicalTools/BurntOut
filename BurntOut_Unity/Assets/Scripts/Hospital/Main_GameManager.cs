@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Main_GameManager : MonoBehaviour {
+public class Main_GameManager : MonoBehaviour
+{
 
     public Interact_Patient room1;
     public Interact_Patient room2;
@@ -20,16 +21,18 @@ public class Main_GameManager : MonoBehaviour {
     public GameObject player;
     public PlayerStats playerStats;
 
+    public DialogueManager dialogueManager;
+
     public bool gameover;
     public bool gamePaused;
 
-    void Start() {
-
+    void Start()
+    {
         // hide unnessesary UI
         UI_ChoiceDia.SetActive(false);
 
         currentRoom = null;
-        
+
         // make game active
         Time.timeScale = 1;
 
@@ -37,11 +40,11 @@ public class Main_GameManager : MonoBehaviour {
 
     }
 
-    void Update() {
-
-
+    void Update()
+    {
         // win condition check ---> (in update now, but if performance lacks, make a function that you can call once and check completion)
-        if (room1.completed == true && room2.completed == true) {
+        if (room1.completed == true && room2.completed == true)
+        {
             Debug.Log("Game Completed");
             Time.timeScale = 0;
             Canvas_Win.SetActive(true);
@@ -49,28 +52,34 @@ public class Main_GameManager : MonoBehaviour {
         }
 
         // lose functionality HERE
-        if (playerStats.currentHealth <= 0) {
+        if (playerStats.currentHealth <= 0)
+        {
 
             // call use lose once 
-            if (gameover == false) {
+            if (gameover == false)
+            {
                 Lose();
                 gameover = true;
             }
-            
+
         }
 
 
         // pause screen 
-        if (Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
 
-            if (gamePaused == true) {
+            if (gamePaused == true)
+            {
                 Debug.Log("Resume Game");
                 Time.timeScale = 1;
                 gamePaused = false;
                 Canvas_Paused.SetActive(false);
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
-            } else {
+            }
+            else
+            {
                 Debug.Log("Game Pause");
                 Time.timeScale = 0;
                 gamePaused = true;
@@ -81,33 +90,29 @@ public class Main_GameManager : MonoBehaviour {
 
         }
 
-	}
+    }
 
-    public void ExitRoom() {
+    public void ExitRoom()
+    {
+        dialogueManager.EndDialogue();
 
         // freeze player controller
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
         // disable Choice UI
         UI_ChoiceDia.SetActive(false);
-
-
-
     }
 
-    public void RoomComplete() {
-
+    public void RoomComplete()
+    {
         currentRoom.completed = true;
-
     }
 
     // on loss here
-    public void Lose() {
-
+    public void Lose()
+    {
         Canvas_Loss.SetActive(true);
         Debug.Log("loss");
-
-
     }
 
 
