@@ -9,31 +9,45 @@ using UnityEngine;
 /// </summary>
 public static class EditorHelper
 {
+    public static readonly Color ErrorColor = new Color(1f, .4f, .4f);
+    public static readonly Color ContinueColor = new Color(.7f, 1f, .7f);
+    public static readonly Color TryAgainColor = new Color(1f, 1f, .7f);
+    public static readonly Color EndColor = new Color(1f, .7f, .7f);
+
     // Displays a list in the editor
     public static void ListEdit(int count, Action addElem, Action<int, int> moveElem, Action<int> removeElem,
         Action<int> display, string removeTitle, string removeDesc)
     {
-        ListEdit(count, addElem, moveElem, removeElem, display, null, null, removeTitle, removeDesc);
+        ListEdit(count, addElem, moveElem, removeElem, display, null, null, null, removeTitle, removeDesc);
     }
 
     // Displays a list in the editor with foldouts
     public static void FoldoutListEdit(Action addElem, Action<int, int> moveElem, Action<int> removeElem,
-        Action<int> display, List<bool> foldouts, Func<int, string> name, string removeTitle, string removeDesc)
+        Action<int> display, List<bool> foldouts, Func<int, string> name, Func<int, Color> color, string removeTitle, string removeDesc)
     {
-        ListEdit(foldouts.Count, addElem, moveElem, removeElem, display, foldouts, name, removeTitle, removeDesc);
+        ListEdit(foldouts.Count, addElem, moveElem, removeElem, display, foldouts, name, color, removeTitle, removeDesc);
     }
 
     private static void ListEdit(int count, Action addElem, Action<int, int> moveElem, Action<int> removeElem,
-        Action<int> display, List<bool> foldouts, Func<int, string> name, string removeTitle, string removeDesc)
+        Action<int> display, List<bool> foldouts, Func<int, string> name, Func<int, Color> color, string removeTitle, string removeDesc)
     {
         for (int i = 0; i < count; i++)
         {
             using (new EditorHorizontal())
             {
                 if (foldouts != null)
+                {
+                    var lastColor = GUI.contentColor;
+
+                    GUI.contentColor = color(i);
                     foldouts[i] = EditorGUILayout.Foldout(foldouts[i], name(i));
+
+                    GUI.contentColor = lastColor;
+                }
                 else
+                {
                     display(i);
+                }
 
                 // Button to move the element up (if it's not at the top)
                 if (i > 0)
@@ -77,7 +91,8 @@ public static class EditorHelper
 
                 if (GUILayout.Button("X", GUILayout.Width(40)))
                 {
-                    if (EditorUtility.DisplayDialog(removeTitle, removeDesc, "Delete", "Cancel")) { 
+                    if (EditorUtility.DisplayDialog(removeTitle, removeDesc, "Delete", "Cancel"))
+                    {
                         removeElem(i);
                         if (foldouts != null)
                             foldouts.RemoveAt(i);

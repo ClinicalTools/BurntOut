@@ -33,9 +33,15 @@ public class OptionEditor
             tasksEditor.Edit();
         }
 
+        var lastColor = GUI.contentColor;
+        if (option.Result == OptionResults.CONTINUE)
+            GUI.contentColor = EditorHelper.ContinueColor;
+        else if (option.Result == OptionResults.TRY_AGAIN)
+            GUI.contentColor = EditorHelper.TryAgainColor;
+        else if (option.Result == OptionResults.END)
+            GUI.contentColor = EditorHelper.EndColor;
         option.Result = (OptionResults)EditorGUILayout.EnumPopup("Result: ", option.Result);
-
-        option.HealthChangeStr = EditorGUILayout.DelayedTextField("Health Change: ", option.HealthChangeStr);
+        GUI.contentColor = lastColor;
 
         EditorGUILayout.LabelField("Feedback:");
         EditorStyles.textField.wordWrap = true;

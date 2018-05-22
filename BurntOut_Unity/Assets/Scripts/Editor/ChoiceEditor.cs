@@ -88,6 +88,18 @@ public class ChoiceEditor
                     optionFoldout,
                     // Foldout title
                     (int i) => { return ("Option " + (i + 1) + " - " + choice.Options[i].Name); },
+                    // Foldout color
+                    (int i) => 
+                    {
+                        if (choice.Options[i].Result == OptionResults.CONTINUE)
+                            return EditorHelper.ContinueColor;
+                        else if (choice.Options[i].Result == OptionResults.TRY_AGAIN)
+                            return EditorHelper.TryAgainColor;
+                        else if (choice.Options[i].Result == OptionResults.END)
+                            return EditorHelper.EndColor;
+
+                        return GUI.contentColor;
+                    },
                     "Remove Option",
                     "Are you sure you want to delete this option?"
                 );

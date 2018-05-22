@@ -101,6 +101,16 @@ public class ScenarioEditor
                     choiceFoldout,
                     // Foldout title
                     (int i) => { return ("Choice " + (i + 1) + " - " + scenario.Choices[i].Name); },
+                    // Foldout color
+                    (int i) => 
+                    {
+                        // Red if there is no option to continue
+                        foreach (Option option in scenario.Choices[i].Options)
+                            if (option.Result == OptionResults.CONTINUE)
+                                return GUI.contentColor;
+
+                        return EditorHelper.ErrorColor;
+                    },
                     "Remove Choice",
                     "Are you sure you want to delete this choice?"
                 );

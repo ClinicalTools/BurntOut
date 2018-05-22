@@ -16,7 +16,7 @@ public class NarrativeEditorWindow : EditorWindow
 
     // Add menu named "Scene Manager" to the Window menu
     [MenuItem("Window/Narrative Manager")]
-    static void Init()
+    public static void Init()
     {
         // Get existing open window or if none, make a new one:
         NarrativeEditorWindow window = GetWindow<NarrativeEditorWindow>("Narrative");
@@ -60,6 +60,7 @@ public class NarrativeEditorWindow : EditorWindow
         // Draw the toolbar for scenario management
         using (new EditorHorizontal(EditorStyles.toolbar))
         {
+            var oldFontSize = EditorStyles.toolbarButton.fontSize;
             EditorStyles.toolbarButton.fontSize = 12;
             if (GUILayout.Toggle(selectedScenario == -1, "SCENE", EditorStyles.toolbarButton))
             {
@@ -204,7 +205,7 @@ public class NarrativeEditorWindow : EditorWindow
                 }
             }
             EditorStyles.toolbarButton.fontStyle = FontStyle.Normal;
-            EditorStyles.toolbarButton.fontSize = 0;
+            EditorStyles.toolbarButton.fontSize = oldFontSize;
         }
 
 
@@ -213,12 +214,23 @@ public class NarrativeEditorWindow : EditorWindow
             // Edit basic scene info
             if (selectedScenario == -1)
             {
+                var oldTextFontSize = EditorStyles.textField.fontSize;
+                EditorStyles.textField.fontSize = 12;
                 EditorStyles.textField.wordWrap = true;
+
+                var oldLabelFontSize = EditorStyles.label.fontSize;
+                EditorStyles.label.fontSize = 12;
+                EditorStyles.label.fontStyle = FontStyle.Bold;
+
                 EditorGUILayout.LabelField("Start Narration:");
-                sceneManager.sceneNarrative.startNarration = EditorGUILayout.TextArea(sceneManager.sceneNarrative.startNarration);
+                sceneManager.sceneNarrative.startNarration = EditorGUILayout.TextArea(sceneManager.sceneNarrative.startNarration, GUILayout.MinHeight(200));
 
                 EditorGUILayout.LabelField("End Narration:");
-                sceneManager.sceneNarrative.endNarration = EditorGUILayout.TextArea(sceneManager.sceneNarrative.endNarration);
+                sceneManager.sceneNarrative.endNarration = EditorGUILayout.TextArea(sceneManager.sceneNarrative.endNarration, GUILayout.MinHeight(200));
+
+                EditorStyles.label.fontStyle = FontStyle.Normal;
+                EditorStyles.label.fontSize = oldLabelFontSize;
+                EditorStyles.textField.fontSize = oldTextFontSize;
             }
             // Edit selected scenario
             else

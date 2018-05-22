@@ -36,26 +36,22 @@ public class Option
     [XmlAttribute("Result")]
     public OptionResults Result;
 
-    [XmlAttribute("HealthChange")]
-    public int HealthChange;
-    public string HealthChangeStr
+    public int HealthChange
     {
         get
         {
-            string str = "";
-            if (HealthChange > 0)
-                str += '+';
-            str += HealthChange;
-            str += '%';
-
-            return str;
-        }
-        set
-        {
-            int oldHealthChange = HealthChange;
-            value = value.Replace("%", "");
-            if (!Int32.TryParse(value, out HealthChange))
-                HealthChange = oldHealthChange;
+            switch (Result)
+            {
+                case OptionResults.CONTINUE:
+                    return 10;
+                case OptionResults.TRY_AGAIN:
+                    return -30;
+                case OptionResults.END:
+                    return -60;
+                default:
+                    Debug.Log("Invalid option result");
+                    return 0;
+            }
         }
     }
 
