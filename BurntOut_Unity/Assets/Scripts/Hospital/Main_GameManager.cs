@@ -26,6 +26,9 @@ public class Main_GameManager : MonoBehaviour {
         UI_ChoiceDia.SetActive(false);
 
         currentRoom = null;
+        
+        // make game active
+        Time.timeScale = 1;
 
     }
 
