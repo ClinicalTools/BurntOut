@@ -10,7 +10,10 @@ public class DialogueManager : MonoBehaviour
     public Text dialogueText;
     public Text feedbackText;
     public Text promptText;
+    // Other references
     public PlayerStats stats;
+    public Main_GameManager gameManager;
+
 
     private Text[] buttonsText;
     private Scenario scenario;
@@ -36,12 +39,13 @@ public class DialogueManager : MonoBehaviour
     {
         for (; ; )
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
 
             ProgressNarrative();
         }
     }
 
+    Coroutine autoProgress;
     public void StartScenario(Scenario scenario)
     {
         this.scenario = scenario;
@@ -53,49 +57,89 @@ public class DialogueManager : MonoBehaviour
         for (int i = 0; i < buttons.Length; i++)
             buttons[i].gameObject.SetActive(false);
 
+        feedbackText.transform.parent.gameObject.SetActive(false);
+        promptText.transform.parent.gameObject.SetActive(false);
+        dialogueText.transform.parent.gameObject.SetActive(true);
+
         ProgressNarrative();
 
-        StartCoroutine("AutoProgress");
+        autoProgress = StartCoroutine("AutoProgress");
     }
 
+    private bool feedback;
     public void ProgressNarrative()
     {
-        // If no more tasks, show the options or process the end of the displayed option
-        if (tasks.Count == 0)
+        if (feedback)
         {
+            // If all choices have been done, show the final narrative
+            if (choiceNum == scenario.Choices.Count)
+            {
+                choiceNum++;
+
+                ShowFeedback(scenario.EndNarrative);
+            }
+            // If the final narrative has been shown, the room has been completed
+            else if (choiceNum >= scenario.Choices.Count)
+            {
+                gameManager.RoomComplete();
+                gameManager.ExitRoom();
+            }
+            // If the player lost the room because of a bad option
+            else if (choiceNum < 0)
+            {
+                gameManager.ExitRoom();
+            }
+            // Otherwise continue with the narrative
+            else
+            {
+                feedback = false;
+                feedbackText.transform.parent.gameObject.SetActive(false);
+                dialogueText.transform.parent.gameObject.SetActive(true);
+
+                ProgressNarrative();
+            }
+        }
+        // If no more tasks, show the options or process the end of the displayed option
+        else if (tasks.Count == 0)
+        {
+            dialogueText.transform.parent.gameObject.SetActive(false);
+
             // No option selected, so prompt the player to pick one
             if (optionSelected < 0)
             {
-                dialogueText.gameObject.SetActive(false);
                 PromptChoice();
             }
             // Finish processing the selected option
             else
             {
-                OptionResults result = scenario.Choices[choiceNum].Options[optionSelected].Result;
+                var option = scenario.Choices[choiceNum].Options[optionSelected];
                 optionSelected = -1;
 
-                switch (result)
+                switch (option.Result)
                 {
                     case OptionResults.CONTINUE:
                         choiceNum++;
-                        tasks = new Queue<Task>(scenario.Choices[choiceNum].Events);
-                        ProgressNarrative();
+                        // Load tasks for the next choice
+                        if (choiceNum < scenario.Choices.Count)
+                            tasks = new Queue<Task>(scenario.Choices[choiceNum].Events);
+
+                        ShowFeedback(option.Feedback);
                         break;
                     case OptionResults.END:
-                        // Not the correct way to end the narrative
-                        scenario = null;
-                        gameObject.SetActive(false);
+                        choiceNum = -1;
+                        ShowFeedback(option.Feedback);
                         break;
                     case OptionResults.TRY_AGAIN:
                         tasks = new Queue<Task>(scenario.Choices[choiceNum].Events);
-                        ProgressNarrative();
+                        ShowFeedback(option.Feedback);
                         break;
                 }
             }
         }
         else
         {
+            dialogueText.gameObject.SetActive(true);
+
             Task task = tasks.Dequeue();
 
             switch (task.action)
@@ -113,21 +157,33 @@ public class DialogueManager : MonoBehaviour
                     break;
             }
         }
+    }
 
+    public void ShowFeedback(string feedback)
+    {
+        this.feedback = true;
+
+        feedbackText.transform.parent.gameObject.SetActive(true);
+
+        feedbackText.text = feedback;
+
+        Debug.Log("Show feedback: " + feedback);
     }
 
     // Shows a line of dialogue
     // Actor should be used in the future
     public void ShowText(string actor, string dialogue)
     {
-        dialogueText.gameObject.SetActive(true);
+        dialogueText.transform.parent.gameObject.SetActive(true);
         dialogueText.text = dialogue;
     }
 
     // Show the player the options
     private void PromptChoice()
     {
-        promptText.gameObject.SetActive(true);
+        StopCoroutine(autoProgress);
+
+        promptText.transform.parent.gameObject.SetActive(true);
         promptText.text = scenario.Choices[choiceNum].Text;
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -139,12 +195,18 @@ public class DialogueManager : MonoBehaviour
     // React to an option being chosen 
     public void OptionClicked(int option)
     {
+        autoProgress = StartCoroutine("AutoProgress");
+
         for (int i = 0; i < buttons.Length; i++)
             buttons[i].gameObject.SetActive(false);
+        promptText.transform.parent.gameObject.SetActive(false);
+        dialogueText.transform.parent.gameObject.SetActive(true);
 
         optionSelected = option;
         tasks = new Queue<Task>(scenario.Choices[choiceNum].Options[option].Events);
-
+        
         stats.currentHealth += scenario.Choices[choiceNum].Options[option].HealthChange;
+
+        ProgressNarrative();
     }
 }
