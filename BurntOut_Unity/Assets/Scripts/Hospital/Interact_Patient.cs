@@ -12,6 +12,7 @@ public class Interact_Patient : MonoBehaviour {
     public GameObject player;
 
     public Main_GameManager gameManager;
+    public DialogueManager dialogueManager;
 
     void Update() {
 
@@ -22,8 +23,13 @@ public class Interact_Patient : MonoBehaviour {
 
                 // INTERACTION HERE
                 UI_ChoiceDia.SetActive(true);
+
+
+                dialogueManager.StartScenario(GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().sceneNarrative.scenarios[0]);
+                /*
                 UI_ChoiceDia.GetComponent<DialogueManager>().StartScenario(
                 GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().sceneNarrative.scenarios[0]);
+                */
 
                 Debug.Log("Patient interact");
 
