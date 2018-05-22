@@ -7,6 +7,7 @@ public class MainMenu_GameManager : MonoBehaviour {
     public void StartGame() {
 
         Application.LoadLevel("Hospital");
+       
 
     }
 }

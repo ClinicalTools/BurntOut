@@ -16,7 +16,7 @@ public class Main_GameManager : MonoBehaviour {
 
     //player controller
     public GameObject player;
-    
+
 
     public bool gamePaused;
 
@@ -71,6 +71,11 @@ public class Main_GameManager : MonoBehaviour {
 
         // freeze player controller
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+
+        // disable Choice UI
+        UI_ChoiceDia.SetActive(false);
+
+
 
     }
 
