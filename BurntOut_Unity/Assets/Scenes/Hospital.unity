@@ -981,6 +981,215 @@ MonoBehaviour:
         but in the long-term you will be setting yourself up to more negative attitudes
         toward patients and patient care, and more frustration with the process of
         providing care to patients. '
+    - Name: Spot on Leg
+      actors:
+      - player
+      - Mr. Peterson
+      choices:
+      - Name: Lower Mr. Peterson's stess levels
+        Text: "What can you say to lower Mr. Peterson\u2019s stress levels?"
+        events:
+        - action: 0
+          actor: 1
+          emotion: 0
+          dialogue: "Finally! I\u2019ve been waiting forever!\u201D"
+        - action: 0
+          actor: 0
+          emotion: 0
+          dialogue: I apologize. I tried to get here as soon as I could.
+        - action: 0
+          actor: 1
+          emotion: 0
+          dialogue: "Well, it wasn\u2019t soon enough! I could be dying and you wouldn\u2019t
+            care."
+        options:
+        - Name: I'm sure it isn't anything to worry about
+          Text: "You\u2019re not dying and I\u2019m sure the spot isn\u2019t anything
+            to worry about. Would you like me to take a look?"
+          events:
+          - action: 2
+            actor: 1
+            emotion: 4
+            dialogue: 
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: No! I want another doctor! You are too rude.
+          Result: 1
+          HealthChange: -60
+          Feedback: "Belittling the patient\u2019s concerns is not an effective way
+            to de-escalate the situation. Patients are unique and see their situation
+            as unique. Instead, you should acknowledge their concerns and work to
+            address them in order to provide the best care possible for their situation."
+        - Name: I want to make sure I'm doing everything I can
+          Text: "I care for all my patients and I want to make sure I\u2019m doing
+            everything I can to provide for you."
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "If that were true, you wouldn\u2019t have made me sit here,
+              waiting and worrying, all this time."
+          Result: 0
+          HealthChange: -30
+          Feedback: While you did attempt to express concern for Mr. Peterson, the
+            phrasing made it more about you than your patient. You may be tired and
+            stressed out, but your focus should be on your patient, acknowledging
+            and addressing their concerns. Your language should reflect that as well.
+        - Name: I want to answer any questions you might have.
+          Text: I understand how frustrating it can be to have to wait, but I can
+            assure you I want to answer any questions you might have.
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "Thank you. I\u2019m sorry I\u2019m so testy, but I\u2019ve
+              just been sitting here waiting and worrying, thinking up worse and worse
+              scenarios."
+          Result: 2
+          HealthChange: 10
+          Feedback: "Acknowledging the patient\u2019s concern, as well as providing
+            assurance that you would like to answer any of their questions, helps
+            Mr. Peterson know that you are there for him. Do not let a patient\u2019s
+            anger escalate the situation, but instead employ tactics to bring the
+            focus back to their concern."
+      - Name: Explain the yawning
+        Text: How should you respond?
+        events:
+        - action: 0
+          actor: 1
+          emotion: 0
+          dialogue: "It\u2019s just that I didn\u2019t notice it before and now it\u2019s
+            there!"
+        - action: 0
+          actor: 0
+          emotion: 0
+          dialogue: Okay. I can understand why you might be concerned about that.
+        - action: 1
+          actor: 0
+          emotion: 0
+          dialogue: 
+        - action: 0
+          actor: 1
+          emotion: 0
+          dialogue: "Sorry I\u2019m boring you."
+        options:
+        - Name: No big deal
+          Text: "It\u2019s no big deal."
+          events:
+          - action: 2
+            actor: 1
+            emotion: 3
+            dialogue: 
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "It\u2019s not a big deal that I\u2019m boring? Or that you\u2019re
+              tired?"
+          Result: 0
+          HealthChange: -30
+          Feedback: It is reasonable to not expose patients to personal feelings or
+            concerns. It makes sense to not divulge serious life moments or strong
+            emotions, which are things you might struggle with. However, acknowledging
+            a normal emotion or feeling is totally acceptable.
+        - Name: Just very tired
+          Text: "I\u2019m sorry. I\u2019m just very tired."
+          events:
+          - action: 1
+            actor: 1
+            emotion: 0
+            dialogue: 
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "Yeah, I guess you would be. You\u2019ve probably been on your
+              feet for over twelve hours now."
+          Result: 2
+          HealthChange: 10
+          Feedback: "It's okay to share a personal struggle with the patient, as it
+            enhances patient rapport if you can help the patient see that you are
+            human, too, and you have reactions to situations just as they do. In this
+            case, the patient clearly is stressed and one reason why they are probably
+            talking so much is a desire to relieve some of that stress. By acknowledging
+            that you\u2019re tired, this might give you an opportunity to discuss
+            the broader issue of dealing with stress. "
+        - Name: Not bored
+          Text: "I\u2019m not bored. Please continue."
+          events:
+          - action: 2
+            actor: 1
+            emotion: 3
+            dialogue: 
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "No, I don\u2019t think so. You don\u2019t seem to care about
+              what I\u2019m saying."
+          Result: 1
+          HealthChange: -60
+          Feedback: "Some patients may not have the sophisticated knowledge you have,
+            but they're pretty good at pattern recognition and denying reality is
+            very rarely a successful strategy. Many patients will perceive this as
+            insulting to their intelligence. You should do your best to be truthful
+            and open, except for when it\u2019s not in the best interest of the patient. "
+      - Name: Address the cherry angioma
+        Text: "Mr. Peterson let\u2019s you examine his leg finally and you determine
+          that the spot is likely a cherry angioma. How would you address the situation
+          with Mr. Peterson?"
+        events: []
+        options:
+        - Name: "People at your age get those spots all the time. It\u2019s fine."
+          Text: "People at your age get those spots all the time. It\u2019s fine."
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: "But what are they? It still looks like cancer to me and that\u2019s
+              worrying me. Are you sure it\u2019s nothing to worry about?"
+          - action: 0
+            actor: 0
+            emotion: 0
+            dialogue: "I promise, Mr. Peterson. You\u2019re fine."
+          Result: 0
+          HealthChange: -30
+          Feedback: While you are doing a good job of assuring Mr. Peterson that the
+            spots are not a concern, you did not actually say what they were and why
+            they are not an immediate medical issue. Another approach would have been
+            better.
+        - Name: Guilt him for not showing them to the nurse
+          Text: You should have shown this to the nurses prior. They could have assured
+            you there was nothing wrong.
+          events:
+          - action: 0
+            actor: 1
+            emotion: 0
+            dialogue: How was I to know? It looked serious and I thought you needed
+              to see it!
+          Result: 1
+          HealthChange: -60
+          Feedback: "Chastising the patient for his approach to the health concern
+            is not helpful for either you or Mr. Peterson. Your patient\u2019s concerns
+            should be acknowledged and addressed in a way that educates him without
+            making him feel as if he is a burden."
+        - Name: Explain them and say they're harmless
+          Text: "That\u2019s just dilated blood cells and they\u2019re very common.
+            You may see more of these types of spots as you age, but they\u2019re
+            harmless."
+          events: []
+          Result: 2
+          HealthChange: 10
+          Feedback: "It\u2019s a good approach to explain the patient\u2019s medical
+            situation to them in language they can understand. Additionally, you took
+            the time to answer Mr. Peterson\u2019s follow-up questions and assure
+            him that you have his best interest in mind when dealing with this situation."
+      EndNarrative: Patients often ask more of you than you feel you can deliver.
+        Unfortunately, cutting corners and disconnecting from patients does not make
+        the process any easier. In the end, it is more efficient and more amenable
+        to your own stress management to quickly acknowledge your human component
+        to patients without wallowing in your own struggles and letting the patients
+        provide feedback back to you. This gives you both the opportunity to express
+        more minor emotions and situations and in many cases receive the support you
+        need from the patients you are already working with.
 --- !u!4 &354923701
 Transform:
   m_ObjectHideFlags: 0
@@ -1408,19 +1617,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1809351561}
+    m_TransformParent: {fileID: 949995576}
     m_Modifications:
     - target: {fileID: 4078887149212140, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -492.74
+      value: -0.2062166
       objectReference: {fileID: 0}
     - target: {fileID: 4078887149212140, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -361.51
+      value: -0.13999939
       objectReference: {fileID: 0}
     - target: {fileID: 4078887149212140, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -8.42
+      value: -0.26975685
       objectReference: {fileID: 0}
     - target: {fileID: 4078887149212140, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1440,7 +1649,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4078887149212140, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1696981996037864, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
       propertyPath: m_Name
@@ -1483,6 +1692,18 @@ Prefab:
       propertyPath: dialogueManager
       value: 
       objectReference: {fileID: 1976377578}
+    - target: {fileID: 4078887149212140, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.14218275
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078887149212140, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.36773375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078887149212140, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.10134068
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
@@ -2277,6 +2498,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 50
   maxHealth: 100
+--- !u!1 &949995575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 949995576}
+  - component: {fileID: 949995579}
+  - component: {fileID: 949995578}
+  - component: {fileID: 949995577}
+  m_Layer: 0
+  m_Name: RoomB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &949995576
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 949995575}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -490.75, y: -360.95, z: -4.87}
+  m_LocalScale: {x: 9.65, y: 4, z: 13.16}
+  m_Children:
+  - {fileID: 30459697}
+  m_Father: {fileID: 1809351561}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &949995577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 949995575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueManager: {fileID: 1976377578}
+  scenario: 1
+--- !u!65 &949995578
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 949995575}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &949995579
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 949995575}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &989074762
 GameObject:
   m_ObjectHideFlags: 0
@@ -3713,7 +3998,7 @@ GameObject:
   - component: {fileID: 1738577847}
   - component: {fileID: 1738577846}
   m_Layer: 0
-  m_Name: Room 1
+  m_Name: RoomA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4099,7 +4384,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1738577845}
-  - {fileID: 30459697}
+  - {fileID: 949995576}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
