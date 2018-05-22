@@ -101,7 +101,7 @@ public class DialogueManager : MonoBehaviour
     {
         UI_ChoiceDia.SetActive(false);
 
-        if (runAutoProgress)
+        if (autoProgress != null && runAutoProgress)
             StopCoroutine(autoProgress);
     }
 
