@@ -280,7 +280,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1590599584}
+      - m_Target: {fileID: 1976377578}
         m_MethodName: OptionClicked
         m_Mode: 3
         m_Arguments:
@@ -862,12 +862,6 @@ MonoBehaviour:
           Feedback: At face value this sounds like a rejection of the patient's concern.
             You should instead recognize and validate their concern in order to console
             the patient and help them decrease their stress related to the test.
-        - Name: 
-          Text: 
-          events: []
-          Result: 0
-          HealthChange: 0
-          Feedback: 
       - Name: Ms. Jackson's concerns about the tests 2
         Text: What is a good way to continue the conversation with Ms. Jackson?
         events:
@@ -1161,7 +1155,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1590599584}
+      - m_Target: {fileID: 1976377578}
         m_MethodName: OptionClicked
         m_Mode: 3
         m_Arguments:
@@ -3310,7 +3304,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1590599583}
-  - component: {fileID: 1590599584}
   m_Layer: 5
   m_Name: UI_Choice&Dialogue
   m_TagString: Untagged
@@ -3342,26 +3335,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1590599584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1590599582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7649cde0b99c5e4f99cbd8d7dedcbbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 469622539}
-  - {fileID: 116756026}
-  - {fileID: 1890029492}
-  dialogueText: {fileID: 1695099775}
-  feedbackText: {fileID: 1888343773}
-  promptText: {fileID: 1300543637}
-  stats: {fileID: 927959815}
-  gameManager: {fileID: 1127561627}
 --- !u!1 &1628650966
 GameObject:
   m_ObjectHideFlags: 0
@@ -4293,7 +4266,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1590599584}
+      - m_Target: {fileID: 1976377578}
         m_MethodName: OptionClicked
         m_Mode: 3
         m_Arguments:
@@ -4339,6 +4312,55 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1890029490}
+--- !u!1 &1976377577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1976377579}
+  - component: {fileID: 1976377578}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1976377578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1976377577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7649cde0b99c5e4f99cbd8d7dedcbbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 469622539}
+  - {fileID: 116756026}
+  - {fileID: 1890029492}
+  dialogueText: {fileID: 1695099775}
+  feedbackText: {fileID: 1888343773}
+  promptText: {fileID: 1300543637}
+  stats: {fileID: 927959815}
+  gameManager: {fileID: 1127561627}
+--- !u!4 &1976377579
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1976377577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5118248, y: 1.5, z: 0.015053261}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2013814580
 GameObject:
   m_ObjectHideFlags: 0

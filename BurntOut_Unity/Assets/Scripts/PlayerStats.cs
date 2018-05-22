@@ -8,4 +8,5 @@ public class PlayerStats : MonoBehaviour {
     public float currentHealth;
     public float maxHealth = 100;
 
+
 }

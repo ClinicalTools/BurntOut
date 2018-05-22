@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
     public PlayerStats stats;
     public Main_GameManager gameManager;
 
-
+    
     private Text[] buttonsText;
     private Scenario scenario;
     private int choiceNum;
