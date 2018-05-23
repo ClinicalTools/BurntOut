@@ -5,6 +5,7 @@ public class InteractPatient : MonoBehaviour
 {
     public int patientId;
     public bool completed;
+    public bool lost;
     public bool isAroundPatient;
     public bool playerFacing;
 
@@ -19,6 +20,9 @@ public class InteractPatient : MonoBehaviour
 
     void Update()
     {
+        if (completed || lost)
+            return;
+
         if (isAroundPatient)
         {
             Vector3 vec = transform.position - player.transform.position;

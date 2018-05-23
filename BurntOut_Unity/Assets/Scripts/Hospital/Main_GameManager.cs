@@ -107,6 +107,10 @@ public class Main_GameManager : MonoBehaviour
     {
         currentRoom.completed = true;
     }
+    public void RoomLost()
+    {
+        currentRoom.lost = true;
+    }
 
     // on loss here
     public void Lose()
