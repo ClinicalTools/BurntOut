@@ -5,11 +5,11 @@ using UnityEngine;
 public class Main_GameManager : MonoBehaviour
 {
 
-    public Interact_Patient room1;
-    public Interact_Patient room2;
+    public InteractPatient room1;
+    public InteractPatient room2;
 
     // store current patient
-    public Interact_Patient currentRoom;
+    public InteractPatient currentRoom;
 
     public GameObject Canvas_Paused;
     public GameObject Canvas_Win;

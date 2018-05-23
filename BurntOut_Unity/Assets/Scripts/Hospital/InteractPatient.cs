@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Interact_Patient : MonoBehaviour
+public class InteractPatient : MonoBehaviour
 {
     public int patientId;
     public bool completed;
     public bool isAroundPatient;
     public bool playerFacing;
 
-    public Text pressButton; 
+    public Text pressButtonText; 
     public GameObject player;
 
     public Main_GameManager gameManager;
@@ -32,12 +32,19 @@ public class Interact_Patient : MonoBehaviour
             playerFacing = Vector3.Angle(playerDir, vec) < maxAngle;
 
             if (wasFacing && !playerFacing)
-                dialogueManager.EndDialogue();
+                LookAway();
+            else if (!wasFacing && playerFacing)
+                Look();
+            else if (playerFacing)
+                pressButtonText.transform.parent.gameObject.SetActive(!dialogueManager.UI_ChoiceDia.activeInHierarchy);
+
         }
 
         // if player is around patient, allow player to interact with it
         if (Input.GetKeyDown(KeyCode.E) && isAroundPatient && playerFacing)
         {
+            pressButtonText.transform.parent.gameObject.SetActive(false);
+
             // INTERACTION HERE
             dialogueManager.StartDialogue();
 
@@ -63,11 +70,16 @@ public class Interact_Patient : MonoBehaviour
     
     private void Look()
     {
-        var scenarioId = GetComponentInParent<Room>().scenarioId;
+        var sceneNarrative = GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().sceneNarrative;
+        var scenario = sceneNarrative.GetScenario(GetComponentInParent<Room>().scenarioId);
+
+        pressButtonText.transform.parent.gameObject.SetActive(true);
+        pressButtonText.text = "Press 'e' to talk to " + scenario.GetActor(patientId).name;
     }
 
     private void LookAway()
     {
+        pressButtonText.transform.parent.gameObject.SetActive(false);
         dialogueManager.EndDialogue();
     }
 

@@ -2685,7 +2685,10 @@ MonoBehaviour:
             dialogue: "I know they\u2019re common, but that doesn\u2019t help alleviate
               my anxiety."
           result: 0
-          feedback: 
+          feedback: 'Patients are unique and see their situation as unique. From the
+            professional perspective the experiences seem similar. However, that''s
+            not how patients see it. It''s best for you not to express the commonality
+            of medicine to patients because that does not mesh with their perception. '
         - name: Whatever the results, we can address them together
           text: Whatever the results, we can address them together.
           events:
@@ -2694,7 +2697,10 @@ MonoBehaviour:
             emotion: 0
             dialogue: I appreciate that. The waiting is just killing me.
           result: 2
-          feedback: 
+          feedback: "It's nice to reassure the patient and convey a positive outlook.
+            In this case, the test is not a chance to find out really bad news, but
+            is indeed fairly routine part of medicine. You shouldn't be afraid to
+            console your patient when it is genuine.\r"
         - name: "You shouldn\u2019t be so worried"
           text: "You shouldn\u2019t be so worried."
           events:
@@ -2708,7 +2714,9 @@ MonoBehaviour:
             dialogue: "Well, it\u2019s my life, so of course I\u2019m worried! You
               don\u2019t seem to care about what might be going on with me!"
           result: 1
-          feedback: 
+          feedback: At face value this sounds like a rejection of the patient's concern.
+            You should instead recognize and validate their concern in order to console
+            the patient and help them decrease their stress related to the test.
       - name: Ms. Jackson's concerns about the tests 2
         text: What is a good way to continue the conversation with Ms. Jackson?
         events:
@@ -2727,7 +2735,11 @@ MonoBehaviour:
             emotion: 0
             dialogue: "I guess you\u2019re a lot stronger than I am, then."
           result: 1
-          feedback: 
+          feedback: 'It''s okay to share a personal struggle with the patient, as
+            it enhances patient rapport if you can help the patient see that you are
+            human, too. However, it could also have the opposite effect and make the
+            patient feel like the comparison shows that they are weak for not dealing
+            with the situation in the same manner you did. '
         - name: Ask about anxiety
           text: "\u201CHave you spoken to anyone on staff about this anxiety prior?\u201D"
           events:
@@ -2738,7 +2750,10 @@ MonoBehaviour:
               got nothing to do most of the day except sit around and think about
               the worse case scenario, it just makes it worse."
           result: 0
-          feedback: 
+          feedback: "While it\u2019s good to ascertain if Ms. Jackson might need help
+            dealing with her anxiety, it\u2019s best to address her immediate concerns
+            at the moment. This would offer an opportunity for you to provide a more
+            complete answer as well as to consult the patient about their stress. "
         - name: Ask about concerns
           text: "\u201CCan you tell me what your concerns are?\u201D"
           events:
@@ -2749,7 +2764,9 @@ MonoBehaviour:
               the same kinds of symptoms he had. I\u2019m always tired, been losing
               weight, and I get fever and chills every night."
           result: 2
-          feedback: 
+          feedback: Presenting the question in this manner offers an opportunity for
+            you to provide a more complete answer as well as to consult the patient.
+            This will help them decrease their stress related to the test.
       - name: Ms. Jackson's concerns about the tests 3
         text: "Now that you know Ms. Jackson\u2019s concerns, you can better address
           the situation. What is a good way to alleviate her stress regarding the
@@ -2766,7 +2783,9 @@ MonoBehaviour:
             dialogue: "And one of them might be leukemia! I just know that\u2019s
               the reason."
           result: 0
-          feedback: 
+          feedback: Acknowledging her concerns and trying to assure Ms. Jackson about
+            her symptoms seems like a good idea, but it leaves the door open to having
+            her think that her suspicion is still correct.
         - name: Tell her it's very unlikely and express sympathy
           text: "\u201CI am sorry to hear about your father. But it\u2019s very unlikely
             that you will have the same diagnosis.\u201D"
@@ -2785,7 +2804,9 @@ MonoBehaviour:
             dialogue: "I guess we\u2019ll find out tomorrow and deal with whatever
               comes."
           result: 2
-          feedback: 
+          feedback: "It was a good approach to acknowledge Ms. Jackson\u2019s concerns
+            regarding similarity to her father\u2019s diagnosis and the unlikelihood
+            that she will have a similar result."
         - name: Not necessarily passed down
           text: "\u201CAcute myeloid leukemia doesn\u2019t necessarily run in families,
             so it wouldn\u2019t be passed down.\u201D"
@@ -2796,7 +2817,10 @@ MonoBehaviour:
             dialogue: "But it could be, right? (She starts crying) And then I\u2019d
               be dying of the same thing that took my father!"
           result: 1
-          feedback: 
+          feedback: "While the technical information may be correct, the way you deliver
+            your assurances makes a difference. Instead of denying Ms. Jackson\u2019s
+            concerns, instead you should acknowledge them and help to alleviate her
+            worries."
       endNarrative: 'Having a good relationship with patients is an important part
         of avoiding burnout. If you see patients as tasks to be beaten, then patient
         care does indeed become tedious and annoying. Without the human element and
@@ -2844,7 +2868,10 @@ MonoBehaviour:
             emotion: 0
             dialogue: No! I want another doctor! You are too rude.
           result: 1
-          feedback: 
+          feedback: "Belittling the patient\u2019s concerns is not an effective way
+            to de-escalate the situation. Patients are unique and see their situation
+            as unique. Instead, you should acknowledge their concerns and work to
+            address them in order to provide the best care possible for their situation."
         - name: I want to make sure I'm doing everything I can
           text: "I care for all my patients and I want to make sure I\u2019m doing
             everything I can to provide for you."
@@ -2855,7 +2882,10 @@ MonoBehaviour:
             dialogue: "If that were true, you wouldn\u2019t have made me sit here,
               waiting and worrying, all this time."
           result: 0
-          feedback: 
+          feedback: While you did attempt to express concern for Mr. Peterson, the
+            phrasing made it more about you than your patient. You may be tired and
+            stressed out, but your focus should be on your patient, acknowledging
+            and addressing their concerns. Your language should reflect that as well.
         - name: I want to answer any questions you might have.
           text: I understand how frustrating it can be to have to wait, but I can
             assure you I want to answer any questions you might have.
@@ -2867,7 +2897,11 @@ MonoBehaviour:
               just been sitting here waiting and worrying, thinking up worse and worse
               scenarios."
           result: 2
-          feedback: 
+          feedback: "Acknowledging the patient\u2019s concern, as well as providing
+            assurance that you would like to answer any of their questions, helps
+            Mr. Peterson know that you are there for him. Do not let a patient\u2019s
+            anger escalate the situation, but instead employ tactics to bring the
+            focus back to their concern."
       - name: Explain the yawning
         text: How should you respond?
         events:
@@ -2902,7 +2936,10 @@ MonoBehaviour:
             dialogue: "It\u2019s not a big deal that I\u2019m boring? Or that you\u2019re
               tired?"
           result: 0
-          feedback: 
+          feedback: It is reasonable to not expose patients to personal feelings or
+            concerns. It makes sense to not divulge serious life moments or strong
+            emotions, which are things you might struggle with. However, acknowledging
+            a normal emotion or feeling is totally acceptable.
         - name: Just very tired
           text: "I\u2019m sorry. I\u2019m just very tired."
           events:
@@ -2916,7 +2953,13 @@ MonoBehaviour:
             dialogue: "Yeah, I guess you would be. You\u2019ve probably been on your
               feet for over twelve hours now."
           result: 2
-          feedback: 
+          feedback: "It's okay to share a personal struggle with the patient, as it
+            enhances patient rapport if you can help the patient see that you are
+            human, too, and you have reactions to situations just as they do. In this
+            case, the patient clearly is stressed and one reason why they are probably
+            talking so much is a desire to relieve some of that stress. By acknowledging
+            that you\u2019re tired, this might give you an opportunity to discuss
+            the broader issue of dealing with stress. "
         - name: Not bored
           text: "I\u2019m not bored. Please continue."
           events:
@@ -2930,7 +2973,11 @@ MonoBehaviour:
             dialogue: "No, I don\u2019t think so. You don\u2019t seem to care about
               what I\u2019m saying."
           result: 1
-          feedback: 
+          feedback: "Some patients may not have the sophisticated knowledge you have,
+            but they're pretty good at pattern recognition and denying reality is
+            very rarely a successful strategy. Many patients will perceive this as
+            insulting to their intelligence. You should do your best to be truthful
+            and open, except for when it\u2019s not in the best interest of the patient. "
       - name: Address the cherry angioma
         text: "Mr. Peterson let\u2019s you examine his leg finally and you determine
           that the spot is likely a cherry angioma. How would you address the situation
@@ -2950,7 +2997,10 @@ MonoBehaviour:
             emotion: 0
             dialogue: "I promise, Mr. Peterson. You\u2019re fine."
           result: 0
-          feedback: 
+          feedback: While you are doing a good job of assuring Mr. Peterson that the
+            spots are not a concern, you did not actually say what they were and why
+            they are not an immediate medical issue. Another approach would have been
+            better.
         - name: Guilt him for not showing them to the nurse
           text: You should have shown this to the nurses prior. They could have assured
             you there was nothing wrong.
@@ -2961,7 +3011,10 @@ MonoBehaviour:
             dialogue: How was I to know? It looked serious and I thought you needed
               to see it!
           result: 1
-          feedback: 
+          feedback: "Chastising the patient for his approach to the health concern
+            is not helpful for either you or Mr. Peterson. Your patient\u2019s concerns
+            should be acknowledged and addressed in a way that educates him without
+            making him feel as if he is a burden."
         - name: Explain them and say they're harmless
           text: "That\u2019s just dilated blood cells and they\u2019re very common.
             You may see more of these types of spots as you age, but they\u2019re
@@ -2980,7 +3033,10 @@ MonoBehaviour:
               do, we\u2019ll remove them, but you shouldn\u2019t worry about that
               at the moment."
           result: 2
-          feedback: 
+          feedback: "It\u2019s a good approach to explain the patient\u2019s medical
+            situation to them in language they can understand. Additionally, you took
+            the time to answer Mr. Peterson\u2019s follow-up questions and assure
+            him that you have his best interest in mind when dealing with this situation."
       endNarrative: Patients often ask more of you than you feel you can deliver.
         Unfortunately, cutting corners and disconnecting from patients does not make
         the process any easier. In the end, it is more efficient and more amenable
@@ -4828,6 +4884,16 @@ Prefab:
         type: 2}
       propertyPath: m_Center.z
       value: -1.0197471
+      objectReference: {fileID: 0}
+    - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: pressButtonText
+      value: 
+      objectReference: {fileID: 826894553}
+    - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: patientId
+      value: -334617666
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -7258,6 +7324,80 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &826894552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 826894555}
+  - component: {fileID: 826894554}
+  - component: {fileID: 826894553}
+  m_Layer: 5
+  m_Name: Text_Interact
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &826894553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 826894552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.028301895, g: 0.021226421, b: 0.021226421, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 18
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: asdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhflaasdhflkajsdhfhlakjsdhflakjsdhflakjsdhfla
+--- !u!222 &826894554
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 826894552}
+--- !u!224 &826894555
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 826894552}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1965098215}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 247.8, y: 131.13}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &829257656
 Prefab:
   m_ObjectHideFlags: 0
@@ -7949,7 +8089,7 @@ RectTransform:
   - {fileID: 1364738874}
   - {fileID: 677895708}
   m_Father: {fileID: 1836963688}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12933,7 +13073,7 @@ RectTransform:
   - {fileID: 1162991120}
   - {fileID: 186891588}
   m_Father: {fileID: 1836963688}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14454,6 +14594,16 @@ Prefab:
       propertyPath: playerRotateToTarget
       value: 
       objectReference: {fileID: 927959814}
+    - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: patientId
+      value: -535933802
+      objectReference: {fileID: 0}
+    - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: pressButtonText
+      value: 
+      objectReference: {fileID: 826894553}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
   m_IsPrefabParent: 0
@@ -15206,6 +15356,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1965098215}
   - {fileID: 907164240}
   - {fileID: 1590599583}
   m_Father: {fileID: 0}
@@ -16906,6 +17057,40 @@ Transform:
   m_PrefabParentObject: {fileID: 4486558126255714, guid: b88956662491edb42ab49fbb46d97b50,
     type: 2}
   m_PrefabInternal: {fileID: 1964783992}
+--- !u!1 &1965098214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1965098215}
+  m_Layer: 5
+  m_Name: UI_InteractText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1965098215
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1965098214}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 826894555}
+  m_Father: {fileID: 1836963688}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000034241322, y: -238.1}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1966068239
 Prefab:
   m_ObjectHideFlags: 0
