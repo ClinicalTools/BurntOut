@@ -11,7 +11,6 @@ public enum OptionResults
 public class Option
 {
     public string name;
-
     public string text;
 
     [SerializeField]
@@ -48,5 +47,5 @@ public class Option
         }
     }
 
-    public string Feedback;
+    public string feedback;
 }

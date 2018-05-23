@@ -45,6 +45,6 @@ public class OptionEditor
 
         EditorGUILayout.LabelField("Feedback:");
         EditorStyles.textField.wordWrap = true;
-        option.Feedback = EditorGUILayout.TextArea(option.Feedback);
+        option.feedback = EditorGUILayout.TextArea(option.feedback);
     }
 }

@@ -163,15 +163,15 @@ public class DialogueManager : MonoBehaviour
                         if (choiceNum < scenario.Choices.Count)
                             tasks = new Queue<Task>(scenario.Choices[choiceNum].Events);
 
-                        ShowFeedback(option.Feedback);
+                        ShowFeedback(option.feedback);
                         break;
                     case OptionResults.END:
                         lost = true;
-                        ShowFeedback(option.Feedback);
+                        ShowFeedback(option.feedback);
                         break;
                     case OptionResults.TRY_AGAIN:
                         tasks = new Queue<Task>(scenario.Choices[choiceNum].Events);
-                        ShowFeedback(option.Feedback);
+                        ShowFeedback(option.feedback);
                         break;
                 }
             }
