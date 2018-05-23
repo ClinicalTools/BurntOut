@@ -230,8 +230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ec5cf00ca181d45a42ba1870e148c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsWalking: 0
-  m_WalkSpeed: 5
+  m_IsWalking: 1
+  m_WalkSpeed: 3
   m_RunSpeed: 10
   m_RunstepLenghten: 0.134
   m_JumpSpeed: 10
@@ -244,9 +244,9 @@ MonoBehaviour:
     MinimumX: -90
     MaximumX: 90
     smooth: 1
-    smoothTime: 8
+    smoothTime: 4
     lockCursor: 1
-  m_UseFovKick: 1
+  m_UseFovKick: 0
   m_FovKick:
     Camera: {fileID: 0}
     originalFov: 0
