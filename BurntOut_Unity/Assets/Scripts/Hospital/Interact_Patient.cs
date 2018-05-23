@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class Interact_Patient : MonoBehaviour {
-
+public class Interact_Patient : MonoBehaviour
+{
     public int patientNumber;
     public bool completed;
     public bool isAroundPatient;
@@ -11,27 +11,39 @@ public class Interact_Patient : MonoBehaviour {
     public Main_GameManager gameManager;
     public DialogueManager dialogueManager;
 
-    void Update() {
+    public float maxAngle = 35;
 
+    void Update()
+    {
         // if player is around patient, allow player to interact with it
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (isAroundPatient == true)
+            {
+                Vector3 vec = transform.position - player.transform.position;
+                vec.y = 0;
 
-            if (isAroundPatient == true) {
+                // Measure from the direction opposite the player
+                Vector3 playerDir = player.transform.TransformDirection(Vector3.forward);
+                playerDir.y = 0;
 
-                // INTERACTION HERE
-                dialogueManager.StartDialogue();
+                if (Vector3.Angle(playerDir, vec) < maxAngle)
+                {
+                    // INTERACTION HERE
+                    dialogueManager.StartDialogue();
 
-                Debug.Log("Patient interact");
+                    Debug.Log("Patient interact");
 
-                // freeze player controller
-                player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+                    // freeze player controller
+                    player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
 
-                // enable mouse
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                    // enable mouse
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
 
-                // give the game manager the "name" of the patient
-                gameManager.currentRoom = this;
+                    // give the game manager the "name" of the patient
+                    gameManager.currentRoom = this;
+                }
             }
 
         }
@@ -40,24 +52,29 @@ public class Interact_Patient : MonoBehaviour {
 
 
     // detect if player is within interact range
-    void OnTriggerEnter (Collider col) {
+    void OnTriggerEnter(Collider col)
+    {
 
-        if (col.gameObject.name == "Player") {
+        if (col.gameObject.name == "Player")
+        {
 
             Debug.Log("Player Detected");
             isAroundPatient = true;
-            
-        } else {
+
+        }
+        else
+        {
 
             Debug.Log("Other obj detected");
             isAroundPatient = false;
 
         }
 
-    } 
+    }
 
     // return to default state when out of range
-    void OnTriggerExit (Collider col) {
+    void OnTriggerExit(Collider col)
+    {
 
         Debug.Log("Player away from patient");
         isAroundPatient = false;
