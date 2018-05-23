@@ -1,0 +1,122 @@
+fileFormatVersion: 2
+guid: 606ea0bc37f5198409f783e078cd7c0b
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: chair02:chair02:pCube9
+    100002: chair02:chair02:transform1
+    100004: chair02:chair02:transform2
+    100006: chair02:chair02:transform3
+    100008: chair02:chair02:transform4
+    100010: chair02:chair02:transform5
+    100012: chair02:chair02:transform6
+    100014: chair02:chair02:transform7
+    100016: chair02:pCube10
+    100018: chair02:pCube5
+    100020: chair02:pCube6
+    100022: chair02:pCube7
+    100024: chair02:pCube8
+    100026: chair02:pCube9
+    100028: chair02:pCylinder1
+    100030: //RootNode
+    400000: chair02:chair02:pCube9
+    400002: chair02:chair02:transform1
+    400004: chair02:chair02:transform2
+    400006: chair02:chair02:transform3
+    400008: chair02:chair02:transform4
+    400010: chair02:chair02:transform5
+    400012: chair02:chair02:transform6
+    400014: chair02:chair02:transform7
+    400016: chair02:pCube10
+    400018: chair02:pCube5
+    400020: chair02:pCube6
+    400022: chair02:pCube7
+    400024: chair02:pCube8
+    400026: chair02:pCube9
+    400028: chair02:pCylinder1
+    400030: //RootNode
+    2100000: lambert1
+    2300000: chair02:chair02:pCube9
+    3300000: chair02:chair02:pCube9
+    4300000: chair02:chair02:pCube9
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
