@@ -14,7 +14,7 @@ public enum TaskEmotion
 public class Task
 {
     public TaskAction action;
-    public int actor;
+    public int actorId;
     public TaskEmotion emotion;
     public string dialogue;
 }

@@ -26,14 +26,21 @@ public class TasksEditor
                 rect.x += newRect.width + 5;
 
                 newRect = new Rect(rect.x, rect.y, 90, EditorGUIUtility.singleLineHeight);
-                element.actor = EditorGUI.Popup(newRect, element.actor, scenario.Actors.ToArray());
+
+                string[] actorNames = new string[scenario.Actors.Count];
+                for (int i = 0; i < actorNames.Length; i++)
+                    actorNames[i] = scenario.Actors[i].name;
+                
+                var actorIndex = EditorGUI.Popup(newRect, scenario.ActorIndex(element.actorId), actorNames);
+                if (actorIndex != -1)
+                    element.actorId = scenario.Actors[actorIndex].id;
+
                 rect.width -= newRect.width + 5;
                 rect.x += newRect.width + 5;
 
                 switch (element.action)
                 {
                     case TaskAction.TALK:
-
                         newRect = new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight);
                         element.dialogue = EditorGUI.TextField(newRect, element.dialogue);
                         break;

@@ -185,7 +185,7 @@ public class DialogueManager : MonoBehaviour
             switch (task.action)
             {
                 case TaskAction.TALK:
-                    ShowText(scenario.Actors[task.actor], task.dialogue);
+                    ShowText(scenario.GetActor(task.actorId).name, task.dialogue);
                     break;
                 case TaskAction.EMOTION:
                     // Show emotion code
@@ -213,7 +213,7 @@ public class DialogueManager : MonoBehaviour
 
     // Shows a line of dialogue
     // Actor should be used in the future
-    private void ShowText(string actor, string dialogue)
+    private void ShowText(string actorName, string dialogue)
     {
         dialogueText.transform.parent.gameObject.SetActive(true);
         dialogueText.text = dialogue;

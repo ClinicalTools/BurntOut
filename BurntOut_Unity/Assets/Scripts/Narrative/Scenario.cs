@@ -13,16 +13,32 @@ public class Scenario
 
     [SerializeField]
     [XmlArray("Actors"), XmlArrayItem("Actor")]
-    private List<string> actors;
-    public List<string> Actors
+    private List<Actor> actors;
+    public List<Actor> Actors
     {
         get
         {
             if (actors == null)
-                actors = new List<string>();
+                actors = new List<Actor>();
 
             return actors;
         }
+    }
+    public int ActorIndex(int id)
+    {
+        for (int i = 0; i <  actors.Count; i++)
+            if (actors[i].id == id)
+                return i;
+
+        return -1;
+    }
+    public Actor GetActor(int id)
+    {
+        foreach (Actor actor in actors)
+            if (actor.id == id)
+                return actor;
+
+        return null;
     }
 
     [SerializeField]
@@ -38,6 +54,7 @@ public class Scenario
             return choices;
         }
     }
+
 
     [XmlAttribute("endNarrative")]
     public string EndNarrative;

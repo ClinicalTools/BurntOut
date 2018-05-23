@@ -37,11 +37,15 @@ public class ScenarioEditor
                 EditorHelper.ListEdit(
                     scenario.Actors.Count,
                     // Add element
-                    () => { scenario.Actors.Add(""); },
+                    () =>
+                    {
+                        scenario.Actors.Add(
+                            new Actor(scenario.Actors.ToArray()));
+                    },
                     // Move element
                     (int orig, int newPos) =>
                     {
-                        string actor = scenario.Actors[orig];
+                        Actor actor = scenario.Actors[orig];
                         scenario.Actors.RemoveAt(orig);
                         scenario.Actors.Insert(newPos, actor);
                     },
@@ -50,7 +54,7 @@ public class ScenarioEditor
                     // Display element
                     (int i) =>
                     {
-                        scenario.Actors[i] = EditorGUILayout.TextField(scenario.Actors[i]);
+                        scenario.Actors[i].name = EditorGUILayout.TextField(scenario.Actors[i].name);
                     },
                     "Remove Actor",
                     "Are you sure you want to delete this actor?"
@@ -102,7 +106,7 @@ public class ScenarioEditor
                     // Foldout title
                     (int i) => { return ("Choice " + (i + 1) + " - " + scenario.Choices[i].Name); },
                     // Foldout color
-                    (int i) => 
+                    (int i) =>
                     {
                         // Red if there is no option to continue
                         foreach (Option option in scenario.Choices[i].Options)
