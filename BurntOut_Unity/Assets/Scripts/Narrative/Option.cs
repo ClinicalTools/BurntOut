@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Serialization;
 using UnityEngine;
 
 public enum OptionResults
@@ -10,17 +8,13 @@ public enum OptionResults
 }
 
 [Serializable]
-[XmlRoot("Option")]
 public class Option
 {
-    [XmlAttribute("name")]
-    public string Name;
+    public string name;
 
-    [XmlAttribute("text")]
-    public string Text;
+    public string text;
 
     [SerializeField]
-    [XmlArray("Events"), XmlArrayItem("Event")]
     private List<Task> events;
     public List<Task> Events
     {
@@ -33,14 +27,13 @@ public class Option
         }
     }
 
-    [XmlAttribute("Result")]
-    public OptionResults Result;
+    public OptionResults result;
 
     public int HealthChange
     {
         get
         {
-            switch (Result)
+            switch (result)
             {
                 case OptionResults.CONTINUE:
                     return 10;
@@ -55,6 +48,5 @@ public class Option
         }
     }
 
-    [XmlAttribute("Feedback")]
     public string Feedback;
 }

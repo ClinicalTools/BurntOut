@@ -1359,192 +1359,169 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneNarrative:
     scenarios:
-    - Name: Blood Test Results
+    - id: 2094913720
+      name: Blood Test Results
       actors:
-      - name: 
-        id: 0
-      - name: 
-        id: 0
+      - id: -542058693
+        name: player
+      - id: -535933802
+        name: Ms. Jackson
       choices:
-      - Name: Ms. Jackson's concerns about the tests 1
-        Text: 'What do you say in response to Ms. Jackson? '
+      - name: Ms. Jackson's concerns about the tests 1
+        text: 'What do you say in response to Ms. Jackson? '
         events:
         - action: 2
-          actorId: 0
+          actorId: -535933802
           emotion: 2
           dialogue: 
         - action: 0
-          actorId: 0
+          actorId: -535933802
           emotion: 0
           dialogue: Hello.
         - action: 0
-          actorId: 0
+          actorId: -542058693
           emotion: 0
           dialogue: Good evening, Ms. Jackson. I heard you had a question for me.
         - action: 0
-          actorId: 0
+          actorId: -535933802
           emotion: 0
           dialogue: 'Yes. '
         - action: 2
-          actorId: 0
+          actorId: -535933802
           emotion: 4
           dialogue: 
         - action: 0
-          actorId: 0
+          actorId: -535933802
           emotion: 0
           dialogue: "I\u2019m supposed to get my blood test results back tomorrow
             and I\u2019m worried about what they might find."
         options:
-        - Name: Tests are a common part of the process
-          Text: Tests are a common part of the process.
+        - name: Tests are a common part of the process
+          text: Tests are a common part of the process.
           events:
           - action: 2
-            actorId: 0
+            actorId: -535933802
             emotion: 2
             dialogue: 
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: "I know they\u2019re common, but that doesn\u2019t help alleviate
               my anxiety."
-          Result: 0
-          Feedback: 'Patients are unique and see their situation as unique. From the
-            professional perspective the experiences seem similar. However, that''s
-            not how patients see it. It''s best for you not to express the commonality
-            of medicine to patients because that does not mesh with their perception. '
-        - Name: Whatever the results, we can address them together
-          Text: Whatever the results, we can address them together.
+          result: 0
+          Feedback: 
+        - name: Whatever the results, we can address them together
+          text: Whatever the results, we can address them together.
           events:
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: I appreciate that. The waiting is just killing me.
-          Result: 2
-          Feedback: "It's nice to reassure the patient and convey a positive outlook.
-            In this case, the test is not a chance to find out really bad news, but
-            is indeed fairly routine part of medicine. You shouldn't be afraid to
-            console your patient when it is genuine.\r"
-        - Name: "You shouldn\u2019t be so worried"
-          Text: "You shouldn\u2019t be so worried."
+          result: 2
+          Feedback: 
+        - name: "You shouldn\u2019t be so worried"
+          text: "You shouldn\u2019t be so worried."
           events:
           - action: 2
-            actorId: 0
+            actorId: -535933802
             emotion: 3
             dialogue: 
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: "Well, it\u2019s my life, so of course I\u2019m worried! You
               don\u2019t seem to care about what might be going on with me!"
-          Result: 1
-          Feedback: At face value this sounds like a rejection of the patient's concern.
-            You should instead recognize and validate their concern in order to console
-            the patient and help them decrease their stress related to the test.
-      - Name: Ms. Jackson's concerns about the tests 2
-        Text: What is a good way to continue the conversation with Ms. Jackson?
+          result: 1
+          Feedback: 
+      - name: Ms. Jackson's concerns about the tests 2
+        text: What is a good way to continue the conversation with Ms. Jackson?
         events:
         - action: 0
-          actorId: 0
+          actorId: -535933802
           emotion: 0
           dialogue: "My sister tells me I shouldn\u2019t be worried either, but it\u2019s
             just my nature. I\u2019m the worrier in the family."
         options:
-        - Name: Worrying never solves anything
-          Text: "\u201CI used to be that way, too, but worrying never solves anything.
+        - name: Worrying never solves anything
+          text: "\u201CI used to be that way, too, but worrying never solves anything.
             Now I try to deal with things as they come.\u201D"
           events:
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: "I guess you\u2019re a lot stronger than I am, then."
-          Result: 1
-          Feedback: 'It''s okay to share a personal struggle with the patient, as
-            it enhances patient rapport if you can help the patient see that you are
-            human, too. However, it could also have the opposite effect and make the
-            patient feel like the comparison shows that they are weak for not dealing
-            with the situation in the same manner you did. '
-        - Name: Ask about anxiety
-          Text: "\u201CHave you spoken to anyone on staff about this anxiety prior?\u201D"
+          result: 1
+          Feedback: 
+        - name: Ask about anxiety
+          text: "\u201CHave you spoken to anyone on staff about this anxiety prior?\u201D"
           events:
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: "Not really. I\u2019m just an anxious person. And since I\u2019ve
               got nothing to do most of the day except sit around and think about
               the worse case scenario, it just makes it worse."
-          Result: 0
-          Feedback: "While it\u2019s good to ascertain if Ms. Jackson might need help
-            dealing with her anxiety, it\u2019s best to address her immediate concerns
-            at the moment. This would offer an opportunity for you to provide a more
-            complete answer as well as to consult the patient about their stress. "
-        - Name: Ask about concerns
-          Text: "\u201CCan you tell me what your concerns are?\u201D"
+          result: 0
+          Feedback: 
+        - name: Ask about concerns
+          text: "\u201CCan you tell me what your concerns are?\u201D"
           events:
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: "My father died of acute myeloid leukemia and I\u2019m having
               the same kinds of symptoms he had. I\u2019m always tired, been losing
               weight, and I get fever and chills every night."
-          Result: 2
-          Feedback: Presenting the question in this manner offers an opportunity for
-            you to provide a more complete answer as well as to consult the patient.
-            This will help them decrease their stress related to the test.
-      - Name: Ms. Jackson's concerns about the tests 3
-        Text: "Now that you know Ms. Jackson\u2019s concerns, you can better address
+          result: 2
+          Feedback: 
+      - name: Ms. Jackson's concerns about the tests 3
+        text: "Now that you know Ms. Jackson\u2019s concerns, you can better address
           the situation. What is a good way to alleviate her stress regarding the
           test results?"
         events: []
         options:
-        - Name: There are a number of possible reasons
-          Text: "\u201CI understand your concerns, but there are a number of reasons
+        - name: There are a number of possible reasons
+          text: "\u201CI understand your concerns, but there are a number of reasons
             why you might be experiencing these symptoms.\u201D"
           events:
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: "And one of them might be leukemia! I just know that\u2019s
               the reason."
-          Result: 0
-          Feedback: Acknowledging her concerns and trying to assure Ms. Jackson about
-            her symptoms seems like a good idea, but it leaves the door open to having
-            her think that her suspicion is still correct.
-        - Name: Tell her it's very unlikely and express sympathy
-          Text: "\u201CI am sorry to hear about your father. But it\u2019s very unlikely
+          result: 0
+          Feedback: 
+        - name: Tell her it's very unlikely and express sympathy
+          text: "\u201CI am sorry to hear about your father. But it\u2019s very unlikely
             that you will have the same diagnosis.\u201D"
           events:
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: I hope not.
           - action: 1
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: 
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: "I guess we\u2019ll find out tomorrow and deal with whatever
               comes."
-          Result: 2
-          Feedback: "It was a good approach to acknowledge Ms. Jackson\u2019s concerns
-            regarding similarity to her father\u2019s diagnosis and the unlikelihood
-            that she will have a similar result."
-        - Name: Not necessarily passed down
-          Text: "\u201CAcute myeloid leukemia doesn\u2019t necessarily run in families,
+          result: 2
+          Feedback: 
+        - name: Not necessarily passed down
+          text: "\u201CAcute myeloid leukemia doesn\u2019t necessarily run in families,
             so it wouldn\u2019t be passed down.\u201D"
           events:
           - action: 0
-            actorId: 0
+            actorId: -535933802
             emotion: 0
             dialogue: "But it could be, right? (She starts crying) And then I\u2019d
               be dying of the same thing that took my father!"
-          Result: 1
-          Feedback: "While the technical information may be correct, the way you deliver
-            your assurances makes a difference. Instead of denying Ms. Jackson\u2019s
-            concerns, instead you should acknowledge them and help to alleviate her
-            worries."
-      EndNarrative: 'Having a good relationship with patients is an important part
+          result: 1
+          Feedback: 
+      endNarrative: 'Having a good relationship with patients is an important part
         of avoiding burnout. If you see patients as tasks to be beaten, then patient
         care does indeed become tedious and annoying. Without the human element and
         without interactions with patients, you will lose the meaning that gives you
@@ -1553,201 +1530,182 @@ MonoBehaviour:
         but in the long-term you will be setting yourself up to more negative attitudes
         toward patients and patient care, and more frustration with the process of
         providing care to patients. '
-    - Name: Spot on Leg
+    - id: 1780528331
+      name: Spot on Leg
       actors:
-      - name: 
-        id: 0
-      - name: 
-        id: 0
+      - id: -369657928
+        name: player
+      - id: -334617666
+        name: Mr. Johnson
       choices:
-      - Name: Lower Mr. Peterson's stess levels
-        Text: "What can you say to lower Mr. Peterson\u2019s stress levels?"
+      - name: Lower Mr. Peterson's stess levels
+        text: "What can you say to lower Mr. Peterson\u2019s stress levels?"
         events:
         - action: 0
-          actorId: 0
+          actorId: -334617666
           emotion: 0
-          dialogue: "Finally! I\u2019ve been waiting forever!\u201D"
+          dialogue: "Finally! I\u2019ve been waiting forever!"
         - action: 0
-          actorId: 0
+          actorId: -369657928
           emotion: 0
           dialogue: I apologize. I tried to get here as soon as I could.
         - action: 0
-          actorId: 0
+          actorId: -334617666
           emotion: 0
           dialogue: "Well, it wasn\u2019t soon enough! I could be dying and you wouldn\u2019t
             care."
         options:
-        - Name: I'm sure it isn't anything to worry about
-          Text: "You\u2019re not dying and I\u2019m sure the spot isn\u2019t anything
+        - name: I'm sure it isn't anything to worry about
+          text: "You\u2019re not dying and I\u2019m sure the spot isn\u2019t anything
             to worry about. Would you like me to take a look?"
           events:
           - action: 2
-            actorId: 0
+            actorId: -334617666
             emotion: 4
             dialogue: 
           - action: 0
-            actorId: 0
+            actorId: -334617666
             emotion: 0
             dialogue: No! I want another doctor! You are too rude.
-          Result: 1
-          Feedback: "Belittling the patient\u2019s concerns is not an effective way
-            to de-escalate the situation. Patients are unique and see their situation
-            as unique. Instead, you should acknowledge their concerns and work to
-            address them in order to provide the best care possible for their situation."
-        - Name: I want to make sure I'm doing everything I can
-          Text: "I care for all my patients and I want to make sure I\u2019m doing
+          result: 1
+          Feedback: 
+        - name: I want to make sure I'm doing everything I can
+          text: "I care for all my patients and I want to make sure I\u2019m doing
             everything I can to provide for you."
           events:
           - action: 0
-            actorId: 0
+            actorId: -334617666
             emotion: 0
             dialogue: "If that were true, you wouldn\u2019t have made me sit here,
               waiting and worrying, all this time."
-          Result: 0
-          Feedback: While you did attempt to express concern for Mr. Peterson, the
-            phrasing made it more about you than your patient. You may be tired and
-            stressed out, but your focus should be on your patient, acknowledging
-            and addressing their concerns. Your language should reflect that as well.
-        - Name: I want to answer any questions you might have.
-          Text: I understand how frustrating it can be to have to wait, but I can
+          result: 0
+          Feedback: 
+        - name: I want to answer any questions you might have.
+          text: I understand how frustrating it can be to have to wait, but I can
             assure you I want to answer any questions you might have.
           events:
           - action: 0
-            actorId: 0
+            actorId: -334617666
             emotion: 0
             dialogue: "Thank you. I\u2019m sorry I\u2019m so testy, but I\u2019ve
               just been sitting here waiting and worrying, thinking up worse and worse
               scenarios."
-          Result: 2
-          Feedback: "Acknowledging the patient\u2019s concern, as well as providing
-            assurance that you would like to answer any of their questions, helps
-            Mr. Peterson know that you are there for him. Do not let a patient\u2019s
-            anger escalate the situation, but instead employ tactics to bring the
-            focus back to their concern."
-      - Name: Explain the yawning
-        Text: How should you respond?
+          result: 2
+          Feedback: 
+      - name: Explain the yawning
+        text: How should you respond?
         events:
         - action: 0
-          actorId: 0
+          actorId: -334617666
           emotion: 0
           dialogue: "It\u2019s just that I didn\u2019t notice it before and now it\u2019s
             there!"
         - action: 0
-          actorId: 0
+          actorId: -369657928
           emotion: 0
           dialogue: Okay. I can understand why you might be concerned about that.
         - action: 1
-          actorId: 0
+          actorId: -369657928
           emotion: 0
           dialogue: 
         - action: 0
-          actorId: 0
+          actorId: -334617666
           emotion: 0
           dialogue: "Sorry I\u2019m boring you."
         options:
-        - Name: No big deal
-          Text: "It\u2019s no big deal."
+        - name: No big deal
+          text: "It\u2019s no big deal."
           events:
           - action: 2
-            actorId: 0
+            actorId: -334617666
             emotion: 3
             dialogue: 
           - action: 0
-            actorId: 0
+            actorId: -334617666
             emotion: 0
             dialogue: "It\u2019s not a big deal that I\u2019m boring? Or that you\u2019re
               tired?"
-          Result: 0
-          Feedback: It is reasonable to not expose patients to personal feelings or
-            concerns. It makes sense to not divulge serious life moments or strong
-            emotions, which are things you might struggle with. However, acknowledging
-            a normal emotion or feeling is totally acceptable.
-        - Name: Just very tired
-          Text: "I\u2019m sorry. I\u2019m just very tired."
+          result: 0
+          Feedback: 
+        - name: Just very tired
+          text: "I\u2019m sorry. I\u2019m just very tired."
           events:
           - action: 1
-            actorId: 0
+            actorId: -334617666
             emotion: 0
             dialogue: 
           - action: 0
-            actorId: 0
+            actorId: -334617666
             emotion: 0
             dialogue: "Yeah, I guess you would be. You\u2019ve probably been on your
               feet for over twelve hours now."
-          Result: 2
-          Feedback: "It's okay to share a personal struggle with the patient, as it
-            enhances patient rapport if you can help the patient see that you are
-            human, too, and you have reactions to situations just as they do. In this
-            case, the patient clearly is stressed and one reason why they are probably
-            talking so much is a desire to relieve some of that stress. By acknowledging
-            that you\u2019re tired, this might give you an opportunity to discuss
-            the broader issue of dealing with stress. "
-        - Name: Not bored
-          Text: "I\u2019m not bored. Please continue."
+          result: 2
+          Feedback: 
+        - name: Not bored
+          text: "I\u2019m not bored. Please continue."
           events:
           - action: 2
-            actorId: 0
+            actorId: -334617666
             emotion: 3
             dialogue: 
           - action: 0
-            actorId: 0
+            actorId: -334617666
             emotion: 0
             dialogue: "No, I don\u2019t think so. You don\u2019t seem to care about
               what I\u2019m saying."
-          Result: 1
-          Feedback: "Some patients may not have the sophisticated knowledge you have,
-            but they're pretty good at pattern recognition and denying reality is
-            very rarely a successful strategy. Many patients will perceive this as
-            insulting to their intelligence. You should do your best to be truthful
-            and open, except for when it\u2019s not in the best interest of the patient. "
-      - Name: Address the cherry angioma
-        Text: "Mr. Peterson let\u2019s you examine his leg finally and you determine
+          result: 1
+          Feedback: 
+      - name: Address the cherry angioma
+        text: "Mr. Peterson let\u2019s you examine his leg finally and you determine
           that the spot is likely a cherry angioma. How would you address the situation
           with Mr. Peterson?"
         events: []
         options:
-        - Name: "People at your age get those spots all the time. It\u2019s fine."
-          Text: "People at your age get those spots all the time. It\u2019s fine."
+        - name: "People at your age get those spots all the time. It\u2019s fine."
+          text: "People at your age get those spots all the time. It\u2019s fine."
           events:
           - action: 0
-            actorId: 0
+            actorId: -334617666
             emotion: 0
             dialogue: "But what are they? It still looks like cancer to me and that\u2019s
               worrying me. Are you sure it\u2019s nothing to worry about?"
           - action: 0
-            actorId: 0
+            actorId: -369657928
             emotion: 0
             dialogue: "I promise, Mr. Peterson. You\u2019re fine."
-          Result: 0
-          Feedback: While you are doing a good job of assuring Mr. Peterson that the
-            spots are not a concern, you did not actually say what they were and why
-            they are not an immediate medical issue. Another approach would have been
-            better.
-        - Name: Guilt him for not showing them to the nurse
-          Text: You should have shown this to the nurses prior. They could have assured
+          result: 0
+          Feedback: 
+        - name: Guilt him for not showing them to the nurse
+          text: You should have shown this to the nurses prior. They could have assured
             you there was nothing wrong.
           events:
           - action: 0
-            actorId: 0
+            actorId: -334617666
             emotion: 0
             dialogue: How was I to know? It looked serious and I thought you needed
               to see it!
-          Result: 1
-          Feedback: "Chastising the patient for his approach to the health concern
-            is not helpful for either you or Mr. Peterson. Your patient\u2019s concerns
-            should be acknowledged and addressed in a way that educates him without
-            making him feel as if he is a burden."
-        - Name: Explain them and say they're harmless
-          Text: "That\u2019s just dilated blood cells and they\u2019re very common.
+          result: 1
+          Feedback: 
+        - name: Explain them and say they're harmless
+          text: "That\u2019s just dilated blood cells and they\u2019re very common.
             You may see more of these types of spots as you age, but they\u2019re
             harmless."
-          events: []
-          Result: 2
-          Feedback: "It\u2019s a good approach to explain the patient\u2019s medical
-            situation to them in language they can understand. Additionally, you took
-            the time to answer Mr. Peterson\u2019s follow-up questions and assure
-            him that you have his best interest in mind when dealing with this situation."
-      EndNarrative: Patients often ask more of you than you feel you can deliver.
+          events:
+          - action: 0
+            actorId: -334617666
+            emotion: 0
+            dialogue: Are you sure? I thought all spots like this were supposed to
+              be taken off in case they were cancer.
+          - action: 0
+            actorId: -369657928
+            emotion: 0
+            dialogue: "Usually they\u2019re just noted in your chart and we keep an
+              eye on them to make sure they don\u2019t change shape or size. If they
+              do, we\u2019ll remove them, but you shouldn\u2019t worry about that
+              at the moment."
+          result: 2
+          Feedback: 
+      endNarrative: Patients often ask more of you than you feel you can deliver.
         Unfortunately, cutting corners and disconnecting from patients does not make
         the process any easier. In the end, it is more efficient and more amenable
         to your own stress management to quickly acknowledge your human component
@@ -1755,8 +1713,21 @@ MonoBehaviour:
         provide feedback back to you. This gives you both the opportunity to express
         more minor emotions and situations and in many cases receive the support you
         need from the patients you are already working with.
-    startNarration: 
-    endNarration: 
+    startNarration: "It\u2019s been a long day and the demands have been coming left
+      and right. You\u2019ve been seeing patients, filling our paperwork, and trying
+      to please your supervisor, which is a seemingly impossible task. Your only food
+      today has been two candy bars and a soda from the drink machine, grabbed in
+      a ten minute lull about three hours ago, so you are tired and cranky and just
+      want to go home. But before you do that, your patients are demanding your attention
+      yet again, so you start moving towards:\n\n1. Ms. Jackson\u2019s room, who has
+      a question about tomorrow\u2019s blood test results.\n2. Mr. Peterson\u2019s
+      room, who is concerned about a spot on his leg."
+    endNarration: "Congratulations! You\u2019ve made it through another day in the
+      hospital. While the experience has been exhausting, you\u2019ve learned a lot
+      about patient care and also how to care for yourself in times of stress. Your
+      mood will affect patient interactions, so be sure to take care of yourself alongside
+      your patients. With the day done, it\u2019s time for you to go home, eat a good
+      dinner, and get some rest. Tomorrow will be here before you know it!"
 --- !u!4 &354923701
 Transform:
   m_ObjectHideFlags: 0
@@ -4372,7 +4343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 1976377578}
-  scenario: 1
+  scenarioId: 1780528331
 --- !u!65 &949995578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7265,7 +7236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 1976377578}
-  scenario: 0
+  scenarioId: 2094913720
 --- !u!65 &1738577847
 BoxCollider:
   m_ObjectHideFlags: 0

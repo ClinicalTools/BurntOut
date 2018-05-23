@@ -26,7 +26,7 @@ public class ScenarioEditor
     public void Edit()
     {
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        scenario.Name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), scenario.Name);
+        scenario.name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), scenario.name);
 
 
         actorsFoldout = EditorGUILayout.Foldout(actorsFoldout, "Actors", EditorStyles.foldout);
@@ -104,13 +104,13 @@ public class ScenarioEditor
                     },
                     choiceFoldout,
                     // Foldout title
-                    (int i) => { return ("Choice " + (i + 1) + " - " + scenario.Choices[i].Name); },
+                    (int i) => { return ("Choice " + (i + 1) + " - " + scenario.Choices[i].name); },
                     // Foldout color
                     (int i) =>
                     {
                         // Red if there is no option to continue
                         foreach (Option option in scenario.Choices[i].Options)
-                            if (option.Result == OptionResults.CONTINUE)
+                            if (option.result == OptionResults.CONTINUE)
                                 return GUI.contentColor;
 
                         return EditorHelper.ErrorColor;
@@ -124,6 +124,6 @@ public class ScenarioEditor
 
         EditorGUILayout.LabelField("End Narrative:");
         EditorStyles.textField.wordWrap = true;
-        scenario.EndNarrative = EditorGUILayout.TextArea(scenario.EndNarrative);
+        scenario.endNarrative = EditorGUILayout.TextArea(scenario.endNarrative);
     }
 }

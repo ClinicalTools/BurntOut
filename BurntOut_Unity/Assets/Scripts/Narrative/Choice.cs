@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
 
@@ -8,14 +7,10 @@ using UnityEngine;
 [XmlRoot("Choice")]
 public class Choice
 {
-    [XmlAttribute("name")]
-    public string Name;
-
-    [XmlAttribute("text")]
-    public string Text;
+    public string name;
+    public string text;
 
     [SerializeField]
-    [XmlArray("Events"), XmlArrayItem("Event")]
     private List<Task> events;
     public List<Task> Events
     {
@@ -29,7 +24,6 @@ public class Choice
     }
 
     [SerializeField]
-    [XmlArray("Options"), XmlArrayItem("Option")]
     private List<Option> options;
     public List<Option> Options
     {

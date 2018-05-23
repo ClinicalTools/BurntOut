@@ -8,8 +8,12 @@ using UnityEngine;
 [XmlRoot("Scenario")]
 public class Scenario
 {
+    // Number to represent this actor.
+    [SerializeField]
+    public int id;
+
     [XmlAttribute("name")]
-    public string Name;
+    public string name;
 
     [SerializeField]
     [XmlArray("Actors"), XmlArrayItem("Actor")]
@@ -26,7 +30,7 @@ public class Scenario
     }
     public int ActorIndex(int id)
     {
-        for (int i = 0; i <  actors.Count; i++)
+        for (int i = 0; i < actors.Count; i++)
             if (actors[i].id == id)
                 return i;
 
@@ -39,6 +43,14 @@ public class Scenario
                 return actor;
 
         return null;
+    }
+    public string[] ActorNames()
+    {
+        var arr = new string[actors.Count];
+        for (int i = 0; i < arr.Length; i++)
+            arr[i] = actors[i].name;
+
+        return arr;
     }
 
     [SerializeField]
@@ -55,7 +67,29 @@ public class Scenario
         }
     }
 
-
     [XmlAttribute("endNarrative")]
-    public string EndNarrative;
+    public string endNarrative;
+
+    public Scenario(Scenario[] scenarios)
+    {
+        // Using hash of current time to get a number that will hopefully be unique
+        var hash = DateTime.Now.GetHashCode();
+
+        // Ensure no other scenario in the passed list has the same id
+        // a true flag means that the code hasn't hit another scenario with the same id
+        bool flag = false;
+        while (!flag)
+        {
+            flag = true;
+            foreach (var actor in scenarios)
+                if (actor.id == hash)
+                {
+                    hash++;
+                    flag = false;
+                    break;
+                }
+        }
+
+        id = hash;
+    }
 }

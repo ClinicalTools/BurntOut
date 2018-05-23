@@ -20,9 +20,9 @@ public class OptionEditor
 
     public void Edit()
     {
-        option.Name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), option.Name);
+        option.name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), option.name);
 
-        option.Text = EditorGUILayout.TextField(new GUIContent("Text: ", "Text to be displayed in game"), option.Text);
+        option.text = EditorGUILayout.TextField(new GUIContent("Text: ", "Text to be displayed in game"), option.text);
 
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
         eventsFoldout = EditorGUILayout.Foldout(eventsFoldout, "Events", EditorStyles.foldout);
@@ -34,13 +34,13 @@ public class OptionEditor
         }
 
         var lastColor = GUI.contentColor;
-        if (option.Result == OptionResults.CONTINUE)
+        if (option.result == OptionResults.CONTINUE)
             GUI.contentColor = EditorHelper.ContinueColor;
-        else if (option.Result == OptionResults.TRY_AGAIN)
+        else if (option.result == OptionResults.TRY_AGAIN)
             GUI.contentColor = EditorHelper.TryAgainColor;
-        else if (option.Result == OptionResults.END)
+        else if (option.result == OptionResults.END)
             GUI.contentColor = EditorHelper.EndColor;
-        option.Result = (OptionResults)EditorGUILayout.EnumPopup("Result: ", option.Result);
+        option.result = (OptionResults)EditorGUILayout.EnumPopup("Result: ", option.result);
         GUI.contentColor = lastColor;
 
         EditorGUILayout.LabelField("Feedback:");

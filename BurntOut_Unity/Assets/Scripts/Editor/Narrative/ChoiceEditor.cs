@@ -35,7 +35,7 @@ public class ChoiceEditor
 
     public void Edit()
     {
-        choice.Name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), choice.Name);
+        choice.name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), choice.name);
 
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
         eventsFoldout = EditorGUILayout.Foldout(eventsFoldout, "Events", EditorStyles.foldout);
@@ -44,7 +44,7 @@ public class ChoiceEditor
         if (eventsFoldout)
             tasksEditor.Edit();
 
-        choice.Text = EditorGUILayout.TextField(new GUIContent("Text: ", "Text to be displayed in game"), choice.Text);
+        choice.text = EditorGUILayout.TextField(new GUIContent("Text: ", "Text to be displayed in game"), choice.text);
 
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
         optionsFoldout = EditorGUILayout.Foldout(optionsFoldout, "Options", EditorStyles.foldout);
@@ -87,15 +87,15 @@ public class ChoiceEditor
                     },
                     optionFoldout,
                     // Foldout title
-                    (int i) => { return ("Option " + (i + 1) + " - " + choice.Options[i].Name); },
+                    (int i) => { return ("Option " + (i + 1) + " - " + choice.Options[i].name); },
                     // Foldout color
                     (int i) => 
                     {
-                        if (choice.Options[i].Result == OptionResults.CONTINUE)
+                        if (choice.Options[i].result == OptionResults.CONTINUE)
                             return EditorHelper.ContinueColor;
-                        else if (choice.Options[i].Result == OptionResults.TRY_AGAIN)
+                        else if (choice.Options[i].result == OptionResults.TRY_AGAIN)
                             return EditorHelper.TryAgainColor;
-                        else if (choice.Options[i].Result == OptionResults.END)
+                        else if (choice.Options[i].result == OptionResults.END)
                             return EditorHelper.EndColor;
 
                         return GUI.contentColor;

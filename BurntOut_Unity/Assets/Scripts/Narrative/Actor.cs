@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public class Actor
 {
-    [SerializeField]
-    public string name;
-
     // Number to represent this actor.
     [SerializeField]
     public int id;
 
+    [SerializeField]
+    public string name;
+    
     public Actor(Actor[] actors)
     {
-        Debug.Log(DateTime.Now.GetHashCode());
         // Using hash of current time to get a number that will hopefully be unique
         var hash = DateTime.Now.GetHashCode();
 

@@ -26,12 +26,8 @@ public class TasksEditor
                 rect.x += newRect.width + 5;
 
                 newRect = new Rect(rect.x, rect.y, 90, EditorGUIUtility.singleLineHeight);
-
-                string[] actorNames = new string[scenario.Actors.Count];
-                for (int i = 0; i < actorNames.Length; i++)
-                    actorNames[i] = scenario.Actors[i].name;
-                
-                var actorIndex = EditorGUI.Popup(newRect, scenario.ActorIndex(element.actorId), actorNames);
+                                
+                var actorIndex = EditorGUI.Popup(newRect, scenario.ActorIndex(element.actorId), scenario.ActorNames());
                 if (actorIndex != -1)
                     element.actorId = scenario.Actors[actorIndex].id;
 

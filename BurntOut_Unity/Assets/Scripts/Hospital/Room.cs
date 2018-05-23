@@ -1,21 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Room : MonoBehaviour
 {
     public DialogueManager dialogueManager;
-    public int scenario;
-
-
+    public int scenarioId;
 
     // detect if player is within interact range
     void OnTriggerEnter(Collider col)
     {
-
         if (col.gameObject.name == "Player")
         {
-            dialogueManager.StartScenario(GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().sceneNarrative.scenarios[scenario]);
+            dialogueManager.StartScenario(
+                GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().
+                sceneNarrative.GetScenario(scenarioId));
         }
 
     }

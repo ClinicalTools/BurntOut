@@ -116,7 +116,7 @@ public class DialogueManager : MonoBehaviour
             {
                 choiceNum++;
 
-                ShowFeedback(scenario.EndNarrative);
+                ShowFeedback(scenario.endNarrative);
             }
             // If the final narrative has been shown, the room has been completed
             else if (choiceNum >= scenario.Choices.Count)
@@ -155,7 +155,7 @@ public class DialogueManager : MonoBehaviour
                 var option = scenario.Choices[choiceNum].Options[optionSelected];
                 optionSelected = -1;
 
-                switch (option.Result)
+                switch (option.result)
                 {
                     case OptionResults.CONTINUE:
                         choiceNum++;
@@ -226,11 +226,11 @@ public class DialogueManager : MonoBehaviour
         StopCoroutine(autoProgress);
 
         promptText.transform.parent.gameObject.SetActive(true);
-        promptText.text = scenario.Choices[choiceNum].Text;
+        promptText.text = scenario.Choices[choiceNum].text;
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].gameObject.SetActive(true);
-            buttonsText[i].text = scenario.Choices[choiceNum].Options[i].Text;
+            buttonsText[i].text = scenario.Choices[choiceNum].Options[i].text;
         }
     }
 

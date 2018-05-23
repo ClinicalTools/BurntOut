@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Interact_Patient : MonoBehaviour
 {
-    public int patientNumber;
+    public int patientId;
     public bool completed;
     public bool isAroundPatient;
+    public bool playerFacing;
 
+    public Text pressButton; 
     public GameObject player;
 
     public Main_GameManager gameManager;
@@ -15,70 +18,66 @@ public class Interact_Patient : MonoBehaviour
 
     void Update()
     {
-        // if player is around patient, allow player to interact with it
-        if (Input.GetKeyDown(KeyCode.E))
+        if (isAroundPatient)
         {
-            if (isAroundPatient == true)
-            {
-                Vector3 vec = transform.position - player.transform.position;
-                vec.y = 0;
+            Vector3 vec = transform.position - player.transform.position;
+            vec.y = 0;
 
-                // Measure from the direction opposite the player
-                Vector3 playerDir = player.transform.TransformDirection(Vector3.forward);
-                playerDir.y = 0;
+            // Measure from the direction opposite the player
+            Vector3 playerDir = player.transform.TransformDirection(Vector3.forward);
+            playerDir.y = 0;
 
-                if (Vector3.Angle(playerDir, vec) < maxAngle)
-                {
-                    // INTERACTION HERE
-                    dialogueManager.StartDialogue();
+            bool wasFacing = playerFacing;
+            playerFacing = Vector3.Angle(playerDir, vec) < maxAngle;
 
-                    Debug.Log("Patient interact");
-
-                    // freeze player controller
-                    player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
-
-                    // enable mouse
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-
-                    // give the game manager the "name" of the patient
-                    gameManager.currentRoom = this;
-                }
-            }
-
+            if (wasFacing && !playerFacing)
+                dialogueManager.EndDialogue();
         }
 
+        // if player is around patient, allow player to interact with it
+        if (Input.GetKeyDown(KeyCode.E) && isAroundPatient && playerFacing)
+        {
+            // INTERACTION HERE
+            dialogueManager.StartDialogue();
+
+            Debug.Log("Patient interact");
+
+            // freeze player controller
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+
+            // enable mouse
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            // give the game manager the "name" of the patient
+            gameManager.currentRoom = this;
+        }
+    }
+    
+    private void Look()
+    {
+        var scenarioId = GetComponentInParent<Room>().scenarioId;
     }
 
+    private void LookAway()
+    {
+        dialogueManager.EndDialogue();
+    }
 
     // detect if player is within interact range
     void OnTriggerEnter(Collider col)
     {
-
         if (col.gameObject.name == "Player")
-        {
-
-            Debug.Log("Player Detected");
             isAroundPatient = true;
-
-        }
-        else
-        {
-
-            Debug.Log("Other obj detected");
-            isAroundPatient = false;
-
-        }
 
     }
 
     // return to default state when out of range
     void OnTriggerExit(Collider col)
     {
+        if (col.gameObject.name == "Player")
+            isAroundPatient = false;
 
-        Debug.Log("Player away from patient");
-        isAroundPatient = false;
-
-        dialogueManager.EndDialogue();
+        LookAway();
     }
 }

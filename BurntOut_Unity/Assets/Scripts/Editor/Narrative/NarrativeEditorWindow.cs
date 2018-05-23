@@ -40,20 +40,22 @@ public class NarrativeEditorWindow : EditorWindow
             sceneManagerObj.AddComponent<NarrativeManager>();
             sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
         }
+        SceneNarrative sceneNarrative = sceneManager.sceneNarrative;
 
         // Allows the scene to save changes and 'undo' to be possible
         Undo.RecordObject(sceneManager, "NarrativeManager change");
 
         // Ensure there's at least one scenario
-        if (sceneManager.sceneNarrative.scenarios.Count == 0)
-            sceneManager.sceneNarrative.scenarios.Add(new Scenario());
+        if (sceneNarrative.scenarios.Count == 0)
+            sceneNarrative.scenarios.Add(
+                new Scenario(sceneNarrative.scenarios.ToArray()));
 
         // Ensure scenarios in the editor match the scenarios in the scene
-        if (scenarioEditors.Count != sceneManager.sceneNarrative.scenarios.Count ||
-            scenarioEditors[0].scenario != sceneManager.sceneNarrative.scenarios[0])
+        if (scenarioEditors.Count != sceneNarrative.scenarios.Count ||
+            scenarioEditors[0].scenario != sceneNarrative.scenarios[0])
         {
             scenarioEditors.Clear();
-            foreach (Scenario scenario in sceneManager.sceneNarrative.scenarios)
+            foreach (Scenario scenario in sceneNarrative.scenarios)
                 scenarioEditors.Add(new ScenarioEditor(scenario));
         }
 
@@ -67,10 +69,10 @@ public class NarrativeEditorWindow : EditorWindow
                 selectedScenario = -1;
             }
 
-            for (int i = 0; i < sceneManager.sceneNarrative.scenarios.Count; i++)
+            for (int i = 0; i < sceneNarrative.scenarios.Count; i++)
             {
                 if (GUILayout.Toggle(selectedScenario == i,
-                    "Scenario " + (i + 1) + " - " + sceneManager.sceneNarrative.scenarios[i].Name, EditorStyles.toolbarButton))
+                    "Scenario " + (i + 1) + " - " + sceneNarrative.scenarios[i].name, EditorStyles.toolbarButton))
                 {
                     selectedScenario = i;
                 }
@@ -80,8 +82,8 @@ public class NarrativeEditorWindow : EditorWindow
 
             if (GUILayout.Button("+", EditorStyles.toolbarButton))
             {
-                Scenario scenario = new Scenario();
-                sceneManager.sceneNarrative.scenarios.Add(scenario);
+                Scenario scenario = new Scenario(sceneNarrative.scenarios.ToArray());
+                sceneNarrative.scenarios.Add(scenario);
                 scenarioEditors.Add(new ScenarioEditor(scenario));
             }
             if (GUILayout.Button("-", EditorStyles.toolbarButton))
@@ -89,16 +91,16 @@ public class NarrativeEditorWindow : EditorWindow
                 if (EditorUtility.DisplayDialog("Remove Scenario",
                     "Are you sure you want to delete this scenario?", "Delete", "Cancel"))
                 {
-                    sceneManager.sceneNarrative.scenarios.RemoveAt(selectedScenario);
+                    sceneNarrative.scenarios.RemoveAt(selectedScenario);
                     scenarioEditors.RemoveAt(selectedScenario);
                     if (selectedScenario > 0)
                         selectedScenario--;
 
                     // Ensure there's at least one scenario
-                    if (sceneManager.sceneNarrative.scenarios.Count == 0)
+                    if (sceneNarrative.scenarios.Count == 0)
                     {
-                        Scenario scenario = new Scenario();
-                        sceneManager.sceneNarrative.scenarios.Add(scenario);
+                        Scenario scenario = new Scenario(sceneNarrative.scenarios.ToArray());
+                        sceneNarrative.scenarios.Add(scenario);
                         scenarioEditors.Add(new ScenarioEditor(scenario));
                     }
 
@@ -112,13 +114,13 @@ public class NarrativeEditorWindow : EditorWindow
                 if (GUILayout.Button("Save Scenario", EditorStyles.toolbarButton))
                 {
                     // Get the folder to save the scenario in
-                    string json = JsonUtility.ToJson(sceneManager.sceneNarrative.scenarios[selectedScenario]);
+                    string json = JsonUtility.ToJson(sceneNarrative.scenarios[selectedScenario]);
                     var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
                     Directory.CreateDirectory(path);
 
                     // Name.yyyy.MM.dd.letter.json
-                    string fileName = sceneManager.sceneNarrative.scenarios[selectedScenario].Name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
+                    string fileName = sceneNarrative.scenarios[selectedScenario].name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
 
                     // Alphabetical character based on number of similar files saved today
                     char lastLetter = 'a';
@@ -152,7 +154,7 @@ public class NarrativeEditorWindow : EditorWindow
                         string json = File.ReadAllText(path);
 
                         var scenario = JsonUtility.FromJson<Scenario>(json);
-                        sceneManager.sceneNarrative.scenarios[selectedScenario] = scenario;
+                        sceneNarrative.scenarios[selectedScenario] = scenario;
                         scenarioEditors[selectedScenario] = new ScenarioEditor(scenario);
                     }
                 }
@@ -161,7 +163,7 @@ public class NarrativeEditorWindow : EditorWindow
             if (GUILayout.Button("Save All", EditorStyles.toolbarButton))
             {
                 // Get the folder to save the scene in
-                string json = JsonUtility.ToJson(sceneManager.sceneNarrative);
+                string json = JsonUtility.ToJson(sceneNarrative);
                 var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name;
                 Directory.CreateDirectory(path);
@@ -200,8 +202,8 @@ public class NarrativeEditorWindow : EditorWindow
                 {
                     string json = File.ReadAllText(path);
 
-                    var sceneNarrative = JsonUtility.FromJson<SceneNarrative>(json);
-                    sceneManager.sceneNarrative = sceneNarrative;
+                    var narrative = JsonUtility.FromJson<SceneNarrative>(json);
+                    sceneManager.sceneNarrative = narrative;
                 }
             }
             EditorStyles.toolbarButton.fontStyle = FontStyle.Normal;
@@ -223,10 +225,10 @@ public class NarrativeEditorWindow : EditorWindow
                 EditorStyles.label.fontStyle = FontStyle.Bold;
 
                 EditorGUILayout.LabelField("Start Narration:");
-                sceneManager.sceneNarrative.startNarration = EditorGUILayout.TextArea(sceneManager.sceneNarrative.startNarration, GUILayout.MinHeight(200));
+                sceneNarrative.startNarration = EditorGUILayout.TextArea(sceneNarrative.startNarration, GUILayout.MinHeight(200));
 
                 EditorGUILayout.LabelField("End Narration:");
-                sceneManager.sceneNarrative.endNarration = EditorGUILayout.TextArea(sceneManager.sceneNarrative.endNarration, GUILayout.MinHeight(200));
+                sceneNarrative.endNarration = EditorGUILayout.TextArea(sceneNarrative.endNarration, GUILayout.MinHeight(200));
 
                 EditorStyles.label.fontStyle = FontStyle.Normal;
                 EditorStyles.label.fontSize = oldLabelFontSize;
