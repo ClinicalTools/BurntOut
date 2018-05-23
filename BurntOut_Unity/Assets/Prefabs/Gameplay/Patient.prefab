@@ -124,6 +124,7 @@ MonoBehaviour:
   patientNumber: 0
   completed: 0
   isAroundPatient: 0
-  UI_ChoiceDia: {fileID: 0}
   player: {fileID: 0}
   gameManager: {fileID: 0}
+  dialogueManager: {fileID: 0}
+  maxAngle: 35
