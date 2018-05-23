@@ -13,6 +13,7 @@ public class Interact_Patient : MonoBehaviour
 
     public Main_GameManager gameManager;
     public DialogueManager dialogueManager;
+    public PlayerRotateToTarget playerRotateToTarget;
 
     public float maxAngle = 35;
 
@@ -51,6 +52,12 @@ public class Interact_Patient : MonoBehaviour
 
             // give the game manager the "name" of the patient
             gameManager.currentRoom = this;
+
+            // give target to "player rotate to target"
+            playerRotateToTarget.target = transform.gameObject;
+
+            // enable playerrotate
+            playerRotateToTarget.enabled = true;
         }
     }
     

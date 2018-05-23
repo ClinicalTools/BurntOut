@@ -23,7 +23,8 @@ public class InteractPatientEditor : Editor
         patient.pressButton = (Text)EditorGUILayout.ObjectField("Press Button", patient.pressButton, typeof(Text), true);
         patient.player = (GameObject)EditorGUILayout.ObjectField("Player", patient.player, typeof(GameObject), true);
         patient.gameManager = (Main_GameManager)EditorGUILayout.ObjectField("Game Manager", patient.gameManager, typeof(Main_GameManager), true);
-        patient.dialogueManager = (DialogueManager)EditorGUILayout.ObjectField("Dialogue Manage:", patient.dialogueManager, typeof(DialogueManager), true);
+        patient.dialogueManager = (DialogueManager)EditorGUILayout.ObjectField("Dialogue Manager", patient.dialogueManager, typeof(DialogueManager), true);
+        patient.playerRotateToTarget = (PlayerRotateToTarget)EditorGUILayout.ObjectField("Player Rotate", patient.playerRotateToTarget, typeof(PlayerRotateToTarget), true);
 
         patient.maxAngle = EditorGUILayout.FloatField("Max Angle", patient.maxAngle);
     }
