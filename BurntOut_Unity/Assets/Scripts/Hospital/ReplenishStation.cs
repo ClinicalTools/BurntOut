@@ -57,7 +57,7 @@ public class ReplenishStation : MonoBehaviour {
     // return to default state when out of range
     void OnTriggerExit(Collider col) {
 
-        Debug.Log("Player away from patient");
+        Debug.Log("Player away from replenish station");
         isAround = false;
 
     }

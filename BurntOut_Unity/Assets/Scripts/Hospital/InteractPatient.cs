@@ -36,7 +36,7 @@ public class InteractPatient : MonoBehaviour
             else if (!wasFacing && playerFacing)
                 Look();
             else if (playerFacing)
-                pressButtonText.transform.parent.gameObject.SetActive(!dialogueManager.UI_ChoiceDia.activeInHierarchy);
+                pressButtonText.transform.parent.gameObject.SetActive(!dialogueManager.InDialogue);
 
         }
 
@@ -47,8 +47,6 @@ public class InteractPatient : MonoBehaviour
 
             // INTERACTION HERE
             dialogueManager.StartDialogue();
-
-            Debug.Log("Patient interact");
 
             // freeze player controller
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
