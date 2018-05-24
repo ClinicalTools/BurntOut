@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReadingStation : MonoBehaviour {
+public class ReadingStation_Interact : MonoBehaviour {
 
     public bool isAroundStation;
     public bool playerFacing;
 
     public Text interactPrompt;
     public GameObject player;
+    public ReadingStation_Functionality rsFunction;
 
     public float maxAngle = 35;
 
@@ -37,7 +38,7 @@ public class ReadingStation : MonoBehaviour {
             interactPrompt.transform.parent.gameObject.SetActive(false);
 
             // INTERACTION HERE
-           
+            rsFunction.enabled = true;
 
 
 
