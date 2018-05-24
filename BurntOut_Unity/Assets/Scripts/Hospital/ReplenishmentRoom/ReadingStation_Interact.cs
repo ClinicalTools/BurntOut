@@ -12,6 +12,8 @@ public class ReadingStation_Interact : MonoBehaviour {
     public GameObject player;
     public ReadingStation_Functionality rsFunction;
 
+    public Main_GameManager gamemanager;
+
     public float maxAngle = 35;
 
     void Update() {
@@ -40,8 +42,8 @@ public class ReadingStation_Interact : MonoBehaviour {
             // INTERACTION HERE
             rsFunction.enabled = true;
 
-
-
+            gamemanager.ReadingStation_Start();         
+            player.GetComponent<PlayerRotateToTarget>().target = this.gameObject;
 
 
 

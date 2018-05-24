@@ -15,7 +15,10 @@ public class Main_GameManager : MonoBehaviour
     public GameObject Canvas_Paused;
     public GameObject Canvas_Win;
     public GameObject Canvas_Loss;
+
+    // UIs
     public GameObject UI_ChoiceDia;
+    public GameObject UI_ReadingStation;
 
 
     //player controller
@@ -84,9 +87,7 @@ public class Main_GameManager : MonoBehaviour
                 Canvas_Paused.SetActive(false);
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
-
-                dofSettings.focusDistance = 0.94f;
-                ppScene.profile.depthOfField.settings = dofSettings;
+                ScreenUnblur();
 
 
             }
@@ -98,13 +99,52 @@ public class Main_GameManager : MonoBehaviour
                 Canvas_Paused.SetActive(true);
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
 
-                dofSettings.focusDistance = 0.1f;
-                ppScene.profile.depthOfField.settings = dofSettings;
+                ScreenBlur();
 
             }
 
         }
 
+    }
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////// READING STATION /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    public void ReadingStation_Start() {
+        ScreenBlur();
+        UI_ReadingStation.SetActive(true);
+        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        player.GetComponent<PlayerRotateToTarget>().enabled = true;
+    }
+
+    public void ReadingStation_End() {
+        ScreenUnblur();
+        UI_ReadingStation.SetActive(false);
+        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        player.GetComponent<PlayerRotateToTarget>().enabled = false;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////// READING STATION /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+
+
+    public void ScreenBlur() {
+        dofSettings.focusDistance = 0.1f;
+        ppScene.profile.depthOfField.settings = dofSettings;
+    }
+
+    public void ScreenUnblur() {
+        dofSettings.focusDistance = 0.94f;
+        ppScene.profile.depthOfField.settings = dofSettings;
     }
 
     public void ExitRoom()
