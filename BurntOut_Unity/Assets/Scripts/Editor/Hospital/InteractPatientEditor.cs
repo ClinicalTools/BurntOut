@@ -20,7 +20,7 @@ public class InteractPatientEditor : Editor
         if (actorIndex >= 0)
             patient.patientId = scenario.Actors[actorIndex].id;
 
-        patient.pressButtonText = (Text)EditorGUILayout.ObjectField("Press Button Text", patient.pressButtonText, typeof(Text), true);
+        patient.interactPrompt = (Text)EditorGUILayout.ObjectField("Interact Prompt", patient.interactPrompt, typeof(Text), true);
         patient.player = (GameObject)EditorGUILayout.ObjectField("Player", patient.player, typeof(GameObject), true);
         patient.gameManager = (Main_GameManager)EditorGUILayout.ObjectField("Game Manager", patient.gameManager, typeof(Main_GameManager), true);
         patient.dialogueManager = (DialogueManager)EditorGUILayout.ObjectField("Dialogue Manager", patient.dialogueManager, typeof(DialogueManager), true);

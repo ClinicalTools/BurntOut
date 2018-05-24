@@ -1,64 +1,76 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class ReplenishStation : MonoBehaviour {
+public class ReplenishStation : MonoBehaviour
+{
+    public bool isAroundStation;
+    public bool playerFacing;
 
-    public int patientNumber;
-    public bool completed;
-    public bool isAround;
-
+    public Text interactPrompt;
     public GameObject player;
-    private PlayerStats playerStats;
 
-    private void Start() {
+    public Transform replenishRoomSpawn;
 
-        playerStats = player.GetComponent<PlayerStats>();
+    public float maxAngle = 35;
 
-    }
+    void Update()
+    {
+        if (isAroundStation)
+        {
+            Vector3 vec = transform.position - player.transform.position;
+            vec.y = 0;
 
-    void Update() {
+            // Measure from the direction opposite the player
+            Vector3 playerDir = player.transform.TransformDirection(Vector3.forward);
+            playerDir.y = 0;
+
+            bool wasFacing = playerFacing;
+            playerFacing = Vector3.Angle(playerDir, vec) < maxAngle;
+
+            if (wasFacing && !playerFacing)
+                LookAway();
+            else if (!wasFacing && playerFacing)
+                Look();
+        }
 
         // if player is around patient, allow player to interact with it
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E) && isAroundStation && playerFacing)
+        {
+            interactPrompt.transform.parent.gameObject.SetActive(false);
 
-            if (isAround == true) {
+            // INTERACTION HERE
+            player.transform.SetPositionAndRotation(replenishRoomSpawn.transform.position, replenishRoomSpawn.transform.rotation);
 
-                // INTERACTION HERE
-                playerStats.currentHealth += 10;
-
-
-
-
-            }
-
+            LookAway();
         }
-
     }
 
+    private void Look()
+    {
+        interactPrompt.transform.parent.gameObject.SetActive(true);
+        interactPrompt.text = "Press 'e' to go to the replenishment room";
+    }
+
+    private void LookAway()
+    {
+        interactPrompt.transform.parent.gameObject.SetActive(false);
+    }
 
     // detect if player is within interact range
-    void OnTriggerEnter(Collider col) {
-
-        if (col.gameObject.name == "Player") {
-
-            Debug.Log("Player Detected");
-            isAround = true;
-
-        } else {
-
-            Debug.Log("Other obj detected");
-            isAround = false;
-
-        }
-
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.name == "Player")
+            isAroundStation = true;
     }
 
     // return to default state when out of range
-    void OnTriggerExit(Collider col) {
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.name == "Player") { 
+            isAroundStation = false;
+            playerFacing = false;
+        }
 
-        Debug.Log("Player away from replenish station");
-        isAround = false;
-
+        LookAway();
     }
 }
