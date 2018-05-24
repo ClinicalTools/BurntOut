@@ -10,8 +10,13 @@ public class MinigameInteract : MonoBehaviour {
     public Text interactPrompt;
     public GameObject player;
     public Minigame minigame;
+    public Camera playerCamera;
 
+    // for placing reading minigame infront of camera
     public Main_GameManager gamemanager;
+    public float bookDistance = 1.0f;
+    public float bookSpeed = 0.10f;
+
 
     public float maxAngle = 35;
 
@@ -41,8 +46,19 @@ public class MinigameInteract : MonoBehaviour {
             // INTERACTION HERE
             minigame.enabled = true;
 
-            gamemanager.ReadingStation_Start();         
-            player.GetComponent<PlayerRotateToTarget>().target = gameObject;
+            if (minigame.name == "ReadingStation") {
+
+                gamemanager.ReadingStation_Start();
+
+                // make book move to screen and face player
+
+                
+                
+                // below works for just placing book infront of player
+                //this.transform.position = playerCamera.transform.position + playerCamera.transform.forward * bookDistance;
+                //this.transform.rotation = new Quaternion(0.0f, playerCamera.transform.rotation.y, 0.0f, playerCamera.transform.rotation.w);
+
+            }
 
             LookAway();
         }

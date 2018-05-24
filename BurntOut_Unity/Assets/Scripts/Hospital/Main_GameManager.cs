@@ -119,7 +119,7 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        player.GetComponent<PlayerRotateToTarget>().enabled = true;
+        //player.GetComponent<PlayerRotateToTarget>().enabled = true;
     }
 
     public void ReadingStation_End() {
@@ -128,7 +128,7 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        player.GetComponent<PlayerRotateToTarget>().enabled = false;
+        //player.GetComponent<PlayerRotateToTarget>().enabled = false;
     }
 
     ///////////////////////////////////////////////////////////////////////////

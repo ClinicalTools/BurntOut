@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65577367358533960}
   - component: {fileID: 65615219394725738}
   - component: {fileID: 114779864838893228}
+  - component: {fileID: 114961544467199518}
   m_Layer: 0
   m_Name: ReadingStation
   m_TagString: Door
@@ -37,13 +38,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1689922668385916}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -9.6506, y: -1.069, z: 8.6352}
-  m_LocalScale: {x: 0.6413146, y: 0.68753064, z: 0.6233568}
+  m_LocalRotation: {x: 0, y: 0.63749117, z: 0, w: 0.7704577}
+  m_LocalPosition: {x: -9.355, y: -1.392, z: 8.635}
+  m_LocalScale: {x: 0.6413146, y: 0.111723185, z: 0.6233568}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 79.21, z: 0}
 --- !u!23 &23111634888986862
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -108,8 +109,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.7737257, y: 1.3851622, z: 2.225861}
-  m_Center: {x: -0.10681683, y: 0.19258183, z: -0.01077604}
+  m_Size: {x: 2.773726, y: 1.3851624, z: 3.8744235}
+  m_Center: {x: -0.1068169, y: 0.19258182, z: 0.81350505}
 --- !u!114 &114779864838893228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,4 +126,24 @@ MonoBehaviour:
   playerFacing: 0
   interactPrompt: {fileID: 0}
   player: {fileID: 0}
+  minigame: {fileID: 114961544467199518}
+  playerCamera: {fileID: 0}
+  gamemanager: {fileID: 0}
   maxAngle: 35
+--- !u!114 &114961544467199518
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1689922668385916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d4c860494f640448bd54ea40aa3dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  completed: 0
+  actionPrompt: 
+  books: []
+  gameObj: {fileID: 0}
+  pageText: {fileID: 0}
+  plays: 0
