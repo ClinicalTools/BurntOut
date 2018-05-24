@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Minigames;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReadingStation_Interact : MonoBehaviour {
+public class MinigameInteract : MonoBehaviour {
 
     public bool isAroundStation;
     public bool playerFacing;
 
     public Text interactPrompt;
     public GameObject player;
-    public ReadingStation_Functionality rsFunction;
+    public Minigame minigame;
 
     public Main_GameManager gamemanager;
 
@@ -40,15 +39,10 @@ public class ReadingStation_Interact : MonoBehaviour {
             interactPrompt.transform.parent.gameObject.SetActive(false);
 
             // INTERACTION HERE
-            rsFunction.enabled = true;
+            minigame.enabled = true;
 
             gamemanager.ReadingStation_Start();         
-            player.GetComponent<PlayerRotateToTarget>().target = this.gameObject;
-
-
-
-
-
+            player.GetComponent<PlayerRotateToTarget>().target = gameObject;
 
             LookAway();
         }
@@ -56,7 +50,7 @@ public class ReadingStation_Interact : MonoBehaviour {
 
     private void Look() {
         interactPrompt.transform.parent.gameObject.SetActive(true);
-        interactPrompt.text = "Press 'e' to read book";
+        interactPrompt.text = "Press 'e' to " + minigame.actionPrompt;
     }
 
     private void LookAway() {

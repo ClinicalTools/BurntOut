@@ -19361,6 +19361,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 79.21
       objectReference: {fileID: 0}
+    - target: {fileID: 114779864838893228, guid: 210983a0aa836c440a3b57af9aa72673,
+        type: 2}
+      propertyPath: minigame
+      value: 
+      objectReference: {fileID: 2080278266}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 210983a0aa836c440a3b57af9aa72673, type: 2}
   m_IsPrefabParent: 0
@@ -20473,6 +20478,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d4c860494f640448bd54ea40aa3dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  completed: 0
+  actionPrompt: read a book
+  books:
+  - pages: []
+  - pages: []
+  - pages: []
+  gameObj: {fileID: 0}
+  pageText: {fileID: 0}
+  plays: 0
 --- !u!1001 &2087114585
 Prefab:
   m_ObjectHideFlags: 0
