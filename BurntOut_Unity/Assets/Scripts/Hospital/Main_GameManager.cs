@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class Main_GameManager : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class Main_GameManager : MonoBehaviour
     //player controller
     public GameObject player;
     public PlayerStats playerStats;
+    public PostProcessingBehaviour ppScene;
+
+    DepthOfFieldModel.Settings dofSettings;
 
     public DialogueManager dialogueManager;
 
@@ -37,6 +41,9 @@ public class Main_GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         playerStats = player.GetComponent<PlayerStats>();
+        
+        // post processing settings here
+        dofSettings = ppScene.profile.depthOfField.settings;
 
     }
 
@@ -77,6 +84,11 @@ public class Main_GameManager : MonoBehaviour
                 Canvas_Paused.SetActive(false);
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
+
+                dofSettings.focusDistance = 0.94f;
+                ppScene.profile.depthOfField.settings = dofSettings;
+
+
             }
             else
             {
@@ -85,6 +97,9 @@ public class Main_GameManager : MonoBehaviour
                 gamePaused = true;
                 Canvas_Paused.SetActive(true);
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+
+                dofSettings.focusDistance = 0.1f;
+                ppScene.profile.depthOfField.settings = dofSettings;
 
             }
 

@@ -9451,6 +9451,7 @@ MonoBehaviour:
   UI_ChoiceDia: {fileID: 1590599582}
   player: {fileID: 927959813}
   playerStats: {fileID: 927959815}
+  ppScene: {fileID: 1867126365}
   dialogueManager: {fileID: 1976377578}
   gameover: 0
   gamePaused: 0
@@ -15399,6 +15400,12 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1867126365 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114482137209246296, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1724883223}
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
 --- !u!1001 &1867633456
 Prefab:
   m_ObjectHideFlags: 0
