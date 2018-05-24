@@ -13,6 +13,8 @@ public class NarrativeEditorWindow : EditorWindow
     private readonly List<ScenarioEditor> scenarioEditors = new List<ScenarioEditor>();
     private int selectedScenario = -1;
     private Vector2 scrollPosition = new Vector2();
+    private float scale = 11;
+
 
     // Add menu named "Scene Manager" to the Window menu
     [MenuItem("Window/Narrative Manager")]
@@ -79,6 +81,8 @@ public class NarrativeEditorWindow : EditorWindow
             }
 
             GUILayout.FlexibleSpace();
+
+            scale = Mathf.Floor(EditorGUILayout.Slider(scale, 8, 20, GUILayout.MaxWidth(150)));
 
             if (GUILayout.Button("+", EditorStyles.toolbarButton))
             {
@@ -210,33 +214,33 @@ public class NarrativeEditorWindow : EditorWindow
             EditorStyles.toolbarButton.fontSize = oldFontSize;
         }
 
-
-        using (new EditorScrollView(ref scrollPosition))
+        EditorStyles.textField.wordWrap = true;
+        EditorStyles.textArea.wordWrap = true;
+        using (new EditorSize((int)scale))
         {
-            // Edit basic scene info
-            if (selectedScenario == -1)
+            using (new EditorScrollView(ref scrollPosition))
             {
-                var oldTextFontSize = EditorStyles.textField.fontSize;
-                EditorStyles.textField.fontSize = 12;
-                EditorStyles.textField.wordWrap = true;
+                // Edit basic scene info
+                if (selectedScenario == -1)
+                {
+                    EditorStyles.textField.wordWrap = true;
 
-                var oldLabelFontSize = EditorStyles.label.fontSize;
-                EditorStyles.label.fontSize = 12;
-                EditorStyles.label.fontStyle = FontStyle.Bold;
+                    EditorStyles.label.fontStyle = FontStyle.Bold;
 
-                EditorGUILayout.LabelField("Start Narration:");
-                sceneNarrative.startNarration = EditorGUILayout.TextArea(sceneNarrative.startNarration, GUILayout.MinHeight(200));
+                    EditorGUILayout.LabelField("Start Narration:");
+                    sceneNarrative.startNarration = EditorGUILayout.TextArea(sceneNarrative.startNarration, GUILayout.MinHeight(200));
 
-                EditorGUILayout.LabelField("End Narration:");
-                sceneNarrative.endNarration = EditorGUILayout.TextArea(sceneNarrative.endNarration, GUILayout.MinHeight(200));
+                    EditorGUILayout.LabelField("End Narration:");
+                    sceneNarrative.endNarration = EditorGUILayout.TextArea(sceneNarrative.endNarration, GUILayout.MinHeight(200));
 
-                EditorStyles.label.fontStyle = FontStyle.Normal;
-                EditorStyles.label.fontSize = oldLabelFontSize;
-                EditorStyles.textField.fontSize = oldTextFontSize;
+                    EditorStyles.label.fontStyle = FontStyle.Normal;
+                }
+                // Edit selected scenario
+                else
+                {
+                    scenarioEditors[selectedScenario].Edit();
+                }
             }
-            // Edit selected scenario
-            else
-                scenarioEditors[selectedScenario].Edit();
         }
     }
 }
