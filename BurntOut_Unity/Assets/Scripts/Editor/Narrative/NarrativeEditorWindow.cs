@@ -15,6 +15,7 @@ public class NarrativeEditorWindow : EditorWindow
     private Vector2 scrollPosition = new Vector2();
     private float scale = 11;
 
+    private readonly string gameObjectName = "NarrativeManager";
 
     // Add menu named "Scene Manager" to the Window menu
     [MenuItem("Window/Narrative Manager")]
@@ -28,12 +29,12 @@ public class NarrativeEditorWindow : EditorWindow
     void OnGUI()
     {
         // If I don't reload this often, the editor will become disconnected from the object after a test play.
-        GameObject sceneManagerObj = GameObject.Find("NarrativeManager");
+        GameObject sceneManagerObj = GameObject.Find(gameObjectName);
 
         // Initalize if null
         if (sceneManagerObj == null)
         {
-            sceneManagerObj = new GameObject("NarrativeManager");
+            sceneManagerObj = new GameObject(gameObjectName);
             sceneManagerObj.AddComponent<NarrativeManager>();
         }
         NarrativeManager sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();

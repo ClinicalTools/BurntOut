@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class InteractPatient : MonoBehaviour
 {
+    [HideInInspector]
     public int patientId;
     public bool completed;
     public bool lost;

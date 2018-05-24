@@ -41,7 +41,13 @@ public class DialogueManager : MonoBehaviour
     {
         buttonsText = new Text[buttons.Length];
         for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].onClick.RemoveAllListeners();
+            // Creating a new variable to hold option number because the delegate would use the value of i from after the for loop
+            var optionNum = i;
+            buttons[i].onClick.AddListener(delegate { OptionClicked(optionNum); });
             buttonsText[i] = buttons[i].gameObject.GetComponentInChildren<Text>();
+        }
     }
     
     private void Update()
@@ -222,14 +228,16 @@ public class DialogueManager : MonoBehaviour
     }
 
     // React to an option being chosen 
-    public void OptionClicked(int option)
+    private void OptionClicked(int option)
     {
         for (int i = 0; i < buttons.Length; i++)
             buttons[i].gameObject.SetActive(false);
+
         promptText.transform.parent.gameObject.SetActive(false);
         dialogueText.transform.parent.gameObject.SetActive(true);
 
         optionSelected = option;
+
         tasks = new Queue<Task>(scenario.Choices[choiceNum].Options[option].Events);
         
         stats.currentHealth += scenario.Choices[choiceNum].Options[option].HealthChange;

@@ -3,6 +3,7 @@
 public class Room : MonoBehaviour
 {
     public DialogueManager dialogueManager;
+    [HideInInspector]
     public int scenarioId;
 
     // detect if player is within interact range

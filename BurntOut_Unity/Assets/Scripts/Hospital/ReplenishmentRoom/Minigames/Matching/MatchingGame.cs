@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace Minigames.Matching {
+namespace Minigames.Matching
+{
+    public class MatchingGame : Minigame
+    {
+        public Button exitBtn;
 
-    public class MatchingGame : Minigame {
-
-        public override void ResetGame() {
+        public void Start()
+        {
+            maxPlays = 2;
+            actionPrompt = "match things";
             
-        }
-
-        public override void StartGame() {
-       
+            exitBtn.onClick.RemoveAllListeners();
+            exitBtn.onClick.AddListener(delegate { ExitGame(); });
         }
     }
 }

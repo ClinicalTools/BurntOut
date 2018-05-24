@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Minigames.Reading
 {
@@ -6,5 +7,6 @@ namespace Minigames.Reading
     public class Page
     {
         public string text;
+        public Sprite img;
     }
 }

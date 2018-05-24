@@ -2,7 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MinigameInteract : MonoBehaviour {
+public class MinigameInteract : MonoBehaviour
+{
 
     public bool isAroundStation;
     public bool playerFacing;
@@ -13,16 +14,17 @@ public class MinigameInteract : MonoBehaviour {
     public Camera playerCamera;
 
     // for placing reading minigame infront of camera
-    public Main_GameManager gamemanager;
     public float bookDistance = 1.0f;
     public float bookSpeed = 0.10f;
 
 
     public float maxAngle = 35;
 
-    void Update() {
+    void Update()
+    {
 
-        if (isAroundStation) {
+        if (isAroundStation)
+        {
             Vector3 vec = transform.position - player.transform.position;
             vec.y = 0;
 
@@ -35,56 +37,53 @@ public class MinigameInteract : MonoBehaviour {
 
             if (wasFacing && !playerFacing)
                 LookAway();
-            else if (!wasFacing && playerFacing)
+            else if (!wasFacing && playerFacing && !minigame.completed)
                 Look();
         }
 
         // if player is around patient, allow player to interact with it
-        if (Input.GetKeyDown(KeyCode.E) && isAroundStation && playerFacing) {
+        if (Input.GetKeyDown(KeyCode.E) && isAroundStation && playerFacing && !minigame.completed)
+        {
             interactPrompt.transform.parent.gameObject.SetActive(false);
 
             // INTERACTION HERE
             minigame.enabled = true;
 
-            if (minigame.name == "ReadingStation") {
+            minigame.StartGame();
+            player.GetComponent<PlayerRotateToTarget>().target = gameObject;
+            // make book move to screen and face player               
+            // below works for just placing book infront of player
+            //this.transform.position = playerCamera.transform.position + playerCamera.transform.forward * bookDistance;
+            //this.transform.rotation = new Quaternion(0.0f, playerCamera.transform.rotation.y, 0.0f, playerCamera.transform.rotation.w);
 
-                gamemanager.ReadingStation_Start();
-                player.GetComponent<PlayerRotateToTarget>().target = this.gameObject;
-                // make book move to screen and face player               
-                // below works for just placing book infront of player
-                //this.transform.position = playerCamera.transform.position + playerCamera.transform.forward * bookDistance;
-                //this.transform.rotation = new Quaternion(0.0f, playerCamera.transform.rotation.y, 0.0f, playerCamera.transform.rotation.w);
-
-            }
-
-            if (minigame.name == "MatchingStation") {
-                gamemanager.MatchingStation_Start();
-                player.GetComponent<PlayerRotateToTarget>().target = this.gameObject;
-
-            }
 
             LookAway();
         }
     }
 
-    private void Look() {
+    private void Look()
+    {
         interactPrompt.transform.parent.gameObject.SetActive(true);
         interactPrompt.text = "Press 'e' to " + minigame.actionPrompt;
     }
 
-    private void LookAway() {
+    private void LookAway()
+    {
         interactPrompt.transform.parent.gameObject.SetActive(false);
     }
 
     // detect if player is within interact range
-    void OnTriggerEnter(Collider col) {
+    void OnTriggerEnter(Collider col)
+    {
         if (col.gameObject.name == "Player")
             isAroundStation = true;
     }
 
     // return to default state when out of range
-    void OnTriggerExit(Collider col) {
-        if (col.gameObject.name == "Player") {
+    void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.name == "Player")
+        {
             isAroundStation = false;
             playerFacing = false;
         }
