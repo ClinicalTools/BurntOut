@@ -49,14 +49,17 @@ public class MinigameInteract : MonoBehaviour {
             if (minigame.name == "ReadingStation") {
 
                 gamemanager.ReadingStation_Start();
-
-                // make book move to screen and face player
-
-                
-                
+                player.GetComponent<PlayerRotateToTarget>().target = this.gameObject;
+                // make book move to screen and face player               
                 // below works for just placing book infront of player
                 //this.transform.position = playerCamera.transform.position + playerCamera.transform.forward * bookDistance;
                 //this.transform.rotation = new Quaternion(0.0f, playerCamera.transform.rotation.y, 0.0f, playerCamera.transform.rotation.w);
+
+            }
+
+            if (minigame.name == "MatchingStation") {
+                gamemanager.MatchingStation_Start();
+                player.GetComponent<PlayerRotateToTarget>().target = this.gameObject;
 
             }
 

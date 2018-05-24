@@ -19,6 +19,7 @@ public class Main_GameManager : MonoBehaviour
     // UIs
     public GameObject UI_ChoiceDia;
     public GameObject UI_ReadingStation;
+    public GameObject UI_MatchingStation;
 
 
     //player controller
@@ -119,7 +120,7 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        //player.GetComponent<PlayerRotateToTarget>().enabled = true;
+        player.GetComponent<PlayerRotateToTarget>().enabled = true;
     }
 
     public void ReadingStation_End() {
@@ -128,11 +129,37 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        //player.GetComponent<PlayerRotateToTarget>().enabled = false;
+        player.GetComponent<PlayerRotateToTarget>().enabled = false;
     }
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////////// READING STATION /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////// MATCHING STATION /////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    public void MatchingStation_Start() {
+        ScreenBlur();
+        UI_MatchingStation.SetActive(true);
+        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        player.GetComponent<PlayerRotateToTarget>().enabled = true;
+    }
+
+    public void MatchingStation_End() {
+        ScreenUnblur();
+        UI_MatchingStation.SetActive(false);
+        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        player.GetComponent<PlayerRotateToTarget>().enabled = false;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////// MATCHING STATION /////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
 
