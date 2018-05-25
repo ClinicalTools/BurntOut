@@ -35,7 +35,7 @@ namespace Minigames
             if (++plays >= maxPlays)
                 completed = true;
 
-            playerStats.currentHealth += healthGain;
+            playerStats.CurrentHealth += healthGain;
             gameUI.SetActive(false);
             gameManager.MinigameEnd();
         }

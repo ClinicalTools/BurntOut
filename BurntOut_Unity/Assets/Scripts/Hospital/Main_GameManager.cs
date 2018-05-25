@@ -63,7 +63,7 @@ public class Main_GameManager : MonoBehaviour
         }
 
         // lose functionality HERE
-        if (playerStats.currentHealth <= 0)
+        if (playerStats.CurrentHealth <= 0)
         {
 
             // call use lose once 

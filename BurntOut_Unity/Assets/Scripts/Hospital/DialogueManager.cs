@@ -240,7 +240,7 @@ public class DialogueManager : MonoBehaviour
 
         tasks = new Queue<Task>(scenario.Choices[choiceNum].Options[option].Events);
         
-        stats.currentHealth += scenario.Choices[choiceNum].Options[option].HealthChange;
+        stats.CurrentHealth += scenario.Choices[choiceNum].Options[option].HealthChange;
 
         ProgressNarrative();
     }

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_HealthBar : MonoBehaviour {
+public class UI_HealthBar : MonoBehaviour
+{
 
     public PlayerStats playerStats;
 
     // text display
+    private float displayHealth;
+    private float oldHealth;
     private float currentHealth;
     private float maxHealth;
     public Text displayText;
@@ -16,21 +19,47 @@ public class UI_HealthBar : MonoBehaviour {
     public Image image;
     public float fillAmount;
 
-	void Update () {
+    private void Start()
+    {
+        displayHealth = playerStats.CurrentHealth;
+        oldHealth = playerStats.CurrentHealth;
+        currentHealth = playerStats.CurrentHealth;
+    }
 
-        // update text of health 
-        currentHealth = playerStats.currentHealth;
-        maxHealth = playerStats.maxHealth;
+    void Update()
+    {
+        displayText.text = (int)displayHealth + " / " + playerStats.maxHealth;
+    }
 
-        displayText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+    // Time it takes for health bar to finish moving
+    float changeTime = 1f;
+    float t;
+    void FixedUpdate()
+    {
+        // Health done moving
+        if (t > 1)
+        {
+            oldHealth = currentHealth;
+            t = 0;
+        }
+        // Player's health changed
+        if (currentHealth != playerStats.CurrentHealth)
+        {
+            t = 0;
+            oldHealth = displayHealth;
+            currentHealth = playerStats.CurrentHealth;
+        }
+        // Bar is moving
+        if (oldHealth != currentHealth)
+        {
+            t += (Time.deltaTime) / changeTime;
+            displayHealth = Mathf.Lerp(oldHealth, currentHealth, t);
+        }
 
-	}
 
-    void FixedUpdate() {
 
         // update "fill" or image of health for increased visual feedback
-        fillAmount = (playerStats.currentHealth / playerStats.maxHealth);
-        image.fillAmount = fillAmount;
+        image.fillAmount = displayHealth / playerStats.maxHealth;
         
     }
 }
