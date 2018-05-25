@@ -7,11 +7,15 @@ namespace Minigames
         public Main_GameManager gameManager;
         public bool completed;
         public GameObject gameUI;
+        public PlayerStats playerStats;
         [HideInInspector]
         public string actionPrompt;
 
         public int plays;
+        [HideInInspector]
         public int maxPlays;
+        [HideInInspector]
+        public int healthGain;
 
         public virtual void ResetGame()
         {
@@ -31,6 +35,7 @@ namespace Minigames
             if (++plays >= maxPlays)
                 completed = true;
 
+            playerStats.currentHealth += healthGain;
             gameUI.SetActive(false);
             gameManager.MinigameEnd();
         }

@@ -17,9 +17,10 @@ namespace Minigames.Reading
         private int bookIndex;
         private int pageIndex;
 
-        public void Start()
+        private void Start()
         {
             maxPlays = 4;
+            healthGain = 10;
             actionPrompt = "read a book";
 
             lastPageBtn.onClick.RemoveAllListeners();
