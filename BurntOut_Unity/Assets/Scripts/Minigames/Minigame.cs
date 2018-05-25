@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Minigames
 {
@@ -8,6 +9,7 @@ namespace Minigames
         public bool completed;
         public GameObject gameUI;
         public PlayerStats playerStats;
+        public Text interactPrompt;
         [HideInInspector]
         public string actionPrompt;
 
@@ -26,6 +28,8 @@ namespace Minigames
         {
             if (completed)
                 return;
+            
+            interactPrompt.transform.parent.gameObject.SetActive(false);
 
             gameUI.SetActive(true);
             gameManager.MinigameStart();
@@ -34,6 +38,8 @@ namespace Minigames
         {
             if (++plays >= maxPlays)
                 completed = true;
+            else
+                interactPrompt.transform.parent.gameObject.SetActive(true);
 
             playerStats.CurrentHealth += healthGain;
             gameUI.SetActive(false);

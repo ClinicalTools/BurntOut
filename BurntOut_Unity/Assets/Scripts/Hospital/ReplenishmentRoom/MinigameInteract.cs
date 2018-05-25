@@ -55,9 +55,6 @@ public class MinigameInteract : MonoBehaviour
             // below works for just placing book infront of player
             //this.transform.position = playerCamera.transform.position + playerCamera.transform.forward * bookDistance;
             //this.transform.rotation = new Quaternion(0.0f, playerCamera.transform.rotation.y, 0.0f, playerCamera.transform.rotation.w);
-
-
-            LookAway();
         }
     }
 
