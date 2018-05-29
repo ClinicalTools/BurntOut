@@ -81,11 +81,13 @@ public class ReplenishStation : MonoBehaviour
 
     public IEnumerator Transition() {
 
+        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         myAnimator.SetBool("fade", true);
         yield return new WaitForSeconds(0.5f); 
         player.transform.SetPositionAndRotation(replenishRoomSpawn.transform.position, replenishRoomSpawn.transform.rotation);
         yield return new WaitForSeconds(0.5f);
         myAnimator.SetBool("fade", false);
+        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
     }
 
