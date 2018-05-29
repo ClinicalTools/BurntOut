@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ReplenishStation : MonoBehaviour
@@ -12,6 +13,9 @@ public class ReplenishStation : MonoBehaviour
     public Transform replenishRoomSpawn;
 
     public float maxAngle = 35;
+
+    public Animator myAnimator;
+    public bool trigger = true;
 
     void Update()
     {
@@ -39,7 +43,8 @@ public class ReplenishStation : MonoBehaviour
             interactPrompt.transform.parent.gameObject.SetActive(false);
 
             // INTERACTION HERE
-            player.transform.SetPositionAndRotation(replenishRoomSpawn.transform.position, replenishRoomSpawn.transform.rotation);
+            StartCoroutine(Transition());
+
 
             LookAway();
         }
@@ -73,4 +78,16 @@ public class ReplenishStation : MonoBehaviour
 
         LookAway();
     }
+
+    public IEnumerator Transition() {
+
+        myAnimator.SetBool("fade", true);
+        yield return new WaitForSeconds(0.5f); 
+        player.transform.SetPositionAndRotation(replenishRoomSpawn.transform.position, replenishRoomSpawn.transform.rotation);
+        yield return new WaitForSeconds(0.5f);
+        myAnimator.SetBool("fade", false);
+
+    }
+
+
 }
