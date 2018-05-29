@@ -8,8 +8,8 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: floortest01_lambert1_BaseColor
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
-    _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A _SPECGLOSSMAP
+  m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF _METALLICGLOSSMAP _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+    _SPECGLOSSMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -40,11 +40,11 @@ Material:
         m_Scale: {x: 25, y: 25}
         m_Offset: {x: 18.66, y: 10}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 721dfef59e7587a4faedf7750f1ef02f, type: 3}
+        m_Texture: {fileID: 2800000, guid: efaaf4a0f72705646b642d8e113517aa, type: 3}
         m_Scale: {x: 25, y: 25}
         m_Offset: {x: 18.66, y: 10}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 2d28d42907a587c458fdc9fa78717ab6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 46bf1d9690d62744cb6b7365c1110157, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 72ed837fd06f55e48a90f278c9c279f4, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -60,11 +60,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BumpScale: 4.32
+    - _BumpScale: 4
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GlossMapScale: 0.623
+    - _GlossMapScale: 0.659
     - _Glossiness: 0.5
     - _GlossyReflections: 0
     - _Metallic: 0
