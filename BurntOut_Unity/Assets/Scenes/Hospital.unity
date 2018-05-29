@@ -1709,6 +1709,7 @@ MonoBehaviour:
   completed: 0
   gameUI: {fileID: 1044312654}
   playerStats: {fileID: 927959815}
+  playerCam: {fileID: 1448730419}
   interactPrompt: {fileID: 1300543637}
   actionPrompt: 
   plays: 0
@@ -4928,6 +4929,7 @@ MonoBehaviour:
   completed: 0
   gameUI: {fileID: 1194110597}
   playerStats: {fileID: 927959815}
+  playerCam: {fileID: 1448730419}
   interactPrompt: {fileID: 826894553}
   actionPrompt: 
   plays: 0
@@ -6879,7 +6881,7 @@ Prefab:
         type: 2}
       propertyPath: playerRotateToTarget
       value: 
-      objectReference: {fileID: 927959814}
+      objectReference: {fileID: 1448730423}
     - target: {fileID: 65075098476840738, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
         type: 2}
       propertyPath: m_Size.z
@@ -6915,6 +6917,16 @@ Prefab:
       propertyPath: interactPrompt
       value: 
       objectReference: {fileID: 826894553}
+    - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: isAroundPatient
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: playerFacing
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
@@ -11373,12 +11385,6 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_PrefabInternal: {fileID: 1724883223}
---- !u!114 &927959814 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114497384694597832, guid: 5e9e851c0e142814dac026a256ba2ac0,
-    type: 2}
-  m_PrefabInternal: {fileID: 1724883223}
-  m_Script: {fileID: 11500000, guid: d1884176c5b52d7439a76df06e83f8ac, type: 3}
 --- !u!114 &927959815 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114408858896853850, guid: 5e9e851c0e142814dac026a256ba2ac0,
@@ -13681,6 +13687,7 @@ MonoBehaviour:
   Star_RoomA: {fileID: 1939611828}
   Star_RoomB: {fileID: 817890652}
   player: {fileID: 927959813}
+  playerCam: {fileID: 1448730419}
   playerStats: {fileID: 927959815}
   ppScene: {fileID: 1867126365}
   dialogueManager: {fileID: 1976377578}
@@ -17655,6 +17662,7 @@ MonoBehaviour:
   completed: 0
   gameUI: {fileID: 1936958792}
   playerStats: {fileID: 927959815}
+  playerCam: {fileID: 1448730419}
   interactPrompt: {fileID: 826894553}
   actionPrompt: 
   plays: 0
@@ -17726,6 +17734,23 @@ Transform:
   m_Father: {fileID: 2078024628}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1448730419 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+  m_PrefabInternal: {fileID: 1724883223}
+--- !u!114 &1448730423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1448730419}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1884176c5b52d7439a76df06e83f8ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  speed: 3
 --- !u!1 &1452766936
 GameObject:
   m_ObjectHideFlags: 0
@@ -20947,7 +20972,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 7.98
+      value: -4.01
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.y
@@ -20955,7 +20980,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 17.13
+      value: 7.489
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalRotation.x
@@ -20995,7 +21020,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 88.261
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114497384694597832, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1728001246
@@ -21619,7 +21645,7 @@ Prefab:
         type: 2}
       propertyPath: playerRotateToTarget
       value: 
-      objectReference: {fileID: 927959814}
+      objectReference: {fileID: 1448730423}
     - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
         type: 2}
       propertyPath: isAroundPatient
@@ -21629,6 +21655,36 @@ Prefab:
         type: 2}
       propertyPath: playerFacing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65075098476840738, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2.7737265
+      objectReference: {fileID: 0}
+    - target: {fileID: 65075098476840738, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 5.409085
+      objectReference: {fileID: 0}
+    - target: {fileID: 65075098476840738, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.106816806
+      objectReference: {fileID: 0}
+    - target: {fileID: 65075098476840738, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 1.580835
+      objectReference: {fileID: 0}
+    - target: {fileID: 65075098476840738, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.1867304
+      objectReference: {fileID: 0}
+    - target: {fileID: 65075098476840738, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.5933655
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}

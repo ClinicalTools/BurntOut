@@ -10,12 +10,13 @@ public class PlayerRotateToTarget : MonoBehaviour {
 	void Update () {
 
         Vector3 targetDirection = target.transform.position - transform.position;
+        Debug.DrawRay(transform.position, targetDirection, Color.red);
 
         float step = speed * Time.deltaTime;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, step, 3.0f);
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, step, 0f);
        
         transform.rotation = Quaternion.LookRotation(newDirection);
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, target.transform.rotation, step);
+      
 
     }
 

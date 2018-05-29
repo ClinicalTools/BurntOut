@@ -27,6 +27,7 @@ public class Main_GameManager : MonoBehaviour
 
     //player controller
     public GameObject player;
+    public GameObject playerCam;
     public PlayerStats playerStats;
     public PostProcessingBehaviour ppScene;
 
@@ -141,7 +142,7 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        player.GetComponent<PlayerRotateToTarget>().enabled = true;
+        player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
     }
 
     public void MinigameEnd() {
@@ -149,7 +150,7 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        player.GetComponent<PlayerRotateToTarget>().enabled = false;
+        player.GetComponentInChildren<PlayerRotateToTarget>().enabled = false;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -177,6 +178,9 @@ public class Main_GameManager : MonoBehaviour
 
         // disable Choice UI
         UI_ChoiceDia.SetActive(false);
+
+        playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+        
     }
 
     public void RoomComplete()
