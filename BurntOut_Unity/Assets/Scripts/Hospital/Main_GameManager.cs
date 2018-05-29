@@ -52,6 +52,9 @@ public class Main_GameManager : MonoBehaviour
         // post processing settings here
         dofSettings = ppScene.profile.depthOfField.settings;
 
+        // start scene not blured
+        ScreenUnblur();
+
     }
 
     void Update()
@@ -131,7 +134,9 @@ public class Main_GameManager : MonoBehaviour
     //////////////////////////////// MINIGAMES ////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+    
     public void MinigameStart() {
+
         ScreenBlur();
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
