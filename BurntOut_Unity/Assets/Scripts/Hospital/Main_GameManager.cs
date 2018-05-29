@@ -38,6 +38,8 @@ public class Main_GameManager : MonoBehaviour
     public bool gameover;
     public bool gamePaused;
 
+    public bool hospitalwin;
+
     void Start()
     {
         // hide unnessesary UI
@@ -55,6 +57,8 @@ public class Main_GameManager : MonoBehaviour
 
         // start scene not blured
         ScreenUnblur();
+
+        hospitalwin = false;
 
     }
 
@@ -77,10 +81,7 @@ public class Main_GameManager : MonoBehaviour
         // win condition check ---> (in update now, but if performance lacks, make a function that you can call once and check completion)
         if (room1.completed == true && room2.completed == true)
         {
-            Debug.Log("Game Completed");
-            //Time.timeScale = 0;
-            Canvas_Win.SetActive(true);
-            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+            hospitalwin = true;
         }
 
         // lose functionality HERE
