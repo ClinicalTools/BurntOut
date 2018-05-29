@@ -1709,7 +1709,6 @@ MonoBehaviour:
   completed: 0
   gameUI: {fileID: 1044312654}
   playerStats: {fileID: 927959815}
-  playerCam: {fileID: 1448730419}
   interactPrompt: {fileID: 1300543637}
   actionPrompt: 
   plays: 0
@@ -4929,7 +4928,6 @@ MonoBehaviour:
   completed: 0
   gameUI: {fileID: 1194110597}
   playerStats: {fileID: 927959815}
-  playerCam: {fileID: 1448730419}
   interactPrompt: {fileID: 826894553}
   actionPrompt: 
   plays: 0
@@ -17662,7 +17660,6 @@ MonoBehaviour:
   completed: 0
   gameUI: {fileID: 1936958792}
   playerStats: {fileID: 927959815}
-  playerCam: {fileID: 1448730419}
   interactPrompt: {fileID: 826894553}
   actionPrompt: 
   plays: 0

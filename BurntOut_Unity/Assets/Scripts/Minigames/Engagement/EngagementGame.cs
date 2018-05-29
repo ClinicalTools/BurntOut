@@ -18,9 +18,11 @@ namespace Minigames.Engagement {
         }
 
         public override void StartGame() {
-            gameManager.MinigameStart();
+
+            base.StartGame();
+
             gameManager.ScreenUnblur();
-            gameUI.SetActive(true);
+            
         }
 
         // Update is called once per frame
