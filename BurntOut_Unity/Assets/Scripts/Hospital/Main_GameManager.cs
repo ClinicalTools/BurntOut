@@ -21,6 +21,9 @@ public class Main_GameManager : MonoBehaviour
     public GameObject UI_ReadingStation;
     public GameObject UI_MatchingStation;
 
+    // Win UI
+    public UI_Star Star_RoomA;
+    public UI_Star Star_RoomB;
 
     //player controller
     public GameObject player;
@@ -53,11 +56,25 @@ public class Main_GameManager : MonoBehaviour
 
     void Update()
     {
+
+        if (room1.completed == true) {
+            Star_RoomA.StartAnimation();
+        }
+
+        if (room2.completed == true) {
+            Star_RoomB.StartAnimation();
+        }
+
+
+
+
+
+
         // win condition check ---> (in update now, but if performance lacks, make a function that you can call once and check completion)
         if (room1.completed == true && room2.completed == true)
         {
             Debug.Log("Game Completed");
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             Canvas_Win.SetActive(true);
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         }
