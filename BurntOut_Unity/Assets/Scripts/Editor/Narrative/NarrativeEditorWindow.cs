@@ -161,6 +161,10 @@ public class NarrativeEditorWindow : EditorWindow
                         string json = File.ReadAllText(path);
 
                         var scenario = JsonUtility.FromJson<Scenario>(json);
+                        for (int i = 0; i < sceneNarrative.scenarios.Count; i++)
+                            if (i != selectedScenario && scenario.id == sceneNarrative.scenarios[i].id)
+                                scenario.ResetHash(sceneNarrative.scenarios.ToArray());
+
                         sceneNarrative.scenarios[selectedScenario] = scenario;
                         scenarioEditors[selectedScenario] = new ScenarioEditor(scenario);
                     }

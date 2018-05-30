@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.PostProcessing;
 
 public class Main_GameManager : MonoBehaviour
 {
-
-    public InteractPatient room1;
-    public InteractPatient room2;
+    private int roomsWon;
+    private int roomsLost;
 
     // store current patient
     public InteractPatient currentRoom;
@@ -22,6 +19,8 @@ public class Main_GameManager : MonoBehaviour
     public GameObject UI_MatchingStation;
 
     // Win UI
+    public UI_Star[] Stars;
+    public UI_Star[] BadStars;
     public UI_Star Star_RoomA;
     public UI_Star Star_RoomB;
     public UI_Star Star_RoomABAD;
@@ -53,7 +52,7 @@ public class Main_GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         playerStats = player.GetComponent<PlayerStats>();
-        
+
         // post processing settings here
         dofSettings = ppScene.profile.depthOfField.settings;
 
@@ -61,55 +60,13 @@ public class Main_GameManager : MonoBehaviour
         ScreenUnblur();
 
         hospitalwin = false;
-
     }
 
     void Update()
     {
-
-        if (room1.completed == true) {
-            Star_RoomA.StartAnimation();
-        }
-
-        if (room2.completed == true) {
-            Star_RoomB.StartAnimation();
-        }
-
-        if (room1.lost == true) {
-            Star_RoomABAD.StartAnimation();
-        }
-
-        if (room2.lost == true) {
-            Star_RoomBBAD.StartAnimation();
-        }
-
-
-
-
-        // win condition check ---> (in update now, but if performance lacks, make a function that you can call once and check completion)
-        if (room1.completed == true && room2.completed == true)
-        {
-            hospitalwin = true;
-        }
-
-        // lose functionality HERE
-        if (playerStats.CurrentHealth <= 0)
-        {
-
-            // call use lose once 
-            if (gameover == false)
-            {
-                Lose();
-                gameover = true;
-            }
-
-        }
-
-
         // pause screen 
         if (Input.GetKeyDown(KeyCode.P))
         {
-
             if (gamePaused == true)
             {
                 Debug.Log("Resume Game");
@@ -119,8 +76,6 @@ public class Main_GameManager : MonoBehaviour
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
                 ScreenUnblur();
-
-
             }
             else
             {
@@ -131,11 +86,8 @@ public class Main_GameManager : MonoBehaviour
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
 
                 ScreenBlur();
-
             }
-
         }
-
     }
 
 
@@ -144,9 +96,9 @@ public class Main_GameManager : MonoBehaviour
     //////////////////////////////// MINIGAMES ////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    
-    public void MinigameStart() {
 
+    public void MinigameStart()
+    {
         ScreenBlur();
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
@@ -154,7 +106,8 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
     }
 
-    public void MinigameEnd() {
+    public void MinigameEnd()
+    {
         ScreenUnblur();
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
@@ -168,12 +121,14 @@ public class Main_GameManager : MonoBehaviour
 
 
 
-    public void ScreenBlur() {
+    public void ScreenBlur()
+    {
         dofSettings.focusDistance = 0.1f;
         ppScene.profile.depthOfField.settings = dofSettings;
     }
 
-    public void ScreenUnblur() {
+    public void ScreenUnblur()
+    {
         dofSettings.focusDistance = 0.94f;
         ppScene.profile.depthOfField.settings = dofSettings;
     }
@@ -189,29 +144,33 @@ public class Main_GameManager : MonoBehaviour
         UI_ChoiceDia.SetActive(false);
 
         playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
-        
+
     }
 
     public void RoomComplete()
     {
+        Stars[roomsWon++].StartAnimation();
+        if (roomsWon >= 3)
+            hospitalwin = true;
+
         currentRoom.completed = true;
     }
     public void RoomLost()
     {
+        BadStars[roomsLost++].StartAnimation();
+        if (roomsLost >= 3)
+            Lose();
+
         currentRoom.lost = true;
-
-        Debug.Log(currentRoom);
-
     }
 
     // on loss here
+    // l   | l i
+    // l l | l -
     public void Lose()
     {
-        
         Canvas_Loss.SetActive(true);
         Debug.Log("loss");
-
-
     }
 
 

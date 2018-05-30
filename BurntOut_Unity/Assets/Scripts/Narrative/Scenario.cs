@@ -72,6 +72,11 @@ public class Scenario
 
     public Scenario(Scenario[] scenarios)
     {
+        ResetHash(scenarios);
+    }
+
+    public void ResetHash(Scenario[] scenarios)
+    {
         // Using hash of current time to get a number that will hopefully be unique
         var hash = DateTime.Now.GetHashCode();
 
