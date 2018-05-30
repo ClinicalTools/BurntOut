@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CtiEditor;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -33,14 +34,14 @@ public static class EditorHelper
     {
         for (int i = 0; i < count; i++)
         {
-            using (new EditorHorizontal())
+            using (CtiEditorGUI.Horizontal())
             {
                 if (foldouts != null)
                 {
                     var lastColor = GUI.contentColor;
 
                     GUI.contentColor = color(i);
-                    foldouts[i] = EditorGUILayout.Foldout(foldouts[i], name(i));
+                    foldouts[i] = CtiEditorGUI.Foldout(foldouts[i], name(i));
 
                     GUI.contentColor = lastColor;
                 }
@@ -52,7 +53,7 @@ public static class EditorHelper
                 // Button to move the element up (if it's not at the top)
                 if (i > 0)
                 {
-                    if (GUILayout.Button("▲", GUILayout.Width(40)))
+                    if (CtiEditorGUI.Button("▲", null, null, CtiEditorGUI.Width(40)))
                     {
                         moveElem(i, i - 1);
 
@@ -66,13 +67,13 @@ public static class EditorHelper
                 }
                 else
                 {
-                    EditorGUILayout.LabelField(" ", GUILayout.Width(40));
+                    CtiEditorGUI.LabelField(" ", null, null, CtiEditorGUI.Width(40));
                 }
 
                 // Button to move the element down (if it's not at the bottom)
                 if (i < count - 1)
                 {
-                    if (GUILayout.Button("▼", GUILayout.Width(40)))
+                    if (CtiEditorGUI.Button("▼", null, null, CtiEditorGUI.Width(40)))
                     {
                         moveElem(i, i + 1);
 
@@ -86,10 +87,10 @@ public static class EditorHelper
                 }
                 else
                 {
-                    EditorGUILayout.LabelField(" ", GUILayout.Width(40));
+                    CtiEditorGUI.LabelField(" ", null, null, CtiEditorGUI.Width(40));
                 }
 
-                if (GUILayout.Button("X", GUILayout.Width(40)))
+                if (CtiEditorGUI.Button("X", null, null, CtiEditorGUI.Width(40)))
                 {
                     if (EditorUtility.DisplayDialog(removeTitle, removeDesc, "Delete", "Cancel"))
                     {
@@ -110,12 +111,12 @@ public static class EditorHelper
         }
 
         // Add new element button
-        using (new EditorHorizontal())
+        using (CtiEditorGUI.Horizontal())
         {
             GUILayout.Space(EditorGUI.indentLevel * 20);
 
 
-            if (GUILayout.Button("+", GUILayout.Width(128)))
+            if (CtiEditorGUI.Button("+", null, null, CtiEditorGUI.Width(128)))
             {
                 addElem();
                 if (foldouts != null)

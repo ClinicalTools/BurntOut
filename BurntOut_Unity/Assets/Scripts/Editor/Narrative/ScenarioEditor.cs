@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CtiEditor;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class ScenarioEditor
     private readonly List<bool> choiceFoldout = new List<bool>();
     private readonly List<ChoiceEditor> choiceEditors = new List<ChoiceEditor>();
     public readonly Scenario scenario;
+    private float endNarrativeWidth;
 
     public ScenarioEditor(Scenario scenario)
     {
@@ -26,11 +28,9 @@ public class ScenarioEditor
     public void Edit()
     {
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        scenario.name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), scenario.name);
-
-
-        actorsFoldout = EditorGUILayout.Foldout(actorsFoldout, "Actors", EditorStyles.foldout);
-        if (actorsFoldout)
+        scenario.name = CtiEditorGUI.TextField(scenario.name, "Name: ", "Name to be displayed in the editor");
+        
+        if (actorsFoldout = CtiEditorGUI.Foldout(actorsFoldout, "Actors"))
         {
             using (new EditorIndent())
             {
@@ -54,7 +54,7 @@ public class ScenarioEditor
                     // Display element
                     (int i) =>
                     {
-                        scenario.Actors[i].name = EditorGUILayout.TextField(scenario.Actors[i].name);
+                        scenario.Actors[i].name = CtiEditorGUI.TextField(scenario.Actors[i].name);
                     },
                     "Remove Actor",
                     "Are you sure you want to delete this actor?"
@@ -64,7 +64,7 @@ public class ScenarioEditor
 
 
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        choicesFoldout = EditorGUILayout.Foldout(choicesFoldout, "Choices", EditorStyles.foldout);
+        choicesFoldout = CtiEditorGUI.Foldout(choicesFoldout, "Choices");
         EditorStyles.foldout.fontStyle = FontStyle.Normal;
         if (choicesFoldout)
         {
@@ -121,9 +121,8 @@ public class ScenarioEditor
             }
         }
 
-
-        EditorGUILayout.LabelField("End Narrative:");
+        CtiEditorGUI.LabelField("End Narrative:");
         EditorStyles.textField.wordWrap = true;
-        scenario.endNarrative = EditorGUILayout.TextArea(scenario.endNarrative);
+        scenario.endNarrative = CtiEditorGUI.TextArea(scenario.endNarrative, ref endNarrativeWidth);
     }
 }

@@ -2,21 +2,28 @@
 using UnityEditor;
 using UnityEngine;
 
-/// <summary>
-/// Class to keep contained elements within an EditorGUILayout horizontal group.
-/// </summary>
-public class EditorHorizontal : IDisposable
+namespace CtiEditor
 {
-    public EditorHorizontal(GUIStyle style = null)
+    /// <summary>
+    /// Class to keep contained elements within an EditorGUILayout horizontal group.
+    /// </summary>
+    internal class EditorHorizontal : IDisposable
     {
-        if (style == null)
-            EditorGUILayout.BeginHorizontal();
-        else
-            EditorGUILayout.BeginHorizontal(style);
-    }
+        internal EditorHorizontal(GUIStyle style = null)
+        {
+            CtiEditorGUI.InHorizontal++;
 
-    public void Dispose()
-    {
-        EditorGUILayout.EndHorizontal();
+            if (style == null)
+                EditorGUILayout.BeginHorizontal();
+            else
+                EditorGUILayout.BeginHorizontal(style);
+        }
+
+        public void Dispose()
+        {
+            CtiEditorGUI.InHorizontal--;
+
+            EditorGUILayout.EndHorizontal();
+        }
     }
 }

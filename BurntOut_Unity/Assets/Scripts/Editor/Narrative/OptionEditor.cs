@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using CtiEditor;
+using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -9,7 +10,7 @@ public class OptionEditor
     private bool eventsFoldout;
     private readonly Option option;
     private readonly TasksEditor tasksEditor;
-
+    private float feedbackWidth;
 
     public OptionEditor(Option option, Scenario scenario)
     {
@@ -20,18 +21,18 @@ public class OptionEditor
 
     public void Edit()
     {
-        option.name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), option.name);
+        option.name = CtiEditorGUI.TextField(option.name, "Name: ", "Name to be displayed in the editor");
 
-        option.text = EditorGUILayout.TextField(new GUIContent("Text: ", "Text to be displayed in game"), option.text);
+        option.text = CtiEditorGUI.TextField(option.text, "Text: ", "Text to be displayed in game");
 
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        eventsFoldout = EditorGUILayout.Foldout(eventsFoldout, "Events", EditorStyles.foldout);
+        eventsFoldout = CtiEditorGUI.Foldout(eventsFoldout, "Events");
         EditorStyles.foldout.fontStyle = FontStyle.Normal;
 
         if (eventsFoldout)
-        {
-            tasksEditor.Edit();
-        }
+            using (new EditorIndent())
+                using (new EditorVertical())
+                    tasksEditor.Edit();
 
         var lastColor = GUI.contentColor;
         if (option.result == OptionResults.CONTINUE)
@@ -40,11 +41,10 @@ public class OptionEditor
             GUI.contentColor = EditorHelper.TryAgainColor;
         else if (option.result == OptionResults.END)
             GUI.contentColor = EditorHelper.EndColor;
-        option.result = (OptionResults)EditorGUILayout.EnumPopup("Result: ", option.result);
+        option.result = (OptionResults)CtiEditorGUI.EnumPopup(option.result, "Result: ");
         GUI.contentColor = lastColor;
 
-        EditorGUILayout.LabelField("Feedback:");
-        EditorStyles.textField.wordWrap = true;
-        option.feedback = EditorGUILayout.TextArea(option.feedback);
+        CtiEditorGUI.LabelField("Feedback:");
+        option.feedback = CtiEditorGUI.TextArea(option.feedback, ref feedbackWidth);
     }
 }

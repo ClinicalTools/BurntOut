@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 using System.IO;
+using CtiEditor;
 
 /// <summary>
 /// Manages editing the scene's scenarios.
@@ -14,6 +15,7 @@ public class NarrativeEditorWindow : EditorWindow
     private int selectedScenario = -1;
     private Vector2 scrollPosition = new Vector2();
     private float scale = 11;
+    private float sceneTextAreaWidth = 0;
 
     private readonly string gameObjectName = "NarrativeManager";
 
@@ -63,7 +65,7 @@ public class NarrativeEditorWindow : EditorWindow
         }
 
         // Draw the toolbar for scenario management
-        using (new EditorHorizontal(EditorStyles.toolbar))
+        using (CtiEditorGUI.Horizontal(EditorStyles.toolbar))
         {
             var oldFontSize = EditorStyles.toolbarButton.fontSize;
             EditorStyles.toolbarButton.fontSize = 12;
@@ -228,11 +230,13 @@ public class NarrativeEditorWindow : EditorWindow
 
                     EditorStyles.label.fontStyle = FontStyle.Bold;
 
-                    EditorGUILayout.LabelField("Start Narration:");
-                    sceneNarrative.startNarration = EditorGUILayout.TextArea(sceneNarrative.startNarration, GUILayout.MinHeight(200));
+                    CtiEditorGUI.LabelField("Start Narration:");
+                    sceneNarrative.startNarration = CtiEditorGUI.TextArea(sceneNarrative.startNarration, ref sceneTextAreaWidth);
 
-                    EditorGUILayout.LabelField("End Narration:");
-                    sceneNarrative.endNarration = EditorGUILayout.TextArea(sceneNarrative.endNarration, GUILayout.MinHeight(200));
+                    CtiEditorGUI.LabelField("");
+
+                    CtiEditorGUI.LabelField("End Narration:");
+                    sceneNarrative.endNarration = CtiEditorGUI.TextArea(sceneNarrative.endNarration, ref sceneTextAreaWidth);
 
                     EditorStyles.label.fontStyle = FontStyle.Normal;
                 }

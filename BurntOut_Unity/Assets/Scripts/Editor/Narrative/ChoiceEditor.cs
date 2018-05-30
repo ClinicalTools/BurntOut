@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CtiEditor;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -15,9 +16,7 @@ public class ChoiceEditor
     private readonly TasksEditor tasksEditor;
 
     private readonly Scenario scenario;
-    private readonly Choice choice;
-    private readonly ReorderableList list;
-    
+    private readonly Choice choice;    
 
     public ChoiceEditor(Choice choice, Scenario scenario)
     {
@@ -35,19 +34,21 @@ public class ChoiceEditor
 
     public void Edit()
     {
-        choice.name = EditorGUILayout.TextField(new GUIContent("Name: ", "Name to be displayed in the editor"), choice.name);
+        choice.name = CtiEditorGUI.TextField(choice.name, "Name: ", "Name to be displayed in the editor");
 
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        eventsFoldout = EditorGUILayout.Foldout(eventsFoldout, "Events", EditorStyles.foldout);
+        eventsFoldout = CtiEditorGUI.Foldout(eventsFoldout, "Events");
         EditorStyles.foldout.fontStyle = FontStyle.Normal;
 
         if (eventsFoldout)
-            tasksEditor.Edit();
+            using (new EditorIndent())
+                using (new EditorVertical())
+                    tasksEditor.Edit();
 
-        choice.text = EditorGUILayout.TextField(new GUIContent("Text: ", "Text to be displayed in game"), choice.text);
+        choice.text = CtiEditorGUI.TextField(choice.text, "Text: ", "Text to be displayed in game");
 
         EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        optionsFoldout = EditorGUILayout.Foldout(optionsFoldout, "Options", EditorStyles.foldout);
+        optionsFoldout = CtiEditorGUI.Foldout(optionsFoldout, "Options");
         EditorStyles.foldout.fontStyle = FontStyle.Normal;
         if (optionsFoldout)
         {

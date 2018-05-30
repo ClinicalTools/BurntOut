@@ -13,20 +13,20 @@ public class TasksEditor
     public TasksEditor(IList tasks, Scenario scenario)
     {
         list = new ReorderableList(tasks, typeof(Task));
-
+        EditorStyles.popup.fixedHeight = 0;
         list.drawElementCallback =
             (Rect rect, int index, bool isActive, bool isFocused) =>
             {
                 var element = (Task)list.list[index];
-                rect.y += 2;
-
-                Rect newRect = new Rect(rect.x, rect.y, 75, EditorGUIUtility.singleLineHeight);
+                rect.y += 1;
+                rect.height -= 4;
+                Rect newRect = new Rect(rect.x, rect.y, 100, rect.height);
                 element.action = (TaskAction)EditorGUI.EnumPopup(newRect, element.action);
                 rect.width -= newRect.width + 5;
                 rect.x += newRect.width + 5;
 
-                newRect = new Rect(rect.x, rect.y, 90, EditorGUIUtility.singleLineHeight);
-                                
+                newRect = new Rect(rect.x, rect.y, 120, rect.height);
+
                 var actorIndex = EditorGUI.Popup(newRect, scenario.ActorIndex(element.actorId), scenario.ActorNames());
                 if (actorIndex != -1)
                     element.actorId = scenario.Actors[actorIndex].id;
@@ -37,11 +37,11 @@ public class TasksEditor
                 switch (element.action)
                 {
                     case TaskAction.TALK:
-                        newRect = new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight);
+                        newRect = new Rect(rect.x, rect.y, rect.width, rect.height);
                         element.dialogue = EditorGUI.TextField(newRect, element.dialogue);
                         break;
                     case TaskAction.EMOTION:
-                        newRect = new Rect(rect.x, rect.y, 90, EditorGUIUtility.singleLineHeight);
+                        newRect = new Rect(rect.x, rect.y, 120, rect.height);
                         element.emotion = (TaskEmotion)EditorGUI.EnumPopup(newRect, element.emotion);
                         break;
                 }
@@ -50,6 +50,8 @@ public class TasksEditor
 
     public void Edit()
     {
+        list.elementHeight = EditorStyles.popup.CalcHeight(new GUIContent(" "), 100) + 4;
+        list.headerHeight = 4;
         list.DoLayoutList();
     }
 }
