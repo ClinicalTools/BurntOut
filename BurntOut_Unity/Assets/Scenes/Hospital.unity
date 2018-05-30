@@ -4373,6 +4373,150 @@ MonoBehaviour:
         provide feedback back to you. This gives you both the opportunity to express
         more minor emotions and situations and in many cases receive the support you
         need from the patients you are already working with.
+    - id: -1036331199
+      name: 3
+      actors:
+      - id: 764233178
+        name: player
+      - id: 777917692
+        name: PATIENT
+      choices:
+      - name: Choice 1
+        text: Choice 1 Text
+        events:
+        - action: 0
+          actorId: 777917692
+          emotion: 0
+          dialogue: dialogue 1
+        - action: 0
+          actorId: 777917692
+          emotion: 0
+          dialogue: dialogue 2
+        options:
+        - name: i did not hit her
+          text: Continue 1
+          events:
+          - action: 0
+            actorId: 777917692
+            emotion: 0
+            dialogue: cool
+          result: 2
+          feedback: You clicked continue
+        - name: i did not
+          text: End 1
+          events:
+          - action: 0
+            actorId: 777917692
+            emotion: 0
+            dialogue: Not cool
+          result: 1
+          feedback: You clicked end
+        - name: oh hai mark
+          text: Try Again 1
+          events:
+          - action: 0
+            actorId: 777917692
+            emotion: 0
+            dialogue: kinda cool
+          result: 0
+          feedback: You clicked try again
+      endNarrative: End Narrative
+    - id: -1036331199
+      name: 4
+      actors:
+      - id: 764233178
+        name: player
+      - id: 777917692
+        name: PATIENT
+      choices:
+      - name: Choice 1
+        text: Choice 1 Text
+        events:
+        - action: 0
+          actorId: 777917692
+          emotion: 0
+          dialogue: dialogue 1
+        - action: 0
+          actorId: 777917692
+          emotion: 0
+          dialogue: dialogue 2
+        options:
+        - name: i did not hit her
+          text: Continue 1
+          events:
+          - action: 0
+            actorId: 777917692
+            emotion: 0
+            dialogue: cool
+          result: 2
+          feedback: You clicked continue
+        - name: i did not
+          text: End 1
+          events:
+          - action: 0
+            actorId: 777917692
+            emotion: 0
+            dialogue: Not cool
+          result: 1
+          feedback: You clicked end
+        - name: oh hai mark
+          text: Try Again 1
+          events:
+          - action: 0
+            actorId: 777917692
+            emotion: 0
+            dialogue: kinda cool
+          result: 0
+          feedback: You clicked try again
+      endNarrative: End Narrative
+    - id: -1036331199
+      name: 5
+      actors:
+      - id: 764233178
+        name: player
+      - id: 777917692
+        name: PATIENT
+      choices:
+      - name: Choice 1
+        text: Choice 1 Text
+        events:
+        - action: 0
+          actorId: 777917692
+          emotion: 0
+          dialogue: dialogue 1
+        - action: 0
+          actorId: 777917692
+          emotion: 0
+          dialogue: dialogue 2
+        options:
+        - name: i did not hit her
+          text: Continue 1
+          events:
+          - action: 0
+            actorId: 777917692
+            emotion: 0
+            dialogue: cool
+          result: 2
+          feedback: You clicked continue
+        - name: i did not
+          text: End 1
+          events:
+          - action: 0
+            actorId: 777917692
+            emotion: 0
+            dialogue: Not cool
+          result: 1
+          feedback: You clicked end
+        - name: oh hai mark
+          text: Try Again 1
+          events:
+          - action: 0
+            actorId: 777917692
+            emotion: 0
+            dialogue: kinda cool
+          result: 0
+          feedback: You clicked try again
+      endNarrative: End Narrative
     startNarration: "It\u2019s been a long day and the demands have been coming left
       and right. You\u2019ve been seeing patients, filling our paperwork, and trying
       to please your supervisor, which is a seemingly impossible task. Your only food

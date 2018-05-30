@@ -398,6 +398,9 @@ namespace CtiEditor
         /// <returns>The text entered by the user.</returns>
         public static string TextArea(string value, ref float lastWidth, params EditorGUIWidth[] widthOptions)
         {
+            if (value == null)
+                value = "";
+
             var style = EditorStyles.textArea;
             style.wordWrap = true;
             var content = new GUIContent(value);
@@ -436,6 +439,9 @@ namespace CtiEditor
         public static string TextField(string value, string text = "", string tooltip = "",
             params EditorGUIWidth[] widthOptions)
         {
+            if (value == null)
+                value = "";
+
             var style = EditorStyles.textField;
             var content = new GUIContent(text, tooltip);
             var position = GetDimensions(content, style, widthOptions);
