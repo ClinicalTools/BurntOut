@@ -74,6 +74,7 @@ namespace CtiEditor
             };
         }
 
+        #region INTERNAL
         // Gets the rect for the GUI object based on the content, style, and width parameters
         private static Rect GetDimensions(GUIContent content, GUIStyle style, params EditorGUIWidth[] widthOptions)
         {
@@ -81,6 +82,8 @@ namespace CtiEditor
             List<GUILayoutOption> options = new List<GUILayoutOption>();
             foreach (var widthOption in widthOptions)
             {
+                if (widthOption == null)
+                    continue;
                 if (widthOption.width > 0)
                     options.Add(GUILayout.Width(widthOption.width));
                 if (widthOption.minWidth > 0)
@@ -93,7 +96,7 @@ namespace CtiEditor
             Rect scale;
             if (InHorizontal == 0)
             {
-                using (CtiEditorGUI.Horizontal())
+                using (Horizontal())
                     GUILayout.FlexibleSpace();
                 scale = GUILayoutUtility.GetLastRect();
             }
@@ -125,23 +128,88 @@ namespace CtiEditor
 
             return position;
         }
+        #endregion
 
+        #region DISPOSABLES
+        public static IDisposable Color(Color color)
+        {
+            return new Disposable.Color(color);
+        }
+
+        public static IDisposable Container()
+        {
+            return new Disposable.Vertical(EditorStyles.helpBox);
+        }
+
+        public static IDisposable FontStyle(FontStyle fontStyle)
+        {
+            return new Disposable.FontStyle(fontStyle);
+        }
+
+        public static IDisposable Horizontal()
+        {
+            if (InHorizontal == 0)
+            {
+                using (new Disposable.Horizontal())
+                    GUILayout.FlexibleSpace();
+                horizontalRect = GUILayoutUtility.GetLastRect();
+            }
+
+            return new Disposable.Horizontal();
+        }
+
+        public static IDisposable LabelFontStyle(FontStyle fontStyle)
+        {
+            return new Disposable.LabelFontStyle(fontStyle);
+        }
+
+        public static IDisposable Indent()
+        {
+            return new Disposable.Indent();
+        }
+
+        public static IDisposable FontSize(int fontSize)
+        {
+            return new Disposable.FontSize(fontSize);
+        }
+
+        public static IDisposable ScrollView(ref Vector2 scrollPosition)
+        {
+            return new Disposable.ScrollView(ref scrollPosition);
+        }
+
+        public static IDisposable Toolbar()
+        {
+            if (InHorizontal == 0)
+            {
+                using (new Disposable.Horizontal())
+                    GUILayout.FlexibleSpace();
+                horizontalRect = GUILayoutUtility.GetLastRect();
+            }
+
+            return new Disposable.Horizontal(EditorStyles.toolbar);
+        }
+
+        public static IDisposable Vertical()
+        {
+            return new Disposable.Vertical();
+        }
+        #endregion
+
+        #region UI ELEMENTS
         /// <summary>
         /// Make a single press button. The user clicks them and something happens immediately.
         /// </summary>
         /// <param name="text">	Text to display on the button.</param>
         /// <param name="tooltip">Text to display on control hover.</param>
-        /// <param name="style">Optional GUIStyle.</param>
         /// <param name="widthOptions">
         ///     Options specifying default width values. 
         ///     Use Width(float), MaxWidth(float), MinWidth(float) to instantiate these options.
         /// </param>
         /// <returns>true when the users clicks the button</returns>
-        public static bool Button(string text, string tooltip = null, GUIStyle style = null,
-            params EditorGUIWidth[] widthOptions)
+        public static bool Button(string text, string tooltip = null, params EditorGUIWidth[] widthOptions)
         {
-            if (style == null)
-                style = EditorStyles.miniButton;
+            var style = EditorStyles.miniButton;
 
             var content = new GUIContent(text, tooltip);
             var position = GetDimensions(content, style, widthOptions);
@@ -159,17 +227,15 @@ namespace CtiEditor
         /// <param name="value">The enum option the field shows.</param>
         /// <param name="text">The label to show.</param>
         /// <param name="tooltip">Text to display on control hover.</param>
-        /// <param name="style">Optional GUIStyle.</param>
         /// <param name="widthOptions">
         ///     Options specifying default width values. 
         ///     Use Width(float), MaxWidth(float), MinWidth(float) to instantiate these options.
         /// </param>
         /// <returns>The enum option that has been selected by the user.</returns>
         public static Enum EnumPopup(Enum value, string text = "", string tooltip = "", 
-            GUIStyle style = null, params EditorGUIWidth[] widthOptions)
+            params EditorGUIWidth[] widthOptions)
         {
-            if (style == null)
-                style = EditorStyles.popup;
+            var style = EditorStyles.popup;
             style.fixedHeight = 0;
 
             var content = new GUIContent(text, tooltip);
@@ -191,33 +257,19 @@ namespace CtiEditor
         /// <param name="value">The shown foldout state.</param>
         /// <param name="text">The label to show.</param>
         /// <param name="tooltip">Text to display on control hover.</param>
-        /// <param name="style">Optional GUIStyle.</param>
         /// <param name="widthOptions">
         ///     Options specifying default width values. 
         ///     Use Width(float), MaxWidth(float), MinWidth(float) to instantiate these options.
         /// </param>
         /// <returns>The foldout state selected by the user. If true, you should render sub-objects.</returns>
-        public static bool Foldout(bool value, string text, string tooltip = "", GUIStyle style = null, 
+        public static bool Foldout(bool value, string text, string tooltip = "", 
             params EditorGUIWidth[] widthOptions)
         {
-            if (style == null)
-                style = EditorStyles.foldout;
+            var style = EditorStyles.foldout;
             var content = new GUIContent(text, tooltip);
             var position = GetDimensions(content, style, widthOptions);
 
             return EditorGUI.Foldout(position, value, content, style);
-        }
-
-        public static IDisposable Horizontal(GUIStyle style = null)
-        {
-            if (InHorizontal == 0)
-            {
-                using (new EditorHorizontal())
-                    GUILayout.FlexibleSpace();
-                horizontalRect = GUILayoutUtility.GetLastRect();
-            }
-
-            return new EditorHorizontal(style);
         }
 
         /// <summary>
@@ -251,16 +303,13 @@ namespace CtiEditor
         /// </summary>
         /// <param name="text">The label to show.</param>
         /// <param name="tooltip">Text to display on control hover.</param>
-        /// <param name="style">Optional GUIStyle.</param>
         /// <param name="widthOptions">
         ///     Options specifying default width values. 
         ///     Use Width(float), MaxWidth(float), MinWidth(float) to instantiate these options.
         /// </param>
-        public static void LabelField(string text, string tooltip = "", GUIStyle style = null,
-            params EditorGUIWidth[] widthOptions)
+        public static void LabelField(string text, string tooltip = "", params EditorGUIWidth[] widthOptions)
         {
-            if (style == null)
-                style = EditorStyles.label;
+            var style = EditorStyles.label;
             var content = new GUIContent(text, tooltip);
             var position = GetDimensions(content, style, widthOptions);
 
@@ -276,17 +325,15 @@ namespace CtiEditor
         /// <param name="allowSceneObjects">Allow assigning scene objects.</param>
         /// <param name="text">The label to show.</param>
         /// <param name="tooltip">Text to display on control hover.</param>
-        /// <param name="style">Optional GUIStyle.</param>
         /// <param name="widthOptions">
         ///     Options specifying default width values. 
         ///     Use Width(float), MaxWidth(float), MinWidth(float) to instantiate these options.
         /// </param>
         /// <returns>The object that has been set by the user.</returns>
         public static UnityEngine.Object ObjectField<T>(UnityEngine.Object value, bool allowSceneObjects,
-            string text = "", string tooltip = "", GUIStyle style = null, params EditorGUIWidth[] widthOptions)
+            string text = "", string tooltip = "", params EditorGUIWidth[] widthOptions)
         {
-            if (style == null)
-                style = EditorStyles.objectField;
+            var style = EditorStyles.objectField;
             var content = new GUIContent(text, tooltip);
             var position = GetDimensions(content, style, widthOptions);
 
@@ -307,17 +354,15 @@ namespace CtiEditor
         /// <param name="optionToolTips">An array with the tooltips for the options shown in the popup.</param>
         /// <param name="text">The label to show.</param>
         /// <param name="tooltip">Text to display on control hover.</param>
-        /// <param name="style">Optional GUIStyle.</param>
         /// <param name="widthOptions">
         ///     Options specifying default width values. 
         ///     Use Width(float), MaxWidth(float), MinWidth(float) to instantiate these options.
         /// </param>
         /// <returns>The index of the option that has been selected by the user.</returns>
         public static int Popup(int value, string[] optionTexts, string[] optionToolTips = null,
-            string text = "", string tooltip = "", GUIStyle style = null, params EditorGUIWidth[] widthOptions)
+            string text = "", string tooltip = "", params EditorGUIWidth[] widthOptions)
         {
-            if (style == null)
-                style = EditorStyles.popup;
+            var style = EditorStyles.popup;
             var content = new GUIContent(text, tooltip);
             var position = GetDimensions(content, style, widthOptions);
 
@@ -342,20 +387,19 @@ namespace CtiEditor
         ///     Initialize OUTSIDE OF YOUR METHOD THAT CALLS THIS. 
         ///     This can be shared between TextArea's guaranteed to have the same width.
         ///     <para>
-        ///         Unity gives errenous data every other frame, so this variable needs to be passed for things to work properly.
+        ///         Unity gives errenous data every other frame, so this variable needs to be passed for 
+        ///         things to work properly.
         ///     </para>
         /// </param>
-        /// <param name="style">Optional GUIStyle.</param>
         /// <param name="widthOptions">
         ///     Options specifying default width values. 
         ///     Use Width(float), MaxWidth(float), MinWidth(float) to instantiate these options.
         /// </param>
         /// <returns>The text entered by the user.</returns>
-        public static string TextArea(string value, ref float lastWidth, GUIStyle style = null, params EditorGUIWidth[] widthOptions)
+        public static string TextArea(string value, ref float lastWidth, params EditorGUIWidth[] widthOptions)
         {
-            EditorStyles.textArea.wordWrap = true;
-            if (style == null)
-                style = EditorStyles.textArea;
+            var style = EditorStyles.textArea;
+            style.wordWrap = true;
             var content = new GUIContent(value);
             var position = GetDimensions(content, style, widthOptions);
 
@@ -384,17 +428,15 @@ namespace CtiEditor
         /// <param name="value">The text to edit.</param>
         /// <param name="text">The label to show.</param>
         /// <param name="tooltip">Text to display on control hover.</param>
-        /// <param name="style">Optional GUIStyle.</param>
         /// <param name="widthOptions">
         ///     Options specifying default width values. 
         ///     Use Width(float), MaxWidth(float), MinWidth(float) to instantiate these options.
         /// </param>
         /// <returns>The text entered by the user.</returns>
-        public static string TextField(string value, string text = "", string tooltip = "", GUIStyle style = null,
+        public static string TextField(string value, string text = "", string tooltip = "",
             params EditorGUIWidth[] widthOptions)
         {
-            if (style == null)
-                style = EditorStyles.textField;
+            var style = EditorStyles.textField;
             var content = new GUIContent(text, tooltip);
             var position = GetDimensions(content, style, widthOptions);
 
@@ -410,17 +452,15 @@ namespace CtiEditor
         /// <param name="value">The shown state of the toggle.</param>
         /// <param name="text">The label to show.</param>
         /// <param name="tooltip">Text to display on control hover.</param>
-        /// <param name="style">Optional GUIStyle.</param>
         /// <param name="widthOptions">
         ///     Options specifying default width values. 
         ///     Use Width(float), MaxWidth(float), MinWidth(float) to instantiate these options.
         /// </param>
         /// <returns>The selected state of the toggle.</returns>
-        public static bool Toggle(bool value, string text = null, string tooltip = null,
-            GUIStyle style = null, params EditorGUIWidth[] widthOptions)
+        public static bool Toggle(bool value, string text = null, string tooltip = null, 
+            params EditorGUIWidth[] widthOptions)
         {
-            if (style == null)
-                style = EditorStyles.toggle;
+            var style = EditorStyles.toggle;
             var content = new GUIContent(text, tooltip);
             var position = GetDimensions(content, style, widthOptions);
 
@@ -430,5 +470,7 @@ namespace CtiEditor
 
             return EditorGUI.Toggle(position, value, style);
         }
+        #endregion
+
     }
 }

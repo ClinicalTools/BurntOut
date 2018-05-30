@@ -65,7 +65,7 @@ public class NarrativeEditorWindow : EditorWindow
         }
 
         // Draw the toolbar for scenario management
-        using (CtiEditorGUI.Horizontal(EditorStyles.toolbar))
+        using (CtiEditorGUI.Toolbar())
         {
             var oldFontSize = EditorStyles.toolbarButton.fontSize;
             EditorStyles.toolbarButton.fontSize = 12;
@@ -217,28 +217,23 @@ public class NarrativeEditorWindow : EditorWindow
             EditorStyles.toolbarButton.fontSize = oldFontSize;
         }
 
-        EditorStyles.textField.wordWrap = true;
-        EditorStyles.textArea.wordWrap = true;
-        using (new EditorSize((int)scale))
+        using (CtiEditorGUI.FontSize((int)scale))
         {
-            using (new EditorScrollView(ref scrollPosition))
+            using (CtiEditorGUI.ScrollView(ref scrollPosition))
             {
                 // Edit basic scene info
                 if (selectedScenario == -1)
                 {
-                    EditorStyles.textField.wordWrap = true;
+                    using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
+                    {
+                        CtiEditorGUI.LabelField("Start Narration:");
+                        sceneNarrative.startNarration = CtiEditorGUI.TextArea(sceneNarrative.startNarration, ref sceneTextAreaWidth);
 
-                    EditorStyles.label.fontStyle = FontStyle.Bold;
+                        CtiEditorGUI.LabelField("");
 
-                    CtiEditorGUI.LabelField("Start Narration:");
-                    sceneNarrative.startNarration = CtiEditorGUI.TextArea(sceneNarrative.startNarration, ref sceneTextAreaWidth);
-
-                    CtiEditorGUI.LabelField("");
-
-                    CtiEditorGUI.LabelField("End Narration:");
-                    sceneNarrative.endNarration = CtiEditorGUI.TextArea(sceneNarrative.endNarration, ref sceneTextAreaWidth);
-
-                    EditorStyles.label.fontStyle = FontStyle.Normal;
+                        CtiEditorGUI.LabelField("End Narration:");
+                        sceneNarrative.endNarration = CtiEditorGUI.TextArea(sceneNarrative.endNarration, ref sceneTextAreaWidth);
+                    }
                 }
                 // Edit selected scenario
                 else

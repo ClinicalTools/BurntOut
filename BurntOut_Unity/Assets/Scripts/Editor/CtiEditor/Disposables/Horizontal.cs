@@ -2,14 +2,14 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CtiEditor
+namespace CtiEditor.Disposable
 {
     /// <summary>
     /// Class to keep contained elements within an EditorGUILayout horizontal group.
     /// </summary>
-    internal class EditorHorizontal : IDisposable
+    internal class Horizontal : IDisposable
     {
-        internal EditorHorizontal(GUIStyle style = null)
+        internal Horizontal(GUIStyle style = null)
         {
             CtiEditorGUI.InHorizontal++;
 

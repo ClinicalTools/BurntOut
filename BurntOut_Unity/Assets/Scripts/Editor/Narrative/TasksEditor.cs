@@ -20,12 +20,12 @@ public class TasksEditor
                 var element = (Task)list.list[index];
                 rect.y += 1;
                 rect.height -= 4;
-                Rect newRect = new Rect(rect.x, rect.y, 100, rect.height);
+                Rect newRect = new Rect(rect.x, rect.y, (EditorStyles.popup.fontSize + 4) * 5.1f, rect.height);
                 element.action = (TaskAction)EditorGUI.EnumPopup(newRect, element.action);
                 rect.width -= newRect.width + 5;
                 rect.x += newRect.width + 5;
 
-                newRect = new Rect(rect.x, rect.y, 120, rect.height);
+                newRect = new Rect(rect.x, rect.y, (EditorStyles.popup.fontSize + 4) * 6f, rect.height);
 
                 var actorIndex = EditorGUI.Popup(newRect, scenario.ActorIndex(element.actorId), scenario.ActorNames());
                 if (actorIndex != -1)
