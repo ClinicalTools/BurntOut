@@ -24,6 +24,8 @@ public class Main_GameManager : MonoBehaviour
     // Win UI
     public UI_Star Star_RoomA;
     public UI_Star Star_RoomB;
+    public UI_Star Star_RoomABAD;
+    public UI_Star Star_RoomBBAD;
 
     //player controller
     public GameObject player;
@@ -73,7 +75,13 @@ public class Main_GameManager : MonoBehaviour
             Star_RoomB.StartAnimation();
         }
 
+        if (room1.lost == true) {
+            Star_RoomABAD.StartAnimation();
+        }
 
+        if (room2.lost == true) {
+            Star_RoomBBAD.StartAnimation();
+        }
 
 
 
@@ -191,13 +199,19 @@ public class Main_GameManager : MonoBehaviour
     public void RoomLost()
     {
         currentRoom.lost = true;
+
+        Debug.Log(currentRoom);
+
     }
 
     // on loss here
     public void Lose()
     {
+        
         Canvas_Loss.SetActive(true);
         Debug.Log("loss");
+
+
     }
 
 
