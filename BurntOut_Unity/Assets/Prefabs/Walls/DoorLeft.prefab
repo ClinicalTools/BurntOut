@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 23337419865965206}
   - component: {fileID: 95077549150459086}
   m_Layer: 0
-  m_Name: Door
+  m_Name: DoorLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,9 +86,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1415164361219466}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.208, y: -0.998, z: 6.283}
-  m_LocalScale: {x: 0.02828276, y: 0.02828276, z: 0.02828276}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -2.208, y: -0.998, z: 6.271}
+  m_LocalScale: {x: 0.02828279, y: 0.02828276, z: 0.02828279}
   m_Children:
   - {fileID: 4573530256103702}
   - {fileID: 4174721130992064}
@@ -102,8 +102,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1686221038041172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.5, y: 9.4, z: 0.1}
-  m_LocalScale: {x: 44.702717, y: 43.622738, z: 41.75642}
+  m_LocalPosition: {x: 27.3, y: 9.51, z: 0.1}
+  m_LocalScale: {x: 45.92697, y: 43.563927, z: 41.75642}
   m_Children: []
   m_Father: {fileID: 4350442271731476}
   m_RootOrder: 0
@@ -311,4 +311,5 @@ MonoBehaviour:
   player: {fileID: 0}
   myanimator: {fileID: 95077549150459086}
   doorVariable: 0
+  doorHandle: {fileID: 1191488860957146}
   maxAngle: 35
