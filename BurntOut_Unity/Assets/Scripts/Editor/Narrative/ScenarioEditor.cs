@@ -27,12 +27,14 @@ public class ScenarioEditor
 
     public void Edit()
     {
-        EditorStyles.foldout.fontStyle = FontStyle.Bold;
         scenario.name = CtiEditorGUI.TextField(scenario.name, "Name: ", "Name to be displayed in the editor");
-        
-        if (actorsFoldout = CtiEditorGUI.Foldout(actorsFoldout, "Actors"))
+
+        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
+            actorsFoldout = CtiEditorGUI.Foldout(actorsFoldout, "Actors");
+
+        if (actorsFoldout)
         {
-            using (new EditorIndent())
+            using (CtiEditorGUI.Indent())
             {
                 EditorHelper.ListEdit(
                     scenario.Actors.Count,
@@ -62,13 +64,12 @@ public class ScenarioEditor
             }
         }
 
+        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
+            choicesFoldout = CtiEditorGUI.Foldout(choicesFoldout, "Choices");
 
-        EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        choicesFoldout = CtiEditorGUI.Foldout(choicesFoldout, "Choices");
-        EditorStyles.foldout.fontStyle = FontStyle.Normal;
         if (choicesFoldout)
         {
-            using (new EditorIndent())
+            using (CtiEditorGUI.Indent())
             {
                 EditorHelper.FoldoutListEdit(
                     // Add element
@@ -99,7 +100,7 @@ public class ScenarioEditor
                     // Folded out display
                     (int i) =>
                     {
-                        using (new EditorVertical(EditorStyles.helpBox))
+                        using (CtiEditorGUI.Container())
                             choiceEditors[i].Edit();
                     },
                     choiceFoldout,

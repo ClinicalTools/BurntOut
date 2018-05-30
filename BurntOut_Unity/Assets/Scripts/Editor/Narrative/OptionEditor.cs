@@ -25,24 +25,22 @@ public class OptionEditor
 
         option.text = CtiEditorGUI.TextField(option.text, "Text: ", "Text to be displayed in game");
 
-        EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        eventsFoldout = CtiEditorGUI.Foldout(eventsFoldout, "Events");
-        EditorStyles.foldout.fontStyle = FontStyle.Normal;
+        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
+            eventsFoldout = CtiEditorGUI.Foldout(eventsFoldout, "Events");
 
         if (eventsFoldout)
-            using (new EditorIndent())
-                using (new EditorVertical())
-                    tasksEditor.Edit();
+            using (CtiEditorGUI.Indent())
+                tasksEditor.Edit();
 
-        var lastColor = GUI.contentColor;
+        Color color = new Color();
         if (option.result == OptionResults.CONTINUE)
-            GUI.contentColor = EditorHelper.ContinueColor;
+            color = EditorHelper.ContinueColor;
         else if (option.result == OptionResults.TRY_AGAIN)
-            GUI.contentColor = EditorHelper.TryAgainColor;
+            color = EditorHelper.TryAgainColor;
         else if (option.result == OptionResults.END)
-            GUI.contentColor = EditorHelper.EndColor;
-        option.result = (OptionResults)CtiEditorGUI.EnumPopup(option.result, "Result: ");
-        GUI.contentColor = lastColor;
+            color = EditorHelper.EndColor;
+        using (CtiEditorGUI.Color(color))
+            option.result = (OptionResults)CtiEditorGUI.EnumPopup(option.result, "Result: ");
 
         CtiEditorGUI.LabelField("Feedback:");
         option.feedback = CtiEditorGUI.TextArea(option.feedback, ref feedbackWidth);

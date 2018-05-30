@@ -1,7 +1,6 @@
 ﻿using CtiEditor;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
 /// <summary>
@@ -16,7 +15,7 @@ public class ChoiceEditor
     private readonly TasksEditor tasksEditor;
 
     private readonly Scenario scenario;
-    private readonly Choice choice;    
+    private readonly Choice choice;
 
     public ChoiceEditor(Choice choice, Scenario scenario)
     {
@@ -36,23 +35,22 @@ public class ChoiceEditor
     {
         choice.name = CtiEditorGUI.TextField(choice.name, "Name: ", "Name to be displayed in the editor");
 
-        EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        eventsFoldout = CtiEditorGUI.Foldout(eventsFoldout, "Events");
-        EditorStyles.foldout.fontStyle = FontStyle.Normal;
+        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
+            eventsFoldout = CtiEditorGUI.Foldout(eventsFoldout, "Events");
 
         if (eventsFoldout)
-            using (new EditorIndent())
-                using (new EditorVertical())
-                    tasksEditor.Edit();
+            using (CtiEditorGUI.Indent())
+            using (CtiEditorGUI.Container())
+                tasksEditor.Edit();
 
         choice.text = CtiEditorGUI.TextField(choice.text, "Text: ", "Text to be displayed in game");
 
-        EditorStyles.foldout.fontStyle = FontStyle.Bold;
-        optionsFoldout = CtiEditorGUI.Foldout(optionsFoldout, "Options");
-        EditorStyles.foldout.fontStyle = FontStyle.Normal;
+        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
+            optionsFoldout = CtiEditorGUI.Foldout(optionsFoldout, "Options");
+
         if (optionsFoldout)
         {
-            using (new EditorIndent())
+            using (CtiEditorGUI.Indent())
             {
                 EditorHelper.FoldoutListEdit(
                     // Add element
@@ -83,14 +81,14 @@ public class ChoiceEditor
                     // Folded out display
                     (int i) =>
                     {
-                        using (new EditorVertical(EditorStyles.helpBox))
+                        using (CtiEditorGUI.Container())
                             optionEditors[i].Edit();
                     },
                     optionFoldout,
                     // Foldout title
                     (int i) => { return ("Option " + (i + 1) + " - " + choice.Options[i].name); },
                     // Foldout color
-                    (int i) => 
+                    (int i) =>
                     {
                         if (choice.Options[i].result == OptionResults.CONTINUE)
                             return EditorHelper.ContinueColor;

@@ -40,10 +40,8 @@ public static class EditorHelper
                 {
                     var lastColor = GUI.contentColor;
 
-                    GUI.contentColor = color(i);
-                    foldouts[i] = CtiEditorGUI.Foldout(foldouts[i], name(i));
-
-                    GUI.contentColor = lastColor;
+                    using (CtiEditorGUI.Color(color(i)))
+                        foldouts[i] = CtiEditorGUI.Foldout(foldouts[i], name(i));
                 }
                 else
                 {
@@ -106,7 +104,7 @@ public static class EditorHelper
             }
 
             if (foldouts != null && foldouts[i])
-                using (new EditorIndent())
+                using (CtiEditorGUI.Indent())
                     display(i);
         }
 
