@@ -10,6 +10,7 @@ public class DoorInteract : MonoBehaviour {
 
     public Text interactPrompt;
     public GameObject player;
+    public PlayerStats stats;
 
     public Animator myanimator;
     public int doorVariable = 0;
@@ -37,7 +38,7 @@ public class DoorInteract : MonoBehaviour {
         }
 
         // if player is around patient, allow player to interact with it
-        if (Input.GetKeyDown(KeyCode.E) && isAroundStation && playerFacing) {
+        if (Input.GetKeyDown(KeyCode.E) && isAroundStation && playerFacing && !stats.LowHealth()) {
             interactPrompt.transform.parent.gameObject.SetActive(false);
 
             // INTERACTION HERE
@@ -75,11 +76,12 @@ public class DoorInteract : MonoBehaviour {
 
         interactPrompt.transform.parent.gameObject.SetActive(true);
 
-        if (doorVariable == 0 || doorVariable == -1)
-        interactPrompt.text = "Press 'e' to open door";
-
-        if (doorVariable == 1)
-        interactPrompt.text = "Press 'e' to close door";
+        if (stats.LowHealth())
+            interactPrompt.text = "Energy too low to open door";
+        else if (doorVariable == 0 || doorVariable == -1)
+            interactPrompt.text = "Press 'e' to open door";
+        else if (doorVariable == 1)
+            interactPrompt.text = "Press 'e' to close door";
     }
 
     private void LookAway() {
