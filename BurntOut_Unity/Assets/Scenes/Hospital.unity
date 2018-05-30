@@ -11245,8 +11245,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 879129292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.85, y: -0.74, z: -1.696}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.85, y: -0.74, z: -2.14}
+  m_LocalScale: {x: 2.1386867, y: 3.7705872, z: 1}
   m_Children: []
   m_Father: {fileID: 1697386424}
   m_RootOrder: 1
@@ -11265,6 +11265,10 @@ MonoBehaviour:
   gm: {fileID: 1127561627}
   Canvas_Win: {fileID: 989074762}
   player: {fileID: 927959813}
+  isAroundStation: 0
+  playerFacing: 0
+  interactPrompt: {fileID: 826894553}
+  maxAngle: 35
 --- !u!65 &879129295
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11275,8 +11279,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 2.3184423}
+  m_Center: {x: 0, y: 0, z: 0.6592212}
 --- !u!23 &879129296
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18903,7 +18907,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1158962026}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.271, y: -0.4456526, z: -1.859}
+  m_LocalPosition: {x: 1.737, y: -0.4456526, z: -1.859}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1697386424}
