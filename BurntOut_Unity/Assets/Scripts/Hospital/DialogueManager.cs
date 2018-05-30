@@ -124,7 +124,7 @@ public class DialogueManager : MonoBehaviour
             // If the player lost the room because of a bad option
             else if (lost)
             {
-                gameManager.RoomLost();
+                //gameManager.RoomLost();
                 gameManager.ExitRoom();
             }
             // Otherwise continue with the narrative
@@ -164,7 +164,7 @@ public class DialogueManager : MonoBehaviour
                         ShowFeedback(option.feedback);
                         break;
                     case OptionResults.END:
-                        lost = true;
+                        //lost = true;
                         ShowFeedback(option.feedback);
                         break;
                     case OptionResults.TRY_AGAIN:

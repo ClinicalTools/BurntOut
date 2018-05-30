@@ -11,6 +11,10 @@ public class DoorInteract : MonoBehaviour {
     public Text interactPrompt;
     public GameObject player;
 
+    public Animator myanimator;
+    public int doorVariable = 0;
+    public GameObject doorHandle;
+
     public float maxAngle = 35;
 
     void Update() {
@@ -38,15 +42,44 @@ public class DoorInteract : MonoBehaviour {
 
             // INTERACTION HERE
 
-            player.GetComponentInChildren<PlayerRotateToTarget>().target = gameObject;
-            player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
+            // if open door the first time...
+            if (doorVariable == 0) {
+                myanimator.SetInteger("dooranim", 1);
+                doorVariable = 1;
+            }
 
+            else if (doorVariable == 1) {
+                myanimator.SetInteger("dooranim", -1);
+                doorVariable = -1;
+            }
+
+            else if (doorVariable == -1) {
+                myanimator.SetInteger("dooranim", 1);
+                doorVariable = 1;
+            }
+
+            StartCoroutine(Rotate());
         }
     }
 
+    public IEnumerator Rotate() {
+
+        player.GetComponentInChildren<PlayerRotateToTarget>().target = doorHandle;
+        player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
+        yield return new WaitForSeconds(1);
+        player.GetComponentInChildren<PlayerRotateToTarget>().enabled = false;
+
+    }
+
     private void Look() {
+
         interactPrompt.transform.parent.gameObject.SetActive(true);
+
+        if (doorVariable == 0 || doorVariable == -1)
         interactPrompt.text = "Press 'e' to open door";
+
+        if (doorVariable == 1)
+        interactPrompt.text = "Press 'e' to close door";
     }
 
     private void LookAway() {
