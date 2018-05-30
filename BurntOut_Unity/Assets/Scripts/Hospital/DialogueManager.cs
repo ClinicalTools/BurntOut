@@ -62,6 +62,7 @@ public class DialogueManager : MonoBehaviour
         this.scenario = scenario;
         choiceNum = -1;
         optionSelected = -1;
+        lost = false;
 
         tasks = new Queue<Task>(scenario.Choices[0].Events);
 
