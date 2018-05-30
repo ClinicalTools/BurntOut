@@ -11,7 +11,7 @@ public class UI_HealthAlert : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (playerstats.CurrentHealth < 40) {
+        if (playerstats.CurrentHealth <= 40) {
             mytext.SetActive(true);
         } else
             mytext.SetActive(false);
