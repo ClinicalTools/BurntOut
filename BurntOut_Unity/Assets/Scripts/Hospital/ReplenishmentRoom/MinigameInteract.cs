@@ -83,9 +83,8 @@ public class MinigameInteract : MonoBehaviour
         {
             isAroundStation = false;
             playerFacing = false;
+            LookAway();
         }
-
-        LookAway();
     }
 }
 

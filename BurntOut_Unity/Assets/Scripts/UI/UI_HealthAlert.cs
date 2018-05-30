@@ -1,21 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-public class UI_HealthAlert : MonoBehaviour {
-
+public class UI_HealthAlert : MonoBehaviour
+{
     public PlayerStats playerstats;
     public GameObject mytext;
 
-	// Update is called once per frame
-	void Update () {
-
-        if (playerstats.CurrentHealth <= 40) {
+    // Update is called once per frame
+    void Update()
+    {
+        if (playerstats.LowHealth())
             mytext.SetActive(true);
-        } else
+        else
             mytext.SetActive(false);
-
-
     }
 }

@@ -27,6 +27,11 @@ public class PlayerStats : MonoBehaviour {
         }
     }
 
+    public bool LowHealth()
+    {
+        return currentHealth <= 40;
+    }
+
     private void Start()
     {
         currentHealth = maxHealth;

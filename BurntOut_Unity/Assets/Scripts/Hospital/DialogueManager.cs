@@ -135,6 +135,9 @@ public class DialogueManager : MonoBehaviour
                 dialogueText.transform.parent.gameObject.SetActive(true);
 
                 ProgressNarrative();
+
+                if (stats.LowHealth())
+                    gameManager.ExitRoom();
             }
         }
         // If no more tasks, show the options or process the end of the displayed option
