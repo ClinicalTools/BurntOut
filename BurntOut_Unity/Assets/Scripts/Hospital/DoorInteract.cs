@@ -97,8 +97,7 @@ public class DoorInteract : MonoBehaviour {
         if (col.gameObject.name == "Player") {
             isAroundStation = false;
             playerFacing = false;
+            LookAway();
         }
-
-        LookAway();
     }
 }

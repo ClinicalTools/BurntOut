@@ -17,11 +17,13 @@ public class InteractPatient : MonoBehaviour
     public DialogueManager dialogueManager;
     public PlayerRotateToTarget playerRotateToTarget;
 
+    public PlayerStats stats;
+
     public float maxAngle = 35;
 
     void Update()
     {
-        if (completed || lost)
+        if (completed || lost || stats.LowHealth())
             return;
 
         if (isAroundPatient)
@@ -98,8 +100,10 @@ public class InteractPatient : MonoBehaviour
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.name == "Player")
+        {
             isAroundPatient = false;
-
-        LookAway();
+            playerFacing = false;
+            LookAway();
+        }
     }
 }
