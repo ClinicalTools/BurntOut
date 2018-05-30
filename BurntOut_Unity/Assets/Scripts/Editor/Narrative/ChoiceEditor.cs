@@ -40,7 +40,6 @@ public class ChoiceEditor
 
         if (eventsFoldout)
             using (CtiEditorGUI.Indent())
-            using (CtiEditorGUI.Container())
                 tasksEditor.Edit();
 
         choice.text = CtiEditorGUI.TextField(choice.text, "Text: ", "Text to be displayed in game");

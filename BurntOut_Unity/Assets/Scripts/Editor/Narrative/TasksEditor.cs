@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using CtiEditor;
+using System.Collections;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -52,6 +53,7 @@ public class TasksEditor
     {
         list.elementHeight = EditorStyles.popup.CalcHeight(new GUIContent(" "), 100) + 4;
         list.headerHeight = 4;
-        list.DoLayoutList();
+        using (CtiEditorGUI.Vertical())
+            list.DoLayoutList();
     }
 }
