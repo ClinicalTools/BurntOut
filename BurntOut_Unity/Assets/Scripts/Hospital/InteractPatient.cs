@@ -10,6 +10,9 @@ public class InteractPatient : MonoBehaviour
     public bool isAroundPatient;
     public bool playerFacing;
 
+    //for room detection
+    public bool doorClosedInBounds;
+
     public Text interactPrompt; 
     public GameObject player;
 
@@ -48,7 +51,7 @@ public class InteractPatient : MonoBehaviour
         }
 
         // if player is around patient, allow player to interact with it
-        if (Input.GetKeyDown(KeyCode.E) && isAroundPatient && playerFacing)
+        if (Input.GetKeyDown(KeyCode.E) && isAroundPatient && playerFacing && doorClosedInBounds)
         {
             interactPrompt.transform.parent.gameObject.SetActive(false);
 
@@ -79,7 +82,12 @@ public class InteractPatient : MonoBehaviour
         var scenario = sceneNarrative.GetScenario(GetComponentInParent<Room>().scenarioId);
 
         interactPrompt.transform.parent.gameObject.SetActive(true);
-        interactPrompt.text = "Press 'e' to talk to " + scenario.GetActor(patientId).name;
+
+        if (doorClosedInBounds) { 
+            interactPrompt.text = "Press 'e' to talk to " + scenario.GetActor(patientId).name;
+        } else {
+            interactPrompt.text = "YOU MUST CLOSE DOOR FIRST!";
+        }
     }
 
     private void LookAway()

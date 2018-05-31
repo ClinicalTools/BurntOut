@@ -74,11 +74,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1244429427221450}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.6892893, y: -0.998, z: 6.191868}
-  m_LocalScale: {x: 0.02828003, y: 0.02828, z: 0.02828003}
+  m_LocalPosition: {x: 6.264, y: -1.6, z: 10.427}
+  m_LocalScale: {x: 0.028280044, y: 0.02828, z: 0.028280044}
   m_Children:
-  - {fileID: 4860810753037686}
   - {fileID: 4951927832090524}
+  - {fileID: 4860810753037686}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -93,7 +93,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4415974101539962}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4951927832090524
 Transform:
@@ -106,7 +106,7 @@ Transform:
   m_LocalScale: {x: 45.92705, y: 43.563934, z: 41.756496}
   m_Children: []
   m_Father: {fileID: 4415974101539962}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23251541734245674
 MeshRenderer:
@@ -256,8 +256,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9760323, y: 2.032, z: 1.3729664}
-  m_Center: {x: -0.16384476, y: 0.7823786, z: 0.1273761}
+  m_Size: {x: 1.6885167, y: 2.032, z: 1.3729664}
+  m_Center: {x: 0.1923971, y: 0.78237855, z: 0.1273761}
 --- !u!95 &95002052366811500
 Animator:
   serializedVersion: 3
@@ -309,6 +309,7 @@ MonoBehaviour:
   playerFacing: 0
   interactPrompt: {fileID: 0}
   player: {fileID: 0}
+  stats: {fileID: 0}
   myanimator: {fileID: 95331964056182448}
   doorVariable: 0
   doorHandle: {fileID: 1177923629769318}

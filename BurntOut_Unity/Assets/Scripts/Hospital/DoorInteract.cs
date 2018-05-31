@@ -16,6 +16,10 @@ public class DoorInteract : MonoBehaviour {
     public int doorVariable = 0;
     public GameObject doorHandle;
 
+    public DetectPlayerInRoom detectPlayerinRoom;
+    public InteractPatient patient;
+    public bool doorlocked;
+
     public float maxAngle = 35;
 
     void Update() {
@@ -49,14 +53,30 @@ public class DoorInteract : MonoBehaviour {
                 doorVariable = 1;
             }
 
+            // if open close
             else if (doorVariable == 1) {
                 myanimator.SetInteger("dooranim", -1);
                 doorVariable = -1;
+
+                // let patient know that you can begin
+                if (detectPlayerinRoom.isPlayerInRoom) {
+                    patient.doorClosedInBounds = true;
+
+                    // lock room
+                    doorlocked = true;
+                }
+                
+
+
             }
 
+            // if close open
             else if (doorVariable == -1) {
-                myanimator.SetInteger("dooranim", 1);
-                doorVariable = 1;
+
+                if (!doorlocked) {
+                    myanimator.SetInteger("dooranim", 1);
+                    doorVariable = 1;
+                }
             }
 
             StartCoroutine(Rotate());
@@ -78,9 +98,14 @@ public class DoorInteract : MonoBehaviour {
 
         if (stats.LowHealth())
             interactPrompt.text = "Energy too low to open door";
-        else if (doorVariable == 0 || doorVariable == -1)
-            interactPrompt.text = "Press 'e' to open door";
-        else if (doorVariable == 1)
+        else if (doorVariable == 0 || doorVariable == -1) {
+
+            if (doorlocked)
+                interactPrompt.text = "DOOR LOCKED!";
+            else
+                interactPrompt.text = "Press 'e' to open door";
+
+        } else if (doorVariable == 1)
             interactPrompt.text = "Press 'e' to close door";
     }
 

@@ -87,8 +87,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1415164361219466}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.3667107, y: -1.6, z: 10.506132}
-  m_LocalScale: {x: 0.028282804, y: 0.02828276, z: 0.028282804}
+  m_LocalPosition: {x: 1.3667107, y: -1.6, z: 0.81513214}
+  m_LocalScale: {x: 0.028280044, y: 0.02828, z: 0.028280044}
   m_Children:
   - {fileID: 4573530256103702}
   - {fileID: 4174721130992064}
@@ -244,8 +244,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9760323, y: 2.032, z: 1.3729664}
-  m_Center: {x: -0.16384476, y: 0.7823786, z: 0.1273761}
+  m_Size: {x: 1.664181, y: 2.032, z: 1.3729664}
+  m_Center: {x: 0.18022965, y: 0.7823787, z: 0.12737606}
 --- !u!65 &65693813132469616
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -309,6 +309,7 @@ MonoBehaviour:
   playerFacing: 0
   interactPrompt: {fileID: 0}
   player: {fileID: 0}
+  stats: {fileID: 0}
   myanimator: {fileID: 95077549150459086}
   doorVariable: 0
   doorHandle: {fileID: 1191488860957146}
