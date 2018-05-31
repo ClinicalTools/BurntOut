@@ -59,6 +59,10 @@ public class DialogueManager : MonoBehaviour
     // Resets the dialogue manager to be used with a passed scenario
     public void StartScenario(Scenario scenario)
     {
+        // If this was already the selected scenario, don't reset variables
+        if (this.scenario == scenario)
+            return;
+
         this.scenario = scenario;
         choiceNum = -1;
         optionSelected = -1;

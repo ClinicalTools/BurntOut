@@ -33,7 +33,10 @@ namespace CtiEditor
             get; set;
         }
         private static Rect horizontalRect;
-
+        internal static bool InReorderableList
+        {
+            get; set;
+        }
         /// <summary>
         /// Holds width data for a piece of the editor. 
         /// You don't use these directly, but construct them with the Width, MinWidth, and MaxWidth 
