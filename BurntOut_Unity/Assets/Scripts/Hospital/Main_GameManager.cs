@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.PostProcessing;
+using System.Collections;
 
 public class Main_GameManager : MonoBehaviour
 {
@@ -170,10 +171,26 @@ public class Main_GameManager : MonoBehaviour
     // l l | l -
     public void Lose()
     {
-        Canvas_Loss.SetActive(true);
-        Debug.Log("loss");
+        StartCoroutine(LoseWithDelay());
     }
 
+    public void returnToMainMenu() {
+        Application.LoadLevel("MainMenu");
+    }
+
+    public IEnumerator LoseWithDelay() {
+
+        yield return new WaitForSeconds(.05f);
+        Canvas_Loss.SetActive(true);
+        Debug.Log("loss");
+        ScreenBlur();
+        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+    }
+    
+    
 
 
 }

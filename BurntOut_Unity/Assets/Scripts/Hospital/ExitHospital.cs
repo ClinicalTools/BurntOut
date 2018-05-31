@@ -12,6 +12,7 @@ public class ExitHospital : MonoBehaviour {
 
     public bool isAroundStation;
     public bool playerFacing;
+    public GameObject lookHere;
 
     public Text interactPrompt;
 
@@ -46,7 +47,7 @@ public class ExitHospital : MonoBehaviour {
             Canvas_Win.SetActive(true);
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
 
-            player.GetComponentInChildren<PlayerRotateToTarget>().target = gameObject;
+            player.GetComponentInChildren<PlayerRotateToTarget>().target = lookHere;
             player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
 
         }
