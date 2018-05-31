@@ -42,6 +42,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        // Custom method to set rotation
+        public void ResetRotation()
+        {
+            m_MouseLook.Init(transform, m_Camera.transform);
+        }
+
         // Use this for initialization
         private void Start()
         {

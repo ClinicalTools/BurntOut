@@ -3,16 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class ReplenishStation : MonoBehaviour
+public class ReplenishTeleport : MonoBehaviour
 {
     public bool isAroundStation;
     public bool playerFacing;
 
     public Text interactPrompt;
     public FirstPersonController fpc;
-    
-    public Transform replenishRoomSpawn;
-    public ReplenishTeleport replenishTeleport;
+
+    public Vector3 teleportPos;
+    public Quaternion teleportRot;
 
     public float maxAngle = 35;
 
@@ -55,7 +55,7 @@ public class ReplenishStation : MonoBehaviour
     private void Look()
     {
         interactPrompt.transform.parent.gameObject.SetActive(true);
-        interactPrompt.text = "Press 'e' to go to the replenishment room";
+        interactPrompt.text = "Press 'e' to return to the patient room";
     }
 
     private void LookAway()
@@ -87,13 +87,11 @@ public class ReplenishStation : MonoBehaviour
         fpc.enabled = false;
         myAnimator.SetBool("fade", true);
         yield return new WaitForSeconds(0.5f);
-        replenishTeleport.gameObject.SetActive(true);
-        replenishTeleport.teleportPos = transform.position;
-        replenishTeleport.teleportRot = transform.rotation;
-        fpc.transform.SetPositionAndRotation(replenishRoomSpawn.transform.position, replenishRoomSpawn.transform.rotation);
+        fpc.transform.SetPositionAndRotation(teleportPos, teleportRot);
         fpc.ResetRotation();
         yield return new WaitForSeconds(0.5f);
         myAnimator.SetBool("fade", false);
         fpc.enabled = true;
+        gameObject.SetActive(false);
     }
 }

@@ -11,9 +11,11 @@ namespace CtiEditor.Disposable
     {
         private readonly int foldoutFontSize, labelFontSize, numberFieldFontSize, objectFieldFontSize,
             popupFontSize, textAreaFontSize, textFieldFontSize, toggleFontSize;
-
+        private readonly int oldFontSize;
         public FontSize(int fontSize)
         {
+            oldFontSize = CtiEditorGUI.Size;
+            CtiEditorGUI.Size = fontSize;
             foldoutFontSize = EditorStyles.foldout.fontSize;
             labelFontSize = EditorStyles.label.fontSize;
             numberFieldFontSize = EditorStyles.numberField.fontSize;
@@ -35,6 +37,7 @@ namespace CtiEditor.Disposable
 
         public void Dispose()
         {
+            CtiEditorGUI.Size = oldFontSize;
             EditorStyles.foldout.fontSize = foldoutFontSize;
             EditorStyles.label.fontSize = labelFontSize;
             EditorStyles.numberField.fontSize = numberFieldFontSize;

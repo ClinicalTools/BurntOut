@@ -24,7 +24,11 @@ namespace CtiEditor
     /// </remarks>
     public static class CtiEditorGUI
     {
-        public static int InHorizontal
+        public static int Size
+        {
+            get; internal set;
+        }
+        internal static int InHorizontal
         {
             get; set;
         }
