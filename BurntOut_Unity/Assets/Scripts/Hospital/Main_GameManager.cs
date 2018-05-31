@@ -153,6 +153,7 @@ public class Main_GameManager : MonoBehaviour
         if (roomsWon >= 3)
             hospitalwin = true;
 
+        currentRoom.door.doorlocked = false;
         currentRoom.completed = true;
     }
     public void RoomLost()

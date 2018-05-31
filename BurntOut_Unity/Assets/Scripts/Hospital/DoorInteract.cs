@@ -62,7 +62,8 @@ public class DoorInteract : MonoBehaviour {
                 if (detectPlayerinRoom.isPlayerInRoom) {
                     patient.doorClosedInBounds = true;
 
-                    // lock room
+                    // lock room if room not completed
+                    if (!patient.completed)
                     doorlocked = true;
                 }
                 

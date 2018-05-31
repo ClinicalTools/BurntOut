@@ -19,6 +19,7 @@ public class InteractPatient : MonoBehaviour
     public Main_GameManager gameManager;
     public DialogueManager dialogueManager;
     public PlayerRotateToTarget playerRotateToTarget;
+    public DoorInteract door;
 
     public PlayerStats stats;
 

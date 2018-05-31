@@ -1913,6 +1913,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 150996114}
+--- !u!114 &151931028 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114197618774563088, guid: ea26f8e90f8491f449609c6e30495fa6,
+    type: 2}
+  m_PrefabInternal: {fileID: 277921675}
+  m_Script: {fileID: 11500000, guid: 15f51b0933bbbb240b84ee2104f4c098, type: 3}
 --- !u!1001 &159817061
 Prefab:
   m_ObjectHideFlags: 0
@@ -28788,6 +28794,11 @@ Prefab:
       propertyPath: stats
       value: 
       objectReference: {fileID: 927959815}
+    - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
+        type: 2}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 151931028}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e48ceb62bba73140a16ac0fade4bb5b, type: 2}
   m_IsPrefabParent: 0
