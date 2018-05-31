@@ -34,7 +34,6 @@ public class Main_GameManager : MonoBehaviour
     public PostProcessingBehaviour ppScene;
 
     DepthOfFieldModel.Settings dofSettings;
-
     public DialogueManager dialogueManager;
 
     public bool gameover;
@@ -44,7 +43,7 @@ public class Main_GameManager : MonoBehaviour
 
     void Start()
     {
-        // hide unnessesary UI
+        // hide unnessesary UI here
         UI_ChoiceDia.SetActive(false);
 
         currentRoom = null;
@@ -141,9 +140,7 @@ public class Main_GameManager : MonoBehaviour
         // freeze player controller
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
-        // disable Choice UI
         UI_ChoiceDia.SetActive(false);
-
         playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
 
     }
@@ -163,6 +160,7 @@ public class Main_GameManager : MonoBehaviour
         if (roomsLost >= 3)
             Lose();
 
+        currentRoom.door.doorlocked = false;
         currentRoom.lost = true;
     }
 

@@ -53,7 +53,7 @@ public class DoorInteract : MonoBehaviour {
                 doorVariable = 1;
             }
 
-            // if open close
+            // if open, close
             else if (doorVariable == 1) {
                 myanimator.SetInteger("dooranim", -1);
                 doorVariable = -1;
@@ -71,7 +71,7 @@ public class DoorInteract : MonoBehaviour {
 
             }
 
-            // if close open
+            // if close, open
             else if (doorVariable == -1) {
 
                 if (!doorlocked) {
@@ -84,6 +84,7 @@ public class DoorInteract : MonoBehaviour {
         }
     }
 
+    // rotate playercamera to look at door handle
     public IEnumerator Rotate() {
 
         player.GetComponentInChildren<PlayerRotateToTarget>().target = doorHandle;
@@ -93,6 +94,7 @@ public class DoorInteract : MonoBehaviour {
 
     }
 
+    // change prompt 
     private void Look() {
 
         interactPrompt.transform.parent.gameObject.SetActive(true);

@@ -77,6 +77,7 @@ public class InteractPatient : MonoBehaviour
         }
     }
     
+    // change prompt
     private void Look()
     {
         var sceneNarrative = GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().sceneNarrative;
