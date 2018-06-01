@@ -28,7 +28,27 @@ public class NarrativeEditorWindow : EditorWindow
         window.Show();
     }
 
-    void OnGUI()
+    NarrativeManager sceneManager;
+    // Initialize the value before editor runs
+    private void Awake()
+    {
+        GameObject sceneManagerObj = GameObject.Find(gameObjectName);
+
+        // Initalize if null
+        if (sceneManagerObj == null)
+        {
+            sceneManagerObj = new GameObject(gameObjectName);
+            sceneManagerObj.AddComponent<NarrativeManager>();
+        }
+        sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
+        if (sceneManager == null)
+        {
+            sceneManagerObj.AddComponent<NarrativeManager>();
+            sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
+        }
+    }
+
+    void OnInspectorUpdate()
     {
         // If I don't reload this often, the editor will become disconnected from the object after a test play.
         GameObject sceneManagerObj = GameObject.Find(gameObjectName);
@@ -39,12 +59,16 @@ public class NarrativeEditorWindow : EditorWindow
             sceneManagerObj = new GameObject(gameObjectName);
             sceneManagerObj.AddComponent<NarrativeManager>();
         }
-        NarrativeManager sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
+        sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
         if (sceneManager == null)
         {
             sceneManagerObj.AddComponent<NarrativeManager>();
             sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
         }
+    }
+
+    void OnGUI()
+    {
         SceneNarrative sceneNarrative = sceneManager.sceneNarrative;
 
         // Allows the scene to save changes and 'undo' to be possible
