@@ -29,26 +29,7 @@ public class NarrativeEditorWindow : EditorWindow
     }
 
     NarrativeManager sceneManager;
-    // Initialize the value before editor runs
-    private void Awake()
-    {
-        GameObject sceneManagerObj = GameObject.Find(gameObjectName);
-
-        // Initalize if null
-        if (sceneManagerObj == null)
-        {
-            sceneManagerObj = new GameObject(gameObjectName);
-            sceneManagerObj.AddComponent<NarrativeManager>();
-        }
-        sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
-        if (sceneManager == null)
-        {
-            sceneManagerObj.AddComponent<NarrativeManager>();
-            sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
-        }
-    }
-
-    void OnInspectorUpdate()
+    private void ResetSceneManager()
     {
         // If I don't reload this often, the editor will become disconnected from the object after a test play.
         GameObject sceneManagerObj = GameObject.Find(gameObjectName);
@@ -67,8 +48,17 @@ public class NarrativeEditorWindow : EditorWindow
         }
     }
 
+    void OnInspectorUpdate()
+    {
+        ResetSceneManager();
+    }
+
+
     void OnGUI()
     {
+        if (sceneManager == null)
+            ResetSceneManager();
+
         SceneNarrative sceneNarrative = sceneManager.sceneNarrative;
 
         // Allows the scene to save changes and 'undo' to be possible
@@ -109,7 +99,7 @@ public class NarrativeEditorWindow : EditorWindow
 
             GUILayout.FlexibleSpace();
 
-            scale = Mathf.Floor(EditorGUILayout.Slider(scale, 8, 20, GUILayout.MaxWidth(150)));
+            scale = Mathf.Floor(EditorGUILayout.Slider(scale, 10, 20, GUILayout.MaxWidth(150)));
 
             if (GUILayout.Button("+", EditorStyles.toolbarButton))
             {
