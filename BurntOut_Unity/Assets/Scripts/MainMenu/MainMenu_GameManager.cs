@@ -5,6 +5,6 @@ public class MainMenu_GameManager : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("Hospital");
+        SceneManager.LoadScene("Central");
     }
 }
