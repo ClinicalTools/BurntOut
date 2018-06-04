@@ -3243,6 +3243,7 @@ MonoBehaviour:
   interactPrompt: {fileID: 826894553}
   maxAngle: 35
   globalstats: {fileID: 2109364711}
+  screenfade: {fileID: 145111414}
 --- !u!65 &251688280
 BoxCollider:
   m_ObjectHideFlags: 0

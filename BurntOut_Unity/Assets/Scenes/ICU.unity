@@ -2803,6 +2803,7 @@ MonoBehaviour:
   playerFacing: 0
   interactPrompt: {fileID: 826894553}
   player: {fileID: 927959813}
+  screenfade: {fileID: 145111414}
   maxAngle: 35
 --- !u!1001 &1296200905
 Prefab:
@@ -3461,7 +3462,7 @@ Transform:
   - {fileID: 734705179}
   - {fileID: 1524815168}
   m_Father: {fileID: 2013814581}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1702559753
 Prefab:
@@ -4360,8 +4361,8 @@ Transform:
   m_LocalPosition: {x: 1.7863159, y: 1.6125689, z: -1.3315372}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1906885094}
   - {fileID: 1689845783}
+  - {fileID: 1906885094}
   - {fileID: 847666218}
   - {fileID: 2056851974}
   - {fileID: 2122110457}

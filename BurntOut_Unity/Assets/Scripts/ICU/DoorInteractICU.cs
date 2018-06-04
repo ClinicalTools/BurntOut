@@ -10,6 +10,7 @@ public class DoorInteractICU : MonoBehaviour {
 
     public Text interactPrompt;
     public GameObject player;
+    public Animator screenfade;
 
     public float maxAngle = 35;
 
@@ -37,7 +38,7 @@ public class DoorInteractICU : MonoBehaviour {
             interactPrompt.transform.parent.gameObject.SetActive(false);
 
             // INTERACTION HERE
-            Application.LoadLevel("Central");
+            StartCoroutine(Transition());
 
         }
     }
@@ -66,5 +67,14 @@ public class DoorInteractICU : MonoBehaviour {
             playerFacing = false;
             LookAway();
         }
+    }
+
+    public IEnumerator Transition() {
+
+        screenfade.SetBool("fade", true);
+
+        yield return new WaitForSeconds(0.5f);
+        Application.LoadLevel("Central");
+
     }
 }

@@ -19,6 +19,7 @@ public class ExitHospital : MonoBehaviour {
     public float maxAngle = 35;
 
     public GlobalStats globalstats;
+    public Animator screenfade;
 
     private void Start() {
         globalstats = FindObjectOfType<GlobalStats>();
@@ -58,7 +59,7 @@ public class ExitHospital : MonoBehaviour {
             player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
 
             globalstats.isHospitalCompleted = true;
-            Application.LoadLevel("Central");
+            StartCoroutine(Transition());
 
         }
     }
@@ -91,4 +92,11 @@ public class ExitHospital : MonoBehaviour {
         LookAway();
     }
 
+    public IEnumerator Transition() {
+
+        screenfade.SetBool("fade", true);
+
+        yield return new WaitForSeconds(0.5f);
+        Application.LoadLevel("Central");
+    }
 }
