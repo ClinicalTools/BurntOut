@@ -18,6 +18,12 @@ public class ExitHospital : MonoBehaviour {
 
     public float maxAngle = 35;
 
+    public GlobalStats globalstats;
+
+    private void Start() {
+        globalstats = FindObjectOfType<GlobalStats>();
+    }
+
     void Update() {
 
         if (isAroundStation) {
@@ -44,11 +50,15 @@ public class ExitHospital : MonoBehaviour {
             // INTERACTION HERE
             Debug.Log("Game Completed");
             //Time.timeScale = 0;
-            Canvas_Win.SetActive(true);
+            //Canvas_Win.SetActive(true);
+
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
 
             player.GetComponentInChildren<PlayerRotateToTarget>().target = lookHere;
             player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
+
+            globalstats.isHospitalCompleted = true;
+            Application.LoadLevel("Central");
 
         }
     }
