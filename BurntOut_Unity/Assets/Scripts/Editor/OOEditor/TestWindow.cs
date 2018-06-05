@@ -13,6 +13,7 @@ public class TestWindow2 : EditorWindow
     TextField test2Txt;
     Button btnTest;
     Toggle tglTest;
+    ToggleButton tglbtnTest;
     IntSlider isdrTest;
     Foldout fldTest;
     EnumPopup epopTest;
@@ -22,15 +23,15 @@ public class TestWindow2 : EditorWindow
         testLbl = new LabelField("Test1");
         testTxt = new TextField("");
         test2Txt = new TextField("abc", "Test2", "abccc");
-        test2Txt.LabelStyle.FontStyle = FontStyle.Bold;
-        test2Txt.LabelStyle.FontSize = 18;
-        test2Txt.Style.FontSize = 18;
+        //test2Txt.LabelStyle.FontStyle = FontStyle.Bold;
+        //test2Txt.Style.FontSize = 18;
 
         btnTest = new Button("Test3", "ok");
         tglTest = new Toggle("Test4");
         isdrTest = new IntSlider(5, 0, 10);
-        fldTest = new Foldout("Test5:");
-        epopTest = new EnumPopup(Day.Sunday, "Test 6");
+        fldTest = new Foldout("Test5");
+        epopTest = new EnumPopup(Day.Sunday, "Test6");
+        tglbtnTest = new ToggleButton(false, "Test");
     }
 
     // Add menu named "Scene Manager" to the Window menu
@@ -44,13 +45,25 @@ public class TestWindow2 : EditorWindow
 
     void OnGUI()
     {
+        using (new Toolbar())
+        {
+            testLbl.Draw();
+            testTxt.Draw();
+            btnTest.Draw();
+            tglbtnTest.Draw();
+            isdrTest.Draw();
+        }
+
         testLbl.Draw();
+        EditorGUILayout.LabelField("Abc");
         testTxt.Draw();
         btnTest.Draw();
-        test2Txt.Draw();
         fldTest.Draw();
+        test2Txt.Draw();
+        EditorGUILayout.TextField("Test2", "abc");
         tglTest.Draw();
-        isdrTest.Draw();
+        EditorGUILayout.Toggle("Test4", false);
         epopTest.Draw();
+        EditorGUILayout.EnumPopup("Test6", Day.Monday);
     }
 }

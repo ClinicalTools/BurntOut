@@ -8,9 +8,15 @@ namespace OOEditor
     {
         public override Enum Value { get; set; }
 
-        internal override GUIStyle BaseStyle
+        protected override GUIStyle BaseStyle
         {
-            get { return EditorStyles.popup; }
+            get
+            {
+                if (OOEditorManager.InToolbar == 0)
+                    return EditorStyles.popup;
+                else
+                    return EditorStyles.toolbarPopup;
+            }
         }
 
         protected override float AbsoluteMinWidth
@@ -33,7 +39,7 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            Value = EditorGUI.EnumPopup(position, Value, BaseStyle);
+            Value = EditorGUI.EnumPopup(position, Value, GUIStyle);
         }
     }
 }

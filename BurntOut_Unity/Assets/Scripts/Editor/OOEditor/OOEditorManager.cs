@@ -67,7 +67,8 @@ namespace OOEditor
 
             scale = horizontalRect;
 
-            var height = guiElement.BaseStyle.CalcHeight(content, scale.width - 8);
+            GUIStyle style = guiElement.GUIStyle;
+            var height = style.CalcHeight(content, scale.width - 8);
 
             // I have no idea how to get height to work properly, so I just did all 3 of these to be safe.
             options.Add(GUILayout.MinHeight(height));
@@ -75,7 +76,7 @@ namespace OOEditor
             options.Add(GUILayout.Height(height));
 
             Rect position;
-            position = EditorGUILayout.GetControlRect(false, height, guiElement.BaseStyle, options.ToArray());
+            position = EditorGUILayout.GetControlRect(false, height, style, options.ToArray());
             position.height = height;
 
             return position;
@@ -93,47 +94,6 @@ namespace OOEditor
             position.width -= width;
 
             return position;
-        }
-
-        internal static GUIStyle GetLabelStyle(EditorStyle labelStyle)
-        {
-            GUIStyle style = new GUIStyle(EditorStyles.label)
-            {
-                wordWrap = true,
-                fixedHeight = 0
-            };
-
-            ApplyStyle(style, labelStyle);
-            ApplyStyle(style, OverrideLabelStyle);
-            ApplyStyle(style, OverrideTextStyle);
-
-            return style;
-        }
-
-        internal static GUIStyle GetStyle(GUIElement element)
-        {
-            GUIStyle style = new GUIStyle(element.BaseStyle)
-            {
-                wordWrap = true,
-                fixedHeight = 0
-            };
-
-            ApplyStyle(style, element.Style);
-            ApplyStyle(style, OverrideLabelStyle);
-            ApplyStyle(style, OverrideTextStyle);
-
-            return style;
-        }
-
-        private static void ApplyStyle(GUIStyle style, EditorStyle editorStyle)
-        {
-            if (editorStyle == null)
-                return;
-
-            if (editorStyle.FontSize > 0)
-                style.fontSize = editorStyle.FontSize;
-            if (editorStyle.FontStyle != null)
-                style.fontStyle = (FontStyle) editorStyle.FontStyle;
         }
     }
 }

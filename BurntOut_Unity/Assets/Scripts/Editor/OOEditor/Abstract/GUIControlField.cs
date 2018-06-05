@@ -11,22 +11,35 @@ namespace OOEditor
             get { return labelStyle; }
         }
 
+        public virtual GUIStyle GUILabelStyle
+        {
+            get
+            {
+                var guiStyle = new GUIStyle(EditorStyles.label);
+
+                Style.ApplyToStyle(guiStyle);
+                LabelStyle.ApplyToStyle(guiStyle);
+                if (OOEditorManager.OverrideTextStyle != null)
+                    OOEditorManager.OverrideLabelStyle.ApplyToStyle(guiStyle);
+                if (OOEditorManager.OverrideTextStyle != null)
+                    OOEditorManager.OverrideTextStyle.ApplyToStyle(guiStyle);
+
+                return guiStyle;
+            }
+        }
+
         protected abstract float AbsoluteMinWidth { get; }
 
         protected GUIControlField() : base() { }
         protected GUIControlField(string tooltip) : base(tooltip) { }
         protected GUIControlField(string text, string tooltip) : base(text, tooltip) { }
 
-        public override void Draw()
-        {
-            OOEditorManager.DrawGuiElement(this, DisplayLabel, Content);
-        }
-
         // Draws the label portion of the control
-        private void DisplayLabel(Rect position)
+        protected override void PrepareDisplay(Rect position)
         {
             if (Content != null)
             {
+                var color = GUI.contentColor;
                 // Ensure width is at least as big as the larger of the minimum widths
                 float minWidth = Mathf.Max(AbsoluteMinWidth, MinWidth);
 
@@ -34,11 +47,18 @@ namespace OOEditor
                 var width = Mathf.Min(EditorGUIUtility.labelWidth, position.width - minWidth);
                 Rect labelRect = new Rect(position.x, position.y, width, position.height);
 
-                EditorGUI.LabelField(labelRect, Content, OOEditorManager.GetLabelStyle(LabelStyle));
+                if (GUI.contentColor == Color.white && Selected)
+                    GUI.contentColor = new Color(0.425f, .7f, 1.42f);
+
+                GUI.SetNextControlName(Name);
+                EditorGUI.LabelField(labelRect, Content, GUILabelStyle);
                 position.x += width;
                 position.width -= width;
+
+                GUI.contentColor = color;
             }
 
+            GUI.SetNextControlName(Name);
             if (position.width > 0)
                 Display(position);
         }

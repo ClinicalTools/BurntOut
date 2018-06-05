@@ -23,9 +23,15 @@ namespace OOEditor
             get { return 10; }
         }
 
-        internal override GUIStyle BaseStyle
+        protected override GUIStyle BaseStyle
         {
-            get { return EditorStyles.textField; }
+            get
+            {
+                if (OOEditorManager.InToolbar == 0)
+                    return EditorStyles.textField;
+                else
+                    return EditorStyles.toolbarTextField;
+            }
         }
 
         public TextField(string value) : base()
@@ -43,7 +49,7 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            Value = EditorGUI.TextField(position, Value, BaseStyle);
+            Value = EditorGUI.TextField(position, Value, GUIStyle);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace OOEditor
     {
         public override bool Value { get; set; }
 
-        internal override GUIStyle BaseStyle
+        protected override GUIStyle BaseStyle
         {
             get { return EditorStyles.foldout; }
         }
@@ -30,7 +30,7 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            Value = EditorGUI.Foldout(position, Value, Content, BaseStyle);
+            Value = EditorGUI.Foldout(position, Value, Content, GUIStyle);
         }
     }
 }

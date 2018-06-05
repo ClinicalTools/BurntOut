@@ -9,7 +9,7 @@ namespace OOEditor
         public int Min { get; set; }
         public int Max { get; set; }
 
-        internal override GUIStyle BaseStyle
+        protected override GUIStyle BaseStyle
         {
             get { return EditorStyles.numberField; }
         }

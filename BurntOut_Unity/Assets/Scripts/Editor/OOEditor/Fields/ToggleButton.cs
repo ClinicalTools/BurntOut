@@ -7,9 +7,15 @@ namespace OOEditor
     {
         public override bool Value { get; set; }
 
-        internal override GUIStyle BaseStyle
+        protected override GUIStyle BaseStyle
         {
-            get { return EditorStyles.miniButton; }
+            get
+            {
+                if (OOEditorManager.InToolbar == 0)
+                    return EditorStyles.miniButton;
+                else
+                    return EditorStyles.toolbarButton;
+            }
         }
 
         public ToggleButton(bool value) : base()
@@ -27,7 +33,7 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            Value = GUI.Toggle(position, Value, Content, BaseStyle);
+            Value = GUI.Toggle(position, Value, Content, GUIStyle);
         }
     }
 }

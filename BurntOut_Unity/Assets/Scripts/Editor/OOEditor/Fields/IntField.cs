@@ -7,9 +7,15 @@ namespace OOEditor
     {
         public override int Value { get; set; }
 
-        internal override GUIStyle BaseStyle
+        protected override GUIStyle BaseStyle
         {
-            get { return EditorStyles.numberField; }
+            get
+            {
+                if (OOEditorManager.InToolbar == 0)
+                    return EditorStyles.numberField;
+                else
+                    return EditorStyles.toolbarTextField;
+            }
         }
         protected override float AbsoluteMinWidth
         {
@@ -31,7 +37,7 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            Value = EditorGUI.IntField(position, Value, BaseStyle);
+            Value = EditorGUI.IntField(position, Value, GUIStyle);
         }
     }
 }

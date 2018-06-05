@@ -5,7 +5,7 @@ namespace OOEditor
 {
     public class LabelField : GUIElement
     {
-        internal override GUIStyle BaseStyle
+        protected override GUIStyle BaseStyle
         {
             get { return EditorStyles.label; }
         }
@@ -25,7 +25,7 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            EditorGUI.LabelField(position, Content, BaseStyle);
+            EditorGUI.LabelField(position, Content, GUIStyle);
         }
     }
 }
