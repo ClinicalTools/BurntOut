@@ -15,8 +15,10 @@ public class TestWindow2 : EditorWindow
     Toggle tglTest;
     ToggleButton tglbtnTest;
     IntSlider isdrTest;
+    FloatSlider fsdrTest;
     Foldout fldTest;
     EnumPopup epopTest;
+    IntField intfieldTest;
 
     public void OnEnable()
     {
@@ -29,9 +31,11 @@ public class TestWindow2 : EditorWindow
         btnTest = new Button("Test3", "ok");
         tglTest = new Toggle("Test4");
         isdrTest = new IntSlider(5, 0, 10);
+        fsdrTest = new FloatSlider(5, 0, 10);
         fldTest = new Foldout("Test5");
         epopTest = new EnumPopup(Day.Sunday, "Test6");
         tglbtnTest = new ToggleButton(false, "Test");
+        intfieldTest = new IntField(0, "Test8");
     }
 
     // Add menu named "Scene Manager" to the Window menu
@@ -43,6 +47,7 @@ public class TestWindow2 : EditorWindow
         window.Show();
     }
 
+    int val;
     void OnGUI()
     {
         using (new Toolbar())
@@ -51,10 +56,15 @@ public class TestWindow2 : EditorWindow
             testTxt.Draw();
             btnTest.Draw();
             tglbtnTest.Draw();
-            isdrTest.Draw();
+            //isdrTest.Draw();
         }
 
+        intfieldTest.Draw();
+        fsdrTest.Draw();
         testLbl.Draw();
+        isdrTest.Draw();
+        val = EditorGUILayout.IntSlider(val, 0, 10);
+        EditorGUILayout.IntSlider(6, 0, 10);
         EditorGUILayout.LabelField("Abc");
         testTxt.Draw();
         btnTest.Draw();

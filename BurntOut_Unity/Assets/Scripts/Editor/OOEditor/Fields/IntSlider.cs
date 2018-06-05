@@ -40,7 +40,39 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            Value = EditorGUI.IntSlider(position, Value, Min, Max);
+            Rect fieldPos = new Rect(position);
+            if (fieldPos.width > 50)
+            {
+                fieldPos.x += fieldPos.width - 50;
+                fieldPos.width = 50;
+            }
+
+            Value = EditorGUI.IntField(fieldPos, Value, GUIStyle);
+
+            position.width -= 55;
+            if (position.width <= 0)
+                return;
+
+            if (position.Contains(Event.current.mousePosition))
+                GUI.FocusControl(Name);
+
+            EditorGUIUtility.AddCursorRect(position, MouseCursor.SlideArrow);
+
+            if (position.width > 0)
+            {
+                GUIStyle style = new GUIStyle(GUI.skin.horizontalSliderThumb);
+                if (Selected)
+                {
+                    style.normal = style.focused;
+                    style.hover = style.focused;
+                    style.active = style.focused;
+                }
+
+                Value = Mathf.RoundToInt(GUI.HorizontalSlider(position, Value, Min, Max, GUI.skin.horizontalSlider, style));
+            }
+
+
+            //Value = EditorGUI.IntSlider(position, Value, Min, Max);
         }
     }
 }
