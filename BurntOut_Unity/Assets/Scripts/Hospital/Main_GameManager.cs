@@ -41,6 +41,14 @@ public class Main_GameManager : MonoBehaviour
 
     public bool hospitalwin;
 
+    public GlobalStats globalStats;
+
+    private void Awake() {
+        // LOAD DATA HERE
+        globalStats = GameObject.FindObjectOfType<GlobalStats>();
+        playerStats.CurrentHealth = globalStats.currentHealth;
+    }
+
     void Start()
     {
         // hide unnessesary UI here
@@ -60,6 +68,8 @@ public class Main_GameManager : MonoBehaviour
         ScreenUnblur();
 
         hospitalwin = false;
+
+
     }
 
     void Update()
@@ -90,7 +100,9 @@ public class Main_GameManager : MonoBehaviour
         }
     }
 
-
+    private void OnDisable() {
+        globalStats.currentHealth = playerStats.CurrentHealth;
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     //////////////////////////////// MINIGAMES ////////////////////////////////

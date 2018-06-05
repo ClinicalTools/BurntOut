@@ -32,8 +32,4 @@ public class PlayerStats : MonoBehaviour {
         return currentHealth <= 40;
     }
 
-    private void Start()
-    {
-        currentHealth = maxHealth;
-    }
 }

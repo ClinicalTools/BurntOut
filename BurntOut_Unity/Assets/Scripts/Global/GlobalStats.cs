@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GlobalStats : MonoBehaviour {
 
-    public bool isHospitalCompleted; 
+    public bool isHospitalCompleted;
+    public int currentHealth;
 
     public static GlobalStats instance = null;
 

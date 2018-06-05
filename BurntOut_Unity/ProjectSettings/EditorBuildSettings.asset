@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ICU.unity
     guid: f5d03d5f96488c6478371b63e63ae147
+  - enabled: 1
+    path: Assets/Scenes/VitalitySpace.unity
+    guid: 2c669e6dd2a133b40b2d42e1f508e8af
   m_configObjects: {}
