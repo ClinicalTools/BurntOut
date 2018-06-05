@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 public class ReplenishTeleport : MonoBehaviour
 {
@@ -45,8 +46,12 @@ public class ReplenishTeleport : MonoBehaviour
             interactPrompt.transform.parent.gameObject.SetActive(false);
 
             // INTERACTION HERE
+
+
             StartCoroutine(Transition());
 
+            if (SceneManager.GetActiveScene().name == "VitalitySpace")
+                StartCoroutine(TransitionToCentral());
 
             LookAway();
         }
@@ -93,5 +98,12 @@ public class ReplenishTeleport : MonoBehaviour
         myAnimator.SetBool("fade", false);
         fpc.enabled = true;
         gameObject.SetActive(false);
+    }
+
+    public IEnumerator TransitionToCentral() {
+        myAnimator.SetBool("fade", true);
+
+        yield return new WaitForSeconds(0.5f);
+        Application.LoadLevel("Central");
     }
 }
