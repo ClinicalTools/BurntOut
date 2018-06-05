@@ -4,59 +4,36 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class EnumPopup : IGuiElement, IControl<Enum>, IField
+    public class EnumPopup : GUIControlField<Enum>
     {
-        public GUIContent Content { get; set; }
-        public Enum Value { get; set; }
-        private float minWidth = 20;
-        public float MinWidth
-        {
-            get
-            {
-                return minWidth;
-            }
-            set
-            {
-                minWidth = value;
-            }
-        }
-        public float Width { get; set; }
-        public float MaxWidth { get; set; }
+        public override Enum Value { get; set; }
 
-
-        public GUIStyle Style
+        internal override GUIStyle BaseStyle
         {
             get { return EditorStyles.popup; }
         }
 
-        public EnumPopup(Enum value)
+        protected override float AbsoluteMinWidth
+        {
+            get { return 20; }
+        }
+
+        public EnumPopup(Enum value) : base()
         {
             Value = value;
         }
-        public EnumPopup(Enum value, string text)
+        public EnumPopup(Enum value, string text) : base(text)
         {
             Value = value;
-            Content = new GUIContent(text);
         }
-        public EnumPopup(Enum value, string text, string tooltip)
+        public EnumPopup(Enum value, string text, string tooltip) : base(text, tooltip)
         {
             Value = value;
-            Content = new GUIContent(text, tooltip);
         }
 
-        public void Draw()
+        protected override void Display(Rect position)
         {
-            Style.fontSize = OOEditorManager.FontSize;
-            OOEditorManager.DrawGuiElement(this, Display, Content);
-        }
-
-        private void Display(Rect position)
-        {
-            if (Content != null)
-                position = OOEditorManager.FieldLabel(position, Content, MinWidth);
-
-            if (position.width > 0)
-                Value = EditorGUI.EnumPopup(position, Value);
+            Value = EditorGUI.EnumPopup(position, Value, BaseStyle);
         }
     }
 }

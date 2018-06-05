@@ -9,13 +9,15 @@ namespace OOEditor
     {
         internal static bool wait;
         
+        internal static int InToolbar { get; set; }
+        internal static int InHorizontal { get; set; }
+        internal static OverrideLabelStyle OverrideLabelStyle { get; set; }
+        internal static OverrideTextStyle OverrideTextStyle { get; set; }
 
-        internal static int FontSize { get; set; }
-
-        private static Queue<IGuiElement> drawElements = new Queue<IGuiElement>();
+        private static Queue<GUIElement> drawElements = new Queue<GUIElement>();
         private static Queue<GUIContent> drawContents = new Queue<GUIContent>();
         private static Queue<Action<Rect>> draws = new Queue<Action<Rect>>();
-        internal static void DrawGuiElement(IGuiElement element, Action<Rect> draw, GUIContent content = null)
+        internal static void DrawGuiElement(GUIElement element, Action<Rect> draw, GUIContent content = null)
         {
             if (content == null)
                 content = new GUIContent(" ");
@@ -39,8 +41,6 @@ namespace OOEditor
             }
         }
 
-        internal static int InHorizontal;
-        internal static int InToolbar;
         private static Rect horizontalRect;
         internal static void ResetHorizontalRect()
         {
@@ -49,7 +49,7 @@ namespace OOEditor
             horizontalRect = GUILayoutUtility.GetLastRect();
         }
         // Gets the rect for the GUI object based on the content, style, and width parameters
-        private static Rect GetDimensions(GUIContent content, IGuiElement guiElement)
+        private static Rect GetDimensions(GUIContent content, GUIElement guiElement)
         {
             // Add all the width options
             List<GUILayoutOption> options = new List<GUILayoutOption>();
@@ -67,7 +67,7 @@ namespace OOEditor
 
             scale = horizontalRect;
 
-            var height = guiElement.Style.CalcHeight(content, scale.width - 8);
+            var height = guiElement.BaseStyle.CalcHeight(content, scale.width - 8);
 
             // I have no idea how to get height to work properly, so I just did all 3 of these to be safe.
             options.Add(GUILayout.MinHeight(height));
@@ -75,7 +75,7 @@ namespace OOEditor
             options.Add(GUILayout.Height(height));
 
             Rect position;
-            position = EditorGUILayout.GetControlRect(false, height, guiElement.Style, options.ToArray());
+            position = EditorGUILayout.GetControlRect(false, height, guiElement.BaseStyle, options.ToArray());
             position.height = height;
 
             return position;
@@ -93,6 +93,47 @@ namespace OOEditor
             position.width -= width;
 
             return position;
+        }
+
+        internal static GUIStyle GetLabelStyle(EditorStyle labelStyle)
+        {
+            GUIStyle style = new GUIStyle(EditorStyles.label)
+            {
+                wordWrap = true,
+                fixedHeight = 0
+            };
+
+            ApplyStyle(style, labelStyle);
+            ApplyStyle(style, OverrideLabelStyle);
+            ApplyStyle(style, OverrideTextStyle);
+
+            return style;
+        }
+
+        internal static GUIStyle GetStyle(GUIElement element)
+        {
+            GUIStyle style = new GUIStyle(element.BaseStyle)
+            {
+                wordWrap = true,
+                fixedHeight = 0
+            };
+
+            ApplyStyle(style, element.Style);
+            ApplyStyle(style, OverrideLabelStyle);
+            ApplyStyle(style, OverrideTextStyle);
+
+            return style;
+        }
+
+        private static void ApplyStyle(GUIStyle style, EditorStyle editorStyle)
+        {
+            if (editorStyle == null)
+                return;
+
+            if (editorStyle.FontSize > 0)
+                style.fontSize = editorStyle.FontSize;
+            if (editorStyle.FontStyle != null)
+                style.fontStyle = (FontStyle) editorStyle.FontStyle;
         }
     }
 }

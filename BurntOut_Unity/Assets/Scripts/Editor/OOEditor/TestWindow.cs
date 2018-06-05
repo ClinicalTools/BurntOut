@@ -21,7 +21,11 @@ public class TestWindow2 : EditorWindow
     {
         testLbl = new LabelField("Test1");
         testTxt = new TextField("");
-        test2Txt = new TextField("", "Test2", "abccc");
+        test2Txt = new TextField("abc", "Test2", "abccc");
+        test2Txt.LabelStyle.FontStyle = FontStyle.Bold;
+        test2Txt.LabelStyle.FontSize = 18;
+        test2Txt.Style.FontSize = 18;
+
         btnTest = new Button("Test3", "ok");
         tglTest = new Toggle("Test4");
         isdrTest = new IntSlider(5, 0, 10);

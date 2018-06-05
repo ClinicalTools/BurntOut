@@ -3,12 +3,10 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class TextField : IGuiElement, IControl<string>, IField
+    public class TextField : GUIControlField<string>
     {
-        public GUIContent Content { get; set; }
-
-        private string value;
-        public string Value
+        private string value = "";
+        public override string Value
         {
             get { return value; }
             set
@@ -19,55 +17,33 @@ namespace OOEditor
                     this.value = value;
             }
         }
-        private float minWidth = 20;
-        public float MinWidth
+
+        protected override float AbsoluteMinWidth
         {
-            get
-            {
-                return minWidth;
-            }
-            set
-            {
-                minWidth = value;
-            }
+            get { return 10; }
         }
-        public float Width { get; set; }
-        public float MaxWidth { get; set; }
 
-
-        public GUIStyle Style
+        internal override GUIStyle BaseStyle
         {
             get { return EditorStyles.textField; }
         }
 
-        public TextField(string value)
+        public TextField(string value) : base()
         {
             Value = value;
         }
-        public TextField(string value, string text)
+        public TextField(string value, string text) : base(text)
         {
             Value = value;
-            Content = new GUIContent(text);
         }
-        public TextField(string value, string text, string tooltip)
+        public TextField(string value, string text, string tooltip) : base(text, tooltip)
         {
             Value = value;
-            Content = new GUIContent(text, tooltip);
         }
 
-        public void Draw()
+        protected override void Display(Rect position)
         {
-            Style.fontSize = OOEditorManager.FontSize;
-            OOEditorManager.DrawGuiElement(this, Display, Content);
-        }
-
-        private void Display(Rect position)
-        {
-            if (Content != null)
-                position = OOEditorManager.FieldLabel(position, Content, MinWidth);
-
-            if (position.width > 0)
-                Value = EditorGUI.TextField(position, Value, Style);
+            Value = EditorGUI.TextField(position, Value, BaseStyle);
         }
     }
 }

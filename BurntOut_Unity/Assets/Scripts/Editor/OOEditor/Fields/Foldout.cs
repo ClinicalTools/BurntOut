@@ -3,48 +3,34 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class Foldout : IGuiElement, IControl<bool>
+    public class Foldout : GUIControl<bool>
     {
-        public GUIContent Content { get; set; }
-        public bool Value { get; set; }
-        private float minWidth = 20;
-        public float MinWidth
-        {
-            get
-            {
-                return minWidth;
-            }
-            set
-            {
-                minWidth = value;
-            }
-        }
-        public float Width { get; set; }
-        public float MaxWidth { get; set; }
+        public override bool Value { get; set; }
 
-        public GUIStyle Style
+        internal override GUIStyle BaseStyle
         {
             get { return EditorStyles.foldout; }
         }
 
-        public Foldout(string text)
+        public Foldout() : base() { }
+        public Foldout(string text) : base(text) { }
+        public Foldout(string text, string tooltip) : base(text, tooltip) { }
+        public Foldout(bool value) : base()
         {
-            Content = new GUIContent(text);
+            Value = value;
         }
-        public Foldout(string text, string tooltip)
+        public Foldout(bool value, string text) : base(text)
         {
-            Content = new GUIContent(text, tooltip);
+            Value = value;
+        }
+        public Foldout(bool value, string text, string tooltip) : base(text, tooltip)
+        {
+            Value = value;
         }
 
-        public void Draw()
+        protected override void Display(Rect position)
         {
-            Style.fontSize = OOEditorManager.FontSize;
-            OOEditorManager.DrawGuiElement(this, Display, Content);
-        }
-
-        private void Display(Rect position)
-        {
-            Value = EditorGUI.Foldout(position, Value, Content, Style);
+            Value = EditorGUI.Foldout(position, Value, Content, BaseStyle);
         }
     }
 }

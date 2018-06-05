@@ -3,52 +3,39 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class Toggle : IGuiElement, IControl<bool>, IField
+    public class Toggle : GUIControlField<bool>
     {
-        public GUIContent Content { get; set; }
-        public bool Value { get; set; }
-        private float minWidth = 0;
-        public float MinWidth
-        {
-            get
-            {
-                return minWidth;
-            }
-            set
-            {
-                minWidth = value;
-            }
-        }
-        public float Width { get; set; }
-        public float MaxWidth { get; set; }
+        public override bool Value { get; set; }
 
-        public GUIStyle Style
+        internal override GUIStyle BaseStyle
         {
             get { return EditorStyles.toggle; }
         }
 
-        public Toggle()
+        protected override float AbsoluteMinWidth
         {
-            Content = new GUIContent("");
-        }
-        public Toggle(string text)
-        {
-            Content = new GUIContent(text);
-        }
-        public Toggle(string text, string tooltip)
-        {
-            Content = new GUIContent(text, tooltip);
+            get { return 10; }
         }
 
-        public void Draw()
+        public Toggle() : base() { }
+        public Toggle(string text) : base(text) { }
+        public Toggle(string text, string tooltip) : base(text, tooltip) { }
+        public Toggle(bool value) : base()
         {
-            Style.fontSize = OOEditorManager.FontSize;
-            OOEditorManager.DrawGuiElement(this, Display, Content);
+            Value = value;
+        }
+        public Toggle(bool value, string text) : base(text)
+        {
+            Value = value;
+        }
+        public Toggle(bool value, string text, string tooltip) : base(text, tooltip)
+        {
+            Value = value;
         }
 
-        private void Display(Rect position)
+        protected override void Display(Rect position)
         {
-            Value = EditorGUI.Toggle(position, Content, Value, Style);
+            Value = EditorGUI.Toggle(position, Value, BaseStyle);
         }
     }
 }

@@ -3,59 +3,35 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class IntField : IGuiElement, IControl<int>, IField
+    public class IntField : GUIControlField<int>
     {
-        public GUIContent Content { get; set; }
-        public int Value { get; set; }
-        private float minWidth = 20;
-        public float MinWidth
-        {
-            get
-            {
-                return minWidth;
-            }
-            set
-            {
-                minWidth = value;
-            }
-        }
-        public float Width { get; set; }
-        public float MaxWidth { get; set; }
+        public override int Value { get; set; }
 
-
-        public GUIStyle Style
+        internal override GUIStyle BaseStyle
         {
             get { return EditorStyles.numberField; }
         }
+        protected override float AbsoluteMinWidth
+        {
+            get { return 10; }
+        }
 
-        public IntField(int value)
+        public IntField(int value) : base()
         {
             Value = value;
         }
-        public IntField(int value, string text)
+        public IntField(int value, string text) : base(text)
         {
             Value = value;
-            Content = new GUIContent(text);
         }
-        public IntField(int value, string text, string tooltip)
+        public IntField(int value, string text, string tooltip) : base(text, tooltip)
         {
             Value = value;
-            Content = new GUIContent(text, tooltip);
         }
 
-        public void Draw()
+        protected override void Display(Rect position)
         {
-            Style.fontSize = OOEditorManager.FontSize;
-            OOEditorManager.DrawGuiElement(this, Display, Content);
-        }
-
-        private void Display(Rect position)
-        {
-            if (Content != null)
-                position = OOEditorManager.FieldLabel(position, Content, MinWidth);
-
-            if (position.width > 0)
-                Value = EditorGUI.IntField(position, Value, Style);
+            Value = EditorGUI.IntField(position, Value, BaseStyle);
         }
     }
 }

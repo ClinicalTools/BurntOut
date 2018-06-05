@@ -3,67 +3,44 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class IntSlider : IGuiElement, IControl<int>, IField
+    public class IntSlider : GUIControlField<int>
     {
-        public GUIContent Content { get; set; }
-        public int Value { get; set; }
+        public override int Value { get; set; }
         public int Min { get; set; }
         public int Max { get; set; }
-        private float minWidth = 20;
-        public float MinWidth
-        {
-            get
-            {
-                return minWidth;
-            }
-            set
-            {
-                minWidth = value;
-            }
-        }
-        public float Width { get; set; }
-        public float MaxWidth { get; set; }
 
-
-        public GUIStyle Style
+        internal override GUIStyle BaseStyle
         {
             get { return EditorStyles.numberField; }
         }
 
-        public IntSlider(int value, int min, int max)
+        protected override float AbsoluteMinWidth
+        {
+            get { return 10; }
+        }
+
+        public IntSlider(int value, int min, int max) : base()
         {
             Value = value;
             Min = min;
             Max = max;
         }
-        public IntSlider(int value, int min, int max, string text)
+        public IntSlider(int value, int min, int max, string text) : base(text)
         {
             Value = value;
             Min = min;
             Max = max;
-            Content = new GUIContent(text);
         }
-        public IntSlider(int value, int min, int max, string text, string tooltip)
+        public IntSlider(int value, int min, int max, string text, string tooltip) : base(text, tooltip)
         {
             Value = value;
             Min = min;
             Max = max;
-            Content = new GUIContent(text, tooltip);
         }
 
-        public void Draw()
+        protected override void Display(Rect position)
         {
-            Style.fontSize = OOEditorManager.FontSize;
-            OOEditorManager.DrawGuiElement(this, Display, Content);
-        }
-
-        private void Display(Rect position)
-        {
-            if (Content != null)
-                position = OOEditorManager.FieldLabel(position, Content, MinWidth);
-
-            if (position.width > 0)
-                Value = EditorGUI.IntSlider(position, Value, Min, Max);
+            Value = EditorGUI.IntSlider(position, Value, Min, Max);
         }
     }
 }

@@ -3,52 +3,31 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class ToggleButton : IGuiElement, IControl<bool>
+    public class ToggleButton : GUIControl<bool>
     {
-        public GUIContent Content { get; set; }
-        public bool Value { get; set; }
-        private float minWidth = 20;
-        public float MinWidth
-        {
-            get
-            {
-                return minWidth;
-            }
-            set
-            {
-                minWidth = value;
-            }
-        }
-        public float Width { get; set; }
-        public float MaxWidth { get; set; }
+        public override bool Value { get; set; }
 
-        public GUIStyle Style
+        internal override GUIStyle BaseStyle
         {
             get { return EditorStyles.miniButton; }
         }
 
-        public ToggleButton()
+        public ToggleButton(bool value) : base()
         {
-            Content = new GUIContent("");
+            Value = value;
         }
-        public ToggleButton(string text)
+        public ToggleButton(bool value, string text) : base(text)
         {
-            Content = new GUIContent(text);
+            Value = value;
         }
-        public ToggleButton(string text, string tooltip)
+        public ToggleButton(bool value, string text, string tooltip) : base(text, tooltip)
         {
-            Content = new GUIContent(text, tooltip);
-        }
-
-        public void Draw()
-        {
-            Style.fontSize = OOEditorManager.FontSize;
-            OOEditorManager.DrawGuiElement(this, Display, Content);
+            Value = value;
         }
 
-        private void Display(Rect position)
+        protected override void Display(Rect position)
         {
-            Value = GUI.Toggle(position, Value, Content, Style);
+            Value = GUI.Toggle(position, Value, Content, BaseStyle);
         }
     }
 }

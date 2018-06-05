@@ -3,52 +3,29 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class LabelField : IGuiElement, IField
+    public class LabelField : GUIElement
     {
-        public GUIContent Content { get; set; }
-
-        private float minWidth = 20;
-        public float MinWidth
-        {
-            get
-            {
-                return minWidth;
-            }
-            set
-            {
-                minWidth = value;
-            }
-        }
-        public float Width { get; set; }
-        public float MaxWidth { get; set; }
-
-
-        public GUIStyle Style
+        internal override GUIStyle BaseStyle
         {
             get { return EditorStyles.label; }
         }
 
-        public LabelField()
+        public LabelField() : base()
         {
             Content = new GUIContent();
         }
-        public LabelField(string text)
+        public LabelField(string text) : base(text)
         {
             Content = new GUIContent(text);
         }
-        public LabelField(string text, string tooltip)
+        public LabelField(string text, string tooltip) : base(text, tooltip)
         {
             Content = new GUIContent(text, tooltip);
         }
 
-        public void Draw()
+        protected override void Display(Rect position)
         {
-            OOEditorManager.DrawGuiElement(this, Display, Content);
-        }
-
-        private void Display(Rect position)
-        {
-            EditorGUI.LabelField(position, Content, Style);
+            EditorGUI.LabelField(position, Content, BaseStyle);
         }
     }
 }

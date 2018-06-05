@@ -1,11 +1,12 @@
 ﻿using System;
+using UnityEngine;
 
 namespace OOEditor
 {
-    public class OverrideLabelStyle : EditorStyle, IDisposable 
+    public class OverrideTextStyle : EditorStyle, IDisposable
     {
-        private OverrideLabelStyle oldLabelStyle;
-        public OverrideLabelStyle()
+        private OverrideTextStyle oldLabelStyle;
+        public OverrideTextStyle()
         {
 
         }
