@@ -26,6 +26,7 @@ public class WorldSpaceUI : MonoBehaviour {
         current.MoveTo();
         if (current.current != null) {
             current = current.current;
+            playerCamera.GetComponent<PlayerRotateToTarget>().target = current.gameObject;
         }
     }
 
