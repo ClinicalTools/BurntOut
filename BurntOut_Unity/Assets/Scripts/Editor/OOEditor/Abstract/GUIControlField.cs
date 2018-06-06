@@ -17,6 +17,9 @@ namespace OOEditor
             {
                 var guiStyle = new GUIStyle(EditorStyles.label);
 
+                if (Focused)
+                    guiStyle.normal = guiStyle.focused;
+
                 Style.ApplyToStyle(guiStyle);
                 LabelStyle.ApplyToStyle(guiStyle);
                 if (OOEditorManager.OverrideTextStyle != null)
@@ -39,28 +42,31 @@ namespace OOEditor
         {
             if (Content != null)
             {
-                var color = GUI.contentColor;
                 // Ensure width is at least as big as the larger of the minimum widths
                 float minWidth = Mathf.Max(AbsoluteMinWidth, MinWidth);
 
                 // Typically use labelWidth for the width, but ensure at least MinWidth pixels are saved for the field
                 var width = Mathf.Min(EditorGUIUtility.labelWidth, position.width - minWidth);
+                // Width cannot be less than 0
+                width = Mathf.Max(width, 1);
                 Rect labelRect = new Rect(position.x, position.y, width, position.height);
-
-                if (GUI.contentColor == Color.white && Selected)
-                    GUI.contentColor = new Color(0.425f, .7f, 1.42f);
-
-                GUI.SetNextControlName(Name);
+                                
+                GUI.SetNextControlName(Name + "label");
                 EditorGUI.LabelField(labelRect, Content, GUILabelStyle);
+
+                if (Event.current.rawType == EventType.MouseDown &&
+                    labelRect.Contains(Event.current.mousePosition))
+                {
+                    GUI.FocusControl(Name + "label");
+
+                    EditorWindow.focusedWindow.Repaint();
+                }
+
                 position.x += width;
                 position.width -= width;
-
-                GUI.contentColor = color;
             }
 
-            GUI.SetNextControlName(Name);
-            if (position.width > 0)
-                Display(position);
+            base.PrepareDisplay(position);
         }
     }
 }

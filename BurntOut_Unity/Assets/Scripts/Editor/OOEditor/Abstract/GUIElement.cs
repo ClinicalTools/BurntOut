@@ -4,14 +4,26 @@ namespace OOEditor
 {
     public abstract class GUIElement
     {
-        protected static int elementNums;
+        protected static int elementNums = 1000;
 
         protected string Name { get; set; }
-        public bool Selected
+
+        private string focusedControl = "";
+        protected string FocusedControlName
         {
             get
             {
-                return GUI.GetNameOfFocusedControl() == Name;
+                var control = GUI.GetNameOfFocusedControl();
+                if (!string.IsNullOrEmpty(control))
+                    focusedControl = control;
+                return focusedControl;
+            }
+        }
+        public bool Focused
+        {
+            get
+            {
+                return FocusedControlName.Contains(Name);
             }
         }
 
@@ -19,6 +31,13 @@ namespace OOEditor
         public float MinWidth { get; set; }
         public float Width { get; set; }
         public float MaxWidth { get; set; }
+        /// <summary>
+        /// Stores the last valid width of the element.
+        /// 
+        /// In every other OnGUI call, elements seem to be given a width of 1, which can cause issues.
+        /// </summary>
+        protected float ValidWidth { get; set; }
+
         private readonly EditorStyle style = new EditorStyle();
         public EditorStyle Style
         {
@@ -30,6 +49,9 @@ namespace OOEditor
             get
             {
                 var guiStyle = new GUIStyle(BaseStyle);
+
+                if (Focused && OOEditorManager.InToolbar == 0)
+                    guiStyle.normal = guiStyle.focused;
 
                 Style.ApplyToStyle(guiStyle);
                 // Basic elements treated like labels
@@ -67,6 +89,9 @@ namespace OOEditor
 
         protected virtual void PrepareDisplay(Rect position)
         {
+            if (position.width > 1)
+                ValidWidth = position.width;
+
             GUI.SetNextControlName(Name);
             Display(position);
         }

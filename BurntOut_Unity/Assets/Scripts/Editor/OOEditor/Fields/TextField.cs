@@ -49,6 +49,7 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
+            GUI.SetNextControlName(Name);
             Value = EditorGUI.TextField(position, Value, GUIStyle);
         }
     }

@@ -14,7 +14,7 @@ namespace OOEditor
 
         protected override float AbsoluteMinWidth
         {
-            get { return 10; }
+            get { return 14; }
         }
 
         public Toggle() : base() { }
@@ -36,6 +36,11 @@ namespace OOEditor
         protected override void Display(Rect position)
         {
             Value = EditorGUI.Toggle(position, Value, GUIStyle);
+
+            // For some reason the toggle doesn't always show as active when the style dictates drawing as though it were
+            // This grabs the control from the label, if that was clicked, and makes the toggle the focus
+            if (Focused && FocusedControlName != Name)
+                GUI.FocusControl(Name);
         }
     }
 }

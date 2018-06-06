@@ -5,13 +5,31 @@ namespace OOEditor
 {
     public class IntSlider : GUIControlField<int>
     {
-        public override int Value { get; set; }
+        int value;
+        public override int Value
+        {
+            get { return value; }
+            set
+            {
+                if (value > Max)
+                    value = Max;
+                else if (value < Min)
+                    value = Min;
+                this.value = value;
+            }
+        }
         public int Min { get; set; }
         public int Max { get; set; }
 
         protected override GUIStyle BaseStyle
         {
-            get { return EditorStyles.numberField; }
+            get
+            {
+                if (OOEditorManager.InToolbar == 0)
+                    return EditorStyles.numberField;
+                else
+                    return EditorStyles.toolbarTextField;
+            }
         }
 
         protected override float AbsoluteMinWidth
@@ -38,6 +56,14 @@ namespace OOEditor
             Max = max;
         }
 
+        private bool SliderFocused
+        {
+            get
+            {
+                return Focused && !FocusedControlName.Contains("field");
+            }
+        }
+
         protected override void Display(Rect position)
         {
             Rect fieldPos = new Rect(position);
@@ -47,32 +73,58 @@ namespace OOEditor
                 fieldPos.width = 50;
             }
 
-            Value = EditorGUI.IntField(fieldPos, Value, GUIStyle);
 
             position.width -= 55;
+
+            // If there's not enough width to draw the slider, only draw the textbox
+            if (ValidWidth <= 55)
+            {
+                GUI.SetNextControlName(Name + "field");
+                Value = EditorGUI.IntField(fieldPos, Value, GUIStyle);
+            }
+
             if (position.width <= 0)
                 return;
 
-            if (position.Contains(Event.current.mousePosition))
+            // When mouse is initially clicked on the slider, make the textbox show as selected
+            if (position.Contains(Event.current.mousePosition) && Event.current.rawType == EventType.MouseDown)
+            {
                 GUI.FocusControl(Name);
+            }
+            else if (SliderFocused)
+            {
+                // Pressing left decrements the value
+                if (Event.current.rawType == EventType.KeyDown && Event.current.keyCode == KeyCode.LeftArrow)
+                {
+                    Value--;
+                    // The control isn't properly updated until a repaint
+                    if (EditorWindow.focusedWindow != null)
+                        EditorWindow.focusedWindow.Repaint();
+                }
+                // Pressing right increments the value
+                else if (Event.current.rawType == EventType.KeyDown && Event.current.keyCode == KeyCode.RightArrow)
+                {
+                    Value++;
+                    if (EditorWindow.focusedWindow != null)
+                        EditorWindow.focusedWindow.Repaint();
+                }
+            }
 
+            // The slider should make the mouse act like it should over a slider
             EditorGUIUtility.AddCursorRect(position, MouseCursor.SlideArrow);
 
             if (position.width > 0)
             {
                 GUIStyle style = new GUIStyle(GUI.skin.horizontalSliderThumb);
-                if (Selected)
-                {
+                // If the slider is focused, paint it like so
+                if (SliderFocused)
                     style.normal = style.focused;
-                    style.hover = style.focused;
-                    style.active = style.focused;
-                }
 
                 Value = Mathf.RoundToInt(GUI.HorizontalSlider(position, Value, Min, Max, GUI.skin.horizontalSlider, style));
             }
 
-
-            //Value = EditorGUI.IntSlider(position, Value, Min, Max);
+            GUI.SetNextControlName(Name + "field");
+            Value = EditorGUI.IntField(fieldPos, Value, GUIStyle);
         }
     }
 }

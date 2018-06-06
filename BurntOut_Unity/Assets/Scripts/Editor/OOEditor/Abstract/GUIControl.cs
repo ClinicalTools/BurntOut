@@ -13,6 +13,9 @@ namespace OOEditor
             {
                 var guiStyle = new GUIStyle(BaseStyle);
 
+                if (Focused && OOEditorManager.InToolbar == 0)
+                    guiStyle.normal = guiStyle.focused;
+
                 Style.ApplyToStyle(guiStyle);
                 if (OOEditorManager.OverrideTextStyle != null)
                     OOEditorManager.OverrideTextStyle.ApplyToStyle(guiStyle);
