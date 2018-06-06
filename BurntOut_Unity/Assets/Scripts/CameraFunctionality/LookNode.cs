@@ -8,6 +8,7 @@ public class LookNode : MonoBehaviour {
     //public bool start;
     public LookNode next;
     public LookNode behind;
+    public LookNode current = null;
 
     private WorldSpaceUI ws_ui;
 

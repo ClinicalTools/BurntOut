@@ -24,6 +24,9 @@ public class WorldSpaceUI : MonoBehaviour {
 
     public void MoveTo() {
         current.MoveTo();
+        if (current.current != null) {
+            current = current.current;
+        }
     }
 
 
