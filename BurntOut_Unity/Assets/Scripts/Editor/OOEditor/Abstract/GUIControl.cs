@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 namespace OOEditor
@@ -6,6 +7,8 @@ namespace OOEditor
     public abstract class GUIControl<T> : GUIElement
     {
         public abstract T Value { get; set; }
+
+        public event EventHandler Changed;
 
         public override GUIStyle GUIStyle
         {
@@ -22,6 +25,16 @@ namespace OOEditor
 
                 return guiStyle;
             }
+        }
+
+        protected override void PrepareDisplay(Rect position)
+        {
+            var oldVal = Value;
+
+            base.PrepareDisplay(position);
+
+            if (!Value.Equals(oldVal) && Changed != null)
+                Changed(this, null);
         }
 
         protected GUIControl() : base() { }

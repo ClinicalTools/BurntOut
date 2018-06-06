@@ -5,15 +5,16 @@ namespace OOEditor
 {
     public class OverrideTextStyle : EditorStyle, IDisposable
     {
-        private OverrideTextStyle oldLabelStyle;
+        private OverrideTextStyle oldStyle;
         public OverrideTextStyle()
         {
-
+            oldStyle = OOEditorManager.OverrideTextStyle;
+            OOEditorManager.OverrideTextStyle = this;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            OOEditorManager.OverrideTextStyle = oldStyle;
         }
     }
 }

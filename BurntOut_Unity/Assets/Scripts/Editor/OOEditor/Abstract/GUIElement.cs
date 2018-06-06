@@ -27,7 +27,7 @@ namespace OOEditor
             }
         }
 
-        public GUIContent Content { get; set; }
+        public GUIContent Content { get; protected set; }
         public float MinWidth { get; set; }
         public float Width { get; set; }
         public float MaxWidth { get; set; }

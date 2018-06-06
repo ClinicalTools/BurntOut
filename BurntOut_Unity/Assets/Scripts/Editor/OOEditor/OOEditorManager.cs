@@ -51,14 +51,20 @@ namespace OOEditor
         // Gets the rect for the GUI object based on the content, style, and width parameters
         private static Rect GetDimensions(GUIContent content, GUIElement guiElement)
         {
+            GUIStyle style = guiElement.GUIStyle;
+
             // Add all the width options
             List<GUILayoutOption> options = new List<GUILayoutOption>();
-            if (guiElement.Width > 0)
-                options.Add(GUILayout.Width(guiElement.Width));
             if (guiElement.MinWidth > 0)
                 options.Add(GUILayout.MinWidth(guiElement.MinWidth));
             if (guiElement.MaxWidth > 0)
                 options.Add(GUILayout.MaxWidth(guiElement.MaxWidth));
+            if (guiElement.Width > 0)
+                options.Add(GUILayout.Width(guiElement.Width));
+
+            // Elements in horizontal are scaled to fit their contents
+            if (guiElement.Width <= 0 && guiElement.MinWidth <= 0 && guiElement.MaxWidth <= 0 && InHorizontal > 0)
+                options.Add(GUILayout.Width(style.CalcSize(content).x));
 
             // This gets the width of the element without adding much (if any) height
             Rect scale;
@@ -67,7 +73,6 @@ namespace OOEditor
 
             scale = horizontalRect;
 
-            GUIStyle style = guiElement.GUIStyle;
             var height = style.CalcHeight(content, scale.width - 8);
 
             // I have no idea how to get height to work properly, so I just did all 3 of these to be safe.
@@ -78,6 +83,9 @@ namespace OOEditor
             Rect position;
             position = EditorGUILayout.GetControlRect(false, height, style, options.ToArray());
             position.height = height;
+
+            if (guiElement.MinWidth > 0)
+                Debug.Log("" + guiElement.MinWidth + " " + position.width);
 
             return position;
         }

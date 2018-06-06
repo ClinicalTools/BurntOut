@@ -5,6 +5,7 @@ using System;
 using UnityEngine.SceneManagement;
 using System.IO;
 using CtiEditor;
+using OOEditor;
 
 /// <summary>
 /// Manages editing the scene's scenarios.
@@ -18,6 +19,47 @@ public class NarrativeEditorWindow : EditorWindow
     private float sceneTextAreaWidth = 0;
 
     private readonly string gameObjectName = "NarrativeManager";
+    private ToggleButton sceneTab;
+    private List<ToggleButton> scenarioTabs = new List<ToggleButton>();
+    private IntSlider fontSizeSlider = new IntSlider(11, 10, 20)
+    {
+        MaxWidth = 150
+    };
+    private Button addScenarioBtn = new Button("+");
+    private Button delScenarioBtn = new Button("-");
+
+    private Button saveScenarioBtn = new Button("Save Scenario");
+    private Button loadScenarioBtn = new Button("Load Scenario");
+    private Button saveAllBtn = new Button("Save All");
+    private Button loadAllBtn = new Button("Load All");
+
+
+    public void OnEnable()
+    {
+        if (sceneManager == null)
+            ResetSceneManager();
+
+        sceneTab = new ToggleButton(false, "Scene");
+        sceneTab.Changed += (object sender, EventArgs e) =>
+        {
+            var tab = (ToggleButton)sender;
+            tab.Value = true;
+
+            selectedScenario = -1;
+            foreach (var scenarioTab in scenarioTabs)
+                scenarioTab.Value = false;
+        };
+
+        saveScenarioBtn.Style.FontStyle = FontStyle.Italic;
+        loadScenarioBtn.Style.FontStyle = FontStyle.Italic;
+        saveAllBtn.Style.FontStyle = FontStyle.BoldAndItalic;
+        loadAllBtn.Style.FontStyle = FontStyle.BoldAndItalic;
+    }
+
+    private void AddScenarioBtn_Changed(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 
     // Add menu named "Scene Manager" to the Window menu
     [MenuItem("Window/Narrative Manager")]
@@ -28,7 +70,7 @@ public class NarrativeEditorWindow : EditorWindow
         window.Show();
     }
 
-    NarrativeManager sceneManager;
+    private NarrativeManager sceneManager;
     private void ResetSceneManager()
     {
         // If I don't reload this often, the editor will become disconnected from the object after a test play.
@@ -40,7 +82,7 @@ public class NarrativeEditorWindow : EditorWindow
             sceneManagerObj = new GameObject(gameObjectName);
             sceneManagerObj.AddComponent<NarrativeManager>();
         }
-        sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
+        var sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
         if (sceneManager == null)
         {
             sceneManagerObj.AddComponent<NarrativeManager>();
@@ -50,14 +92,22 @@ public class NarrativeEditorWindow : EditorWindow
 
     void OnInspectorUpdate()
     {
+        var oldSceneManager = sceneManager;
         ResetSceneManager();
+        if (oldSceneManager != sceneManager)
+            OnEnable();
     }
 
 
     void OnGUI()
     {
         if (sceneManager == null)
+        { 
             ResetSceneManager();
+            OnEnable();
+        }
+
+
 
         SceneNarrative sceneNarrative = sceneManager.sceneNarrative;
 
@@ -79,35 +129,41 @@ public class NarrativeEditorWindow : EditorWindow
         }
 
         // Draw the toolbar for scenario management
-        using (CtiEditorGUI.Toolbar())
+        using (new Toolbar())
+        using (var toolbarStyle = new OverrideTextStyle())
         {
-            var oldFontSize = EditorStyles.toolbarButton.fontSize;
-            EditorStyles.toolbarButton.fontSize = 12;
-            if (GUILayout.Toggle(selectedScenario == -1, "SCENE", EditorStyles.toolbarButton))
-            {
-                selectedScenario = -1;
-            }
+            toolbarStyle.FontSize = 12;
+            
+            sceneTab.Draw();
 
             for (int i = 0; i < sceneNarrative.scenarios.Count; i++)
             {
-                if (GUILayout.Toggle(selectedScenario == i,
-                    "Scenario " + (i + 1) + " - " + sceneNarrative.scenarios[i].name, EditorStyles.toolbarButton))
-                {
+                if (scenarioTabs.Count <= i)
+                    scenarioTabs.Add(new ToggleButton(false, "Scenario " + (i + 1) + " - " + sceneNarrative.scenarios[i].name));
+
+                var tab = scenarioTabs[i];
+                tab.Content.text = "Scenario " + (i + 1) + " - " + sceneNarrative.scenarios[i].name;
+                tab.Value = (selectedScenario == i);
+                tab.Draw();
+                if (tab.Value)
                     selectedScenario = i;
-                }
             }
 
             GUILayout.FlexibleSpace();
 
-            scale = Mathf.Floor(EditorGUILayout.Slider(scale, 10, 20, GUILayout.MaxWidth(150)));
+            fontSizeSlider.Draw();
+            scale = fontSizeSlider.Value;
 
-            if (GUILayout.Button("+", EditorStyles.toolbarButton))
+            addScenarioBtn.Draw();
+            if (addScenarioBtn.Value)
             {
                 Scenario scenario = new Scenario(sceneNarrative.scenarios.ToArray());
                 sceneNarrative.scenarios.Add(scenario);
                 scenarioEditors.Add(new ScenarioEditor(scenario));
             }
-            if (GUILayout.Button("-", EditorStyles.toolbarButton))
+
+            delScenarioBtn.Draw();
+            if (delScenarioBtn.Value)
             {
                 if (EditorUtility.DisplayDialog("Remove Scenario",
                     "Are you sure you want to delete this scenario?", "Delete", "Cancel"))
@@ -124,15 +180,13 @@ public class NarrativeEditorWindow : EditorWindow
                         sceneNarrative.scenarios.Add(scenario);
                         scenarioEditors.Add(new ScenarioEditor(scenario));
                     }
-
                 }
             }
 
-            EditorStyles.toolbarButton.fontStyle = FontStyle.Italic;
             if (selectedScenario > -1)
             {
-
-                if (GUILayout.Button("Save Scenario", EditorStyles.toolbarButton))
+                saveScenarioBtn.Draw();
+                if (saveScenarioBtn.Value)
                 {
                     // Get the folder to save the scenario in
                     string json = JsonUtility.ToJson(sceneNarrative.scenarios[selectedScenario]);
@@ -162,7 +216,8 @@ public class NarrativeEditorWindow : EditorWindow
                     if (!String.IsNullOrEmpty(path))
                         File.WriteAllText(path, json);
                 }
-                if (GUILayout.Button("Load Scenario", EditorStyles.toolbarButton))
+                loadScenarioBtn.Draw();
+                if (loadScenarioBtn.Value)
                 {
                     // Get the folder to load the scenario from
                     var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -184,8 +239,8 @@ public class NarrativeEditorWindow : EditorWindow
                     }
                 }
             }
-            EditorStyles.toolbarButton.fontStyle = FontStyle.BoldAndItalic;
-            if (GUILayout.Button("Save All", EditorStyles.toolbarButton))
+            saveAllBtn.Draw();
+            if (saveAllBtn.Value)
             {
                 // Get the folder to save the scene in
                 string json = JsonUtility.ToJson(sceneNarrative);
@@ -215,7 +270,8 @@ public class NarrativeEditorWindow : EditorWindow
                 if (!String.IsNullOrEmpty(path))
                     File.WriteAllText(path, json);
             }
-            if (GUILayout.Button("Load All", EditorStyles.toolbarButton))
+            loadAllBtn.Draw();
+            if (loadAllBtn.Value)
             {
                 // Get the folder to load the scene from
                 var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -231,8 +287,6 @@ public class NarrativeEditorWindow : EditorWindow
                     sceneManager.sceneNarrative = narrative;
                 }
             }
-            EditorStyles.toolbarButton.fontStyle = FontStyle.Normal;
-            EditorStyles.toolbarButton.fontSize = oldFontSize;
         }
 
         using (CtiEditorGUI.FontSize((int)scale))
