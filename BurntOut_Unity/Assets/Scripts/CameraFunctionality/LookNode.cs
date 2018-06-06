@@ -5,35 +5,42 @@ using UnityEngine;
 public class LookNode : MonoBehaviour {
 
     public int id;
+    //public bool start;
     public LookNode next;
     public LookNode behind;
 
     private WorldSpaceUI ws_ui;
 
     private Camera playerCamera;
-    private PlayerRotateToTarget myRotate;
+    private PlayerRotateToTarget myRotateTo;
+    private PlayerMoveToTarget myMoveTo;
 
 	// Use this for initialization
 	void Start () {
 
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        myRotate = playerCamera.GetComponent<PlayerRotateToTarget>();
+        myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
+        myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
         ws_ui = GameObject.FindGameObjectWithTag("WSUI").GetComponent<WorldSpaceUI>();
 
         if (id == 0) {
-            myRotate.enabled = true;
-            myRotate.target = this.gameObject;
+            myRotateTo.enabled = true;
+            myRotateTo.target = this.gameObject;
             ws_ui.current = this;
         }
 
 	}
 
+    public void MoveTo() {
+        myMoveTo.target = this.gameObject;
+    }
+
     public void RotateNext() {
-        myRotate.target = next.gameObject;
+        myRotateTo.target = next.gameObject;
     }
 
     public void RotateBehind() {
-        myRotate.target = behind.gameObject;
+        myRotateTo.target = behind.gameObject;
     }
 
 }

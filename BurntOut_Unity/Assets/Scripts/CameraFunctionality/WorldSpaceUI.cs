@@ -22,6 +22,10 @@ public class WorldSpaceUI : MonoBehaviour {
         current = current.behind;
     }
 
+    public void MoveTo() {
+        current.MoveTo();
+    }
+
 
 
 }

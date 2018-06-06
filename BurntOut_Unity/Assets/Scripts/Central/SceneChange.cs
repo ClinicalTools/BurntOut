@@ -14,7 +14,7 @@ public class SceneChange : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
 
 
-        if (other.name == "Player") {
+        if (other.name == "Player" || other.name == "FirstPersonCharacter") {
             StartCoroutine(Transition());
         }
 
