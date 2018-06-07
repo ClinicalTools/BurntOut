@@ -9,8 +9,11 @@ public class InteractiveNode : MonoBehaviour {
     public Material fx_MS_Material;
     public Material fx_MT_Material;
 
+
     public bool fx_moveStation;
     public bool fx_moveTo;
+
+    [HideInInspector]
     public StationaryMovementNode nextStation;
 
     private Camera playerCamera;
