@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LookNode : MonoBehaviour {
+public class InteractiveNode : MonoBehaviour {
 
     public int id;
     //public bool start;
@@ -10,20 +10,24 @@ public class LookNode : MonoBehaviour {
     public LookNode behind;
     public LookNode currentlook = null;
 
-    private WorldSpaceUI ws_ui;
+    public Material myMaterial;
+
+    //private WorldSpaceUI ws_ui;
 
     private Camera playerCamera;
     private PlayerRotateToTarget myRotateTo;
     private PlayerMoveToTarget myMoveTo;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
 
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
+        myMaterial = this.gameObject.GetComponent<Material>();
+        //ws_ui = GameObject.FindGameObjectWithTag("WSUI").GetComponent<WorldSpaceUI>();
 
-	}
+    }
 
     public void MoveTo() {
         myMoveTo.target = this.gameObject;
@@ -36,5 +40,4 @@ public class LookNode : MonoBehaviour {
     public void RotateBehind() {
         myRotateTo.target = behind.gameObject;
     }
-
 }
