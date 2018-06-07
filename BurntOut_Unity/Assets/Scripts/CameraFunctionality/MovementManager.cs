@@ -25,6 +25,10 @@ public class MovementManager : MonoBehaviour {
 
         // start player at this node
         playerCamera.transform.position = stationaryMovementNodes[0].transform.position;
+        
+        // start player looking here
+        myRotateTo.enabled = true;
+        myRotateTo.target = stationaryMovementNodes[0].lookhere[0].gameObject;
 
     }
 	

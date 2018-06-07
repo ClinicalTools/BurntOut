@@ -24,11 +24,7 @@ public class StationaryMovementNode : MonoBehaviour {
 
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
-        myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
-
-        // start player looking here
-        myRotateTo.enabled = true;
-        myRotateTo.target = lookhere[0].gameObject;
+        myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();      
 
     }
 
