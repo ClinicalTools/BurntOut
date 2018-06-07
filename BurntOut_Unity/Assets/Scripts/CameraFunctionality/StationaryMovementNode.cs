@@ -10,20 +10,21 @@ public class StationaryMovementNode : MonoBehaviour {
     private Camera playerCamera;
     private PlayerRotateToTarget myRotateTo;
     private PlayerMoveToTarget myMoveTo;
+    private MovementManager movementManager;
 
     public InteractiveNode currentInteractiveNode;
     public InteractiveNode previousInteractiveNode;
     public int iterator = 0;
+    
 
     // Use this for initialization
     void Start() {
 
+        movementManager = GameObject.FindObjectOfType<MovementManager>();
+
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
-       
-        // start player at this node
-        playerCamera.transform.position = this.transform.position;
 
         // start player looking here
         myRotateTo.enabled = true;
@@ -32,52 +33,56 @@ public class StationaryMovementNode : MonoBehaviour {
     }
 
     private void Update() {
-        
-        if (Input.GetKeyDown(KeyCode.H)) {
 
-            if (currentInteractiveNode == null) {
-                currentInteractiveNode = interactiveNodes[iterator];
-                iterator = 0;
+        // if this node is currently selected, make it have functionality
+        if (movementManager.currentStationNode == this) {
 
-                // selection visual
-                HighlightNode(currentInteractiveNode);
+            if (Input.GetKeyDown(KeyCode.H)) {
 
-            } else {
-
-                // if not out of bounds
-                if (iterator != interactiveNodes.Length - 1) {
-                    iterator++;
-                    previousInteractiveNode = currentInteractiveNode;
+                if (currentInteractiveNode == null) {
                     currentInteractiveNode = interactiveNodes[iterator];
+                    iterator = 0;
 
                     // selection visual
-                    DeHighlightNode(previousInteractiveNode);
                     HighlightNode(currentInteractiveNode);
+
+                } else {
+
+                    // if not out of bounds
+                    if (iterator != interactiveNodes.Length - 1) {
+                        iterator++;
+                        previousInteractiveNode = currentInteractiveNode;
+                        currentInteractiveNode = interactiveNodes[iterator];
+
+                        // selection visual
+                        DeHighlightNode(previousInteractiveNode);
+                        HighlightNode(currentInteractiveNode);
+                    }
                 }
+
             }
 
-        }
+            if (Input.GetKeyDown(KeyCode.G)) {
 
-        if (Input.GetKeyDown(KeyCode.G)) {
-
-            if (currentInteractiveNode == null) {
-                currentInteractiveNode = interactiveNodes[interactiveNodes.Length-1];
-                iterator = interactiveNodes.Length - 1;
-
-                // selection visual
-                HighlightNode(currentInteractiveNode);
-
-            } else {
-
-                // if not out of bounds
-                if (iterator != 0) {
-                    iterator--;
-                    previousInteractiveNode = currentInteractiveNode;
-                    currentInteractiveNode = interactiveNodes[iterator];
+                if (currentInteractiveNode == null) {
+                    currentInteractiveNode = interactiveNodes[interactiveNodes.Length - 1];
+                    iterator = interactiveNodes.Length - 1;
 
                     // selection visual
-                    DeHighlightNode(previousInteractiveNode);
                     HighlightNode(currentInteractiveNode);
+
+                } else {
+
+                    // if not out of bounds
+                    if (iterator != 0) {
+                        iterator--;
+                        previousInteractiveNode = currentInteractiveNode;
+                        currentInteractiveNode = interactiveNodes[iterator];
+
+                        // selection visual
+                        DeHighlightNode(previousInteractiveNode);
+                        HighlightNode(currentInteractiveNode);
+                    }
                 }
             }
         }

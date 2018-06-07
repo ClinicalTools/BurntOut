@@ -5,12 +5,11 @@ using UnityEngine;
 public class InteractiveNode : MonoBehaviour {
 
     public int id;
-    //public bool start;
-    public LookNode next;
-    public LookNode behind;
-    public LookNode currentlook = null;
 
     public Material myMaterial;
+
+    public bool fx_moveStation;
+    public StationaryMovementNode nextStation;
 
     //private WorldSpaceUI ws_ui;
 
@@ -25,19 +24,12 @@ public class InteractiveNode : MonoBehaviour {
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
         myMaterial = this.gameObject.GetComponent<Material>();
-        //ws_ui = GameObject.FindGameObjectWithTag("WSUI").GetComponent<WorldSpaceUI>();
-
+        
     }
 
     public void MoveTo() {
         myMoveTo.target = this.gameObject;
     }
 
-    public void RotateNext() {
-        myRotateTo.target = next.gameObject;
-    }
 
-    public void RotateBehind() {
-        myRotateTo.target = behind.gameObject;
-    }
 }
