@@ -1,10 +1,13 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
 {
     public class Button : GUIControl<bool>
     {
+        public event EventHandler Pressed;
+
         public override bool Value { get; set; }
 
         protected override GUIStyle BaseStyle
@@ -25,6 +28,8 @@ namespace OOEditor
         protected override void Display(Rect position)
         {
             Value = GUI.Button(position, Content, GUIStyle);
+            if (Value && Pressed != null)
+                Pressed(this, null);
         }
     }
 }

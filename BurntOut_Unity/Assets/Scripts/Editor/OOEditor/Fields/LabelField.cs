@@ -10,10 +10,6 @@ namespace OOEditor
             get { return EditorStyles.label; }
         }
 
-        public LabelField() : base()
-        {
-            Content = new GUIContent();
-        }
         public LabelField(string text) : base(text)
         {
             Content = new GUIContent(text);
