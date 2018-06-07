@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VitalitySpace.unity
     guid: 2c669e6dd2a133b40b2d42e1f508e8af
+  - enabled: 1
+    path: Assets/Scenes/Hospital_Patient_SingleRoom.unity
+    guid: 18662fb186ac38f4d86c9113f6306949
+  - enabled: 1
+    path: Assets/Scenes/Hospital_Patient_SingleRoom (Selection Mechanic).unity
+    guid: 248dc841d0f15a1438ace0f3b74b2a2e
   m_configObjects: {}

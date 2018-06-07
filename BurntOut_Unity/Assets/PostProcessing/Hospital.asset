@@ -42,7 +42,7 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 0.17
+      intensity: 0.7
       radius: 0.43
       sampleCount: 16
       downsampling: 1

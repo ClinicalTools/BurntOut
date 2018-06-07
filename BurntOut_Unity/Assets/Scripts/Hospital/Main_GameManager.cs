@@ -47,6 +47,8 @@ public class Main_GameManager : MonoBehaviour
         // LOAD DATA HERE
         globalStats = GameObject.FindObjectOfType<GlobalStats>();
         playerStats.CurrentHealth = globalStats.currentHealth;
+
+        Cursor.visible = true;
     }
 
     void Start()
