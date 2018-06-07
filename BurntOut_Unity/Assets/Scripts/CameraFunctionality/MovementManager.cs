@@ -31,11 +31,11 @@ public class MovementManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.L)) {
+        if (Input.GetKeyDown(KeyCode.X)) {
 
+            // if currentnode has the function: go to next stationary movement node 
             if (currentStationNode.currentInteractiveNode != null) {
-
-                // if currentnode has the function: go to next stationary movement node 
+                                
                 if (currentStationNode.currentInteractiveNode.fx_moveStation) {
 
                     // degighlight 
@@ -54,6 +54,15 @@ public class MovementManager : MonoBehaviour {
                     previousStationNode.iterator = 0;
                     previousStationNode.currentInteractiveNode = null;
                     previousStationNode.previousInteractiveNode = null;
+                }
+
+            }
+
+            // if currentnode has the function: move to interactive node (USE THIS FUNCTIONALITY ONLY FOR LEVEL SELECT)
+            if (currentStationNode.currentInteractiveNode != null) {
+
+                if (currentStationNode.currentInteractiveNode.fx_moveTo) {
+                    myMoveTo.target = currentStationNode.currentInteractiveNode.gameObject;
                 }
 
             }

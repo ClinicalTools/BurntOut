@@ -7,8 +7,10 @@ public class InteractiveNode : MonoBehaviour {
     public int id;
 
     public Material fx_MS_Material;
+    public Material fx_MT_Material;
 
     public bool fx_moveStation;
+    public bool fx_moveTo;
     public StationaryMovementNode nextStation;
 
     private Camera playerCamera;
@@ -23,6 +25,8 @@ public class InteractiveNode : MonoBehaviour {
 
         if (fx_moveStation)
             this.gameObject.GetComponent<MeshRenderer>().material = fx_MS_Material;
+        if (fx_moveTo)
+            this.gameObject.GetComponent<MeshRenderer>().material = fx_MT_Material;
         
     }
 
