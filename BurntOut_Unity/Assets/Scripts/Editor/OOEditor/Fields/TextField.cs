@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
@@ -49,7 +50,6 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            GUI.SetNextControlName(Name);
             Value = EditorGUI.TextField(position, Value, GUIStyle);
         }
     }

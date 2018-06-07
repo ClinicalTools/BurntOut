@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-public static class FlexibleSpace
+namespace OOEditor
 {
-    public static void Draw()
+    public static class FlexibleSpace
     {
-        GUILayout.FlexibleSpace();
+        public static void Draw()
+        {
+            GUILayout.FlexibleSpace();
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace OOEditor
 
                 Style.ApplyToStyle(guiStyle);
                 LabelStyle.ApplyToStyle(guiStyle);
-                if (OOEditorManager.OverrideTextStyle != null)
+                if (OOEditorManager.OverrideLabelStyle != null)
                     OOEditorManager.OverrideLabelStyle.ApplyToStyle(guiStyle);
                 if (OOEditorManager.OverrideTextStyle != null)
                     OOEditorManager.OverrideTextStyle.ApplyToStyle(guiStyle);

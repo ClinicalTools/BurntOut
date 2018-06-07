@@ -5,16 +5,16 @@ using UnityEngine;
 public class SceneNarrationEditor
 {
     LabelField startNarrationLabel;
-    TextField startNarrationField;
+    TextArea startNarrationField;
     LabelField endNarrationLabel;
-    TextField endNarrationField;
+    TextArea endNarrationField;
 
     public SceneNarrationEditor(SceneNarrative sceneNarrative)
     {
         startNarrationLabel = new LabelField("Start Narration:");
         startNarrationLabel.Style.FontStyle = FontStyle.Bold;
 
-        startNarrationField = new TextField(sceneNarrative.startNarration);
+        startNarrationField = new TextArea(sceneNarrative.startNarration);
         startNarrationField.Changed += (object sender, EventArgs e) =>
         {
             var field = (TextField)sender;
@@ -25,7 +25,7 @@ public class SceneNarrationEditor
         endNarrationLabel.Style.FontStyle = FontStyle.Bold;
 
 
-        endNarrationField = new TextField(sceneNarrative.endNarration);
+        endNarrationField = new TextArea(sceneNarrative.endNarration);
         endNarrationField.Changed += (object sender, EventArgs e) =>
         {
             var field = (TextField)sender;
@@ -38,7 +38,7 @@ public class SceneNarrationEditor
         startNarrationLabel.Draw();
         startNarrationField.Draw();
 
-
+        BlankLine.Draw();
 
         endNarrationLabel.Draw();
         endNarrationField.Draw();

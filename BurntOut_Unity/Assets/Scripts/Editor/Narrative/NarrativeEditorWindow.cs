@@ -342,14 +342,10 @@ public class NarrativeEditorWindow : EditorWindow
         {
             // Edit basic scene info
             if (selectedScenario == -1)
-            {
                 sceneEditor.Draw();
-            }
             // Edit selected scenario
             else
-            {
-                scenarioEditors[selectedScenario].Edit();
-            }
+                scenarioEditors[selectedScenario].Draw();
         }
     }
 }

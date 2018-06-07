@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BlankLine : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+﻿namespace OOEditor
+{
+    public static class BlankLine
+    {
+        private static LabelField label = new LabelField(" ");
+        public static void Draw()
+        {
+            label.Draw();
+        }
+    }
 }

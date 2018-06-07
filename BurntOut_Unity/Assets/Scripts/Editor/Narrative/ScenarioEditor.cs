@@ -1,4 +1,6 @@
 ﻿using CtiEditor;
+using OOEditor;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -8,31 +10,53 @@ using UnityEngine;
 /// </summary>
 public class ScenarioEditor
 {
-    private bool actorsFoldout;
-    private bool choicesFoldout;
+    //private bool actorsFoldout;
+    //private bool choicesFoldout;
     private readonly List<bool> choiceFoldout = new List<bool>();
     private readonly List<ChoiceEditor> choiceEditors = new List<ChoiceEditor>();
     public readonly Scenario scenario;
-    private float endNarrativeWidth;
+
+    private TextField nameField;
+    private Foldout actorsFoldout, choicesFoldout;
+    private LabelField endNarrativeLabel;
+    private TextArea endNarrativeField;
 
     public ScenarioEditor(Scenario scenario)
     {
         this.scenario = scenario;
+
+        nameField = new TextField(scenario.name, "Name:", "Name to be displayed in the editor");
+        nameField.Changed += (object sender, EventArgs e) =>
+        {
+            var field = (TextField)sender;
+            scenario.name = field.Value;
+        };
         foreach (Choice choice in scenario.Choices)
         {
             choiceFoldout.Add(false);
             choiceEditors.Add(new ChoiceEditor(choice, scenario));
         }
+
+        actorsFoldout = new Foldout("Actors");
+        actorsFoldout.Style.FontStyle = FontStyle.Bold;
+        choicesFoldout = new Foldout("Choices");
+        choicesFoldout.Style.FontStyle = FontStyle.Bold;
+
+        endNarrativeLabel = new LabelField("End Narrative:");
+        endNarrativeField = new TextArea(scenario.endNarrative);
+        endNarrativeField.Changed += (object sender, EventArgs e) =>
+        {
+            var field = (TextArea)sender;
+            scenario.endNarrative = field.Value;
+        };
     }
 
-    public void Edit()
+    public void Draw()
     {
-        scenario.name = CtiEditorGUI.TextField(scenario.name, "Name: ", "Name to be displayed in the editor");
+        nameField.Draw();
 
-        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
-            actorsFoldout = CtiEditorGUI.Foldout(actorsFoldout, "Actors");
-
-        if (actorsFoldout)
+        actorsFoldout.Draw();
+        if (actorsFoldout.Value)
         {
             using (CtiEditorGUI.Indent())
             {
@@ -64,10 +88,8 @@ public class ScenarioEditor
             }
         }
 
-        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
-            choicesFoldout = CtiEditorGUI.Foldout(choicesFoldout, "Choices");
-
-        if (choicesFoldout)
+        choicesFoldout.Draw();
+        if (choicesFoldout.Value)
         {
             using (CtiEditorGUI.Indent())
             {
@@ -122,8 +144,7 @@ public class ScenarioEditor
             }
         }
 
-        CtiEditorGUI.LabelField("End Narrative:");
-        EditorStyles.textField.wordWrap = true;
-        scenario.endNarrative = CtiEditorGUI.TextArea(scenario.endNarrative, ref endNarrativeWidth);
+        endNarrativeLabel.Draw();
+        endNarrativeField.Draw();
     }
 }
