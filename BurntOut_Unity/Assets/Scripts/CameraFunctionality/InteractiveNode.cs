@@ -6,24 +6,23 @@ public class InteractiveNode : MonoBehaviour {
 
     public int id;
 
-    public Material myMaterial;
+    public Material fx_MS_Material;
 
     public bool fx_moveStation;
     public StationaryMovementNode nextStation;
-
-    //private WorldSpaceUI ws_ui;
 
     private Camera playerCamera;
     private PlayerRotateToTarget myRotateTo;
     private PlayerMoveToTarget myMoveTo;
 
-    // Use this for initialization
     void Start() {
 
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
-        myMaterial = this.gameObject.GetComponent<Material>();
+
+        if (fx_moveStation)
+            this.gameObject.GetComponent<MeshRenderer>().material = fx_MS_Material;
         
     }
 

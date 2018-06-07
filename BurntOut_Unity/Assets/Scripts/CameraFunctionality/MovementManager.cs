@@ -6,6 +6,7 @@ public class MovementManager : MonoBehaviour {
 
     public StationaryMovementNode[] stationaryMovementNodes;
     public StationaryMovementNode currentStationNode;
+    public StationaryMovementNode previousStationNode;
     public int iterator = 0;
 
     public LookNode[] lookhere;
@@ -32,19 +33,29 @@ public class MovementManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.L)) {
 
-            // if currentnode has the function: go to next stationary movement node 
-            if (currentStationNode.currentInteractiveNode.fx_moveStation) {
+            if (currentStationNode.currentInteractiveNode != null) {
 
-                // degighlight
-                currentStationNode.DeHighlightNode(currentStationNode.currentInteractiveNode);
+                // if currentnode has the function: go to next stationary movement node 
+                if (currentStationNode.currentInteractiveNode.fx_moveStation) {
 
-                // set new
-                myMoveTo.enabled = true;
-                currentStationNode = currentStationNode.currentInteractiveNode.nextStation;
+                    // degighlight 
+                    currentStationNode.DeHighlightNode(currentStationNode.currentInteractiveNode);                    
 
-                // moveto and rotateto
-                myMoveTo.target = currentStationNode.gameObject;
-                myRotateTo.target = currentStationNode.lookhere[0].gameObject;
+                    // set new
+                    myMoveTo.enabled = true;
+                    currentStationNode = currentStationNode.currentInteractiveNode.nextStation;
+                    previousStationNode = currentStationNode;
+
+                    // moveto and rotateto
+                    myMoveTo.target = currentStationNode.gameObject;
+                    myRotateTo.target = currentStationNode.lookhere[0].gameObject;
+
+                    // reset iterator value
+                    previousStationNode.iterator = 0;
+                    previousStationNode.currentInteractiveNode = null;
+                    previousStationNode.previousInteractiveNode = null;
+                }
+
             }
 
         }
