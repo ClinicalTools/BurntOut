@@ -1,4 +1,4 @@
-﻿
+﻿using OOEditor.Internal;
 using System;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ namespace OOEditor
 {
     public abstract class GUIControl<T> : GUIElement
     {
-        public abstract T Value { get; set; }
+        public virtual T Value { get; set; }
 
         public event EventHandler Changed;
 
@@ -14,7 +14,11 @@ namespace OOEditor
         {
             get
             {
-                var guiStyle = new GUIStyle(BaseStyle);
+                GUIStyle guiStyle;
+                if (OOEditorManager.InToolbar == 0)
+                    guiStyle = new GUIStyle(BaseStyle);
+                else
+                    guiStyle = new GUIStyle(ToolbarStyle);
 
                 if (Focused && OOEditorManager.InToolbar == 0)
                     guiStyle.normal = guiStyle.focused;

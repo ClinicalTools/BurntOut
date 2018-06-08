@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace OOEditor
+namespace OOEditor.Internal
 {
     internal static class OOEditorManager
     {

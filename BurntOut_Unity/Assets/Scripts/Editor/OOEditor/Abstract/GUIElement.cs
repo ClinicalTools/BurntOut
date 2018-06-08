@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using OOEditor.Internal;
+using UnityEngine;
 
 namespace OOEditor
 {
@@ -37,18 +38,17 @@ namespace OOEditor
         /// In every other OnGUI call, elements seem to be given a width of 1, which can cause issues.
         /// </summary>
         protected float ValidWidth { get; set; }
-
-        private readonly EditorStyle style = new EditorStyle();
-        public EditorStyle Style
-        {
-            get { return style; }
-        }
+        public EditorStyle Style { get; } = new EditorStyle();
 
         public virtual GUIStyle GUIStyle
         {
             get
             {
-                var guiStyle = new GUIStyle(BaseStyle);
+                GUIStyle guiStyle;
+                if (OOEditorManager.InToolbar == 0)
+                    guiStyle = new GUIStyle(BaseStyle);
+                else
+                    guiStyle = new GUIStyle(ToolbarStyle);
 
                 if (Focused && OOEditorManager.InToolbar == 0)
                     guiStyle.normal = guiStyle.focused;
@@ -65,6 +65,7 @@ namespace OOEditor
         }
 
         protected abstract GUIStyle BaseStyle { get; }
+        protected virtual GUIStyle ToolbarStyle => BaseStyle;
 
         protected GUIElement()
         {

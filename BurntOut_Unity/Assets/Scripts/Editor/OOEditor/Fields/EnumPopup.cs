@@ -1,13 +1,12 @@
-﻿using System;
+﻿using OOEditor.Internal;
+using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
 {
-    public class EnumPopup : GUIControlField<Enum>
+    public class EnumPopup<T> : GUIControlField<Enum>
     {
-        public override Enum Value { get; set; }
-
         protected override GUIStyle BaseStyle
         {
             get
@@ -19,11 +18,8 @@ namespace OOEditor
             }
         }
 
-        protected override float AbsoluteMinWidth
-        {
-            get { return 20; }
-        }
-
+        protected override float AbsoluteMinWidth { get; } = 20;
+        
         public EnumPopup(Enum value) : base()
         {
             Value = value;

@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using OOEditor.Internal;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
@@ -32,10 +34,7 @@ namespace OOEditor
             }
         }
 
-        protected override float AbsoluteMinWidth
-        {
-            get { return 10; }
-        }
+        protected override float AbsoluteMinWidth { get; } = 10; 
 
         public FloatSlider(float value, float min, float max) : base()
         {
@@ -73,7 +72,7 @@ namespace OOEditor
                 fieldPos.width = 50;
             }
 
-
+            
             position.width -= 55;
 
             // If there's not enough width to draw the slider, only draw the textbox
@@ -129,6 +128,8 @@ namespace OOEditor
                 if (Value != newValue)
                     Value = Mathf.Round(newValue * 100) / 100;
             }
+
+            List<string> x = new List<string>();
 
             GUI.SetNextControlName(Name + "field");
             Value = EditorGUI.FloatField(fieldPos, Value, GUIStyle);
