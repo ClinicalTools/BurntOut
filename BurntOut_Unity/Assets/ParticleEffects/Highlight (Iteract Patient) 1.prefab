@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198800970175616554}
   - component: {fileID: 199800848286431372}
   m_Layer: 0
-  m_Name: Highlight (InteractiveNode)
+  m_Name: Highlight (Iteract Patient) 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +227,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.95234555, b: 0.6556604, a: 0.11764706}
+      maxColor: {r: 0.5330188, g: 0.8255838, b: 1, a: 0.11764706}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

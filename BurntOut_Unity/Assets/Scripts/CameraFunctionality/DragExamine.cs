@@ -5,7 +5,7 @@ using UnityEngine;
 public class DragExamine : MonoBehaviour {
 
     public float turnSpeed;
-    private Vector2 startPos;
+    private Vector3 startPos;
 
     void OnMouseDrag() {
 

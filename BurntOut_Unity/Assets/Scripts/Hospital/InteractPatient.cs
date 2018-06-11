@@ -25,6 +25,7 @@ public class InteractPatient : MonoBehaviour
 
     public float maxAngle = 35;
 
+
     void Update()
     {
         if (completed || lost || stats.LowHealth())
@@ -116,4 +117,5 @@ public class InteractPatient : MonoBehaviour
             LookAway();
         }
     }
+
 }
