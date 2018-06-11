@@ -43,6 +43,9 @@ public class Main_GameManager : MonoBehaviour
 
     public GlobalStats globalStats;
 
+    // for examine objects
+    public bool isCurrentlyExamine;
+
     private void Awake() {
         // LOAD DATA HERE
         globalStats = GameObject.FindObjectOfType<GlobalStats>();

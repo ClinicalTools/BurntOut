@@ -12,6 +12,7 @@ public class ExamineObject_Screen : MonoBehaviour {
     private Main_GameManager gamemanager;
 
     public GameObject myCanvas;
+    private bool abilityToRun;
 
 
     // Use this for initialization
@@ -28,24 +29,43 @@ public class ExamineObject_Screen : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        if (gamemanager.isCurrentlyExamine == false) {
+            abilityToRun = true;
+        }
+
+        if (gamemanager.isCurrentlyExamine == true) {
+            Debug.Log("akjsdhkasjdhaskajs");
+            abilityToRun = false;
+        }
+
+
+
     }
 
     private void OnMouseOver() {
 
+        if (abilityToRun)
         myParticleSystem.gameObject.SetActive(true);
 
     }
 
     private void OnMouseExit() {
 
+        if (abilityToRun)
         myParticleSystem.gameObject.SetActive(false);
 
     }
 
     private void OnMouseDown() {
 
-        gamemanager.ScreenBlur();
-        myCanvas.SetActive(true);
+        if (abilityToRun) {
+            gamemanager.ScreenBlur();
+            myCanvas.SetActive(true);
+
+            gamemanager.isCurrentlyExamine = true;
+        }
+
+
     }
 
     public void ExitExamine() {
@@ -53,6 +73,8 @@ public class ExamineObject_Screen : MonoBehaviour {
         gamemanager.ScreenUnblur();
         myCanvas.SetActive(false);
 
+        gamemanager.isCurrentlyExamine = false;
+        myParticleSystem.gameObject.SetActive(false);
     }
 
 

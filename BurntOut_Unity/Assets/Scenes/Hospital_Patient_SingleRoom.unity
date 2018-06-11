@@ -3590,7 +3590,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4507276330809956, guid: aedbccd9881656c479304a4780a88dc2, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.90499973
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4507276330809956, guid: aedbccd9881656c479304a4780a88dc2, type: 2}
       propertyPath: m_LocalRotation.x
@@ -14390,6 +14390,7 @@ MonoBehaviour:
   gamePaused: 0
   hospitalwin: 0
   globalStats: {fileID: 0}
+  isCurrentlyExamine: 0
 --- !u!4 &1127561628
 Transform:
   m_ObjectHideFlags: 0
