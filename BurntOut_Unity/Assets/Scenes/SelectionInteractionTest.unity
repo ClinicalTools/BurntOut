@@ -4490,6 +4490,7 @@ MonoBehaviour:
   previousStationNode: {fileID: 0}
   iterator: 0
   lookhere: []
+  CONTROLLERSUPPORT: 0
 --- !u!1 &1055156165
 GameObject:
   m_ObjectHideFlags: 0

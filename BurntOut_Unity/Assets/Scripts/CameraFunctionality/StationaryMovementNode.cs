@@ -15,6 +15,8 @@ public class StationaryMovementNode : MonoBehaviour {
     public InteractiveNode currentInteractiveNode;
     public InteractiveNode previousInteractiveNode;
     public int iterator = 0;
+
+    public bool CONTROLLERSUPPORT = false;
     
 
     // Use this for initialization
@@ -30,10 +32,18 @@ public class StationaryMovementNode : MonoBehaviour {
 
     private void Update() {
 
+        // if any of interactive nodes are hovered...
+        foreach (InteractiveNode node in interactiveNodes) {
+            if (node.mouseHovered) {
+                previousInteractiveNode = currentInteractiveNode;
+                currentInteractiveNode = node;
+            }
+        }
+
         // if this node is currently selected, make it have functionality
         if (movementManager.currentStationNode == this) {
 
-            if (Input.GetKeyDown(KeyCode.H)) {
+            if (Input.GetKeyDown(KeyCode.H) && CONTROLLERSUPPORT == true) {
 
                 if (currentInteractiveNode == null) {
                     currentInteractiveNode = interactiveNodes[iterator];
@@ -58,7 +68,7 @@ public class StationaryMovementNode : MonoBehaviour {
 
             }
 
-            if (Input.GetKeyDown(KeyCode.G)) {
+            if (Input.GetKeyDown(KeyCode.G) && CONTROLLERSUPPORT == true) {
 
                 if (currentInteractiveNode == null) {
                     currentInteractiveNode = interactiveNodes[interactiveNodes.Length - 1];
