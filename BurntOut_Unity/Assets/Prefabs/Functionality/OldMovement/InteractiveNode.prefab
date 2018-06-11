@@ -128,7 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  next: {fileID: 0}
-  behind: {fileID: 0}
-  currentlook: {fileID: 0}
-  myMaterial: {fileID: 0}
+  fx_MS_Material: {fileID: 0}
+  fx_MT_Material: {fileID: 0}
+  fx_moveStation: 0
+  fx_moveTo: 0
+  nextStation: {fileID: 0}
+  mouseHovered: 0

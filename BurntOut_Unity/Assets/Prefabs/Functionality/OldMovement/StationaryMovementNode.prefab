@@ -96,7 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eda80abdbfae1e49b966152d4abd290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactions: []
+  interactiveNodes: []
+  lookhere: []
+  currentInteractiveNode: {fileID: 0}
+  previousInteractiveNode: {fileID: 0}
+  iterator: 0
+  CONTROLLERSUPPORT: 0
 --- !u!135 &135980206323519964
 SphereCollider:
   m_ObjectHideFlags: 1
