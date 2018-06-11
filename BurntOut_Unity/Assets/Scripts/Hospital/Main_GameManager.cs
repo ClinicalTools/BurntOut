@@ -76,6 +76,7 @@ public class Main_GameManager : MonoBehaviour
 
     void Update()
     {
+
         // pause screen 
         if (Input.GetKeyDown(KeyCode.P))
         {

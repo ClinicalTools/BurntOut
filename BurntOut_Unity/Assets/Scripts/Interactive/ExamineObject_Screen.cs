@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExamineObject : MonoBehaviour {
+public class ExamineObject_Screen : MonoBehaviour {
 
-    private GameObject playersCloseExamineGameobject;
     private Camera mainCamera;
 
     private ParticleSystem myParticleSystem;
 
     private Transform startingTransform;
+    private Main_GameManager gamemanager;
+
+    public GameObject myCanvas;
 
 
     // Use this for initialization
     void Start() {
         mainCamera = Camera.main;
-        playersCloseExamineGameobject = GameObject.FindGameObjectWithTag("CloseExamine");
+        gamemanager = GameObject.FindObjectOfType<Main_GameManager>();
 
         myParticleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
         myParticleSystem.gameObject.SetActive(false);
@@ -32,7 +34,6 @@ public class ExamineObject : MonoBehaviour {
 
         myParticleSystem.gameObject.SetActive(true);
 
-
     }
 
     private void OnMouseExit() {
@@ -43,7 +44,17 @@ public class ExamineObject : MonoBehaviour {
 
     private void OnMouseDown() {
 
+        gamemanager.ScreenBlur();
+        myCanvas.SetActive(true);
+    }
+
+    public void ExitExamine() {
+
+        gamemanager.ScreenUnblur();
+        myCanvas.SetActive(false);
 
     }
+
+
 
 }

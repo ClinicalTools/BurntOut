@@ -21,7 +21,7 @@ public class ObjectRotator : MonoBehaviour {
 
             // apply rotation
             _rotation.y = -(_mouseOffset.x + _mouseOffset.y) * _sensitivity;
-            _rotation.x = -(_mouseOffset.x + _mouseOffset.y) * _sensitivity;
+            //_rotation.x = -(_mouseOffset.x + _mouseOffset.y) * _sensitivity;
 
             // rotate
             transform.Rotate(_rotation);

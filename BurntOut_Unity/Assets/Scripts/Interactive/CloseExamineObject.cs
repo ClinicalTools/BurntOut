@@ -49,4 +49,6 @@ public class CloseExamineObject : MonoBehaviour {
 
     }
 
+  
+
 }
