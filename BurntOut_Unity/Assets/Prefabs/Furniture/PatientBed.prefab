@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4486558126255714}
   - component: {fileID: 33120939535795742}
   - component: {fileID: 23280131432023546}
-  - component: {fileID: 64613627302158046}
+  - component: {fileID: 65758823505532726}
   m_Layer: 0
   m_Name: PatientBed
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1419716074584826}
   m_Mesh: {fileID: 4300000, guid: 475a68148ea2b4d4d80e5e902ddb3e67, type: 3}
---- !u!64 &64613627302158046
-MeshCollider:
+--- !u!65 &65758823505532726
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -93,8 +93,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 475a68148ea2b4d4d80e5e902ddb3e67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.012253029, y: 0.01274468, z: 0.0131244445}
+  m_Center: {x: -0.000000014668331, y: 0.001372358, z: -0.0000009266662}
