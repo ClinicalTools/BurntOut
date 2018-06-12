@@ -174,10 +174,16 @@ public class Main_GameManager : MonoBehaviour
         dialogueManager.EndDialogue();
 
         // freeze player controller
-        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
+        if (scene.name != "Hospital_Patient_SingleRoom") {
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+            playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+        }
+
+        isCurrentlyExamine = false;
+        currentRoom.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
         UI_ChoiceDia.SetActive(false);
-        playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+        ScreenUnblur();
 
     }
 

@@ -77,7 +77,19 @@ public class InteractPatient : MonoBehaviour
             playerRotateToTarget.enabled = true;
         }
     }
-    
+
+    // for clicking mechanics
+    private void OnMouseDown() {
+
+        if (gameManager.scene.name == "Hospital_Patient_SingleRoom") {
+
+            interactPrompt.transform.parent.gameObject.SetActive(false);
+            gameManager.currentRoom = this;
+            dialogueManager.StartDialogue();
+        }
+
+    }
+
     // change prompt
     private void Look()
     {

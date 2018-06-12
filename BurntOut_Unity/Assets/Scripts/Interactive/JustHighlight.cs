@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExamineObject_Screen : MonoBehaviour {
+public class JustHighlight : MonoBehaviour {
 
-   private Camera mainCamera;
+    private Camera mainCamera;
 
     private ParticleSystem myParticleSystem;
 
     private Transform startingTransform;
     private Main_GameManager gamemanager;
 
-    public GameObject myCanvas;
     public bool abilityToRunScript;
 
 
@@ -44,14 +43,14 @@ public class ExamineObject_Screen : MonoBehaviour {
     private void OnMouseOver() {
 
         if (abilityToRunScript)
-        myParticleSystem.gameObject.SetActive(true);
+            myParticleSystem.gameObject.SetActive(true);
 
     }
 
     private void OnMouseExit() {
 
         if (abilityToRunScript)
-        myParticleSystem.gameObject.SetActive(false);
+            myParticleSystem.gameObject.SetActive(false);
 
     }
 
@@ -59,7 +58,7 @@ public class ExamineObject_Screen : MonoBehaviour {
 
         if (abilityToRunScript) {
             gamemanager.ScreenBlur();
-            myCanvas.SetActive(true);
+
 
             gamemanager.isCurrentlyExamine = true;
         }
@@ -70,12 +69,10 @@ public class ExamineObject_Screen : MonoBehaviour {
     public void ExitExamine() {
 
         gamemanager.ScreenUnblur();
-        myCanvas.SetActive(false);
+
 
         gamemanager.isCurrentlyExamine = false;
         myParticleSystem.gameObject.SetActive(false);
     }
-
-
 
 }
