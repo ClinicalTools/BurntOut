@@ -3885,6 +3885,11 @@ Prefab:
       propertyPath: stationaryMovementNodes.Array.data[1]
       value: 
       objectReference: {fileID: 2146041770}
+    - target: {fileID: 114716188280820578, guid: cb33f72a6bb8317438412fc0ce11c678,
+        type: 2}
+      propertyPath: CONTROLLERSUPPORT
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb33f72a6bb8317438412fc0ce11c678, type: 2}
   m_IsPrefabParent: 0
@@ -14466,6 +14471,7 @@ MonoBehaviour:
   gamePaused: 0
   hospitalwin: 0
   globalStats: {fileID: 0}
+  isCurrentlyExamine: 0
 --- !u!4 &1127561628
 Transform:
   m_ObjectHideFlags: 0
@@ -21116,6 +21122,15 @@ Prefab:
       value: -0.15478557
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910527278733352, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23917366568070200, guid: 5e9e851c0e142814dac026a256ba2ac0,
+        type: 2}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}

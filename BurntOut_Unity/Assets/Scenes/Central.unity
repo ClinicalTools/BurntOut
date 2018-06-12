@@ -9184,7 +9184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef63a0806e954048ad206ec16b76d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: ICU
+  level: SelectionInteractionTest
   screenfade: {fileID: 145111414}
   player: {fileID: 927959813}
 --- !u!65 &1232663194
@@ -11293,6 +11293,10 @@ Prefab:
     - target: {fileID: 4008178733783432, guid: b79a4a991f9a6bf498fae542dcd9cf94, type: 2}
       propertyPath: m_LocalScale.z
       value: 3.2693448
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873901930036382, guid: b79a4a991f9a6bf498fae542dcd9cf94, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b79a4a991f9a6bf498fae542dcd9cf94, type: 2}

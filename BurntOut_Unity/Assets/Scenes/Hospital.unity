@@ -14284,6 +14284,7 @@ MonoBehaviour:
   gamePaused: 0
   hospitalwin: 0
   globalStats: {fileID: 0}
+  isCurrentlyExamine: 0
 --- !u!4 &1127561628
 Transform:
   m_ObjectHideFlags: 0
@@ -20814,6 +20815,10 @@ Prefab:
         type: 2}
       propertyPath: currentHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910527278733352, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114497384694597832, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}

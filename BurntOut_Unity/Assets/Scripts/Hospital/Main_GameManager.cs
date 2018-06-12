@@ -66,6 +66,13 @@ public class Main_GameManager : MonoBehaviour
             Cursor.visible = true;
         }
 
+        if (scene.name == "Hospital") {
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+        }
+
+        if (scene.name == "VitalitySpace") {
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+        }
 
         // hide unnessesary UI here
         UI_ChoiceDia.SetActive(false);
