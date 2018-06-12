@@ -1723,6 +1723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Canvas_Paused: {fileID: 1138629943}
+  playerCloseExamine: {fileID: 609559480}
   player: {fileID: 927959813}
   playerCam: {fileID: 1448730419}
   playerStats: {fileID: 927959815}
@@ -3852,6 +3853,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4913398858427252, guid: 5d76296e48ddf1d498bb4f7a4b0167f4,
     type: 2}
   m_PrefabInternal: {fileID: 605156407}
+--- !u!1 &609559480 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1910527278733352, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1724883223}
 --- !u!1 &611572596
 GameObject:
   m_ObjectHideFlags: 0

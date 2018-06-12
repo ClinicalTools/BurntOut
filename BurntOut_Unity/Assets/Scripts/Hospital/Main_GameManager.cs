@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.PostProcessing;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Main_GameManager : MonoBehaviour
@@ -46,6 +47,8 @@ public class Main_GameManager : MonoBehaviour
     // for examine objects
     public bool isCurrentlyExamine;
 
+    public Scene scene;
+
     private void Awake() {
         // LOAD DATA HERE
         globalStats = GameObject.FindObjectOfType<GlobalStats>();
@@ -56,6 +59,14 @@ public class Main_GameManager : MonoBehaviour
 
     void Start()
     {
+        scene = SceneManager.GetActiveScene();
+
+        if (scene.name == "Hospital_Patient_SingleRoom") {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+
         // hide unnessesary UI here
         UI_ChoiceDia.SetActive(false);
 

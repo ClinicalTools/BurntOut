@@ -12,7 +12,7 @@ public class ExamineObject_Screen : MonoBehaviour {
     private Main_GameManager gamemanager;
 
     public GameObject myCanvas;
-    private bool abilityToRun;
+    private bool abilityToRunScript;
 
 
     // Use this for initialization
@@ -30,12 +30,11 @@ public class ExamineObject_Screen : MonoBehaviour {
     void Update() {
 
         if (gamemanager.isCurrentlyExamine == false) {
-            abilityToRun = true;
+            abilityToRunScript = true;
         }
 
         if (gamemanager.isCurrentlyExamine == true) {
-            Debug.Log("akjsdhkasjdhaskajs");
-            abilityToRun = false;
+            abilityToRunScript = false;
         }
 
 
@@ -44,21 +43,21 @@ public class ExamineObject_Screen : MonoBehaviour {
 
     private void OnMouseOver() {
 
-        if (abilityToRun)
+        if (abilityToRunScript)
         myParticleSystem.gameObject.SetActive(true);
 
     }
 
     private void OnMouseExit() {
 
-        if (abilityToRun)
+        if (abilityToRunScript)
         myParticleSystem.gameObject.SetActive(false);
 
     }
 
     private void OnMouseDown() {
 
-        if (abilityToRun) {
+        if (abilityToRunScript) {
             gamemanager.ScreenBlur();
             myCanvas.SetActive(true);
 

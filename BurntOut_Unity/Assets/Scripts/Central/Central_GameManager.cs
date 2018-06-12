@@ -6,6 +6,7 @@ using UnityEngine.PostProcessing;
 public class Central_GameManager : MonoBehaviour {
 
     public GameObject Canvas_Paused;
+    public GameObject playerCloseExamine;
 
     //player controller
     public GameObject player;
@@ -27,6 +28,10 @@ public class Central_GameManager : MonoBehaviour {
     }
 
     void Start() {
+
+        playerCloseExamine.SetActive(false);
+
+        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
         // make game active
         Time.timeScale = 1;

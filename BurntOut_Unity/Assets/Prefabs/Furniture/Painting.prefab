@@ -134,11 +134,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1714487383396872}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46a0b56bc616a2d4a8e56751c4a6890a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCanvas: {fileID: 0}
 --- !u!198 &198786060154172688
 ParticleSystem:
   m_ObjectHideFlags: 1
