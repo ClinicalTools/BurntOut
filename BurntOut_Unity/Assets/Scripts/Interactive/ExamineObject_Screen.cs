@@ -12,6 +12,8 @@ public class ExamineObject_Screen : MonoBehaviour {
     private Main_GameManager gamemanager;
 
     public GameObject myCanvas;
+    public GameObject myCanvasObject;
+
     public bool abilityToRunScript;
 
 
@@ -24,6 +26,7 @@ public class ExamineObject_Screen : MonoBehaviour {
         myParticleSystem.gameObject.SetActive(false);
 
         startingTransform = transform;
+        myCanvasObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,6 +63,8 @@ public class ExamineObject_Screen : MonoBehaviour {
         if (abilityToRunScript) {
             gamemanager.ScreenBlur();
             myCanvas.SetActive(true);
+            myCanvasObject.SetActive(true);
+
 
             gamemanager.isCurrentlyExamine = true;
         }
@@ -71,6 +76,8 @@ public class ExamineObject_Screen : MonoBehaviour {
 
         gamemanager.ScreenUnblur();
         myCanvas.SetActive(false);
+        myCanvasObject.SetActive(false);
+
 
         gamemanager.isCurrentlyExamine = false;
         myParticleSystem.gameObject.SetActive(false);

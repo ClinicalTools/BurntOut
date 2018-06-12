@@ -7,6 +7,7 @@ public class CameraLookHere : MonoBehaviour {
     private Camera playerCamera;
     private PlayerRotateToTarget myRotateTo;
     private PlayerMoveToTarget myMoveTo;
+    private Main_GameManager gamemanager;
 
     public float bounds = 1;
     private float Xmax;
@@ -20,6 +21,7 @@ public class CameraLookHere : MonoBehaviour {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
+        gamemanager = FindObjectOfType<Main_GameManager>();
 
         myRotateTo.enabled = true;
         myRotateTo.target = this.gameObject;
@@ -33,22 +35,25 @@ public class CameraLookHere : MonoBehaviour {
 
     private void Update() {
 
-        Move();
+        if (!gamemanager.isCurrentlyExamine) {
 
-        if (transform.position.x >= Xmax) {
-            transform.position = new Vector3(Xmax, transform.position.y, transform.position.z);
-        }
+            Move();
 
-        if (transform.position.y >= Ymax) {
-            transform.position = new Vector3(transform.position.x, Ymax, transform.position.z);
-        }
+            if (transform.position.x >= Xmax) {
+                transform.position = new Vector3(Xmax, transform.position.y, transform.position.z);
+            }
 
-        if (transform.position.x <= Xmin) {
-            transform.position = new Vector3(Xmin, transform.position.y, transform.position.z);
-        }
+            if (transform.position.y >= Ymax) {
+                transform.position = new Vector3(transform.position.x, Ymax, transform.position.z);
+            }
 
-        if (transform.position.y <= Ymin) {
-            transform.position = new Vector3(transform.position.x, Ymin, transform.position.z);
+            if (transform.position.x <= Xmin) {
+                transform.position = new Vector3(Xmin, transform.position.y, transform.position.z);
+            }
+
+            if (transform.position.y <= Ymin) {
+                transform.position = new Vector3(transform.position.x, Ymin, transform.position.z);
+            }
         }
     }
 
