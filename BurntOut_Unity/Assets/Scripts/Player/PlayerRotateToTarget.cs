@@ -7,7 +7,16 @@ public class PlayerRotateToTarget : MonoBehaviour {
     public GameObject target;
     public float speed;
 
-	void Update () {
+    private Main_GameManager gamemanager;
+
+    private void Start() {
+        gamemanager = FindObjectOfType<Main_GameManager>();
+
+        if (gamemanager.scene.name == "Hospital_Patient_SingleRoom")
+            target = Camera.main.gameObject;
+    }
+
+    void Update () {
 
         Vector3 targetDirection = target.transform.position - transform.position;
         Debug.DrawRay(transform.position, targetDirection, Color.red);

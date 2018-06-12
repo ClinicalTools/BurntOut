@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExamineObject_Canvas : MonoBehaviour {
 
 
-    public float distanceFromCamera = 2;
+    public float distanceFromCamera = 0.1f;
     private GameObject targetlocation;
     private Camera mainCamera;
 
