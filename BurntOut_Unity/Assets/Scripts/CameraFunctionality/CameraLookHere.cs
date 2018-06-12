@@ -26,10 +26,10 @@ public class CameraLookHere : MonoBehaviour {
         myRotateTo.enabled = true;
         myRotateTo.target = this.gameObject;
 
-        Xmax = transform.position.x + 1;
-        Ymax = transform.position.y + 1;
-        Xmin = transform.position.x - 1;
-        Ymin = transform.position.y - 1;
+        Xmax = transform.position.x + bounds;
+        Ymax = transform.position.y + bounds;
+        Xmin = transform.position.x - bounds;
+        Ymin = transform.position.y - bounds;
 
     }
 

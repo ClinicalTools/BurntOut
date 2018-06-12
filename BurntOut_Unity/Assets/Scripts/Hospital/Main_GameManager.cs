@@ -3,13 +3,14 @@ using UnityEngine.PostProcessing;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class Main_GameManager : MonoBehaviour
-{
+public class Main_GameManager : MonoBehaviour {
     private int roomsWon;
     private int roomsLost;
 
     // store current patient
     public InteractPatient currentRoom;
+
+    public Animator screenfade;
 
     public GameObject Canvas_Paused;
     public GameObject Canvas_Win;
@@ -57,8 +58,7 @@ public class Main_GameManager : MonoBehaviour
         Cursor.visible = true;
     }
 
-    void Start()
-    {
+    void Start() {
         scene = SceneManager.GetActiveScene();
 
         if (scene.name == "Hospital_Patient_SingleRoom") {
@@ -95,14 +95,11 @@ public class Main_GameManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
+    void Update() {
 
         // pause screen 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (gamePaused == true)
-            {
+        if (Input.GetKeyDown(KeyCode.P)) {
+            if (gamePaused == true) {
                 Debug.Log("Resume Game");
                 Time.timeScale = 1;
                 gamePaused = false;
@@ -110,9 +107,7 @@ public class Main_GameManager : MonoBehaviour
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
                 ScreenUnblur();
-            }
-            else
-            {
+            } else {
                 Debug.Log("Game Pause");
                 Time.timeScale = 0;
                 gamePaused = true;
@@ -133,8 +128,7 @@ public class Main_GameManager : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////
 
 
-    public void MinigameStart()
-    {
+    public void MinigameStart() {
         ScreenBlur();
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
@@ -142,8 +136,7 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
     }
 
-    public void MinigameEnd()
-    {
+    public void MinigameEnd() {
         ScreenUnblur();
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
@@ -157,20 +150,17 @@ public class Main_GameManager : MonoBehaviour
 
 
 
-    public void ScreenBlur()
-    {
+    public void ScreenBlur() {
         dofSettings.focusDistance = 0.1f;
         ppScene.profile.depthOfField.settings = dofSettings;
     }
 
-    public void ScreenUnblur()
-    {
+    public void ScreenUnblur() {
         dofSettings.focusDistance = 0.94f;
         ppScene.profile.depthOfField.settings = dofSettings;
     }
 
-    public void ExitRoom()
-    {
+    public void ExitRoom() {
         dialogueManager.EndDialogue();
 
         // freeze player controller
@@ -187,8 +177,7 @@ public class Main_GameManager : MonoBehaviour
 
     }
 
-    public void RoomComplete()
-    {
+    public void RoomComplete() {
         Stars[roomsWon++].StartAnimation();
         if (roomsWon >= 3)
             hospitalwin = true;
@@ -196,8 +185,7 @@ public class Main_GameManager : MonoBehaviour
         currentRoom.door.doorlocked = false;
         currentRoom.completed = true;
     }
-    public void RoomLost()
-    {
+    public void RoomLost() {
         BadStars[roomsLost++].StartAnimation();
         if (roomsLost >= 3)
             Lose();
@@ -209,13 +197,16 @@ public class Main_GameManager : MonoBehaviour
     // on loss here
     // l   | l i
     // l l | l -
-    public void Lose()
-    {
+    public void Lose() {
         StartCoroutine(LoseWithDelay());
     }
 
     public void returnToMainMenu() {
         Application.LoadLevel("MainMenu");
+    }
+
+    public void Transition() {
+        StartCoroutine(TransitionToCentral());
     }
 
     public IEnumerator LoseWithDelay() {
@@ -229,8 +220,16 @@ public class Main_GameManager : MonoBehaviour
         Cursor.visible = true;
 
     }
-    
-    
+
+    public IEnumerator TransitionToCentral() {
+
+        screenfade.SetBool("fade", true);
+
+        yield return new WaitForSeconds(0.5f);
+        Application.LoadLevel("Central");
+    }
+
+
 
 
 }

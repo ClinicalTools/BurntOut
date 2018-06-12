@@ -12,7 +12,7 @@ public class PlayerRotateToTarget : MonoBehaviour {
     private void Start() {
         gamemanager = FindObjectOfType<Main_GameManager>();
 
-        if (gamemanager.scene.name == "Hospital_Patient_SingleRoom")
+        if (gamemanager.scene.name == "Hospital_Patient_SingleRoom" && target == null)
             target = Camera.main.gameObject;
     }
 
