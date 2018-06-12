@@ -83,9 +83,12 @@ public class InteractPatient : MonoBehaviour
 
         if (gameManager.scene.name == "Hospital_Patient_SingleRoom") {
 
-            interactPrompt.transform.parent.gameObject.SetActive(false);
-            gameManager.currentRoom = this;
-            dialogueManager.StartDialogue();
+            if (!gameManager.isCurrentlyExamine) {
+
+                interactPrompt.transform.parent.gameObject.SetActive(false);
+                gameManager.currentRoom = this;
+                dialogueManager.StartDialogue();
+            }
         }
 
     }
