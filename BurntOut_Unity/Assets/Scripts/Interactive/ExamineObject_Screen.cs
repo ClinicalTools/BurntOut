@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExamineObject_Screen : MonoBehaviour {
 
-   private Camera mainCamera;
+    private Camera mainCamera;
 
     private ParticleSystem myParticleSystem;
 
@@ -20,6 +20,7 @@ public class ExamineObject_Screen : MonoBehaviour {
     // Use this for initialization
     void Start() {
         mainCamera = Camera.main;
+
         gamemanager = GameObject.FindObjectOfType<Main_GameManager>();
 
         myParticleSystem = gameObject.GetComponentInChildren<ParticleSystem>();

@@ -66,6 +66,11 @@ public class Main_GameManager : MonoBehaviour {
             Cursor.visible = true;
         }
 
+        if (scene.name == "ICU_New") {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         if (scene.name == "Hospital") {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
         }
@@ -75,7 +80,8 @@ public class Main_GameManager : MonoBehaviour {
         }
 
         // hide unnessesary UI here
-        UI_ChoiceDia.SetActive(false);
+        if (scene.name != "ICU_New")
+            UI_ChoiceDia.SetActive(false);
 
         currentRoom = null;
 
@@ -166,6 +172,11 @@ public class Main_GameManager : MonoBehaviour {
         // freeze player controller
 
         if (scene.name != "Hospital_Patient_SingleRoom") {
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+            playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+        }
+
+        if (scene.name != "ICU_New") {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
         }

@@ -6,13 +6,15 @@ public class PlayerRotateToTarget : MonoBehaviour {
 
     public GameObject target;
     public float speed;
-
     private Main_GameManager gamemanager;
 
     private void Start() {
         gamemanager = FindObjectOfType<Main_GameManager>();
 
         if (gamemanager.scene.name == "Hospital_Patient_SingleRoom" && target == null)
+            target = Camera.main.gameObject;
+
+        if (gamemanager.scene.name == "ICU_New" && target == null)
             target = Camera.main.gameObject;
     }
 

@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectionInteractionTest.unity
     guid: 1c2d79679bc89e14986ebc9d47eae503
+  - enabled: 1
+    path: Assets/Scenes/ICU_New.unity
+    guid: fa3c68e73ac106845a3b10ba2446dbc6
   m_configObjects: {}
