@@ -1,4 +1,5 @@
 ﻿using CtiEditor;
+using OOEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,14 +10,15 @@ public class OptionEditor
 {
     private bool eventsFoldout;
     private readonly Option option;
-    private readonly TasksEditor tasksEditor;
+    private ReorderableList<Task, TaskDrawer> taskList;
     private float feedbackWidth;
+
 
     public OptionEditor(Option option, Scenario scenario)
     {
         this.option = option;
-
-        tasksEditor = new TasksEditor(option.Events, scenario);
+        
+        taskList = new ReorderableList<Task, TaskDrawer>(option.Events);
     }
 
     public void Edit()
@@ -30,7 +32,7 @@ public class OptionEditor
 
         if (eventsFoldout)
             using (CtiEditorGUI.Indent())
-                tasksEditor.Edit();
+                taskList.Draw();
 
         Color color = new Color();
         if (option.result == OptionResults.CONTINUE)

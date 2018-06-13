@@ -16,6 +16,8 @@ public class ScenarioEditor
     private readonly List<ChoiceEditor> choiceEditors = new List<ChoiceEditor>();
     public readonly Scenario scenario;
 
+    public static Scenario CurrentScenario { get; private set; }
+
     private TextField nameField;
     private Foldout actorsFoldout, choicesFoldout;
     private LabelField endNarrativeLabel;
@@ -23,13 +25,13 @@ public class ScenarioEditor
 
     public ScenarioEditor(Scenario scenario)
     {
+        CurrentScenario = scenario;
         this.scenario = scenario;
 
         nameField = new TextField(scenario.name, "Name:", "Name to be displayed in the editor");
-        nameField.Changed += (object sender, EventArgs e) =>
+        nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
         {
-            var field = (TextField)sender;
-            scenario.name = field.Value;
+            scenario.name = e.Value;
         };
         foreach (Choice choice in scenario.Choices)
         {
@@ -44,15 +46,16 @@ public class ScenarioEditor
 
         endNarrativeLabel = new LabelField("End Narrative:");
         endNarrativeField = new TextArea(scenario.endNarrative);
-        endNarrativeField.Changed += (object sender, EventArgs e) =>
+        endNarrativeField.Changed += (object sender, ControlChangedArgs<string> e) =>
         {
-            var field = (TextArea)sender;
-            scenario.endNarrative = field.Value;
+            scenario.endNarrative = e.Value;
         };
     }
 
     public void Draw()
     {
+        CurrentScenario = scenario;
+
         nameField.Draw();
 
         actorsFoldout.Draw();

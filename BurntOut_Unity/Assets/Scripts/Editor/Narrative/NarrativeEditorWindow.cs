@@ -21,14 +21,13 @@ public class NarrativeEditorWindow : EditorWindow
     private readonly string gameObjectName = "NarrativeManager";
 
     // Toolbar controls
-    private ToggleButton sceneTab;
-    private List<ToggleButton> scenarioTabs = new List<ToggleButton>();
+    private TabControl tabs;
     private IntSlider fontSizeSlider;
     private Button addScenarioBtn;
     private Button delScenarioBtn;
 
     private Button saveScenarioBtn;
-    private Button loadScenarioBtn; 
+    private Button loadScenarioBtn;
     private Button saveAllBtn;
     private Button loadAllBtn;
 
@@ -40,35 +39,14 @@ public class NarrativeEditorWindow : EditorWindow
         if (sceneNarrative == null)
             ResetSceneManager();
 
-        sceneTab = new ToggleButton(selectedScenario == -1, "Scene");
-        sceneTab.Changed += (object sender, EventArgs e) =>
-        {
-            var tab = (ToggleButton)sender;
-            tab.Value = true;
-
-            selectedScenario = -1;
-            foreach (var scenarioTab in scenarioTabs)
-                scenarioTab.Value = false;
-        };
-
-        scenarioTabs.Clear();
+        string[] tabNames = new string[sceneNarrative.scenarios.Count + 1];
+        tabNames[0] = "Scene";
         for (int i = 0; i < sceneNarrative.scenarios.Count; i++)
         {
-            scenarioTabs.Add(new ToggleButton(selectedScenario == i, "Scenario " + (i + 1) + " - " + sceneNarrative.scenarios[i].name));
-            var tabNum = i;
-            scenarioTabs[i].Changed += (object sender, EventArgs e) =>
-            {
-                var tab = (ToggleButton)sender;
-                tab.Value = true;
-
-                selectedScenario = tabNum;
-                sceneTab.Value = false;
-                foreach (var scenarioTab in scenarioTabs)
-                    if (scenarioTab != scenarioTabs[tabNum])
-                        scenarioTab.Value = false;
-            };
+            tabNames[i + 1] = "Scenario " + (i + 1) + " - " + sceneNarrative.scenarios[i].name;
         }
-
+        tabs = new TabControl(0, tabNames);
+        
         fontSizeSlider = new IntSlider(11, 10, 20)
         {
             MaxWidth = 150
@@ -103,30 +81,16 @@ public class NarrativeEditorWindow : EditorWindow
         Scenario scenario = new Scenario(sceneNarrative.scenarios.ToArray());
         sceneNarrative.scenarios.Add(scenario);
         scenarioEditors.Add(new ScenarioEditor(scenario));
-        var tabNum = scenarioTabs.Count;
-        scenarioTabs.Add(new ToggleButton(false, "Scenario " + (tabNum) + " - " + sceneNarrative.scenarios[tabNum].name));
-        scenarioTabs[tabNum].Changed += (object tabSender, EventArgs args) =>
-        {
-            var tab = (ToggleButton)sender;
-            tab.Value = true;
-
-            selectedScenario = tabNum;
-            sceneTab.Value = false;
-            foreach (var scenarioTab in scenarioTabs)
-                if (scenarioTab != scenarioTabs[tabNum])
-                    scenarioTab.Value = false;
-        };
+        tabs.AddTab("Scenario");
     }
     private void DelScenarioBtn_Pressed(object sender, EventArgs e)
     {
         if (EditorUtility.DisplayDialog("Remove Scenario",
                        "Are you sure you want to delete this scenario?", "Delete", "Cancel"))
         {
-            sceneNarrative.scenarios.RemoveAt(selectedScenario);
-            scenarioEditors.RemoveAt(selectedScenario);
-            scenarioTabs.RemoveAt(selectedScenario);
-            if (selectedScenario > 0)
-                scenarioTabs[--selectedScenario].Value = true;
+            sceneNarrative.scenarios.RemoveAt(tabs.Value - 1);
+            scenarioEditors.RemoveAt(tabs.Value - 1);
+            tabs.RemoveTab(tabs.Value);
 
             // Ensure there's at least one scenario
             if (sceneNarrative.scenarios.Count == 0)
@@ -295,8 +259,11 @@ public class NarrativeEditorWindow : EditorWindow
 
         // Ensure there's at least one scenario
         if (sceneNarrative.scenarios.Count == 0)
+        {
+            tabs.AddTab("Scenario");
             sceneNarrative.scenarios.Add(
                 new Scenario(sceneNarrative.scenarios.ToArray()));
+        }
 
         // Ensure scenarios in the editor match the scenarios in the scene
         if (scenarioEditors.Count != sceneNarrative.scenarios.Count ||
@@ -311,14 +278,9 @@ public class NarrativeEditorWindow : EditorWindow
         using (new Toolbar())
         using (new OverrideTextStyle(12))
         {
-            sceneTab.Draw();
-
             for (int i = 0; i < sceneNarrative.scenarios.Count; i++)
-            {
-                var tab = scenarioTabs[i];
-                tab.Content.text = "Scenario " + (i + 1) + " - " + sceneNarrative.scenarios[i].name;
-                tab.Draw();
-            }
+                tabs.SetTabName(i + 1, "Scenario " + (i + 1) + " - " + sceneNarrative.scenarios[i].name);
+            tabs.Draw();
 
             FlexibleSpace.Draw();
 
@@ -341,11 +303,11 @@ public class NarrativeEditorWindow : EditorWindow
         using (new ScrollView(ref scrollPosition))
         {
             // Edit basic scene info
-            if (selectedScenario == -1)
+            if (tabs.Value == 0)
                 sceneEditor.Draw();
             // Edit selected scenario
             else
-                scenarioEditors[selectedScenario].Draw();
+                scenarioEditors[tabs.Value - 1].Draw();
         }
     }
 }

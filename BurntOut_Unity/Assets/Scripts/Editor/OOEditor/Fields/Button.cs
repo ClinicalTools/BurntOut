@@ -8,9 +8,7 @@ namespace OOEditor
     public class Button : GUIControl<bool>
     {
         public event EventHandler Pressed;
-
-        public override bool Value { get; set; }
-
+        
         protected override GUIStyle BaseStyle => EditorStyles.miniButton;
         protected override GUIStyle ToolbarStyle => EditorStyles.toolbarButton;
 

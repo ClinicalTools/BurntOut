@@ -5,10 +5,7 @@ namespace OOEditor
 {
     public class LabelField : GUIElement
     {
-        protected override GUIStyle BaseStyle
-        {
-            get { return EditorStyles.label; }
-        }
+        protected override GUIStyle BaseStyle => EditorStyles.label;
 
         public LabelField(string text) : base(text)
         {

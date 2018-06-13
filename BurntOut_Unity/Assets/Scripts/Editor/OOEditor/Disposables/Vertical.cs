@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEditor;
+using UnityEngine;
 
 namespace OOEditor
 {
@@ -9,21 +10,25 @@ namespace OOEditor
     /// </summary>
     public class Vertical : IDisposable
     {
-        private int oldIndentation;
+        private int oldIndentLevel;
 
         public Vertical()
         {
-            EditorGUILayout.BeginVertical();
-
-            oldIndentation = EditorGUI.indentLevel;
+            oldIndentLevel = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
+
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Space(oldIndentLevel * 20);
+            EditorGUILayout.BeginVertical();
         }
 
         public void Dispose()
         {
-            EditorGUI.indentLevel = oldIndentation;
-
             EditorGUILayout.EndVertical();
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUI.indentLevel = oldIndentLevel;
+
         }
     }
 }

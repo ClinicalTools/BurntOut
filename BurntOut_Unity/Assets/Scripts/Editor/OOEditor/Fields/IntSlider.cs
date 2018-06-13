@@ -40,21 +40,21 @@ namespace OOEditor
 
         public IntSlider(int value, int min, int max) : base()
         {
-            Value = value;
             Min = min;
             Max = max;
+            Value = value;
         }
         public IntSlider(int value, int min, int max, string text) : base(text)
         {
-            Value = value;
             Min = min;
             Max = max;
+            Value = value;
         }
         public IntSlider(int value, int min, int max, string text, string tooltip) : base(text, tooltip)
         {
-            Value = value;
             Min = min;
             Max = max;
+            Value = value;
         }
 
         private bool SliderFocused

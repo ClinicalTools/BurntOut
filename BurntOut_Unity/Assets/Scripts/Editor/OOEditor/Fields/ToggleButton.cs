@@ -8,16 +8,9 @@ namespace OOEditor
     {
         public override bool Value { get; set; }
 
-        protected override GUIStyle BaseStyle
-        {
-            get
-            {
-                if (OOEditorManager.InToolbar == 0)
-                    return EditorStyles.miniButton;
-                else
-                    return EditorStyles.toolbarButton;
-            }
-        }
+
+        protected override GUIStyle BaseStyle => EditorStyles.miniButton;
+        protected override GUIStyle ToolbarStyle => EditorStyles.toolbarButton;
 
         public ToggleButton(bool value) : base()
         {

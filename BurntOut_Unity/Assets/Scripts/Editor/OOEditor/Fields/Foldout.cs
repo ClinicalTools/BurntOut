@@ -5,12 +5,7 @@ namespace OOEditor
 {
     public class Foldout : GUIControl<bool>
     {
-        public override bool Value { get; set; }
-
-        protected override GUIStyle BaseStyle
-        {
-            get { return EditorStyles.foldout; }
-        }
+        protected override GUIStyle BaseStyle => EditorStyles.foldout;
 
         public Foldout() : base() { }
         public Foldout(string text) : base(text) { }

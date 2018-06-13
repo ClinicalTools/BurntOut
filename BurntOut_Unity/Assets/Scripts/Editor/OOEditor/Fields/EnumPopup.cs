@@ -1,22 +1,13 @@
-﻿using OOEditor.Internal;
-using System;
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
 {
-    public class EnumPopup<T> : GUIControlField<Enum>
+    public class EnumPopup : GUIControlField<Enum>
     {
-        protected override GUIStyle BaseStyle
-        {
-            get
-            {
-                if (OOEditorManager.InToolbar == 0)
-                    return EditorStyles.popup;
-                else
-                    return EditorStyles.toolbarPopup;
-            }
-        }
+        protected override GUIStyle BaseStyle => EditorStyles.popup;
+        protected override GUIStyle ToolbarStyle => EditorStyles.toolbarPopup;
 
         protected override float AbsoluteMinWidth { get; } = 20;
         

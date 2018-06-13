@@ -7,8 +7,24 @@ namespace OOEditor.Internal
 {
     internal static class OOEditorManager
     {
-        internal static bool wait;
-        
+        private const int SPACING = 3;
+
+        private static bool wait;
+        public static bool Wait
+        {
+            get
+            {
+                return wait;
+            }
+            set
+            {
+                //if (wait == true && value == false)
+                    //EmptyQueue();
+                wait = value;
+            }
+        }
+
+
         internal static int InToolbar { get; set; }
         internal static int InHorizontal { get; set; }
         internal static OverrideLabelStyle OverrideLabelStyle { get; set; }
@@ -17,28 +33,53 @@ namespace OOEditor.Internal
         private static Queue<GUIElement> drawElements = new Queue<GUIElement>();
         private static Queue<GUIContent> drawContents = new Queue<GUIContent>();
         private static Queue<Action<Rect>> draws = new Queue<Action<Rect>>();
+        private static float minDrawWidth;
         internal static void DrawGuiElement(GUIElement element, Action<Rect> draw, GUIContent content = null)
         {
             if (content == null)
                 content = new GUIContent(" ");
 
+            if (element.MinWidth > 0)
+                minDrawWidth += element.MinWidth;
+            if (draws.Count > 0)
+                minDrawWidth += SPACING;
             drawElements.Enqueue(element);
             drawContents.Enqueue(content);
             draws.Enqueue(draw);
 
-            if (!wait)
+            if (!Wait)
                 EmptyQueue();
         }
-
-        private static void EmptyQueue()
+        
+        private static Rect queueRect;
+        public static void EmptyQueueInHorizontalRect(Rect rect)
         {
+            Wait = false;
             while (drawElements.Count > 0)
             {
                 var draw = draws.Dequeue();
                 var elem = drawElements.Dequeue();
                 var contents = drawContents.Dequeue();
-                draw(GetDimensions(contents, elem));
+                Rect pos = GetPosInHorizontalRect(rect, elem);
+                draw(pos);
+                rect.x += pos.width + SPACING;
+                rect.width -= pos.width + SPACING;
             }
+            minDrawWidth = 0;
+        }
+
+        public static void EmptyQueue()
+        {
+            Wait = false;
+            while (drawElements.Count > 0)
+            {
+                var draw = draws.Dequeue();
+                var elem = drawElements.Dequeue();
+                var contents = drawContents.Dequeue();
+                Rect pos = GetDimensions(contents, elem);
+                draw(pos);
+            }
+            minDrawWidth = 0;
         }
 
         private static Rect horizontalRect;
@@ -47,6 +88,24 @@ namespace OOEditor.Internal
             using (new Horizontal())
                 GUILayout.FlexibleSpace();
             horizontalRect = GUILayoutUtility.GetLastRect();
+        }
+        
+        private static Rect GetPosInHorizontalRect(Rect rect, GUIElement guiElement)
+        {
+            if (guiElement.MinWidth > 0)
+                minDrawWidth -= guiElement.MinWidth;
+            float maxWidth = rect.width - minDrawWidth;
+            float preferredWidth = Mathf.Min(maxWidth, rect.width / (draws.Count + 1));
+            if (guiElement.MinWidth > 0)
+                preferredWidth = guiElement.MinWidth;
+            if (guiElement.Width > 0 && guiElement.Width < maxWidth)
+                preferredWidth = guiElement.Width;
+            if (guiElement.MaxWidth > 0 && guiElement.MaxWidth < preferredWidth)
+                preferredWidth = guiElement.MaxWidth;
+
+            rect.width = preferredWidth;
+
+            return rect;
         }
         // Gets the rect for the GUI object based on the content, style, and width parameters
         private static Rect GetDimensions(GUIContent content, GUIElement guiElement)
@@ -83,10 +142,7 @@ namespace OOEditor.Internal
             Rect position;
             position = EditorGUILayout.GetControlRect(false, height, style, options.ToArray());
             position.height = height;
-
-            if (guiElement.MinWidth > 0)
-                Debug.Log("" + guiElement.MinWidth + " " + position.width);
-
+            
             return position;
         }
 

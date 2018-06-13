@@ -8,7 +8,7 @@ namespace OOEditor
     {
         public virtual T Value { get; set; }
 
-        public event EventHandler Changed;
+        public event EventHandler<ControlChangedArgs<T>> Changed;
 
         public override GUIStyle GUIStyle
         {
@@ -38,7 +38,7 @@ namespace OOEditor
             base.PrepareDisplay(position);
 
             if (!Value.Equals(oldVal) && Changed != null)
-                Changed(this, null);
+                Changed(this, new ControlChangedArgs<T>(oldVal, Value));
         }
 
         protected GUIControl() : base() { }

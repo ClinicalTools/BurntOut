@@ -15,10 +15,9 @@ public class SceneNarrationEditor
         startNarrationLabel.Style.FontStyle = FontStyle.Bold;
 
         startNarrationField = new TextArea(sceneNarrative.startNarration);
-        startNarrationField.Changed += (object sender, EventArgs e) =>
+        startNarrationField.Changed += (object sender, ControlChangedArgs<string> e) =>
         {
-            var field = (TextField)sender;
-            sceneNarrative.startNarration = field.Value;
+            sceneNarrative.startNarration = e.Value;
         };
 
         endNarrationLabel = new LabelField("End Narration:");
@@ -26,10 +25,9 @@ public class SceneNarrationEditor
 
 
         endNarrationField = new TextArea(sceneNarrative.endNarration);
-        endNarrationField.Changed += (object sender, EventArgs e) =>
+        endNarrationField.Changed += (object sender, ControlChangedArgs<string> e) =>
         {
-            var field = (TextField)sender;
-            sceneNarrative.endNarration = field.Value;
+            sceneNarrative.endNarration = e.Value;
         };
     }
 

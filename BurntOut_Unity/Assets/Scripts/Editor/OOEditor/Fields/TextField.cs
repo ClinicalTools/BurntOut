@@ -19,22 +19,10 @@ namespace OOEditor
                     this.value = value;
             }
         }
-
-        protected override float AbsoluteMinWidth
-        {
-            get { return 10; }
-        }
-
-        protected override GUIStyle BaseStyle
-        {
-            get
-            {
-                if (OOEditorManager.InToolbar == 0)
-                    return EditorStyles.textField;
-                else
-                    return EditorStyles.toolbarTextField;
-            }
-        }
+        
+        protected override GUIStyle BaseStyle => EditorStyles.textField;
+        protected override GUIStyle ToolbarStyle => EditorStyles.toolbarTextField;
+        protected override float AbsoluteMinWidth { get; } = 10;
 
         public TextField(string value) : base()
         {

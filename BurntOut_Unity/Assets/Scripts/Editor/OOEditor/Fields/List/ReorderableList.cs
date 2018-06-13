@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OOEditor.Internal;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -20,23 +21,32 @@ namespace OOEditor
                 drawers.Add(drawer);
             }
 
-            list = new UnityEditorInternal.ReorderableList(value, typeof(Task));
-            list.headerHeight = 4;
-            list.drawElementCallback =
+            list = new UnityEditorInternal.ReorderableList(Value, typeof(T))
+            {
+                headerHeight = 4,
+                drawElementCallback =
                 (Rect rect, int index, bool isActive, bool isFocused) =>
                 {
+                    rect.y += 1;
+                    rect.height -= 4;
+                    OOEditorManager.Wait = true;
                     drawers[index].Draw();
-                };
+                    OOEditorManager.EmptyQueueInHorizontalRect(rect);
+                    
+                    //Value[index] = drawers[index].Value;
+                }
+            };
         }
         
-        protected void Draw()
+        public void Draw()
         {
             list.elementHeight = EditorStyles.popup.CalcHeight(new GUIContent(" "), 100) + 4;
+
             using (new Vertical())
                 list.DoLayoutList();
-
-            for (int i = 0; i < Value.Count; i++)
-                Value[i] = drawers[i].Value;
+                
+            //for (int i = 0; i < Value.Count; i++)
+                //Value[i] = drawers[i].Value;
         }
     }
 }

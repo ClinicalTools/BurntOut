@@ -1,4 +1,5 @@
 ﻿using CtiEditor;
+using OOEditor;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class ChoiceEditor
     private bool optionsFoldout;
     private readonly List<bool> optionFoldout = new List<bool>();
     private readonly List<OptionEditor> optionEditors = new List<OptionEditor>();
-    private readonly TasksEditor tasksEditor;
+    private ReorderableList<Task, TaskDrawer> taskList;
 
     private readonly Scenario scenario;
     private readonly Choice choice;
@@ -27,8 +28,8 @@ public class ChoiceEditor
             optionFoldout.Add(false);
             optionEditors.Add(new OptionEditor(option, scenario));
         }
-
-        tasksEditor = new TasksEditor(choice.Events, scenario);
+        
+        taskList = new ReorderableList<Task, TaskDrawer>(choice.Events);
     }
 
     public void Edit()
@@ -40,7 +41,7 @@ public class ChoiceEditor
 
         if (eventsFoldout)
             using (CtiEditorGUI.Indent())
-                tasksEditor.Edit();
+                taskList.Draw();
 
         choice.text = CtiEditorGUI.TextField(choice.text, "Text: ", "Text to be displayed in game");
 
