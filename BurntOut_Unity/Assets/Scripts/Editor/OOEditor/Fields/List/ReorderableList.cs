@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class ReorderableList<T, TDrawer> where TDrawer : GUIObjectDrawer<T>
+    public class ReorderableList<T, TDrawer> where TDrawer : IGUIObjectDrawer<T>
     {
         private List<TDrawer> drawers = new List<TDrawer>();
         public List<T> Value { get; private set; }

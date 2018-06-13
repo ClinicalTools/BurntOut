@@ -10,13 +10,15 @@ using UnityEngine;
 /// </summary>
 public class ScenarioEditor
 {
+    public static Scenario CurrentScenario { get; private set; }
+
+    public readonly Scenario scenario;
+
     //private bool actorsFoldout;
     //private bool choicesFoldout;
     private readonly List<bool> choiceFoldout = new List<bool>();
     private readonly List<ChoiceEditor> choiceEditors = new List<ChoiceEditor>();
-    public readonly Scenario scenario;
-
-    public static Scenario CurrentScenario { get; private set; }
+    private readonly FoldoutList<Choice, ChoiceEditor> choiceList;
 
     private TextField nameField;
     private Foldout actorsFoldout, choicesFoldout;
@@ -43,13 +45,10 @@ public class ScenarioEditor
             DefaultElement = () => { return new Actor(scenario.Actors.ToArray()); }
         };
 
+        
         choicesFoldout = new Foldout("Choices");
         choicesFoldout.Style.FontStyle = FontStyle.Bold;
-        foreach (Choice choice in scenario.Choices)
-        {
-            choiceFoldout.Add(false);
-            choiceEditors.Add(new ChoiceEditor(choice, scenario));
-        }
+        choiceList = new FoldoutList<Choice, ChoiceEditor>(scenario.Choices);
 
         endNarrativeLabel = new LabelField("End Narrative:");
         endNarrativeField = new TextArea(scenario.endNarrative);
@@ -67,68 +66,13 @@ public class ScenarioEditor
 
         actorsFoldout.Draw();
         if (actorsFoldout.Value)
-        {
-            using (CtiEditorGUI.Indent())
-            {
+            using (new Indent())
                 actorsList.Draw();
-            }
-        }
 
         choicesFoldout.Draw();
         if (choicesFoldout.Value)
-        {
-            using (CtiEditorGUI.Indent())
-            {
-                EditorHelper.FoldoutListEdit(
-                    // Add element
-                    () =>
-                    {
-                        Choice choice = new Choice();
-                        scenario.Choices.Add(choice);
-                        choiceEditors.Add(new ChoiceEditor(choice, scenario));
-                    },
-                    // Move element
-                    (int orig, int newPos) =>
-                    {
-                        Choice choice = scenario.Choices[orig];
-                        scenario.Choices.RemoveAt(orig);
-                        scenario.Choices.Insert(newPos, choice);
-
-                        ChoiceEditor choiceEditor = choiceEditors[orig];
-                        choiceEditors.RemoveAt(orig);
-                        choiceEditors.Insert(newPos, choiceEditor);
-                    },
-                    // Remove element
-                    (int i) =>
-                    {
-                        scenario.Choices.RemoveAt(i);
-                        choiceEditors.RemoveAt(i);
-
-                    },
-                    // Folded out display
-                    (int i) =>
-                    {
-                        using (CtiEditorGUI.Container())
-                            choiceEditors[i].Edit();
-                    },
-                    choiceFoldout,
-                    // Foldout title
-                    (int i) => { return ("Choice " + (i + 1) + " - " + scenario.Choices[i].name); },
-                    // Foldout color
-                    (int i) =>
-                    {
-                        // Red if there is no option to continue
-                        foreach (Option option in scenario.Choices[i].Options)
-                            if (option.result == OptionResults.CONTINUE)
-                                return GUI.contentColor;
-
-                        return EditorHelper.ErrorColor;
-                    },
-                    "Remove Choice",
-                    "Are you sure you want to delete this choice?"
-                );
-            }
-        }
+            using (new Indent())
+                choiceList.Draw();
 
         endNarrativeLabel.Draw();
         endNarrativeField.Draw();

@@ -1,50 +1,110 @@
 ﻿using CtiEditor;
 using OOEditor;
-using UnityEditor;
+using System;
 using UnityEngine;
 
 /// <summary>
 /// Manages the editing of an option for a given scenario.
 /// </summary>
-public class OptionEditor
+public class OptionEditor : FoldoutObjectDrawer<Option>
 {
-    private bool eventsFoldout;
-    private readonly Option option;
-    private ReorderableList<Task, TaskDrawer> taskList;
-    private float feedbackWidth;
-
-
-    public OptionEditor(Option option, Scenario scenario)
+    protected override string FoldoutName => $"Option {(ChoiceEditor.CurrentChoice.Options.IndexOf(Value) + 1)} - {Value.name}";
+    protected override Color? FoldoutColor
     {
-        this.option = option;
-        
-        taskList = new ReorderableList<Task, TaskDrawer>(option.Events);
+        get
+        {
+            switch (Value.result)
+            {
+                case OptionResults.CONTINUE:
+                    return EditorColors.LightGreen;
+                case OptionResults.TRY_AGAIN:
+                    return EditorColors.LightYellow;
+                case OptionResults.END:
+                    return EditorColors.LightRed;
+                default:
+                    return null;
+            }
+        }
     }
 
-    public void Edit()
+    private Foldout eventsFoldout;
+    private ReorderableList<Task, TaskDrawer> taskList;
+
+    private readonly TextField nameField;
+    private readonly TextField textField;
+
+    private readonly EnumPopup resultPopup;
+
+    private readonly LabelField feedbackLabel;
+    private readonly TextArea feedback;
+
+
+    public OptionEditor(Option option)
     {
-        option.name = CtiEditorGUI.TextField(option.name, "Name: ", "Name to be displayed in the editor");
+        Value = option;
 
-        option.text = CtiEditorGUI.TextField(option.text, "Text: ", "Text to be displayed in game");
+        nameField = new TextField(option.name, "Name:", "Name to be displayed in the editor");
+        nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
+        {
+            Value.name = e.Value;
+        };
 
-        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
-            eventsFoldout = CtiEditorGUI.Foldout(eventsFoldout, "Events");
+        textField = new TextField(option.text, "Text:", "Text to be displayed in game");
+        textField.Changed += (object sender, ControlChangedArgs<string> e) =>
+        {
+            Value.text = e.Value;
+        };
 
-        if (eventsFoldout)
-            using (CtiEditorGUI.Indent())
+        eventsFoldout = new Foldout("Events");
+        eventsFoldout.Style.FontStyle = FontStyle.Bold;
+
+        taskList = new ReorderableList<Task, TaskDrawer>(option.Events);
+
+        resultPopup = new EnumPopup(Value.result, "Result:");
+        resultPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
+        {
+            Value.result = (OptionResults)(e.Value);
+            SetResultPopupColor();
+        };
+        SetResultPopupColor();
+
+        feedbackLabel = new LabelField("Feedback:");
+        feedback = new TextArea(option.feedback);
+        feedback.Changed += (object sender, ControlChangedArgs<string> e) =>
+        {
+            Value.feedback = e.Value;
+        };
+    }
+
+    private void SetResultPopupColor()
+    {
+        switch (Value.result)
+        {
+            case OptionResults.CONTINUE:
+                resultPopup.Style.FontColor = EditorColors.LightGreen;
+                break;
+            case OptionResults.TRY_AGAIN:
+                resultPopup.Style.FontColor = EditorColors.LightYellow;
+                break;
+            case OptionResults.END:
+                resultPopup.Style.FontColor = EditorColors.LightRed;
+                break;
+        }
+    }
+
+    public override void Draw()
+    {
+        nameField.Draw();
+        textField.Draw();
+
+        eventsFoldout.Draw();
+        if (eventsFoldout.Value)
+            using (new Indent())
                 taskList.Draw();
 
-        Color color = new Color();
-        if (option.result == OptionResults.CONTINUE)
-            color = EditorHelper.ContinueColor;
-        else if (option.result == OptionResults.TRY_AGAIN)
-            color = EditorHelper.TryAgainColor;
-        else if (option.result == OptionResults.END)
-            color = EditorHelper.EndColor;
-        using (CtiEditorGUI.Color(color))
-            option.result = (OptionResults)CtiEditorGUI.EnumPopup(option.result, "Result: ");
+        resultPopup.Draw();
 
-        CtiEditorGUI.LabelField("Feedback:");
-        option.feedback = CtiEditorGUI.TextArea(option.feedback, ref feedbackWidth);
+        feedbackLabel.Draw();
+        feedback.Draw();
     }
 }

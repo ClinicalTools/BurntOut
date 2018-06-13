@@ -1,7 +1,7 @@
 ﻿using OOEditor;
 using System;
 
-public class TaskDrawer : GUIObjectDrawer<Task>
+public class TaskDrawer : IGUIObjectDrawer<Task>
 {
     EnumPopup actionPopup;
     Popup actorPopup;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OOEditor
 {
-    public class GUIList<T, TDrawer> where TDrawer : GUIObjectDrawer<T>
+    public class GUIList<T, TDrawer> where TDrawer : IGUIObjectDrawer<T>
     {
         public List<T> Value { get; private set; }
         private List<TDrawer> drawers = new List<TDrawer>();

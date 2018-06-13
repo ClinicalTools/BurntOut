@@ -1,108 +1,83 @@
 ﻿using CtiEditor;
 using OOEditor;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 /// <summary>
 /// Manages the editing of a choice for a given scenario.
 /// </summary>
-public class ChoiceEditor
+public class ChoiceEditor : FoldoutObjectDrawer<Choice>
 {
-    private bool eventsFoldout;
-    private bool optionsFoldout;
-    private readonly List<bool> optionFoldout = new List<bool>();
-    private readonly List<OptionEditor> optionEditors = new List<OptionEditor>();
-    private ReorderableList<Task, TaskDrawer> taskList;
-
-    private readonly Scenario scenario;
-    private readonly Choice choice;
-
-    public ChoiceEditor(Choice choice, Scenario scenario)
+    protected override string FoldoutName => $"Choice {ScenarioEditor.CurrentScenario.Choices.IndexOf(Value) + 1} - {Value.name}";
+    protected override Color? FoldoutColor
     {
-        this.choice = choice;
-        this.scenario = scenario;
-
-        foreach (Option option in choice.Options)
+        get
         {
-            optionFoldout.Add(false);
-            optionEditors.Add(new OptionEditor(option, scenario));
+            if (Value.Options.Exists(option => option.result == OptionResults.CONTINUE))
+                return null;
+            else
+                return EditorColors.Red;
         }
-        
-        taskList = new ReorderableList<Task, TaskDrawer>(choice.Events);
     }
 
-    public void Edit()
+    public static Choice CurrentChoice { get; private set; }
+
+    private readonly TextField nameField;
+    private readonly Foldout eventsFoldout;
+    private readonly ReorderableList<Task, TaskDrawer> taskList;
+    private readonly TextField textField;
+    private readonly Foldout optionsFoldout;
+    private readonly FoldoutList<Option, OptionEditor> optionList;
+
+    //private bool eventsFoldout;
+    //private bool optionsFoldout;
+    private readonly List<bool> optionFoldout = new List<bool>();
+    private readonly List<OptionEditor> optionEditors = new List<OptionEditor>();
+    
+    public ChoiceEditor(Choice choice)
     {
-        choice.name = CtiEditorGUI.TextField(choice.name, "Name: ", "Name to be displayed in the editor");
+        CurrentChoice = choice;
+        Value = choice;
 
-        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
-            eventsFoldout = CtiEditorGUI.Foldout(eventsFoldout, "Events");
+        int choiceNum = ScenarioEditor.CurrentScenario.Choices.IndexOf(Value);
 
-        if (eventsFoldout)
+        nameField = new TextField(choice.name, "Name:", "Name to be displayed in the editor");
+        nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
+        {
+            choice.name = e.Value;
+        };
+
+        textField = new TextField(choice.text, "Text:", "Text to be displayed in game");
+        textField.Changed += (object sender, ControlChangedArgs<string> e) =>
+        {
+            choice.text = e.Value;
+        };
+
+        eventsFoldout = new Foldout(false, "Events");
+        eventsFoldout.Style.FontStyle = FontStyle.Bold;
+        taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
+
+        optionsFoldout = new Foldout(false, "Options");
+        optionsFoldout.Style.FontStyle = FontStyle.Bold;
+        optionList = new FoldoutList<Option, OptionEditor>(Value.Options);
+    }
+
+    public override void Draw()
+    {
+        CurrentChoice = Value;
+
+        nameField.Draw();
+
+        eventsFoldout.Draw();
+        if (eventsFoldout.Value)
             using (CtiEditorGUI.Indent())
                 taskList.Draw();
 
-        choice.text = CtiEditorGUI.TextField(choice.text, "Text: ", "Text to be displayed in game");
+        textField.Draw();
 
-        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
-            optionsFoldout = CtiEditorGUI.Foldout(optionsFoldout, "Options");
-
-        if (optionsFoldout)
-        {
+        optionsFoldout.Draw();
+        if (optionsFoldout.Value)
             using (CtiEditorGUI.Indent())
-            {
-                EditorHelper.FoldoutListEdit(
-                    // Add element
-                    () =>
-                    {
-                        Option option = new Option();
-                        choice.Options.Add(option);
-                        optionEditors.Add(new OptionEditor(option, scenario));
-                    },
-                    // Move element
-                    (int orig, int newPos) =>
-                    {
-                        Option option = choice.Options[orig];
-                        choice.Options.RemoveAt(orig);
-                        choice.Options.Insert(newPos, option);
-
-                        OptionEditor optionEditor = optionEditors[orig];
-                        optionEditors.RemoveAt(orig);
-                        optionEditors.Insert(newPos, optionEditor);
-                    },
-                    // Remove element
-                    (int i) =>
-                    {
-                        choice.Options.RemoveAt(i);
-                        optionEditors.RemoveAt(i);
-
-                    },
-                    // Folded out display
-                    (int i) =>
-                    {
-                        using (CtiEditorGUI.Container())
-                            optionEditors[i].Edit();
-                    },
-                    optionFoldout,
-                    // Foldout title
-                    (int i) => { return ("Option " + (i + 1) + " - " + choice.Options[i].name); },
-                    // Foldout color
-                    (int i) =>
-                    {
-                        if (choice.Options[i].result == OptionResults.CONTINUE)
-                            return EditorHelper.ContinueColor;
-                        else if (choice.Options[i].result == OptionResults.TRY_AGAIN)
-                            return EditorHelper.TryAgainColor;
-                        else if (choice.Options[i].result == OptionResults.END)
-                            return EditorHelper.EndColor;
-
-                        return GUI.contentColor;
-                    },
-                    "Remove Option",
-                    "Are you sure you want to delete this option?"
-                );
-            }
-        }
+                optionList.Draw();
     }
 }

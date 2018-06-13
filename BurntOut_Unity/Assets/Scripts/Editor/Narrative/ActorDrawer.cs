@@ -1,6 +1,6 @@
 ﻿using OOEditor;
 
-public class ActorDrawer : GUIObjectDrawer<Actor>
+public class ActorDrawer : IGUIObjectDrawer<Actor>
 {
     TextField actorName;
 

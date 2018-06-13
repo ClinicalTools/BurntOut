@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public interface GUIObjectDrawer<T>
+    public interface IGUIObjectDrawer<T>
     {
         T Value { get; set; }
         void Draw();

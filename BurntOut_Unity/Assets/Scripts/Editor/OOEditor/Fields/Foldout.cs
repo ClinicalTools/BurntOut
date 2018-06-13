@@ -25,6 +25,7 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
+            //GUIStyle.normal.textColor == new Color();
             Value = EditorGUI.Foldout(position, Value, Content, GUIStyle);
         }
     }
