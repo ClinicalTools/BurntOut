@@ -40,9 +40,7 @@ public class ExamineObject_Screen : MonoBehaviour {
         if (gamemanager.isCurrentlyExamine == true) {
             abilityToRunScript = false;
         }
-
-
-
+                
     }
 
     private void OnMouseOver() {
@@ -65,8 +63,7 @@ public class ExamineObject_Screen : MonoBehaviour {
             gamemanager.ScreenBlur();
             myCanvas.SetActive(true);
             myCanvasObject.SetActive(true);
-
-
+            
             gamemanager.isCurrentlyExamine = true;
         }
 
@@ -78,8 +75,7 @@ public class ExamineObject_Screen : MonoBehaviour {
         gamemanager.ScreenUnblur();
         myCanvas.SetActive(false);
         myCanvasObject.SetActive(false);
-
-
+        
         gamemanager.isCurrentlyExamine = false;
         myParticleSystem.gameObject.SetActive(false);
     }

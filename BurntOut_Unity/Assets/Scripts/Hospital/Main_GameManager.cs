@@ -182,7 +182,10 @@ public class Main_GameManager : MonoBehaviour {
         }
 
         isCurrentlyExamine = false;
-        currentRoom.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
+
+        if (scene.name == "ICU_New" || scene.name == "Hospital_Patient_SingleRoom")
+            currentRoom.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
+
         UI_ChoiceDia.SetActive(false);
         ScreenUnblur();
 
