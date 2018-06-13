@@ -8,9 +8,28 @@ public class TaskDrawer : GUIObjectDrawer<Task>
     TextField dialogueField;
     EnumPopup emotionPopup;
 
-    public override void Init(Task val)
+    private Task value;
+    public Task Value
     {
-        Value = val;
+        get
+        {
+            return value;
+        }
+        set
+        {
+            this.value = value;
+            actionPopup.Value = value.action;
+            Scenario scenario = ScenarioEditor.CurrentScenario;
+            actorPopup.Value = scenario.ActorIndex(value.actorId);
+            dialogueField.Value = value.dialogue;
+            emotionPopup.Value = value.emotion;
+        }
+    }
+
+    public TaskDrawer(Task val)
+    {
+        value = val;
+
         actionPopup = new EnumPopup(val.action);
         actionPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
         {
@@ -20,14 +39,14 @@ public class TaskDrawer : GUIObjectDrawer<Task>
 
         Scenario scenario = ScenarioEditor.CurrentScenario;
         actorPopup = new Popup(scenario.ActorIndex(val.actorId), scenario.ActorNames());
-        actorPopup.Changed += (object sener, ControlChangedArgs<int> e) =>
+        actorPopup.Changed += (object sender, ControlChangedArgs<int> e) =>
         {
             Value.actorId = scenario.Actors[e.Value].id;
         };
         actorPopup.Width = 90;
 
         dialogueField = new TextField(val.dialogue);
-        dialogueField.Changed += (object sener, ControlChangedArgs<string> e) =>
+        dialogueField.Changed += (object sender, ControlChangedArgs<string> e) =>
         {
             Value.dialogue = e.Value;
         };
@@ -40,13 +59,13 @@ public class TaskDrawer : GUIObjectDrawer<Task>
         emotionPopup.Width = 120;
     }
 
-    public override void Draw()
+    public void Draw()
     {
         actionPopup.Draw();
 
         actorPopup.Options = ScenarioEditor.CurrentScenario.ActorNames();
         actorPopup.Draw();
-        
+
         switch (Value.action)
         {
             case TaskAction.TALK:

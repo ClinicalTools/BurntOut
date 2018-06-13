@@ -23,6 +23,8 @@ public class ScenarioEditor
     private LabelField endNarrativeLabel;
     private TextArea endNarrativeField;
 
+    private GUIList<Actor, ActorDrawer> actorsList;
+
     public ScenarioEditor(Scenario scenario)
     {
         CurrentScenario = scenario;
@@ -33,16 +35,21 @@ public class ScenarioEditor
         {
             scenario.name = e.Value;
         };
+
+        actorsFoldout = new Foldout("Actors");
+        actorsFoldout.Style.FontStyle = FontStyle.Bold;
+        actorsList = new GUIList<Actor, ActorDrawer>(scenario.Actors)
+        {
+            DefaultElement = () => { return new Actor(scenario.Actors.ToArray()); }
+        };
+
+        choicesFoldout = new Foldout("Choices");
+        choicesFoldout.Style.FontStyle = FontStyle.Bold;
         foreach (Choice choice in scenario.Choices)
         {
             choiceFoldout.Add(false);
             choiceEditors.Add(new ChoiceEditor(choice, scenario));
         }
-
-        actorsFoldout = new Foldout("Actors");
-        actorsFoldout.Style.FontStyle = FontStyle.Bold;
-        choicesFoldout = new Foldout("Choices");
-        choicesFoldout.Style.FontStyle = FontStyle.Bold;
 
         endNarrativeLabel = new LabelField("End Narrative:");
         endNarrativeField = new TextArea(scenario.endNarrative);
@@ -63,31 +70,7 @@ public class ScenarioEditor
         {
             using (CtiEditorGUI.Indent())
             {
-                EditorHelper.ListEdit(
-                    scenario.Actors.Count,
-                    // Add element
-                    () =>
-                    {
-                        scenario.Actors.Add(
-                            new Actor(scenario.Actors.ToArray()));
-                    },
-                    // Move element
-                    (int orig, int newPos) =>
-                    {
-                        Actor actor = scenario.Actors[orig];
-                        scenario.Actors.RemoveAt(orig);
-                        scenario.Actors.Insert(newPos, actor);
-                    },
-                    // Remove element
-                    (int i) => { scenario.Actors.RemoveAt(i); },
-                    // Display element
-                    (int i) =>
-                    {
-                        scenario.Actors[i].name = CtiEditorGUI.TextField(scenario.Actors[i].name);
-                    },
-                    "Remove Actor",
-                    "Are you sure you want to delete this actor?"
-                );
+                actorsList.Draw();
             }
         }
 

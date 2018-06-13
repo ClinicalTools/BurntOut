@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public abstract class GUIObjectDrawer<T>
+    public interface GUIObjectDrawer<T>
     {
-        public virtual T Value { get; set; }
-        public abstract void Init(T val);
-        public abstract void Draw();
+        T Value { get; set; }
+        void Draw();
     }
 }

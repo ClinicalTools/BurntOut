@@ -121,8 +121,6 @@ namespace OOEditor
                     Value = Mathf.Round(newValue * 100) / 100;
             }
 
-            List<string> x = new List<string>();
-
             GUI.SetNextControlName(Name + "field");
             Value = EditorGUI.FloatField(fieldPos, Value, GUIStyle);
         }

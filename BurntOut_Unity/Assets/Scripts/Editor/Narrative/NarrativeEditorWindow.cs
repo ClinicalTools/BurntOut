@@ -13,10 +13,7 @@ using OOEditor;
 public class NarrativeEditorWindow : EditorWindow
 {
     private readonly List<ScenarioEditor> scenarioEditors = new List<ScenarioEditor>();
-    private int selectedScenario = -1;
     private Vector2 scrollPosition = new Vector2();
-    private float scale = 11;
-    private float sceneTextAreaWidth = 0;
 
     private readonly string gameObjectName = "NarrativeManager";
 
@@ -105,13 +102,13 @@ public class NarrativeEditorWindow : EditorWindow
     private void SaveScenarioBtn_Pressed(object sender, EventArgs e)
     {
         // Get the folder to save the scenario in
-        string json = JsonUtility.ToJson(sceneNarrative.scenarios[selectedScenario]);
+        string json = JsonUtility.ToJson(sceneNarrative.scenarios[tabs.Value - 1]);
         var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
         Directory.CreateDirectory(path);
 
         // Name.yyyy.MM.dd.letter.json
-        string fileName = sceneNarrative.scenarios[selectedScenario].name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
+        string fileName = sceneNarrative.scenarios[tabs.Value - 1].name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
 
         // Alphabetical character based on number of similar files saved today
         char lastLetter = 'a';
@@ -147,11 +144,11 @@ public class NarrativeEditorWindow : EditorWindow
 
             var scenario = JsonUtility.FromJson<Scenario>(json);
             for (int i = 0; i < sceneNarrative.scenarios.Count; i++)
-                if (i != selectedScenario && scenario.id == sceneNarrative.scenarios[i].id)
+                if (i != tabs.Value - 1 && scenario.id == sceneNarrative.scenarios[i].id)
                     scenario.ResetHash(sceneNarrative.scenarios.ToArray());
 
-            sceneNarrative.scenarios[selectedScenario] = scenario;
-            scenarioEditors[selectedScenario] = new ScenarioEditor(scenario);
+            sceneNarrative.scenarios[tabs.Value - 1] = scenario;
+            scenarioEditors[tabs.Value - 1] = new ScenarioEditor(scenario);
         }
 
         OnEnable();
@@ -285,12 +282,11 @@ public class NarrativeEditorWindow : EditorWindow
             FlexibleSpace.Draw();
 
             fontSizeSlider.Draw();
-            scale = fontSizeSlider.Value;
-
+            
             addScenarioBtn.Draw();
             delScenarioBtn.Draw();
 
-            if (selectedScenario > -1)
+            if (tabs.Value > 0)
             {
                 saveScenarioBtn.Draw();
                 loadScenarioBtn.Draw();

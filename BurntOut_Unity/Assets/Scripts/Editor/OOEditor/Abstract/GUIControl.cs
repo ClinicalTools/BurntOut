@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public abstract class GUIControl<T> : GUIElement
+    public abstract class GUIControl<T> : GUIElement, GUIObjectDrawer<T>
     {
         public virtual T Value { get; set; }
 

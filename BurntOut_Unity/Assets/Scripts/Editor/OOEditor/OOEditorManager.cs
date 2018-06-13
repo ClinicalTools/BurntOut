@@ -59,7 +59,7 @@ namespace OOEditor.Internal
             {
                 var draw = draws.Dequeue();
                 var elem = drawElements.Dequeue();
-                var contents = drawContents.Dequeue();
+                drawContents.Dequeue();
                 Rect pos = GetPosInHorizontalRect(rect, elem);
                 draw(pos);
                 rect.x += pos.width + SPACING;
@@ -121,8 +121,8 @@ namespace OOEditor.Internal
             if (guiElement.Width > 0)
                 options.Add(GUILayout.Width(guiElement.Width));
 
-            // Elements in horizontal are scaled to fit their contents
-            if (guiElement.Width <= 0 && guiElement.MinWidth <= 0 && guiElement.MaxWidth <= 0 && InHorizontal > 0)
+            // Elements in toolbar are scaled to fit their contents
+            if (guiElement.Width <= 0 && guiElement.MinWidth <= 0 && guiElement.MaxWidth <= 0 && InToolbar > 0)
                 options.Add(GUILayout.Width(style.CalcSize(content).x));
 
             // This gets the width of the element without adding much (if any) height
