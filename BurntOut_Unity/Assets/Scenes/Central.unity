@@ -2179,22 +2179,6 @@ Prefab:
       propertyPath: m_Name
       value: ClerkDesk_Corner (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 4831248625686112, guid: 685978be553091e4585ce5c283603eee, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90.00001
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831248625686112, guid: 685978be553091e4585ce5c283603eee, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.4209563
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831248625686112, guid: 685978be553091e4585ce5c283603eee, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.4209564
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831248625686112, guid: 685978be553091e4585ce5c283603eee, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.4209579
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 685978be553091e4585ce5c283603eee, type: 2}
   m_IsPrefabParent: 0
@@ -5977,18 +5961,6 @@ Prefab:
     - target: {fileID: 1506521347452936, guid: 685978be553091e4585ce5c283603eee, type: 2}
       propertyPath: m_Name
       value: ClerkDesk_Corner (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831248625686112, guid: 685978be553091e4585ce5c283603eee, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.4209563
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831248625686112, guid: 685978be553091e4585ce5c283603eee, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.4209564
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831248625686112, guid: 685978be553091e4585ce5c283603eee, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.4209564
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 685978be553091e4585ce5c283603eee, type: 2}
