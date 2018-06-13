@@ -181,6 +181,9 @@ public class Main_GameManager : MonoBehaviour {
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
         }
 
+        playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+        Debug.Log("working?");
+
         isCurrentlyExamine = false;
 
         if (scene.name == "ICU_New" || scene.name == "Hospital_Patient_SingleRoom")
@@ -198,6 +201,7 @@ public class Main_GameManager : MonoBehaviour {
 
         currentRoom.door.doorlocked = false;
         currentRoom.completed = true;
+        playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
     }
     public void RoomLost() {
         BadStars[roomsLost++].StartAnimation();
@@ -206,6 +210,7 @@ public class Main_GameManager : MonoBehaviour {
 
         currentRoom.door.doorlocked = false;
         currentRoom.lost = true;
+        playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
     }
 
     // on loss here

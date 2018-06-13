@@ -735,7 +735,7 @@ Prefab:
         type: 2}
       propertyPath: playerRotateToTarget
       value: 
-      objectReference: {fileID: 1448730423}
+      objectReference: {fileID: 1448730420}
     - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
         type: 2}
       propertyPath: isAroundPatient
@@ -1241,7 +1241,7 @@ Prefab:
         type: 2}
       propertyPath: playerRotateToTarget
       value: 
-      objectReference: {fileID: 1448730423}
+      objectReference: {fileID: 1448730420}
     - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
         type: 2}
       propertyPath: isAroundPatient
@@ -8047,7 +8047,7 @@ Prefab:
         type: 2}
       propertyPath: playerRotateToTarget
       value: 
-      objectReference: {fileID: 1448730423}
+      objectReference: {fileID: 1448730420}
     - target: {fileID: 65075098476840738, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
         type: 2}
       propertyPath: m_Size.z
@@ -12455,7 +12455,7 @@ Prefab:
         type: 2}
       propertyPath: playerRotateToTarget
       value: 
-      objectReference: {fileID: 1448730423}
+      objectReference: {fileID: 1448730420}
     - target: {fileID: 65075098476840738, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
         type: 2}
       propertyPath: m_Size.z
@@ -17690,6 +17690,12 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_PrefabInternal: {fileID: 1724883223}
+--- !u!114 &1448730420 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114892753350064428, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1724883223}
+  m_Script: {fileID: 11500000, guid: d1884176c5b52d7439a76df06e83f8ac, type: 3}
 --- !u!114 &1448730423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21377,7 +21383,7 @@ Prefab:
         type: 2}
       propertyPath: playerRotateToTarget
       value: 
-      objectReference: {fileID: 1448730423}
+      objectReference: {fileID: 1448730420}
     - target: {fileID: 114226582186580400, guid: 1e48ceb62bba73140a16ac0fade4bb5b,
         type: 2}
       propertyPath: isAroundPatient
