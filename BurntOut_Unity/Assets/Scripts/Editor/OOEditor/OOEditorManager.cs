@@ -8,27 +8,13 @@ namespace OOEditor.Internal
     internal static class OOEditorManager
     {
         private const int SPACING = 3;
+        public static bool Wait { get; set; }
 
-        private static bool wait;
-        public static bool Wait
-        {
-            get
-            {
-                return wait;
-            }
-            set
-            {
-                //if (wait == true && value == false)
-                    //EmptyQueue();
-                wait = value;
-            }
-        }
+        public static bool InHorizontal { get; set; }
+        public static bool InToolbar { get; set; }
 
-
-        internal static int InToolbar { get; set; }
-        internal static int InHorizontal { get; set; }
-        internal static OverrideLabelStyle OverrideLabelStyle { get; set; }
-        internal static OverrideTextStyle OverrideTextStyle { get; set; }
+        internal static EditorStyle OverrideLabelStyle { get; set; }
+        internal static EditorStyle OverrideTextStyle { get; set; }
 
         private static Queue<GUIElement> drawElements = new Queue<GUIElement>();
         private static Queue<GUIContent> drawContents = new Queue<GUIContent>();
@@ -85,7 +71,7 @@ namespace OOEditor.Internal
         private static Rect horizontalRect;
         internal static void ResetHorizontalRect()
         {
-            using (new Horizontal())
+            using (Horizontal.Draw())
                 GUILayout.FlexibleSpace();
             horizontalRect = GUILayoutUtility.GetLastRect();
         }
@@ -122,12 +108,12 @@ namespace OOEditor.Internal
                 options.Add(GUILayout.Width(guiElement.Width));
 
             // Elements in toolbar are scaled to fit their contents
-            if (guiElement.Width <= 0 && guiElement.MinWidth <= 0 && guiElement.MaxWidth <= 0 && InToolbar > 0)
+            if (guiElement.Width <= 0 && guiElement.MinWidth <= 0 && guiElement.MaxWidth <= 0 && InToolbar)
                 options.Add(GUILayout.Width(style.CalcSize(content).x));
 
             // This gets the width of the element without adding much (if any) height
             Rect scale;
-            if (InHorizontal == 0)
+            if (!InHorizontal)
                 ResetHorizontalRect();
 
             scale = horizontalRect;

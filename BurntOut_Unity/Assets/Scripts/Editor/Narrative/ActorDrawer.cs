@@ -1,36 +1,39 @@
 ﻿using OOEditor;
 
-public class ActorDrawer : IGUIObjectDrawer<Actor>
+namespace Narrative.Inspector
 {
-    TextField actorName;
-
-    private Actor value;
-    public Actor Value
+    public class ActorDrawer : IGUIObjectDrawer<Actor>
     {
-        get
+        TextField actorName;
+
+        private Actor value;
+        public Actor Value
         {
-            return value;
+            get
+            {
+                return value;
+            }
+            set
+            {
+                this.value = value;
+                actorName.Value = value.name;
+            }
         }
-        set
+
+        public ActorDrawer(Actor val)
         {
-            this.value = value;
-            actorName.Value = value.name;
+            value = val;
+
+            actorName = new TextField(val.name);
+            actorName.Changed += (object sender, ControlChangedArgs<string> e) =>
+            {
+                Value.name = e.Value;
+            };
         }
-    }
 
-    public ActorDrawer(Actor val)
-    {
-        value = val;
-
-        actorName = new TextField(val.name);
-        actorName.Changed += (object sender, ControlChangedArgs<string> e) => 
+        public void Draw()
         {
-            Value.name = e.Value;
-        };
-    }
-
-    public void Draw()
-    {
-        actorName.Draw();
+            actorName.Draw();
+        }
     }
 }

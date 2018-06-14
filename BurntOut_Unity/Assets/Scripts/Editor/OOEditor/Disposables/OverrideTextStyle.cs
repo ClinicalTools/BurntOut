@@ -1,41 +1,64 @@
 ﻿using OOEditor.Internal;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace OOEditor
 {
-    public class OverrideTextStyle : EditorStyle, IDisposable
+    public class OverrideTextStyle : EditorStyle
     {
-        private OverrideTextStyle oldStyle;
-        public OverrideTextStyle() : base()
+        private class DisposableOverrideTextStyle : IDisposable
         {
-            oldStyle = OOEditorManager.OverrideTextStyle;
-            OOEditorManager.OverrideTextStyle = this;
+            private bool disposed;
+            private readonly EditorStyle oldStyle;
+
+            public DisposableOverrideTextStyle(EditorStyle style)
+            {
+                oldStyle = OOEditorManager.OverrideTextStyle;
+
+                OOEditorManager.OverrideTextStyle = style;
+            }
+
+            public void Dispose()
+            {
+                if (disposed)
+                    Debug.LogError("OverrideTextStyle incorrectly disposed.");
+                else
+                    OOEditorManager.OverrideTextStyle = oldStyle;
+
+                disposed = true;
+            }
         }
-        public OverrideTextStyle(int fontSize) : base(fontSize)
-        {
-            oldStyle = OOEditorManager.OverrideTextStyle;
-            OOEditorManager.OverrideTextStyle = this;
-        }
-        public OverrideTextStyle(FontStyle fontStyle) : base(fontStyle)
-        {
-            oldStyle = OOEditorManager.OverrideTextStyle;
-            OOEditorManager.OverrideTextStyle = this;
-        }
-        public OverrideTextStyle(int fontSize, FontStyle fontStyle) : base(fontSize, fontStyle)
-        {
-            oldStyle = OOEditorManager.OverrideTextStyle;
-            OOEditorManager.OverrideTextStyle = this;
-        }
+
+        public OverrideTextStyle() : base() { }
+        public OverrideTextStyle(Color fontColor) : base(fontColor) { }
+        public OverrideTextStyle(FontStyle fontStyle) : base(fontStyle) { }
+        public OverrideTextStyle(FontStyle fontStyle, Color fontColor) : base(fontStyle, fontColor) { }
+        public OverrideTextStyle(int fontSize) : base(fontSize) { }
+        public OverrideTextStyle(int fontSize, FontStyle fontStyle) : base(fontSize, fontStyle) { }
+        public OverrideTextStyle(int fontSize, FontStyle fontStyle, Color fontColor) 
+            : base(fontSize, fontStyle, fontColor) { }
         public OverrideTextStyle(EditorStyle style) : base()
         {
             FontSize = style.FontSize;
             FontStyle = style.FontStyle;
+            FontColor = style.FontColor;
         }
 
-        public void Dispose()
+
+        private IDisposable disposable;
+        public IDisposable Draw()
         {
-            OOEditorManager.OverrideTextStyle = oldStyle;
+            disposable = new DisposableOverrideTextStyle(this);
+            return disposable;
+        }
+
+        public void EndDraw()
+        {
+            if (disposable == null)
+                Debug.LogError("OverrideTextStyle incorrectly disposed.");
+            else
+                disposable.Dispose();
         }
     }
 }

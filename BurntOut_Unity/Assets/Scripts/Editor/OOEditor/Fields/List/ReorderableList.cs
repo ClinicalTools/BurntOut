@@ -7,22 +7,13 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class ReorderableList<T, TDrawer> where TDrawer : IGUIObjectDrawer<T>
+    public class ReorderableList<T, TDrawer> : OOList<T, TDrawer>
+        where TDrawer : IGUIObjectDrawer<T>
     {
-        private List<TDrawer> drawers = new List<TDrawer>();
-        public List<T> Value { get; private set; }
         private ReorderableList list;
 
-        public ReorderableList(List<T> value)
+        public ReorderableList(List<T> value) : base(value)
         {
-            Value = value;
-            foreach (var val in Value)
-            {
-                object[] args = { val };
-                var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
-                drawers.Add(drawer);
-            }
-
             list = new ReorderableList(Value, typeof(T))
             {
                 headerHeight = 4,
@@ -32,41 +23,42 @@ namespace OOEditor
                     rect.y += 1;
                     rect.height -= 4;
                     OOEditorManager.Wait = true;
-                    drawers[index].Draw();
+                    Drawers[index].Draw();
                     OOEditorManager.EmptyQueueInHorizontalRect(rect);
                 },
                 onAddCallback = (ReorderableList list) =>
                 {
-                    var val = (T)Activator.CreateInstance(typeof(T));
-                    Value.Add(val);
-                    object[] args = { val };
-                    var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
-                    drawers.Add(drawer);
+                    AddRow();
                 },
                 onRemoveCallback = (ReorderableList list) =>
                 {
-                    drawers.RemoveAt(list.index);
-                    Value.RemoveAt(list.index);
+                    RemoveRow(list.index);
                     list.index = -1;
                 },
                 onReorderCallback = (ReorderableList list) =>
                 {
                     for (var i = 0; i < Value.Count; i++)
-                        drawers[i].Value = Value[i];
+                        Drawers[i].Value = Value[i];
                 }
             };
         }
 
-        public void Draw()
+        protected override void Display()
         {
-            list.elementHeight = EditorStyles.popup.CalcHeight(new GUIContent(" "), 100) + 4;
+            var style = new GUIStyle(EditorStyles.popup)
+            {
+                fixedHeight = 0
+            };
+            if (OOEditorManager.OverrideLabelStyle != null)
+                OOEditorManager.OverrideLabelStyle.ApplyToStyle(style);
+            if (OOEditorManager.OverrideTextStyle != null)
+                OOEditorManager.OverrideTextStyle.ApplyToStyle(style);
 
-            using (new Vertical())
+
+            list.elementHeight = style.CalcHeight(new GUIContent(" "), 100) + 4;
+
+            using (Vertical.Draw())
                 list.DoLayoutList();
-
-            if (typeof(T).IsValueType)
-                for (int i = 0; i < Value.Count; i++)
-                    Value[i] = drawers[i].Value;
         }
     }
 }

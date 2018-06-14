@@ -1,34 +1,45 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
 {
     /// <summary>
-    /// Class to keep contained elements within an EditorGUILayout vertical group.
-    /// Most uses of this class are to force GUI elements to use the correct indentation.
+    /// Class to keep contained elements within an EditorGUILayout GUIContainer group.
     /// </summary>
-    public class GUIContainer : IDisposable
+    public static class GUIContainer
     {
-        private int oldIndentLevel;
-
-        public GUIContainer()
+        private class DisposableGUIContainer : IDisposable
         {
-            oldIndentLevel = EditorGUI.indentLevel;
-            EditorGUI.indentLevel = 0;
+            public DisposableGUIContainer()
+            {
+                EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            }
 
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Space(oldIndentLevel * 20);
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            public void Dispose()
+            {
+                if (this != disposables.Pop())
+                    Debug.LogError("GUIContainer incorrectly disposed.");
+
+                EditorGUILayout.EndVertical();
+            }
         }
 
-        public void Dispose()
+        private static readonly Stack<IDisposable> disposables = new Stack<IDisposable>();
+        public static IDisposable Draw()
         {
-            EditorGUILayout.EndVertical();
-            EditorGUILayout.EndHorizontal();
+            var disposable = new DisposableGUIContainer();
+            disposables.Push(disposable);
+            return disposable;
+        }
 
-            EditorGUI.indentLevel = oldIndentLevel;
-
+        public static void EndDraw()
+        {
+            if (disposables.Count == 0)
+                Debug.LogError("GUIContainer incorrectly disposed.");
+            else
+                disposables.Peek().Dispose();
         }
     }
 }

@@ -45,12 +45,12 @@ namespace OOEditor
             get
             {
                 GUIStyle guiStyle;
-                if (OOEditorManager.InToolbar == 0)
-                    guiStyle = new GUIStyle(BaseStyle);
-                else
+                if (OOEditorManager.InToolbar)
                     guiStyle = new GUIStyle(ToolbarStyle);
+                else
+                    guiStyle = new GUIStyle(BaseStyle);
 
-                if (Focused && OOEditorManager.InToolbar == 0)
+                if (Focused && !OOEditorManager.InToolbar)
                     guiStyle.normal = guiStyle.focused;
 
                 Style.ApplyToStyle(guiStyle);

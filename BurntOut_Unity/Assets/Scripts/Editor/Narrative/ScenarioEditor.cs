@@ -1,80 +1,75 @@
-﻿using CtiEditor;
-using OOEditor;
-using System;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using OOEditor;
 using UnityEngine;
 
-/// <summary>
-/// Manages the editing of a scenario.
-/// </summary>
-public class ScenarioEditor
+namespace Narrative.Inspector
 {
-    public static Scenario CurrentScenario { get; private set; }
-
-    public readonly Scenario scenario;
-
-    //private bool actorsFoldout;
-    //private bool choicesFoldout;
-    private readonly List<bool> choiceFoldout = new List<bool>();
-    private readonly List<ChoiceEditor> choiceEditors = new List<ChoiceEditor>();
-    private readonly FoldoutList<Choice, ChoiceEditor> choiceList;
-
-    private TextField nameField;
-    private Foldout actorsFoldout, choicesFoldout;
-    private LabelField endNarrativeLabel;
-    private TextArea endNarrativeField;
-
-    private GUIList<Actor, ActorDrawer> actorsList;
-
-    public ScenarioEditor(Scenario scenario)
+    /// <summary>
+    /// Manages the editing of a scenario.
+    /// </summary>
+    public class ScenarioEditor
     {
-        CurrentScenario = scenario;
-        this.scenario = scenario;
+        public static Scenario CurrentScenario { get; private set; }
 
-        nameField = new TextField(scenario.name, "Name:", "Name to be displayed in the editor");
-        nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
+        public readonly Scenario scenario;
+
+        private readonly FoldoutList<Choice, ChoiceEditor> choiceList;
+
+        private TextField nameField;
+        private Foldout actorsFoldout, choicesFoldout;
+        private LabelField endNarrativeLabel;
+        private TextArea endNarrativeField;
+
+        private GUIList<Actor, ActorDrawer> actorsList;
+
+        public ScenarioEditor(Scenario scenario)
         {
-            scenario.name = e.Value;
-        };
+            CurrentScenario = scenario;
+            this.scenario = scenario;
 
-        actorsFoldout = new Foldout("Actors");
-        actorsFoldout.Style.FontStyle = FontStyle.Bold;
-        actorsList = new GUIList<Actor, ActorDrawer>(scenario.Actors)
+            nameField = new TextField(scenario.name, "Name:", "Name to be displayed in the editor");
+            nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            {
+                scenario.name = e.Value;
+            };
+
+            actorsFoldout = new Foldout("Actors");
+            actorsFoldout.Style.FontStyle = FontStyle.Bold;
+            actorsList = new GUIList<Actor, ActorDrawer>(scenario.Actors)
+            {
+                DefaultElement = () => { return new Actor(scenario.Actors.ToArray()); }
+            };
+
+
+            choicesFoldout = new Foldout("Choices");
+            choicesFoldout.Style.FontStyle = FontStyle.Bold;
+            choiceList = new FoldoutList<Choice, ChoiceEditor>(scenario.Choices);
+
+            endNarrativeLabel = new LabelField("End Narrative:");
+            endNarrativeField = new TextArea(scenario.endNarrative);
+            endNarrativeField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            {
+                scenario.endNarrative = e.Value;
+            };
+        }
+
+        public void Draw()
         {
-            DefaultElement = () => { return new Actor(scenario.Actors.ToArray()); }
-        };
+            CurrentScenario = scenario;
 
-        
-        choicesFoldout = new Foldout("Choices");
-        choicesFoldout.Style.FontStyle = FontStyle.Bold;
-        choiceList = new FoldoutList<Choice, ChoiceEditor>(scenario.Choices);
+            nameField.Draw();
 
-        endNarrativeLabel = new LabelField("End Narrative:");
-        endNarrativeField = new TextArea(scenario.endNarrative);
-        endNarrativeField.Changed += (object sender, ControlChangedArgs<string> e) =>
-        {
-            scenario.endNarrative = e.Value;
-        };
-    }
+            actorsFoldout.Draw();
+            if (actorsFoldout.Value)
+                using (Indent.Draw())
+                    actorsList.Draw();
 
-    public void Draw()
-    {
-        CurrentScenario = scenario;
+            choicesFoldout.Draw();
+            if (choicesFoldout.Value)
+                using (Indent.Draw())
+                    choiceList.Draw();
 
-        nameField.Draw();
-
-        actorsFoldout.Draw();
-        if (actorsFoldout.Value)
-            using (new Indent())
-                actorsList.Draw();
-
-        choicesFoldout.Draw();
-        if (choicesFoldout.Value)
-            using (new Indent())
-                choiceList.Draw();
-
-        endNarrativeLabel.Draw();
-        endNarrativeField.Draw();
+            endNarrativeLabel.Draw();
+            endNarrativeField.Draw();
+        }
     }
 }

@@ -22,21 +22,10 @@ namespace OOEditor
         public int Min { get; set; }
         public int Max { get; set; }
 
-        protected override GUIStyle BaseStyle
-        {
-            get
-            {
-                if (OOEditorManager.InToolbar == 0)
-                    return EditorStyles.numberField;
-                else
-                    return EditorStyles.toolbarTextField;
-            }
-        }
+        protected override GUIStyle BaseStyle => EditorStyles.numberField;
+        protected override GUIStyle ToolbarStyle => EditorStyles.toolbarTextField;
 
-        protected override float AbsoluteMinWidth
-        {
-            get { return 10; }
-        }
+        protected override float AbsoluteMinWidth { get; } = 10;
 
         public IntSlider(int value, int min, int max) : base()
         {

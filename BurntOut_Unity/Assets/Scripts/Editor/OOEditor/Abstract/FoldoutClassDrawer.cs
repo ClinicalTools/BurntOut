@@ -1,20 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace OOEditor
 {
-    public abstract class FoldoutObjectDrawer<T> : IGUIObjectDrawer<T>
+    public abstract class FoldoutClassDrawer<T> : ClassDrawer<T>
     {
-        public virtual T Value { get; set; }
         public virtual bool Expanded
         {
             get { return Foldout.Value; }
             set { Foldout.Value = value; }
         }
         protected virtual Color? FoldoutColor { get; } = null;
-
-        public abstract void Draw();
 
         protected Foldout Foldout { get; } = new Foldout(" ");
 

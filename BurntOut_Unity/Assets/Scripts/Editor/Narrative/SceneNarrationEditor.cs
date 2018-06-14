@@ -1,44 +1,46 @@
 ﻿using OOEditor;
-using System;
 using UnityEngine;
 
-public class SceneNarrationEditor
+namespace Narrative.Inspector
 {
-    LabelField startNarrationLabel;
-    TextArea startNarrationField;
-    LabelField endNarrationLabel;
-    TextArea endNarrationField;
-
-    public SceneNarrationEditor(SceneNarrative sceneNarrative)
+    public class SceneNarrationEditor
     {
-        startNarrationLabel = new LabelField("Start Narration:");
-        startNarrationLabel.Style.FontStyle = FontStyle.Bold;
+        LabelField startNarrationLabel;
+        TextArea startNarrationField;
+        LabelField endNarrationLabel;
+        TextArea endNarrationField;
 
-        startNarrationField = new TextArea(sceneNarrative.startNarration);
-        startNarrationField.Changed += (object sender, ControlChangedArgs<string> e) =>
+        public SceneNarrationEditor(SceneNarrative sceneNarrative)
         {
-            sceneNarrative.startNarration = e.Value;
-        };
+            startNarrationLabel = new LabelField("Start Narration:");
+            startNarrationLabel.Style.FontStyle = FontStyle.Bold;
 
-        endNarrationLabel = new LabelField("End Narration:");
-        endNarrationLabel.Style.FontStyle = FontStyle.Bold;
+            startNarrationField = new TextArea(sceneNarrative.startNarration);
+            startNarrationField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            {
+                sceneNarrative.startNarration = e.Value;
+            };
+
+            endNarrationLabel = new LabelField("End Narration:");
+            endNarrationLabel.Style.FontStyle = FontStyle.Bold;
 
 
-        endNarrationField = new TextArea(sceneNarrative.endNarration);
-        endNarrationField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            endNarrationField = new TextArea(sceneNarrative.endNarration);
+            endNarrationField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            {
+                sceneNarrative.endNarration = e.Value;
+            };
+        }
+
+        public void Draw()
         {
-            sceneNarrative.endNarration = e.Value;
-        };
-    }
+            startNarrationLabel.Draw();
+            startNarrationField.Draw();
 
-    public void Draw()
-    {
-        startNarrationLabel.Draw();
-        startNarrationField.Draw();
+            BlankLine.Draw();
 
-        BlankLine.Draw();
-
-        endNarrationLabel.Draw();
-        endNarrationField.Draw();
+            endNarrationLabel.Draw();
+            endNarrationField.Draw();
+        }
     }
 }

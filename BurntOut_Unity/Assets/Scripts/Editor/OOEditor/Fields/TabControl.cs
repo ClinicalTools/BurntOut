@@ -68,15 +68,15 @@ namespace OOEditor
 
         public void Draw()
         {
-            Toolbar toolbar = null;
-            if (OOEditorManager.InToolbar == 0)
-                toolbar = new Toolbar();
+            var drawToolbar = !OOEditorManager.InToolbar;
+            if (drawToolbar)
+                Toolbar.Draw();
 
             foreach (var tab in tabs)
                 tab.Draw();
 
-            if (toolbar != null)
-                toolbar.Dispose();
+            if (drawToolbar)
+                Toolbar.EndDraw();
         }
 
     }

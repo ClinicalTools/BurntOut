@@ -1,139 +1,118 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace OOEditor
 {
-    public class GUIList<T, TDrawer> where TDrawer : IGUIObjectDrawer<T>
+    public class GUIList<T, TDrawer> : OOList<T, TDrawer>
+        where TDrawer : IGUIObjectDrawer<T>
     {
-        public List<T> Value { get; private set; }
-        private List<TDrawer> drawers = new List<TDrawer>();
+        private const float BUTTON_WIDTH = 30;
 
-        private LabelField topUpSpace;
-        private List<Button> upButtons = new List<Button>();
-        private List<Button> downButtons = new List<Button>();
-        private LabelField bottomDownSpace;
-        private List<Button> delButtons = new List<Button>();
-        private Button addButton;
+        protected LabelField TopUpSpace { get; }
+        protected List<Button> UpButtons { get; } = new List<Button>();
+        protected List<Button> DownButtons { get; } = new List<Button>();
+        protected LabelField BottomDownSpace { get; }
+        protected List<Button> DelButtons { get; } = new List<Button>();
+        protected Button AddButton { get; }
 
-        /// <summary>
-        /// Used if the element to initialize shouldn't be initialized with the default constructor.
-        /// </summary>
-        public Func<T> DefaultElement { get; set; }
-
-        public GUIList(List<T> value)
+        public GUIList(List<T> value) : base(value)
         {
-            Value = value;
-            for (var i = 0; i < Value.Count; i++)
-                AddRow();
-
-            topUpSpace = new LabelField(" ")
+            TopUpSpace = new LabelField(" ")
             {
-                Width = 40
+                Width = BUTTON_WIDTH
             };
-            bottomDownSpace = new LabelField(" ")
+            BottomDownSpace = new LabelField(" ")
             {
-                Width = 40
+                Width = BUTTON_WIDTH
             };
-            addButton = new Button("+")
+            AddButton = new Button("+")
             {
                 Width = 128
             };
-            addButton.Pressed += (object o, EventArgs e) =>
+            AddButton.Style.FontStyle = FontStyle.Bold;
+            AddButton.Pressed += (object o, EventArgs e) =>
             {
-                T val;
-                if (DefaultElement != null)
-                    val = DefaultElement();
-                else
-                    val = (T)Activator.CreateInstance(typeof(T));
-                Value.Add(val);
-
                 AddRow();
             };
         }
 
-        private void AddRow()
+        protected override void AddRow()
         {
-            var index = drawers.Count;
-            object[] args = { Value[index] };
-            var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
-            drawers.Add(drawer);
+            base.AddRow();
+
+            var index = DelButtons.Count;
 
             if (index > 0)
             {
                 EventHandler swapPos = (object o, EventArgs e) =>
                 {
-                    var val = Value[index];
-                    Value.RemoveAt(index);
-                    Value.Insert(index - 1, val);
-                    var draw = drawers[index];
-                    drawers.RemoveAt(index);
-                    drawers.Insert(index - 1, draw);
+                    SwapRows(index, index - 1);
                 };
 
                 var upButton = new Button("▲")
                 {
-                    Width = 40
+                    Width = BUTTON_WIDTH
                 };
                 upButton.Pressed += swapPos;
-                upButtons.Add(upButton);
+                UpButtons.Add(upButton);
 
                 // Create the down button for the last row
                 var downButton = new Button("▼")
                 {
-                    Width = 40
+                    Width = BUTTON_WIDTH
                 };
                 downButton.Pressed += swapPos;
-                downButtons.Add(downButton);
+                DownButtons.Add(downButton);
             }
 
             var delButton = new Button("X")
             {
-                Width = 40
+                Width = BUTTON_WIDTH
             };
+            delButton.Style.FontStyle = FontStyle.Bold;
             delButton.Pressed += (object o, EventArgs e) =>
             {
-                Value.RemoveAt(index);
-                drawers.RemoveAt(index);
-                delButtons.RemoveAt(Value.Count);
-                if (Value.Count > 0)
-                {
-                    upButtons.RemoveAt(Value.Count - 1);
-                    downButtons.RemoveAt(Value.Count - 1);
-                }
+                RemoveRow(index);
             };
-            delButtons.Add(delButton);
+            DelButtons.Add(delButton);
         }
 
-        public void Draw()
+        protected override void RemoveRow(int index)
         {
-            while (drawers.Count < Value.Count)
-                AddRow();
+            base.RemoveRow(index);
 
+            DelButtons.RemoveAt(Value.Count);
+            if (Value.Count > 0)
+            {
+                UpButtons.RemoveAt(Value.Count - 1);
+                DownButtons.RemoveAt(Value.Count - 1);
+            }
+        }
+
+        protected override void Display()
+        {
             for (var i = 0; i < Value.Count; i++)
             {
-                using (new Horizontal())
+                using (Horizontal.Draw())
                 {
-                    drawers[i].Draw();
+                    Drawers[i].Draw();
 
                     if (i > 0)
-                        upButtons[i - 1].Draw();
+                        UpButtons[i - 1].Draw();
                     else
-                        topUpSpace.Draw();
+                        TopUpSpace.Draw();
 
                     if (i < Value.Count - 1)
-                        downButtons[i].Draw();
+                        DownButtons[i].Draw();
                     else
-                        bottomDownSpace.Draw();
+                        BottomDownSpace.Draw();
 
-                    delButtons[i].Draw();
+                    DelButtons[i].Draw();
                 }
             }
 
-            addButton.Draw();
-
-            if (typeof(T).IsValueType)
-                for (int i = 0; i < Value.Count; i++)
-                    Value[i] = drawers[i].Value;
+            AddButton.Draw();
         }
     }
 }
