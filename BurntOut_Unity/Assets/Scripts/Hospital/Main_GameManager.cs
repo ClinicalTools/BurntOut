@@ -110,7 +110,9 @@ public class Main_GameManager : MonoBehaviour {
                 Time.timeScale = 1;
                 gamePaused = false;
                 Canvas_Paused.SetActive(false);
-                player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
+
+                if (scene.name == "VitalitySpace" || scene.name == "Hospital" || scene.name == "Central") 
+                    player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 
                 ScreenUnblur();
             } else {
@@ -171,18 +173,10 @@ public class Main_GameManager : MonoBehaviour {
 
         // freeze player controller
 
-        if (scene.name != "Hospital_Patient_SingleRoom") {
+        if (scene.name == "Hospital" || scene.name == "VitalitySpace") {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
         }
-
-        if (scene.name != "ICU_New") {
-            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
-            playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
-        }
-
-        playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
-        Debug.Log("working?");
 
         isCurrentlyExamine = false;
 
@@ -202,8 +196,15 @@ public class Main_GameManager : MonoBehaviour {
         currentRoom.door.doorlocked = false;
         currentRoom.completed = true;
         playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+
+        if (scene.name == "Hospital_Patient_SingleRoom") {
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+            playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
+        }
+
     }
     public void RoomLost() {
+
         BadStars[roomsLost++].StartAnimation();
         if (roomsLost >= 3)
             Lose();
@@ -211,6 +212,11 @@ public class Main_GameManager : MonoBehaviour {
         currentRoom.door.doorlocked = false;
         currentRoom.lost = true;
         playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+
+        if (scene.name == "Hospital_Patient_SingleRoom") {
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+            playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
+        }
     }
 
     // on loss here
