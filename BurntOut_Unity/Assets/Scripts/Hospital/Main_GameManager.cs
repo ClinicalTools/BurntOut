@@ -207,6 +207,8 @@ public class Main_GameManager : MonoBehaviour {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
             globalStats.GOOD_stars += 1;
+            currentRoom.gameObject.SetActive(false);
+            globalStats.isMrJohnsonCompleted = true;
         }
 
     }
@@ -224,6 +226,8 @@ public class Main_GameManager : MonoBehaviour {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
             globalStats.BAD_stars += 1;
+            currentRoom.gameObject.SetActive(false);
+            globalStats.isMrJohnsonCompleted = true;
         }
     }
 

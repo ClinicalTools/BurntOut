@@ -5,6 +5,7 @@ using UnityEngine;
 public class GlobalStats : MonoBehaviour {
 
     public bool isHospitalCompleted;
+    public bool isMrJohnsonCompleted;
     public int currentHealth;
     public int GOOD_stars;
     public int BAD_stars;

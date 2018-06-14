@@ -1913,6 +1913,9 @@ MonoBehaviour:
   level: VitalitySpace
   screenfade: {fileID: 145111414}
   player: {fileID: 927959813}
+  mrJohnsonRoom: 0
+  darkParticleEffect: {fileID: 0}
+  lightParticleEffect: {fileID: 0}
 --- !u!65 &249141789
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4330,6 +4333,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 546422428}
+--- !u!1 &562632181 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1203440250811464, guid: f5f3e8653bb32b64cb9def3327d49678,
+    type: 2}
+  m_PrefabInternal: {fileID: 681334359}
 --- !u!1 &570908719
 GameObject:
   m_ObjectHideFlags: 0
@@ -6118,6 +6126,7 @@ Transform:
   m_Children:
   - {fileID: 1720664267}
   - {fileID: 22172550}
+  - {fileID: 1764036268}
   m_Father: {fileID: 713091611}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -6135,6 +6144,9 @@ MonoBehaviour:
   level: Hospital_Patient_SingleRoom
   screenfade: {fileID: 145111414}
   player: {fileID: 927959813}
+  mrJohnsonRoom: 1
+  darkParticleEffect: {fileID: 1764036267}
+  lightParticleEffect: {fileID: 562632181}
 --- !u!65 &753638565
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7220,6 +7232,9 @@ MonoBehaviour:
   level: hospital
   screenfade: {fileID: 145111414}
   player: {fileID: 927959813}
+  mrJohnsonRoom: 0
+  darkParticleEffect: {fileID: 0}
+  lightParticleEffect: {fileID: 0}
 --- !u!1 &831033306
 GameObject:
   m_ObjectHideFlags: 0
@@ -11180,6 +11195,9 @@ MonoBehaviour:
   level: Hospital_Patient_SingleRoom (Selection Mechanic)
   screenfade: {fileID: 145111414}
   player: {fileID: 927959813}
+  mrJohnsonRoom: 0
+  darkParticleEffect: {fileID: 0}
+  lightParticleEffect: {fileID: 0}
 --- !u!65 &1184183667
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11817,9 +11835,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Hospital Patient       (Visual Novel Style)
-
-'
+  m_Text: Mr. Johnson's Room
 --- !u!222 &1228355115
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11857,6 +11873,9 @@ MonoBehaviour:
   level: ICU_New
   screenfade: {fileID: 145111414}
   player: {fileID: 927959813}
+  mrJohnsonRoom: 0
+  darkParticleEffect: {fileID: 0}
+  lightParticleEffect: {fileID: 0}
 --- !u!65 &1232663194
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12398,6 +12417,52 @@ Transform:
   m_Father: {fileID: 2100114575}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1299231368
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 753638563}
+    m_Modifications:
+    - target: {fileID: 4357177471748668, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.538
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357177471748668, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.873
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357177471748668, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357177471748668, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357177471748668, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357177471748668, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357177471748668, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357177471748668, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032996626806054, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 85e1018197b4e1641a4cab7b9d65745e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1301930209
 GameObject:
   m_ObjectHideFlags: 0
@@ -15714,6 +15779,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1910527278733352, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114497384694597832, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -16104,6 +16173,28 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d76296e48ddf1d498bb4f7a4b0167f4, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1764036267 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1032996626806054, guid: 85e1018197b4e1641a4cab7b9d65745e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1299231368}
+--- !u!4 &1764036268 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4357177471748668, guid: 85e1018197b4e1641a4cab7b9d65745e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1299231368}
+--- !u!65 &1764036271
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1764036267}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.817403, y: 1, z: 2.6600096}
+  m_Center: {x: 0.09129799, y: 0.000000031426282, z: -0.15794441}
 --- !u!1 &1767715130
 GameObject:
   m_ObjectHideFlags: 0
@@ -19708,6 +19799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHospitalCompleted: 0
+  isMrJohnsonCompleted: 0
   currentHealth: 80
   GOOD_stars: 0
   BAD_stars: 0

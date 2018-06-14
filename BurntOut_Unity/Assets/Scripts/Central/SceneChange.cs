@@ -5,18 +5,33 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 
 public class SceneChange : MonoBehaviour {
-
-
+    
     public string level;
     public Animator screenfade;
     public GameObject player;
+    public bool mrJohnsonRoom;
+    public GameObject darkParticleEffect;
+    public GameObject lightParticleEffect;
+
+
+    private GlobalStats globalStats;
+
+    private void Start() {
+
+        globalStats = GameObject.FindObjectOfType<GlobalStats>();
+
+        if (globalStats.isMrJohnsonCompleted && mrJohnsonRoom) {
+            darkParticleEffect.SetActive(true);
+            lightParticleEffect.SetActive(false);
+        }
+
+
+    }
 
     private void OnTriggerEnter(Collider other) {
 
+        StartCoroutine(Transition());
 
-        if (other.name == "Player" || other.name == "FirstPersonCharacter") {
-            StartCoroutine(Transition());
-        }
 
     }
 
