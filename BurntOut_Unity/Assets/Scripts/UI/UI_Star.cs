@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class UI_Star : MonoBehaviour {
 
+    public GlobalStats globalStats;
+    public bool GOODstar, BADstar;
+ 
 
+    void Start () {
 
-	// Use this for initialization
-	void Start () {
+        globalStats = FindObjectOfType<GlobalStats>();
+
+        //if (globalStats.GOOD_stars == 0 && globalStats.BAD_stars == 0)
         gameObject.SetActive(false);
 	}
 	
@@ -17,6 +22,11 @@ public class UI_Star : MonoBehaviour {
 	}
 
     public void StartAnimation() {
+        gameObject.SetActive(true);
+    }
+
+    public void JustDisplay() {
+        gameObject.GetComponent<Animator>().enabled = false;
         gameObject.SetActive(true);
     }
 }

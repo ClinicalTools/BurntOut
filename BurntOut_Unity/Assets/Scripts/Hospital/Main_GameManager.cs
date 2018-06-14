@@ -59,6 +59,12 @@ public class Main_GameManager : MonoBehaviour {
     }
 
     void Start() {
+
+        roomsWon = globalStats.GOOD_stars;
+        roomsLost = globalStats.BAD_stars;
+
+        StartCoroutine(UpdateStars());
+
         scene = SceneManager.GetActiveScene();
 
         if (scene.name == "Hospital_Patient_SingleRoom") {
@@ -71,7 +77,7 @@ public class Main_GameManager : MonoBehaviour {
             Cursor.visible = true;
         }
 
-        if (scene.name == "Hospital") {
+        if (scene.name == "Hospital" || scene.name == "Central") {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
         }
 
@@ -200,6 +206,7 @@ public class Main_GameManager : MonoBehaviour {
         if (scene.name == "Hospital_Patient_SingleRoom") {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
+            globalStats.GOOD_stars += 1;
         }
 
     }
@@ -216,6 +223,7 @@ public class Main_GameManager : MonoBehaviour {
         if (scene.name == "Hospital_Patient_SingleRoom") {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
+            globalStats.BAD_stars += 1;
         }
     }
 
@@ -252,6 +260,43 @@ public class Main_GameManager : MonoBehaviour {
 
         yield return new WaitForSeconds(0.5f);
         Application.LoadLevel("Central");
+    }
+
+    public IEnumerator UpdateStars() {
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (roomsWon >= 1) {
+            Stars[0].JustDisplay();
+            Debug.Log("star working");
+        }
+
+        if (roomsLost >= 1) {
+            BadStars[0].JustDisplay();
+            Debug.Log("bad star working");
+        }
+
+        if (roomsWon >= 2) {
+            Stars[1].JustDisplay();
+            Debug.Log("star working");
+        }
+
+        if (roomsLost >= 2) {
+            BadStars[1].JustDisplay();
+            Debug.Log("bad star working");
+        }
+        if (roomsWon >= 3) {
+            Stars[2].JustDisplay();
+            Debug.Log("star working");
+        }
+
+        if (roomsLost >= 3) {
+            BadStars[2].JustDisplay();
+            Debug.Log("bad star working");
+        }
+
+
+
     }
 
 

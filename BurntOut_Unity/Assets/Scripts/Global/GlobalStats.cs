@@ -6,6 +6,8 @@ public class GlobalStats : MonoBehaviour {
 
     public bool isHospitalCompleted;
     public int currentHealth;
+    public int GOOD_stars;
+    public int BAD_stars;
 
     public static GlobalStats instance = null;
 
