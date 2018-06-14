@@ -62,15 +62,15 @@ namespace Narrative.Inspector
 
             loadScenarioBtn = new Button("Load Scenario");
             loadScenarioBtn.Style.FontStyle = FontStyle.Italic;
-            loadScenarioBtn.Changed += LoadScenarioBtn_Pressed;
+            loadScenarioBtn.Pressed += LoadScenarioBtn_Pressed;
 
             saveAllBtn = new Button("Save All");
             saveAllBtn.Style.FontStyle = FontStyle.BoldAndItalic;
-            saveAllBtn.Changed += SaveAllBtn_Pressed;
+            saveAllBtn.Pressed += SaveAllBtn_Pressed;
 
             loadAllBtn = new Button("Load All");
             loadAllBtn.Style.FontStyle = FontStyle.BoldAndItalic;
-            loadAllBtn.Changed += LoadAllBtn_Pressed;
+            loadAllBtn.Pressed += LoadAllBtn_Pressed;
 
             sceneEditor = new SceneNarrationEditor(sceneNarrative);
         }

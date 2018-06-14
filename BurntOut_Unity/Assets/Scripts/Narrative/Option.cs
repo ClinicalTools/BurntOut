@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum OptionResults
+public enum OptionResult
 {
     TRY_AGAIN, END, CONTINUE
 }
@@ -26,7 +26,7 @@ public class Option
         }
     }
 
-    public OptionResults result;
+    public OptionResult result;
 
     public int HealthChange
     {
@@ -34,11 +34,11 @@ public class Option
         {
             switch (result)
             {
-                case OptionResults.CONTINUE:
+                case OptionResult.CONTINUE:
                     return 10;
-                case OptionResults.TRY_AGAIN:
+                case OptionResult.TRY_AGAIN:
                     return -30;
-                case OptionResults.END:
+                case OptionResult.END:
                     return -60;
                 default:
                     Debug.Log("Invalid option result");

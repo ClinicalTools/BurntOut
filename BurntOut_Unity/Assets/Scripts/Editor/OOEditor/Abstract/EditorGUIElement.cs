@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public abstract class GUIElement
+    public abstract class EditorGUIElement
     {
-        protected static int elementNums = 1000;
+        // 4,294,967,295 elements should be enough
+        protected static uint elementNums = 0;
 
         protected string Name { get; set; }
 
@@ -20,13 +21,7 @@ namespace OOEditor
                 return focusedControl;
             }
         }
-        public bool Focused
-        {
-            get
-            {
-                return FocusedControlName.Contains(Name);
-            }
-        }
+        public bool Focused => FocusedControlName.Contains(Name);
 
         public GUIContent Content { get; protected set; }
         public float MinWidth { get; set; }
@@ -67,18 +62,18 @@ namespace OOEditor
         protected abstract GUIStyle BaseStyle { get; }
         protected virtual GUIStyle ToolbarStyle => BaseStyle;
 
-        protected GUIElement()
+        protected EditorGUIElement()
         {
-            Name = "" + elementNums++;
+            Name = (elementNums++).ToString("X8");
         }
-        protected GUIElement(string text)
+        protected EditorGUIElement(string text)
         {
-            Name = "" + elementNums++;
+            Name = (elementNums++).ToString("X8");
             Content = new GUIContent(text);
         }
-        protected GUIElement(string text, string tooltip)
+        protected EditorGUIElement(string text, string tooltip)
         {
-            Name = "" + elementNums++;
+            Name = (elementNums++).ToString("X8");
             Content = new GUIContent(text, tooltip);
         }
 

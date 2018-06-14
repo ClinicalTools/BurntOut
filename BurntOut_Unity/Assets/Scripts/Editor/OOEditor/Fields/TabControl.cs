@@ -45,12 +45,13 @@ namespace OOEditor
         {
             var newTab = new ToggleButton(false, tabName);
             int tabNum = tabs.Count;
-            newTab.Changed += (object o, ControlChangedArgs<bool> e) =>
+            newTab.Pressed += (object o, EventArgs e) =>
             {
-                if (e.Value == false)
+                if (Value != tabNum)
+                {
+                    Value = tabNum;
                     Changed?.Invoke(this, new ControlChangedArgs<int>(Value, tabNum));
-
-                Value = tabNum;
+                }
             };
             tabs.Add(newTab);
         }

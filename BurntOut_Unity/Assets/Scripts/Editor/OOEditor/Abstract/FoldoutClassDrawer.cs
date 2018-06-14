@@ -9,17 +9,11 @@ namespace OOEditor
             get { return Foldout.Value; }
             set { Foldout.Value = value; }
         }
-        protected virtual Color? FoldoutColor { get; } = null;
 
-        protected Foldout Foldout { get; } = new Foldout(" ");
-
-        protected abstract string FoldoutName { get; }
+        protected abstract Foldout Foldout { get; }
 
         public virtual void DrawFoldout()
         {
-            Foldout.Content.text = FoldoutName;
-            if (FoldoutColor != null)
-                Foldout.Style.FontColor = FoldoutColor;
             Foldout.Draw();
         }
     }

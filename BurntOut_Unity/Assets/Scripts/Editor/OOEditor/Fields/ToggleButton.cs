@@ -1,4 +1,5 @@
 ﻿using OOEditor.Internal;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,8 +7,7 @@ namespace OOEditor
 {
     public class ToggleButton : GUIControl<bool>
     {
-        public override bool Value { get; set; }
-
+        public event EventHandler Pressed;
 
         protected override GUIStyle BaseStyle => EditorStyles.miniButton;
         protected override GUIStyle ToolbarStyle => EditorStyles.toolbarButton;
@@ -27,7 +27,10 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
+            bool lastVal = Value;
             Value = GUI.Toggle(position, Value, Content, GUIStyle);
+            if (lastVal != Value)
+                Pressed?.Invoke(this, new EventArgs());
         }
     }
 }

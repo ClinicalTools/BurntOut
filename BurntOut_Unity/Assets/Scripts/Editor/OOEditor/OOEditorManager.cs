@@ -16,11 +16,11 @@ namespace OOEditor.Internal
         internal static EditorStyle OverrideLabelStyle { get; set; }
         internal static EditorStyle OverrideTextStyle { get; set; }
 
-        private static Queue<GUIElement> drawElements = new Queue<GUIElement>();
+        private static Queue<EditorGUIElement> drawElements = new Queue<EditorGUIElement>();
         private static Queue<GUIContent> drawContents = new Queue<GUIContent>();
         private static Queue<Action<Rect>> draws = new Queue<Action<Rect>>();
         private static float minDrawWidth;
-        internal static void DrawGuiElement(GUIElement element, Action<Rect> draw, GUIContent content = null)
+        internal static void DrawGuiElement(EditorGUIElement element, Action<Rect> draw, GUIContent content = null)
         {
             if (content == null)
                 content = new GUIContent(" ");
@@ -76,7 +76,7 @@ namespace OOEditor.Internal
             horizontalRect = GUILayoutUtility.GetLastRect();
         }
         
-        private static Rect GetPosInHorizontalRect(Rect rect, GUIElement guiElement)
+        private static Rect GetPosInHorizontalRect(Rect rect, EditorGUIElement guiElement)
         {
             if (guiElement.MinWidth > 0)
                 minDrawWidth -= guiElement.MinWidth;
@@ -94,7 +94,7 @@ namespace OOEditor.Internal
             return rect;
         }
         // Gets the rect for the GUI object based on the content, style, and width parameters
-        private static Rect GetDimensions(GUIContent content, GUIElement guiElement)
+        private static Rect GetDimensions(GUIContent content, EditorGUIElement guiElement)
         {
             GUIStyle style = guiElement.GUIStyle;
 

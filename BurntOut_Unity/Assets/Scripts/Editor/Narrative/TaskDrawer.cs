@@ -3,65 +3,67 @@ using System;
 
 namespace Narrative.Inspector
 {
-    public class TaskDrawer : IGUIObjectDrawer<Task>
+    public class TaskDrawer : ClassDrawer<Task>
     {
         EnumPopup actionPopup;
         Popup actorPopup;
         TextField dialogueField;
         EnumPopup emotionPopup;
-
-        private Task value;
-        public Task Value
+        
+        public TaskDrawer(Task value)
         {
-            get
-            {
-                return value;
-            }
-            set
-            {
-                this.value = value;
-                actionPopup.Value = value.action;
-                Scenario scenario = ScenarioEditor.CurrentScenario;
-                actorPopup.Value = scenario.ActorIndex(value.actorId);
-                dialogueField.Value = value.dialogue;
-                emotionPopup.Value = value.emotion;
-            }
-        }
+            Value = value;
 
-        public TaskDrawer(Task val)
-        {
-            value = val;
-
-            actionPopup = new EnumPopup(val.action);
+            actionPopup = new EnumPopup(value.action)
+            {
+                Width = 75
+            };
             actionPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
             {
                 Value.action = (TaskAction)e.Value;
             };
-            actionPopup.Width = 75;
+            actionPopup.Changed += OnChange;
 
             Scenario scenario = ScenarioEditor.CurrentScenario;
-            actorPopup = new Popup(scenario.ActorIndex(val.actorId), scenario.ActorNames());
+            actorPopup = new Popup(scenario.ActorIndex(value.actorId), scenario.ActorNames())
+            {
+                Width = 90
+            };
             actorPopup.Changed += (object sender, ControlChangedArgs<int> e) =>
             {
-                Value.actorId = scenario.Actors[e.Value].id;
+                if (e.Value >= 0)
+                    Value.actorId = scenario.Actors[e.Value].id;
             };
-            actorPopup.Width = 90;
+            actorPopup.Changed += OnChange;
 
-            dialogueField = new TextField(val.dialogue);
+            dialogueField = new TextField(value.dialogue);
             dialogueField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.dialogue = e.Value;
             };
+            dialogueField.Changed += OnChange;
 
-            emotionPopup = new EnumPopup(val.emotion);
+            emotionPopup = new EnumPopup(value.emotion)
+            {
+                Width = 120
+            };
             emotionPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
             {
                 Value.emotion = (TaskEmotion)e.Value;
             };
-            emotionPopup.Width = 120;
+            emotionPopup.Changed += OnChange;
         }
 
-        public void Draw()
+        public override void ResetValues()
+        {
+            actionPopup.Value = Value.action;
+            Scenario scenario = ScenarioEditor.CurrentScenario;
+            actorPopup.Value = scenario.ActorIndex(Value.actorId);
+            dialogueField.Value = Value.dialogue;
+            emotionPopup.Value = Value.emotion;
+        }
+
+        public override void Draw()
         {
             actionPopup.Draw();
 

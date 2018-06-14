@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace OOEditor
 {
     public abstract class OOList<T, TDrawer> where TDrawer : IGUIObjectDrawer<T>
     {
         public List<T> Value { get; set; }
+
+        public event EventHandler<ListChangedArgs<T>> Changed;
+
         protected List<TDrawer> Drawers { get; } = new List<TDrawer>();
 
         /// <summary>
@@ -21,7 +25,6 @@ namespace OOEditor
                 AddRow();
         }
 
-        
         protected virtual void SwapRows(int index1, int index2)
         {
             var val = Value[index1];
@@ -40,16 +43,22 @@ namespace OOEditor
             // Check if we need to add a value with this row
             if (Value.Count == Drawers.Count)
             {
+                Debug.Log(Value.ToArray().GetHashCode());
                 T val;
                 if (DefaultElement != null)
                     val = DefaultElement();
                 else
                     val = (T)Activator.CreateInstance(typeof(T));
                 Value.Add(val);
+                Debug.Log(Value.ToArray().GetHashCode());
             }
 
             object[] args = { Value[Drawers.Count] };
             var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
+            drawer.Changed += (object sender, ControlChangedArgs<T> e) =>
+            {
+                Changed?.Invoke(this, new ListChangedArgs<T>(Value));
+            };
             Drawers.Add(drawer);
         }
         /// <summary>
@@ -63,8 +72,18 @@ namespace OOEditor
             Drawers.RemoveAt(index);
         }
 
+        private bool firstDraw = true;
         public virtual void Draw()
         {
+            // First draw calls changed, since it changed from its default
+            if (firstDraw)
+            {
+                Changed?.Invoke(this, new ListChangedArgs<T>(Value));
+                firstDraw = false;
+            }
+
+            var count = Value.Count;
+
             // Since the list is shared outside this class, values must be constantly updated to avoid errors
             while (Drawers.Count < Value.Count)
                 AddRow();
@@ -81,6 +100,9 @@ namespace OOEditor
             for (int i = 0; i < Value.Count; i++)
                 if (!Drawers[i].Value.Equals(Value[i]))
                     Value[i] = Drawers[i].Value;
+
+            if (count != Value.Count)
+                Changed?.Invoke(this, new ListChangedArgs<T>(Value));
         }
 
         protected abstract void Display();

@@ -6,11 +6,7 @@ namespace OOEditor
 {
     public abstract class GUIControlField<T> : GUIControl<T>
     {
-        EditorStyle labelStyle = new EditorStyle();
-        public EditorStyle LabelStyle
-        {
-            get { return labelStyle; }
-        }
+        public EditorStyle LabelStyle { get; } = new EditorStyle();
 
         public virtual GUIStyle GUILabelStyle
         {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public class LabelField : GUIElement
+    public class LabelField : EditorGUIElement
     {
         protected override GUIStyle BaseStyle => EditorStyles.label;
 

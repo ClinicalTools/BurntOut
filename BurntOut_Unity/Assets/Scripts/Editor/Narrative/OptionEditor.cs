@@ -9,18 +9,21 @@ namespace Narrative.Inspector
     /// </summary>
     public class OptionEditor : FoldoutClassDrawer<Option>
     {
-        protected override string FoldoutName => $"Option {(ChoiceEditor.CurrentChoice.Options.IndexOf(Value) + 1)} - {Value.name}";
-        protected override Color? FoldoutColor
+        protected string FoldoutName =>
+            $"Option {(ChoiceEditor.CurrentChoice.Options.IndexOf(Value) + 1)} - {Value.name}";
+        protected override Foldout Foldout { get; }
+
+        protected Color? ResultColor
         {
             get
             {
                 switch (Value.result)
                 {
-                    case OptionResults.CONTINUE:
+                    case OptionResult.CONTINUE:
                         return EditorColors.LightGreen;
-                    case OptionResults.TRY_AGAIN:
+                    case OptionResult.TRY_AGAIN:
                         return EditorColors.LightYellow;
-                    case OptionResults.END:
+                    case OptionResult.END:
                         return EditorColors.LightRed;
                     default:
                         return null;
@@ -44,30 +47,40 @@ namespace Narrative.Inspector
         {
             Value = option;
 
+            Foldout = new Foldout(FoldoutName);
+            Foldout.Style.FontColor = ResultColor;
+
             nameField = new TextField(option.name, "Name:", "Name to be displayed in the editor");
             nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.name = e.Value;
+                Foldout.Content.text = FoldoutName;
             };
+            nameField.Changed += OnChange;
 
             textField = new TextField(option.text, "Text:", "Text to be displayed in game");
             textField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.text = e.Value;
             };
+            textField.Changed += OnChange;
 
             eventsFoldout = new Foldout("Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
 
             taskList = new ReorderableList<Task, TaskDrawer>(option.Events);
+            taskList.Changed += OnChange;
 
             resultPopup = new EnumPopup(Value.result, "Result:");
             resultPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
             {
-                Value.result = (OptionResults)(e.Value);
-                SetResultPopupColor();
+                Value.result = (OptionResult)(e.Value);
+
+                var color = ResultColor;
+                Foldout.Style.FontColor = color;
+                resultPopup.Style.FontColor = color;
             };
-            SetResultPopupColor();
+            resultPopup.Changed += OnChange;
 
             feedbackLabel = new LabelField("Feedback:");
             feedback = new TextArea(option.feedback);
@@ -75,6 +88,7 @@ namespace Narrative.Inspector
             {
                 Value.feedback = e.Value;
             };
+            feedback.Changed += OnChange;
         }
 
         public override void ResetValues()
@@ -84,22 +98,6 @@ namespace Narrative.Inspector
             taskList.Value = Value.Events;
             resultPopup.Value = Value.result;
             feedback.Value = Value.feedback;
-        }
-
-        private void SetResultPopupColor()
-        {
-            switch (Value.result)
-            {
-                case OptionResults.CONTINUE:
-                    resultPopup.Style.FontColor = EditorColors.LightGreen;
-                    break;
-                case OptionResults.TRY_AGAIN:
-                    resultPopup.Style.FontColor = EditorColors.LightYellow;
-                    break;
-                case OptionResults.END:
-                    resultPopup.Style.FontColor = EditorColors.LightRed;
-                    break;
-            }
         }
 
         public override void Draw()

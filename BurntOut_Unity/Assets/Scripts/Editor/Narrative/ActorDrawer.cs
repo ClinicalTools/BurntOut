@@ -2,36 +2,28 @@
 
 namespace Narrative.Inspector
 {
-    public class ActorDrawer : IGUIObjectDrawer<Actor>
+    public class ActorDrawer : ClassDrawer<Actor>
     {
         TextField actorName;
 
-        private Actor value;
-        public Actor Value
+        public ActorDrawer(Actor value)
         {
-            get
-            {
-                return value;
-            }
-            set
-            {
-                this.value = value;
-                actorName.Value = value.name;
-            }
-        }
+            Value = value;
 
-        public ActorDrawer(Actor val)
-        {
-            value = val;
-
-            actorName = new TextField(val.name);
+            actorName = new TextField(value.name);
             actorName.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.name = e.Value;
             };
+            actorName.Changed += OnChange;
         }
 
-        public void Draw()
+        public override void ResetValues()
+        {
+            actorName.Value = Value.name;
+        }
+
+        public override void Draw()
         {
             actorName.Draw();
         }

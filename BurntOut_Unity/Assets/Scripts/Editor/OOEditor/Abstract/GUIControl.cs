@@ -4,9 +4,23 @@ using UnityEngine;
 
 namespace OOEditor
 {
-    public abstract class GUIControl<T> : GUIElement, IGUIObjectDrawer<T>
+    public abstract class GUIControl<T> : EditorGUIElement, IGUIObjectDrawer<T>
     {
-        public virtual T Value { get; set; }
+        private T value;
+        public virtual T Value
+        {
+            get
+            {
+                return value;
+            }
+            set
+            {
+                if (!value.Equals(this.value) && !firstDraw)
+                    Changed?.Invoke(this, new ControlChangedArgs<T>(value, this.value));
+
+                this.value = value;
+            }
+        }
 
         public event EventHandler<ControlChangedArgs<T>> Changed;
 
@@ -31,6 +45,22 @@ namespace OOEditor
             }
         }
 
+        protected GUIControl() : base() { }
+        protected GUIControl(string text) : base(text) { }
+        protected GUIControl(string text, string tooltip) : base(text, tooltip) { }
+
+        private bool firstDraw = true;
+        public override void Draw()
+        {
+            // First draw calls changed, since it changed from its default
+            if (firstDraw)
+            {
+                Changed?.Invoke(this, new ControlChangedArgs<T>(default(T), Value));
+                firstDraw = false;
+            }
+            OOEditorManager.DrawGuiElement(this, PrepareDisplay, Content);
+        }
+
         protected override void PrepareDisplay(Rect position)
         {
             var oldVal = Value;
@@ -41,8 +71,5 @@ namespace OOEditor
                 Changed(this, new ControlChangedArgs<T>(oldVal, Value));
         }
 
-        protected GUIControl() : base() { }
-        protected GUIControl(string text) : base(text) { }
-        protected GUIControl(string text, string tooltip) : base(text, tooltip) { }
     }
 }

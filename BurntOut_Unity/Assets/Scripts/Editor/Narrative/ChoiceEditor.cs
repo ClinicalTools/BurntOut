@@ -8,17 +8,21 @@ namespace Narrative.Inspector
     /// </summary>
     public class ChoiceEditor : FoldoutClassDrawer<Choice>
     {
-        protected override string FoldoutName => $"Choice {ScenarioEditor.CurrentScenario.Choices.IndexOf(Value) + 1} - {Value.name}";
-        protected override Color? FoldoutColor
+        protected string FoldoutName =>
+            $"Choice {ScenarioEditor.CurrentScenario.Choices.IndexOf(Value) + 1} - {Value.name}";
+        protected override Foldout Foldout { get; }
+
+        protected Color? FoldoutColor
         {
             get
             {
-                if (Value.Options.Exists(option => option.result == OptionResults.CONTINUE))
+                if (Value.Options.Exists(option => option.result == OptionResult.CONTINUE))
                     return null;
                 else
                     return EditorColors.Red;
             }
         }
+
 
         public static Choice CurrentChoice { get; private set; }
 
@@ -34,25 +38,33 @@ namespace Narrative.Inspector
             CurrentChoice = choice;
             Value = choice;
 
+            Foldout = new Foldout(FoldoutName);
+            Foldout.Style.FontColor = FoldoutColor;
+
             nameField = new TextField(choice.name, "Name:", "Name to be displayed in the editor");
             nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 choice.name = e.Value;
+                Foldout.Content.text = FoldoutName;
             };
+            nameField.Changed += OnChange;
 
             textField = new TextField(choice.text, "Text:", "Text to be displayed in game");
             textField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 choice.text = e.Value;
             };
+            textField.Changed += OnChange;
 
             eventsFoldout = new Foldout(false, "Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
             taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
+            taskList.Changed += OnChange;
 
             optionsFoldout = new Foldout(false, "Options");
             optionsFoldout.Style.FontStyle = FontStyle.Bold;
             optionList = new FoldoutList<Option, OptionEditor>(Value.Options);
+            optionList.Changed += OnChange;
         }
 
         public override void ResetValues()

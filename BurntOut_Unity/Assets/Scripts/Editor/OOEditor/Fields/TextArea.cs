@@ -6,17 +6,10 @@ namespace OOEditor
 {
     public class TextArea : GUIControl<string>
     {
-        private string value = "";
         public override string Value
         {
-            get { return value; }
-            set
-            {
-                if (value == null)
-                    this.value = "";
-                else
-                    this.value = value;
-            }
+            get { return base.Value; }
+            set { base.Value = value ?? ""; }
         }
 
         protected override GUIStyle BaseStyle
@@ -38,7 +31,7 @@ namespace OOEditor
             var style = GUIStyle;
             position.height = GUIStyle.CalcHeight(Content, ValidWidth);
             var spacing = position.height - style.CalcHeight(new GUIContent(" "), ValidWidth);
-            var newLineCount = value.Split('\n').Length - 1;
+            var newLineCount = Value.Split('\n').Length - 1;
             // At font 20, lines start adding an extra 4 pixels, rather than 3. 
             // I doubt we'll go higher than that, so that's good enough for now.
             // 8 is the lowest I checked, and that also uses 3. No practical reason to go lower.

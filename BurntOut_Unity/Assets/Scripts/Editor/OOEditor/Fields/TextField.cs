@@ -7,19 +7,12 @@ namespace OOEditor
 {
     public class TextField : GUIControlField<string>
     {
-        private string value = "";
         public override string Value
         {
-            get { return value; }
-            set
-            {
-                if (value == null)
-                    this.value = "";
-                else
-                    this.value = value;
-            }
+            get { return base.Value; }
+            set { base.Value = value ?? ""; }
         }
-        
+
         protected override GUIStyle BaseStyle => EditorStyles.textField;
         protected override GUIStyle ToolbarStyle => EditorStyles.toolbarTextField;
         protected override float AbsoluteMinWidth { get; } = 10;

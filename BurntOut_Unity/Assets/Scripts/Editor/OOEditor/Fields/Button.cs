@@ -18,8 +18,8 @@ namespace OOEditor
         protected override void Display(Rect position)
         {
             Value = GUI.Button(position, Content, GUIStyle);
-            if (Value && Pressed != null)
-                Pressed(this, null);
+            if (Value)
+                Pressed?.Invoke(this, new EventArgs());
         }
     }
 }

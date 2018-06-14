@@ -6,17 +6,16 @@ namespace OOEditor
 {
     public class IntSlider : GUIControlField<int>
     {
-        int value;
         public override int Value
         {
-            get { return value; }
+            get { return base.Value; }
             set
             {
                 if (value > Max)
                     value = Max;
                 else if (value < Min)
                     value = Min;
-                this.value = value;
+                base.Value = value;
             }
         }
         public int Min { get; set; }
