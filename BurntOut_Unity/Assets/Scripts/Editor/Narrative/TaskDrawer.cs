@@ -22,7 +22,6 @@ namespace Narrative.Inspector
             {
                 Value.action = (TaskAction)e.Value;
             };
-            actionPopup.Changed += OnChange;
 
             Scenario scenario = ScenarioEditor.CurrentScenario;
             actorPopup = new Popup(scenario.ActorIndex(value.actorId), scenario.ActorNames())
@@ -34,14 +33,12 @@ namespace Narrative.Inspector
                 if (e.Value >= 0)
                     Value.actorId = scenario.Actors[e.Value].id;
             };
-            actorPopup.Changed += OnChange;
 
             dialogueField = new TextField(value.dialogue);
             dialogueField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.dialogue = e.Value;
             };
-            dialogueField.Changed += OnChange;
 
             emotionPopup = new EnumPopup(value.emotion)
             {
@@ -51,7 +48,6 @@ namespace Narrative.Inspector
             {
                 Value.emotion = (TaskEmotion)e.Value;
             };
-            emotionPopup.Changed += OnChange;
         }
 
         public override void ResetValues()

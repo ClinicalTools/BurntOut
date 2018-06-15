@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace OOEditor.Internal
 {
-    internal static class OOEditorManager
+    public static class OOEditorManager
     {
         private const int SPACING = 3;
         public static bool Wait { get; set; }
@@ -13,8 +13,17 @@ namespace OOEditor.Internal
         public static bool InHorizontal { get; set; }
         public static bool InToolbar { get; set; }
 
-        internal static EditorStyle OverrideLabelStyle { get; set; }
-        internal static EditorStyle OverrideTextStyle { get; set; }
+        public static EditorStyle OverrideLabelStyle { get; set; }
+        public static EditorStyle OverrideTextStyle { get; set; }
+
+        /// <summary>
+        /// Allows listening to whether there are changes in objects in a range
+        /// </summary>
+        public static event EventHandler Changed;
+        public static void ElementChanged(object sender, EventArgs e)
+        {
+            Changed?.Invoke(sender, e);
+        }
 
         private static Queue<EditorGUIElement> drawElements = new Queue<EditorGUIElement>();
         private static Queue<GUIContent> drawContents = new Queue<GUIContent>();

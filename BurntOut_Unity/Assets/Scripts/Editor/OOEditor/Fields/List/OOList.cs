@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOEditor.Internal;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,10 +56,6 @@ namespace OOEditor
 
             object[] args = { Value[Drawers.Count] };
             var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
-            drawer.Changed += (object sender, ControlChangedArgs<T> e) =>
-            {
-                Changed?.Invoke(this, new ListChangedArgs<T>(Value));
-            };
             Drawers.Add(drawer);
         }
         /// <summary>
@@ -93,7 +90,10 @@ namespace OOEditor
                 if (!Drawers[i].Value.Equals(Value[i]))
                     Drawers[i].Value = Value[i];
 
+            // Listen to whether contained elements change
+            OOEditorManager.Changed += OnChanged;
             Display();
+            OOEditorManager.Changed -= OnChanged;
 
             // This allows value type lists to function correctly
             // Also ensures the drawer is using a valid reference
@@ -102,7 +102,16 @@ namespace OOEditor
                     Value[i] = Drawers[i].Value;
 
             if (count != Value.Count)
-                Changed?.Invoke(this, new ListChangedArgs<T>(Value));
+            {
+                var e = new ListChangedArgs<T>(Value);
+                OOEditorManager.ElementChanged(this, e);
+                Changed?.Invoke(this, e);
+            }
+        }
+
+        protected void OnChanged(object sender, EventArgs e)
+        {
+            Changed?.Invoke(this, new ListChangedArgs<T>(Value));
         }
 
         protected abstract void Display();

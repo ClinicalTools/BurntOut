@@ -56,20 +56,17 @@ namespace Narrative.Inspector
                 Value.name = e.Value;
                 Foldout.Content.text = FoldoutName;
             };
-            nameField.Changed += OnChange;
 
             textField = new TextField(option.text, "Text:", "Text to be displayed in game");
             textField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.text = e.Value;
             };
-            textField.Changed += OnChange;
 
             eventsFoldout = new Foldout("Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
 
             taskList = new ReorderableList<Task, TaskDrawer>(option.Events);
-            taskList.Changed += OnChange;
 
             resultPopup = new EnumPopup(Value.result, "Result:");
             resultPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
@@ -80,7 +77,6 @@ namespace Narrative.Inspector
                 Foldout.Style.FontColor = color;
                 resultPopup.Style.FontColor = color;
             };
-            resultPopup.Changed += OnChange;
 
             feedbackLabel = new LabelField("Feedback:");
             feedback = new TextArea(option.feedback);
@@ -88,7 +84,6 @@ namespace Narrative.Inspector
             {
                 Value.feedback = e.Value;
             };
-            feedback.Changed += OnChange;
         }
 
         public override void ResetValues()

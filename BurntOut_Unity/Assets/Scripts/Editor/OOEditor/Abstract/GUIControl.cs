@@ -67,8 +67,12 @@ namespace OOEditor
 
             base.PrepareDisplay(position);
 
-            if (!Value.Equals(oldVal) && Changed != null)
-                Changed(this, new ControlChangedArgs<T>(oldVal, Value));
+            if (!Value.Equals(oldVal))
+            {
+                var e = new ControlChangedArgs<T>(oldVal, Value);
+                OOEditorManager.ElementChanged(this, e);
+                Changed?.Invoke(this, e);
+            }
         }
 
     }

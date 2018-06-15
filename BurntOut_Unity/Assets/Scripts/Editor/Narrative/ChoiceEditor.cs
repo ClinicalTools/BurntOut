@@ -47,24 +47,20 @@ namespace Narrative.Inspector
                 choice.name = e.Value;
                 Foldout.Content.text = FoldoutName;
             };
-            nameField.Changed += OnChange;
 
             textField = new TextField(choice.text, "Text:", "Text to be displayed in game");
             textField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 choice.text = e.Value;
             };
-            textField.Changed += OnChange;
 
             eventsFoldout = new Foldout(false, "Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
             taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
-            taskList.Changed += OnChange;
 
             optionsFoldout = new Foldout(false, "Options");
             optionsFoldout.Style.FontStyle = FontStyle.Bold;
             optionList = new FoldoutList<Option, OptionEditor>(Value.Options);
-            optionList.Changed += OnChange;
         }
 
         public override void ResetValues()

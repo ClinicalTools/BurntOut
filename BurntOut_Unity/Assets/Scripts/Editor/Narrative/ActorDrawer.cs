@@ -15,7 +15,6 @@ namespace Narrative.Inspector
             {
                 Value.name = e.Value;
             };
-            actorName.Changed += OnChange;
         }
 
         public override void ResetValues()
