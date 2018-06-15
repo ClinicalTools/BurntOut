@@ -28,7 +28,7 @@ namespace OOEditor
                     DelButtons[i].Draw();
                 }
 
-                if (Drawers[i].Expanded)
+                if (i < Drawers.Count && Drawers[i].Expanded)
                     using (Indent.Draw())
                     using (GUIContainer.Draw())
                         Drawers[i].Draw();

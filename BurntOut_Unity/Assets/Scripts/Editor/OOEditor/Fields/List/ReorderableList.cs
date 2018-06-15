@@ -1,5 +1,4 @@
 ﻿using OOEditor.Internal;
-using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
@@ -54,8 +53,7 @@ namespace OOEditor
             if (OOEditorManager.OverrideTextStyle != null)
                 OOEditorManager.OverrideTextStyle.ApplyToStyle(style);
 
-
-            list.elementHeight = style.CalcHeight(new GUIContent(" "), 100) + 4;
+            list.elementHeight = style.CalcHeight(new GUIContent(), 100) + 4;
 
             using (Vertical.Draw())
                 list.DoLayoutList();

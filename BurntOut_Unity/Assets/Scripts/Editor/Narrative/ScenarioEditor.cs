@@ -43,10 +43,6 @@ namespace Narrative.Inspector
             choicesFoldout = new Foldout("Choices");
             choicesFoldout.Style.FontStyle = FontStyle.Bold;
             choiceList = new FoldoutList<Choice, ChoiceEditor>(scenario.Choices);
-            choiceList.Changed += (object sender, ListChangedArgs<Choice> e) =>
-            {
-                Debug.Log("heyyyy");
-            };
 
             endNarrativeLabel = new LabelField("End Narrative:");
             endNarrativeField = new TextArea(scenario.endNarrative);

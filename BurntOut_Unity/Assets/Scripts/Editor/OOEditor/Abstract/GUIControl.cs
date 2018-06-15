@@ -24,25 +24,19 @@ namespace OOEditor
 
         public event EventHandler<ControlChangedArgs<T>> Changed;
 
-        public override GUIStyle GUIStyle
+        protected override void ResetGUIStyle()
         {
-            get
-            {
-                GUIStyle guiStyle;
-                if (OOEditorManager.InToolbar)
-                    guiStyle = new GUIStyle(ToolbarStyle);
-                else
-                    guiStyle = new GUIStyle(BaseStyle);
+            if (OOEditorManager.InToolbar)
+                GUIStyle = new GUIStyle(ToolbarStyle);
+            else
+                GUIStyle = new GUIStyle(BaseStyle);
 
-                if (Focused && !OOEditorManager.InToolbar)
-                    guiStyle.normal = guiStyle.focused;
+            if (Focused && !OOEditorManager.InToolbar)
+                GUIStyle.normal = GUIStyle.focused;
 
-                Style.ApplyToStyle(guiStyle);
-                if (OOEditorManager.OverrideTextStyle != null)
-                    OOEditorManager.OverrideTextStyle.ApplyToStyle(guiStyle);
-
-                return guiStyle;
-            }
+            Style.ApplyToStyle(GUIStyle);
+            if (OOEditorManager.OverrideTextStyle != null)
+                OOEditorManager.OverrideTextStyle.ApplyToStyle(GUIStyle);
         }
 
         protected GUIControl() : base() { }
@@ -52,6 +46,8 @@ namespace OOEditor
         private bool firstDraw = true;
         public override void Draw()
         {
+            ResetGUIStyle();
+
             // First draw calls changed, since it changed from its default
             if (firstDraw)
             {

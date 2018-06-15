@@ -20,15 +20,16 @@ namespace OOEditor
         {
             TopUpSpace = new LabelField(" ")
             {
-                Width = BUTTON_WIDTH
+
+                MaxWidth = BUTTON_WIDTH
             };
             BottomDownSpace = new LabelField(" ")
             {
-                Width = BUTTON_WIDTH
+                MaxWidth = BUTTON_WIDTH
             };
             AddButton = new Button("+")
             {
-                Width = 128
+                MaxWidth = 128
             };
             AddButton.Style.FontStyle = FontStyle.Bold;
             AddButton.Pressed += (object o, EventArgs e) =>
@@ -52,7 +53,7 @@ namespace OOEditor
 
                 var upButton = new Button("▲")
                 {
-                    Width = BUTTON_WIDTH
+                    MaxWidth = BUTTON_WIDTH
                 };
                 upButton.Pressed += swapPos;
                 UpButtons.Add(upButton);
@@ -60,7 +61,7 @@ namespace OOEditor
                 // Create the down button for the last row
                 var downButton = new Button("▼")
                 {
-                    Width = BUTTON_WIDTH
+                    MaxWidth = BUTTON_WIDTH
                 };
                 downButton.Pressed += swapPos;
                 DownButtons.Add(downButton);
@@ -68,7 +69,7 @@ namespace OOEditor
 
             var delButton = new Button("X")
             {
-                Width = BUTTON_WIDTH
+                MaxWidth = BUTTON_WIDTH
             };
             delButton.Style.FontStyle = FontStyle.Bold;
             delButton.Pressed += (object o, EventArgs e) =>

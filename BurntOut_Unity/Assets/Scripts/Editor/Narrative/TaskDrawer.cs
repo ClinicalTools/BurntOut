@@ -16,7 +16,7 @@ namespace Narrative.Inspector
 
             actionPopup = new EnumPopup(value.action)
             {
-                Width = 75
+                FitWidth = true
             };
             actionPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
             {
@@ -26,7 +26,7 @@ namespace Narrative.Inspector
             Scenario scenario = ScenarioEditor.CurrentScenario;
             actorPopup = new Popup(scenario.ActorIndex(value.actorId), scenario.ActorNames())
             {
-                Width = 90
+                FitWidth = true
             };
             actorPopup.Changed += (object sender, ControlChangedArgs<int> e) =>
             {
@@ -42,7 +42,7 @@ namespace Narrative.Inspector
 
             emotionPopup = new EnumPopup(value.emotion)
             {
-                Width = 120
+                FitWidth = true
             };
             emotionPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
             {

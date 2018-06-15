@@ -6,6 +6,7 @@ namespace OOEditor
     public abstract class EditorGUIElement
     {
         // 4,294,967,295 elements should be enough
+        // Note that this is shared between all OO gui elements, not just those in a particular window
         protected static uint elementNums = 0;
 
         protected string Name { get; set; }
@@ -24,9 +25,41 @@ namespace OOEditor
         public bool Focused => FocusedControlName.Contains(Name);
 
         public GUIContent Content { get; protected set; }
-        public float MinWidth { get; set; }
-        public float Width { get; set; }
-        public float MaxWidth { get; set; }
+
+        private float minWidth;
+        public virtual float MinWidth
+        {
+            get { return OOEditorManager.ScaledWidth(minWidth, GUIStyle?.fontSize ?? 0); }
+            set { minWidth = value; }
+        }
+        private float maxWidth;
+        public virtual float MaxWidth
+        {
+            get { return OOEditorManager.ScaledWidth(maxWidth, GUIStyle?.fontSize ?? 0); }
+            set { maxWidth = value; }
+        }
+        private bool? fitWidth;
+        public virtual bool FitWidth
+        {
+            get { return fitWidth ?? DefaultFitWidth; }
+            set { fitWidth = value; }
+        }
+        protected virtual bool DefaultFitWidth => OOEditorManager.InToolbar;
+        public virtual float Width
+        {
+            get
+            {
+                if (FitWidth && Content != null)
+                {
+                    var width = GUIStyle.CalcSize(Content).x;
+                    if (maxWidth > 0)
+                        return Mathf.Clamp(width, MinWidth, MaxWidth);
+                    else
+                        return Mathf.Max(width, MinWidth);
+                }
+                return 0;
+            }
+        }
         /// <summary>
         /// Stores the last valid width of the element.
         /// 
@@ -35,29 +68,25 @@ namespace OOEditor
         protected float ValidWidth { get; set; }
         public EditorStyle Style { get; } = new EditorStyle();
 
-        public virtual GUIStyle GUIStyle
+        public GUIStyle GUIStyle { get; protected set; }
+        protected virtual void ResetGUIStyle()
         {
-            get
-            {
-                GUIStyle guiStyle;
-                if (OOEditorManager.InToolbar)
-                    guiStyle = new GUIStyle(ToolbarStyle);
-                else
-                    guiStyle = new GUIStyle(BaseStyle);
+            if (OOEditorManager.InToolbar)
+                GUIStyle = new GUIStyle(ToolbarStyle);
+            else
+                GUIStyle = new GUIStyle(BaseStyle);
 
-                if (Focused && !OOEditorManager.InToolbar)
-                    guiStyle.normal = guiStyle.focused;
+            if (Focused && !OOEditorManager.InToolbar)
+                GUIStyle.normal = GUIStyle.focused;
 
-                Style.ApplyToStyle(guiStyle);
-                // Basic elements treated like labels
-                if (OOEditorManager.OverrideLabelStyle != null)
-                    OOEditorManager.OverrideLabelStyle.ApplyToStyle(guiStyle);
-                if (OOEditorManager.OverrideTextStyle != null)
-                    OOEditorManager.OverrideTextStyle.ApplyToStyle(guiStyle);
-
-                return guiStyle;
-            }
+            Style.ApplyToStyle(GUIStyle);
+            // Basic elements treated like labels
+            if (OOEditorManager.OverrideLabelStyle != null)
+                OOEditorManager.OverrideLabelStyle.ApplyToStyle(GUIStyle);
+            if (OOEditorManager.OverrideTextStyle != null)
+                OOEditorManager.OverrideTextStyle.ApplyToStyle(GUIStyle);
         }
+
 
         protected abstract GUIStyle BaseStyle { get; }
         protected virtual GUIStyle ToolbarStyle => BaseStyle;
@@ -80,6 +109,7 @@ namespace OOEditor
 
         public virtual void Draw()
         {
+            ResetGUIStyle();
             OOEditorManager.DrawGuiElement(this, PrepareDisplay, Content);
         }
 

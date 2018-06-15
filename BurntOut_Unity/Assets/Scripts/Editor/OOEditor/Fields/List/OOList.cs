@@ -44,14 +44,12 @@ namespace OOEditor
             // Check if we need to add a value with this row
             if (Value.Count == Drawers.Count)
             {
-                Debug.Log(Value.ToArray().GetHashCode());
                 T val;
                 if (DefaultElement != null)
                     val = DefaultElement();
                 else
                     val = (T)Activator.CreateInstance(typeof(T));
                 Value.Add(val);
-                Debug.Log(Value.ToArray().GetHashCode());
             }
 
             object[] args = { Value[Drawers.Count] };

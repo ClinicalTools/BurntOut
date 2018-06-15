@@ -61,6 +61,10 @@ namespace Narrative.Inspector
             optionsFoldout = new Foldout(false, "Options");
             optionsFoldout.Style.FontStyle = FontStyle.Bold;
             optionList = new FoldoutList<Option, OptionEditor>(Value.Options);
+            optionList.Changed += (object sender, ListChangedArgs<Option> e) =>
+            {
+                Foldout.Style.FontColor = FoldoutColor;
+            };
         }
 
         public override void ResetValues()

@@ -8,24 +8,25 @@ namespace OOEditor
     {
         public EditorStyle LabelStyle { get; } = new EditorStyle();
 
-        public virtual GUIStyle GUILabelStyle
+        // Width cannot be estimated when the element is using the content for a label
+        public override float Width { get; } = 0;
+
+        public GUIStyle GUILabelStyle { get; protected set; }
+        protected override void ResetGUIStyle()
         {
-            get
-            {
-                var guiStyle = new GUIStyle(EditorStyles.label);
+            base.ResetGUIStyle();
 
-                if (Focused)
-                    guiStyle.normal = guiStyle.focused;
+            
+            GUILabelStyle = new GUIStyle(EditorStyles.label);
+            if (Focused)
+                GUILabelStyle.normal = GUILabelStyle.focused;
 
-                Style.ApplyToStyle(guiStyle);
-                LabelStyle.ApplyToStyle(guiStyle);
-                if (OOEditorManager.OverrideLabelStyle != null)
-                    OOEditorManager.OverrideLabelStyle.ApplyToStyle(guiStyle);
-                if (OOEditorManager.OverrideTextStyle != null)
-                    OOEditorManager.OverrideTextStyle.ApplyToStyle(guiStyle);
-
-                return guiStyle;
-            }
+            Style.ApplyToStyle(GUILabelStyle);
+            LabelStyle.ApplyToStyle(GUILabelStyle);
+            if (OOEditorManager.OverrideLabelStyle != null)
+                OOEditorManager.OverrideLabelStyle.ApplyToStyle(GUILabelStyle);
+            if (OOEditorManager.OverrideTextStyle != null)
+                OOEditorManager.OverrideTextStyle.ApplyToStyle(GUILabelStyle);
         }
 
         protected abstract float AbsoluteMinWidth { get; }
@@ -47,7 +48,7 @@ namespace OOEditor
                 // Width cannot be less than 0
                 width = Mathf.Max(width, 1);
                 Rect labelRect = new Rect(position.x, position.y, width, position.height);
-                                
+
                 GUI.SetNextControlName(Name + "label");
                 EditorGUI.LabelField(labelRect, Content, GUILabelStyle);
 
