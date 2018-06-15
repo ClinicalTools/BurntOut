@@ -28,6 +28,52 @@ namespace Narrative.Inspector
 
         private int ScenarioNum => tabs.Value - 1;
 
+
+        // Add menu named "Scene Manager" to the Window menu
+        [MenuItem("Window/Narrative Manager")]
+        public static void Init()
+        {
+            // Get existing open window or if none, make a new one:
+            NarrativeEditorWindow window = GetWindow<NarrativeEditorWindow>("Narrative");
+            window.Show();
+        }
+
+        private NarrativeManager sceneManager;
+        private SceneNarrative sceneNarrative;
+        private void ResetSceneManager()
+        {
+            // If I don't reload this often, the editor will become disconnected from the object after a test play.
+            GameObject sceneManagerObj = GameObject.Find(gameObjectName);
+
+            // Initalize if null
+            if (sceneManagerObj == null)
+            {
+                sceneManagerObj = new GameObject(gameObjectName);
+                sceneManager = null;
+            }
+            else
+            {
+                sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
+            }
+            if (sceneManager == null)
+            {
+                sceneManagerObj.AddComponent<NarrativeManager>();
+                sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
+
+                // Add one scenario
+                Scenario scenario = new Scenario(new Scenario[0]);
+                sceneNarrative.scenarios.Add(scenario);
+            }
+
+            sceneNarrative = sceneManager.sceneNarrative;
+        }
+
+        void OnInspectorUpdate()
+        {
+            var oldSceneNarrative = sceneNarrative;
+            ResetSceneManager();
+        }
+
         public void OnEnable()
         {
             if (sceneNarrative == null)
@@ -93,7 +139,7 @@ namespace Narrative.Inspector
                 // Ensure there's at least one scenario
                 if (sceneNarrative.scenarios.Count == 0)
                 {
-                    Scenario scenario = new Scenario(sceneNarrative.scenarios.ToArray());
+                    Scenario scenario = new Scenario(new Scenario[0]);
                     sceneNarrative.scenarios.Add(scenario);
                     scenarioEditors.Add(new ScenarioEditor(scenario));
                 }
@@ -129,54 +175,10 @@ namespace Narrative.Inspector
             OnEnable();
         }
 
-        // Add menu named "Scene Manager" to the Window menu
-        [MenuItem("Window/Narrative Manager")]
-        public static void Init()
-        {
-            // Get existing open window or if none, make a new one:
-            NarrativeEditorWindow window = GetWindow<NarrativeEditorWindow>("Narrative");
-            window.Show();
-        }
-
-        private NarrativeManager sceneManager;
-        private SceneNarrative sceneNarrative;
-        private void ResetSceneManager()
-        {
-            // If I don't reload this often, the editor will become disconnected from the object after a test play.
-            GameObject sceneManagerObj = GameObject.Find(gameObjectName);
-
-            // Initalize if null
-            if (sceneManagerObj == null)
-            {
-                sceneManagerObj = new GameObject(gameObjectName);
-                sceneManagerObj.AddComponent<NarrativeManager>();
-            }
-
-            sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
-            if (sceneManager == null)
-            {
-                sceneManagerObj.AddComponent<NarrativeManager>();
-                sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
-            }
-            sceneNarrative = sceneManager.sceneNarrative;
-        }
-
-        void OnInspectorUpdate()
-        {
-            var oldSceneNarrative = sceneNarrative;
-            ResetSceneManager();
-            if (oldSceneNarrative != sceneNarrative)
-                OnEnable();
-        }
-
-
         void OnGUI()
         {
-            if (sceneNarrative == null)
-            {
+            if (sceneManager == null || sceneNarrative == null)
                 ResetSceneManager();
-                OnEnable();
-            }
 
             // Allows the scene to save changes and 'undo' to be possible
             Undo.RecordObject(sceneManager, "NarrativeManager change");
@@ -197,7 +199,6 @@ namespace Narrative.Inspector
                     scenarioEditors.Add(new ScenarioEditor(scenario));
             }
 
-            /*
             // Draw the toolbar for scenario management
             using (Toolbar.Draw())
             using (toolbarTextStyle.Draw())
@@ -223,7 +224,7 @@ namespace Narrative.Inspector
             }
 
             using (textStyle.Draw())
-            using (scrollView.Draw())//*/
+            using (scrollView.Draw())
             {
                 // Edit basic scene info
                 if (tabs.Value == 0)

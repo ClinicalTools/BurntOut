@@ -16,7 +16,7 @@ namespace OOEditor
             set
             {
                 if (!value.Equals(this.value) && !firstDraw)
-                    Changed?.Invoke(this, new ControlChangedArgs<T>(value, this.value));
+                    Changed?.Invoke(this, new ControlChangedArgs<T>(this.value, value));
 
                 this.value = value;
             }
@@ -57,38 +57,15 @@ namespace OOEditor
             OOEditorManager.DrawGuiElement(this, PrepareDisplay, Content);
         }
 
-        private bool goodFrame = false;
-        private bool reset = false;
-        T olderValue;
         /// <summary>
         /// Updates the control's value and then draws it.
         /// </summary>
         /// <param name="value">Updated value for the control</param>
         public void Draw(T value)
         {
-            //if (goodFrame)
-                //Value = value;
-            Debug.Log(goodFrame);
+            this.value = value;
+
             Draw();
-        }
-        protected override void PrepareDisplay(Rect position)
-        {
-            var oldVal = Value;
-
-            base.PrepareDisplay(position);
-
-            if (!Value.Equals(oldVal))
-            {
-                Debug.Log($"{goodFrame} {Value} {oldVal}");
-                if (!goodFrame)
-                    return;
-
-                var e = new ControlChangedArgs<T>(oldVal, Value);
-                OOEditorManager.ElementChanged(this, e);
-                Changed?.Invoke(this, e);
-            }
-
-            goodFrame = !goodFrame;
         }
 
     }

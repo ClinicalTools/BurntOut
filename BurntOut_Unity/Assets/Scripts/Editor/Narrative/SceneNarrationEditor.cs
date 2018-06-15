@@ -40,7 +40,7 @@ namespace Narrative.Inspector
             BlankLine.Draw();
 
             endNarrationLabel.Draw();
-            //endNarrationField.Draw(Value.endNarration);
+            endNarrationField.Draw(Value.endNarration);
         }
     }
 }
