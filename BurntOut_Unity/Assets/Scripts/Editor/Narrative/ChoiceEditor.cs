@@ -8,6 +8,9 @@ namespace Narrative.Inspector
     /// </summary>
     public class ChoiceEditor : FoldoutClassDrawer<Choice>
     {
+        public static Choice CurrentChoice { get; private set; }
+
+
         protected string FoldoutName =>
             $"Choice {ScenarioEditor.CurrentScenario.Choices.IndexOf(Value) + 1} - {Value.name}";
         protected override Foldout Foldout { get; }
@@ -23,9 +26,6 @@ namespace Narrative.Inspector
             }
         }
 
-
-        public static Choice CurrentChoice { get; private set; }
-
         private readonly TextField nameField;
         private readonly Foldout eventsFoldout;
         private readonly ReorderableList<Task, TaskDrawer> taskList;
@@ -33,65 +33,56 @@ namespace Narrative.Inspector
         private readonly Foldout optionsFoldout;
         private readonly FoldoutList<Option, OptionEditor> optionList;
 
-        public ChoiceEditor(Choice choice)
+        public ChoiceEditor(Choice value) : base(value)
         {
-            CurrentChoice = choice;
-            Value = choice;
+            CurrentChoice = Value;
 
             Foldout = new Foldout(FoldoutName);
             Foldout.Style.FontColor = FoldoutColor;
 
-            nameField = new TextField(choice.name, "Name:", "Name to be displayed in the editor");
+            nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
             nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
-                choice.name = e.Value;
+                Value.name = e.Value;
                 Foldout.Content.text = FoldoutName;
             };
 
-            textField = new TextField(choice.text, "Text:", "Text to be displayed in game");
+            textField = new TextField(Value.text, "Text:", "Text to be displayed in game");
             textField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
-                choice.text = e.Value;
+                Value.text = e.Value;
             };
 
             eventsFoldout = new Foldout(false, "Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
-            taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
+            taskList = new ReorderableList<Task, TaskDrawer>(base.Value.Events);
 
             optionsFoldout = new Foldout(false, "Options");
             optionsFoldout.Style.FontStyle = FontStyle.Bold;
-            optionList = new FoldoutList<Option, OptionEditor>(Value.Options);
+            optionList = new FoldoutList<Option, OptionEditor>(base.Value.Options);
             optionList.Changed += (object sender, ListChangedArgs<Option> e) =>
             {
                 Foldout.Style.FontColor = FoldoutColor;
             };
         }
 
-        public override void ResetValues()
-        {
-            nameField.Value = Value.name;
-            textField.Value = Value.text;
-            taskList.Value = Value.Events;
-            optionList.Value = Value.Options;
-        }
-
-        public override void Draw()
+        protected override void Display()
         {
             CurrentChoice = Value;
 
-            nameField.Draw();
+            nameField.Draw(Value.name);
 
             eventsFoldout.Draw();
             if (eventsFoldout.Value)
                 using (Indent.Draw())
-                    taskList.Draw();
+                    taskList.Draw(Value.Events);
 
-            textField.Draw();
+            textField.Draw(Value.text);
 
             optionsFoldout.Draw();
             if (optionsFoldout.Value)
                 using (Indent.Draw())
-                    optionList.Draw();
+                    optionList.Draw(Value.Options);
         }
     }
 }

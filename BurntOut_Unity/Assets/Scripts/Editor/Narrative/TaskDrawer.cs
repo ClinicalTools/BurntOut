@@ -10,11 +10,9 @@ namespace Narrative.Inspector
         TextField dialogueField;
         EnumPopup emotionPopup;
         
-        public TaskDrawer(Task value)
+        public TaskDrawer(Task value) : base(value)
         {
-            Value = value;
-
-            actionPopup = new EnumPopup(value.action)
+            actionPopup = new EnumPopup(Value.action)
             {
                 FitWidth = true
             };
@@ -24,7 +22,7 @@ namespace Narrative.Inspector
             };
 
             Scenario scenario = ScenarioEditor.CurrentScenario;
-            actorPopup = new Popup(scenario.ActorIndex(value.actorId), scenario.ActorNames())
+            actorPopup = new Popup(scenario.ActorIndex(Value.actorId), scenario.ActorNames())
             {
                 FitWidth = true
             };
@@ -34,13 +32,13 @@ namespace Narrative.Inspector
                     Value.actorId = scenario.Actors[e.Value].id;
             };
 
-            dialogueField = new TextField(value.dialogue);
+            dialogueField = new TextField(Value.dialogue);
             dialogueField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.dialogue = e.Value;
             };
 
-            emotionPopup = new EnumPopup(value.emotion)
+            emotionPopup = new EnumPopup(Value.emotion)
             {
                 FitWidth = true
             };
@@ -50,29 +48,21 @@ namespace Narrative.Inspector
             };
         }
 
-        public override void ResetValues()
+        protected override void Display()
         {
-            actionPopup.Value = Value.action;
+            actionPopup.Draw(Value.action);
+
             Scenario scenario = ScenarioEditor.CurrentScenario;
-            actorPopup.Value = scenario.ActorIndex(Value.actorId);
-            dialogueField.Value = Value.dialogue;
-            emotionPopup.Value = Value.emotion;
-        }
-
-        public override void Draw()
-        {
-            actionPopup.Draw();
-
-            actorPopup.Options = ScenarioEditor.CurrentScenario.ActorNames();
-            actorPopup.Draw();
+            actorPopup.Options = scenario.ActorNames();
+            actorPopup.Draw(scenario.ActorIndex(Value.actorId));
 
             switch (Value.action)
             {
                 case TaskAction.TALK:
-                    dialogueField.Draw();
+                    dialogueField.Draw(Value.dialogue);
                     break;
                 case TaskAction.EMOTION:
-                    emotionPopup.Draw();
+                    emotionPopup.Draw(Value.emotion);
                     break;
             }
         }

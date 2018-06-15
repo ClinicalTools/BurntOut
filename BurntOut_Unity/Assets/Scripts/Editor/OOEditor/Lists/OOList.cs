@@ -7,7 +7,7 @@ namespace OOEditor
 {
     public abstract class OOList<T, TDrawer> where TDrawer : IGUIObjectDrawer<T>
     {
-        public List<T> Value { get; set; }
+        public List<T> List { get; set; }
 
         public event EventHandler<ListChangedArgs<T>> Changed;
 
@@ -20,17 +20,17 @@ namespace OOEditor
 
         public OOList(List<T> value)
         {
-            Value = value;
+            List = value;
 
-            for (var i = 0; i < Value.Count; i++)
+            for (var i = 0; i < List.Count; i++)
                 AddRow();
         }
 
         protected virtual void SwapRows(int index1, int index2)
         {
-            var val = Value[index1];
-            Value.RemoveAt(index1);
-            Value.Insert(index2, val);
+            var val = List[index1];
+            List.RemoveAt(index1);
+            List.Insert(index2, val);
             var draw = Drawers[index1];
             Drawers.RemoveAt(index1);
             Drawers.Insert(index2, draw);
@@ -42,17 +42,17 @@ namespace OOEditor
         protected virtual void AddRow()
         {
             // Check if we need to add a value with this row
-            if (Value.Count == Drawers.Count)
+            if (List.Count == Drawers.Count)
             {
                 T val;
                 if (DefaultElement != null)
                     val = DefaultElement();
                 else
                     val = (T)Activator.CreateInstance(typeof(T));
-                Value.Add(val);
+                List.Add(val);
             }
 
-            object[] args = { Value[Drawers.Count] };
+            object[] args = { List[Drawers.Count] };
             var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
             Drawers.Add(drawer);
         }
@@ -62,8 +62,8 @@ namespace OOEditor
         protected virtual void RemoveRow(int index)
         {
             // Check if we need to remove a value with this row
-            if (Value.Count == Drawers.Count)
-                Value.RemoveAt(index);
+            if (List.Count == Drawers.Count)
+                List.RemoveAt(index);
             Drawers.RemoveAt(index);
         }
 
@@ -73,20 +73,20 @@ namespace OOEditor
             // First draw calls changed, since it changed from its default
             if (firstDraw)
             {
-                Changed?.Invoke(this, new ListChangedArgs<T>(Value));
+                Changed?.Invoke(this, new ListChangedArgs<T>(List));
                 firstDraw = false;
             }
 
-            var count = Value.Count;
+            var count = List.Count;
 
             // Since the list is shared outside this class, values must be constantly updated to avoid errors
-            while (Drawers.Count < Value.Count)
+            while (Drawers.Count < List.Count)
                 AddRow();
-            while (Drawers.Count > Value.Count)
-                RemoveRow(Value.Count);
-            for (var i = 0; i < Value.Count; i++)
-                if (!Drawers[i].Value.Equals(Value[i]))
-                    Drawers[i].Value = Value[i];
+            while (Drawers.Count > List.Count)
+                RemoveRow(List.Count);
+            for (var i = 0; i < List.Count; i++)
+                if (!Drawers[i].Value.Equals(List[i]))
+                    Drawers[i].Value = List[i];
 
             // Listen to whether contained elements change
             OOEditorManager.Changed += OnChanged;
@@ -95,21 +95,31 @@ namespace OOEditor
 
             // This allows value type lists to function correctly
             // Also ensures the drawer is using a valid reference
-            for (int i = 0; i < Value.Count; i++)
-                if (!Drawers[i].Value.Equals(Value[i]))
-                    Value[i] = Drawers[i].Value;
+            for (int i = 0; i < List.Count; i++)
+                if (!Drawers[i].Value.Equals(List[i]))
+                    List[i] = Drawers[i].Value;
 
-            if (count != Value.Count)
+            if (count != List.Count)
             {
-                var e = new ListChangedArgs<T>(Value);
+                var e = new ListChangedArgs<T>(List);
                 OOEditorManager.ElementChanged(this, e);
                 Changed?.Invoke(this, e);
             }
         }
+        /// <summary>
+        /// Updates the list's reference and then draws it.
+        /// </summary>
+        /// <param name="list">Reference of list to draw</param>
+        public void Draw(List<T> list)
+        {
+            List = list;
+
+            Draw();
+        }
 
         protected void OnChanged(object sender, EventArgs e)
         {
-            Changed?.Invoke(this, new ListChangedArgs<T>(Value));
+            Changed?.Invoke(this, new ListChangedArgs<T>(List));
         }
 
         protected abstract void Display();

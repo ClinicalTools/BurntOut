@@ -83,28 +83,28 @@ namespace OOEditor
         {
             base.RemoveRow(index);
 
-            DelButtons.RemoveAt(Value.Count);
-            if (Value.Count > 0)
+            DelButtons.RemoveAt(List.Count);
+            if (List.Count > 0)
             {
-                UpButtons.RemoveAt(Value.Count - 1);
-                DownButtons.RemoveAt(Value.Count - 1);
+                UpButtons.RemoveAt(List.Count - 1);
+                DownButtons.RemoveAt(List.Count - 1);
             }
         }
 
         protected override void Display()
         {
-            for (var i = 0; i < Value.Count; i++)
+            for (var i = 0; i < List.Count; i++)
             {
                 using (Horizontal.Draw())
                 {
-                    Drawers[i].Draw();
+                    Drawers[i].Draw(List[i]);
 
                     if (i > 0)
                         UpButtons[i - 1].Draw();
                     else
                         TopUpSpace.Draw();
 
-                    if (i < Value.Count - 1)
+                    if (i < List.Count - 1)
                         DownButtons[i].Draw();
                     else
                         BottomDownSpace.Draw();

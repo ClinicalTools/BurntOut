@@ -24,7 +24,7 @@ namespace OOEditor
         }
         public bool Focused => FocusedControlName.Contains(Name);
 
-        public GUIContent Content { get; protected set; }
+        public virtual GUIContent Content { get; }
 
         private float minWidth;
         public virtual float MinWidth

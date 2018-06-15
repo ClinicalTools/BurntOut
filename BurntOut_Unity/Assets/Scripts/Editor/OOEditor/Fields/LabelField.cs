@@ -7,14 +7,8 @@ namespace OOEditor
     {
         protected override GUIStyle BaseStyle => EditorStyles.label;
 
-        public LabelField(string text) : base(text)
-        {
-            Content = new GUIContent(text);
-        }
-        public LabelField(string text, string tooltip) : base(text, tooltip)
-        {
-            Content = new GUIContent(text, tooltip);
-        }
+        public LabelField(string text) : base(text) { }
+        public LabelField(string text, string tooltip) : base(text, tooltip) { }
 
         protected override void Display(Rect position)
         {

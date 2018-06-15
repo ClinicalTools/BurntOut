@@ -43,21 +43,19 @@ namespace Narrative.Inspector
         private readonly TextArea feedback;
 
 
-        public OptionEditor(Option option)
+        public OptionEditor(Option value) : base(value)
         {
-            Value = option;
-
             Foldout = new Foldout(FoldoutName);
             Foldout.Style.FontColor = ResultColor;
 
-            nameField = new TextField(option.name, "Name:", "Name to be displayed in the editor");
+            nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
             nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.name = e.Value;
                 Foldout.Content.text = FoldoutName;
             };
 
-            textField = new TextField(option.text, "Text:", "Text to be displayed in game");
+            textField = new TextField(Value.text, "Text:", "Text to be displayed in game");
             textField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.text = e.Value;
@@ -66,7 +64,7 @@ namespace Narrative.Inspector
             eventsFoldout = new Foldout("Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
 
-            taskList = new ReorderableList<Task, TaskDrawer>(option.Events);
+            taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
 
             resultPopup = new EnumPopup(Value.result, "Result:");
             resultPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
@@ -79,36 +77,27 @@ namespace Narrative.Inspector
             };
 
             feedbackLabel = new LabelField("Feedback:");
-            feedback = new TextArea(option.feedback);
+            feedback = new TextArea(Value.feedback);
             feedback.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
                 Value.feedback = e.Value;
             };
         }
 
-        public override void ResetValues()
+        protected override void Display()
         {
-            nameField.Value = Value.name;
-            textField.Value = Value.text;
-            taskList.Value = Value.Events;
-            resultPopup.Value = Value.result;
-            feedback.Value = Value.feedback;
-        }
-
-        public override void Draw()
-        {
-            nameField.Draw();
-            textField.Draw();
+            nameField.Draw(Value.name);
+            textField.Draw(Value.text);
 
             eventsFoldout.Draw();
             if (eventsFoldout.Value)
                 using (Indent.Draw())
-                    taskList.Draw();
+                    taskList.Draw(Value.Events);
 
-            resultPopup.Draw();
+            resultPopup.Draw(Value.result);
 
             feedbackLabel.Draw();
-            feedback.Draw();
+            feedback.Draw(Value.feedback);
         }
     }
 }

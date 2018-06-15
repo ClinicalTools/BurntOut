@@ -9,7 +9,7 @@ namespace OOEditor
         
         protected override void Display()
         {
-            for (var i = 0; i < Value.Count; i++)
+            for (var i = 0; i < List.Count; i++)
             {
                 using (Horizontal.Draw())
                 {
@@ -20,7 +20,7 @@ namespace OOEditor
                     else
                         TopUpSpace.Draw();
 
-                    if (i < Value.Count - 1)
+                    if (i < List.Count - 1)
                         DownButtons[i].Draw();
                     else
                         BottomDownSpace.Draw();
@@ -31,7 +31,7 @@ namespace OOEditor
                 if (i < Drawers.Count && Drawers[i].Expanded)
                     using (Indent.Draw())
                     using (GUIContainer.Draw())
-                        Drawers[i].Draw();
+                        Drawers[i].Draw(List[i]);
             }
 
             AddButton.Draw();

@@ -12,6 +12,8 @@ namespace OOEditor
 
         protected abstract Foldout Foldout { get; }
 
+        public FoldoutClassDrawer(T value) : base(value) { }
+
         public virtual void DrawFoldout()
         {
             Foldout.Draw();

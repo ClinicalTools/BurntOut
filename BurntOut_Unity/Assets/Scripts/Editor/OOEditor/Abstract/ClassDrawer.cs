@@ -2,27 +2,23 @@
 
 public abstract class ClassDrawer<T> : IGUIObjectDrawer<T>
 {
-    private T value;
-    public virtual T Value
+    public virtual T Value { get; set; }
+
+    public ClassDrawer(T value)
     {
-        get
-        {
-            return value;
-        }
-        set
-        {
-            if (this.value != null && !this.value.Equals(value))
-            {
-                this.value = value;
-                ResetValues();
-            }
-            else
-            {
-                this.value = value;
-            }
-        }
+        Value = value;
     }
 
-    public abstract void ResetValues();
-    public abstract void Draw();
+    /// <summary>
+    /// Updates the class's value and then draws it.
+    /// </summary>
+    /// <param name="value">Updated value to draw</param>
+    public void Draw(T value)
+    {
+        Value = value;
+
+        Display();
+    }
+
+    protected abstract void Display();
 }

@@ -13,7 +13,7 @@ namespace OOEditor
 
         public ReorderableList(List<T> value) : base(value)
         {
-            list = new ReorderableList(Value, typeof(T))
+            list = new ReorderableList(List, typeof(T))
             {
                 headerHeight = 4,
                 drawElementCallback =
@@ -22,7 +22,7 @@ namespace OOEditor
                     rect.y += 1;
                     rect.height -= 4;
                     OOEditorManager.Wait = true;
-                    Drawers[index].Draw();
+                    Drawers[index].Draw(List[index]);
                     OOEditorManager.EmptyQueueInHorizontalRect(rect);
                 },
                 onAddCallback = (ReorderableList list) =>
@@ -36,8 +36,8 @@ namespace OOEditor
                 },
                 onReorderCallback = (ReorderableList list) =>
                 {
-                    for (var i = 0; i < Value.Count; i++)
-                        Drawers[i].Value = Value[i];
+                    for (var i = 0; i < List.Count; i++)
+                        Drawers[i].Value = List[i];
                 }
             };
         }

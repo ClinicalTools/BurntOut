@@ -3,6 +3,10 @@
     public interface IGUIObjectDrawer<T>
     {
         T Value { get; set; }
-        void Draw();
+        /// <summary>
+        /// Updates the object's value and then draws it.
+        /// </summary>
+        /// <param name="value">Updated value to draw</param>
+        void Draw(T value);
     }
 }

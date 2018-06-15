@@ -79,6 +79,14 @@ namespace OOEditor
             if (drawToolbar)
                 Toolbar.EndDraw();
         }
-
+        /// <summary>
+        /// Updates the control's value and then draws it.
+        /// </summary>
+        /// <param name="value">Updated value for the control</param>
+        public void Draw(int value)
+        {
+            Value = value;
+            Draw();
+        }
     }
 }

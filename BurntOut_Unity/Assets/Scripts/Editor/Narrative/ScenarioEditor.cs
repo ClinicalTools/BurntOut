@@ -6,11 +6,9 @@ namespace Narrative.Inspector
     /// <summary>
     /// Manages the editing of a scenario.
     /// </summary>
-    public class ScenarioEditor
+    public class ScenarioEditor : ClassDrawer<Scenario>
     {
         public static Scenario CurrentScenario { get; private set; }
-
-        public readonly Scenario scenario;
 
         private readonly FoldoutList<Choice, ChoiceEditor> choiceList;
 
@@ -21,55 +19,53 @@ namespace Narrative.Inspector
 
         private GUIList<Actor, ActorDrawer> actorsList;
 
-        public ScenarioEditor(Scenario scenario)
+        public ScenarioEditor(Scenario value) : base(value)
         {
-            CurrentScenario = scenario;
-            this.scenario = scenario;
+            CurrentScenario = Value;
 
-            nameField = new TextField(scenario.name, "Name:", "Name to be displayed in the editor");
+            nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
             nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
-                scenario.name = e.Value;
+                base.Value.name = e.Value;
             };
 
             actorsFoldout = new Foldout("Actors");
             actorsFoldout.Style.FontStyle = FontStyle.Bold;
-            actorsList = new GUIList<Actor, ActorDrawer>(scenario.Actors)
+            actorsList = new GUIList<Actor, ActorDrawer>(base.Value.Actors)
             {
-                DefaultElement = () => { return new Actor(scenario.Actors.ToArray()); }
+                DefaultElement = () => { return new Actor(base.Value.Actors.ToArray()); }
             };
-
 
             choicesFoldout = new Foldout("Choices");
             choicesFoldout.Style.FontStyle = FontStyle.Bold;
-            choiceList = new FoldoutList<Choice, ChoiceEditor>(scenario.Choices);
+            choiceList = new FoldoutList<Choice, ChoiceEditor>(base.Value.Choices);
 
             endNarrativeLabel = new LabelField("End Narrative:");
-            endNarrativeField = new TextArea(scenario.endNarrative);
+            endNarrativeField = new TextArea(base.Value.endNarrative);
             endNarrativeField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
-                scenario.endNarrative = e.Value;
+                base.Value.endNarrative = e.Value;
             };
         }
 
-        public void Draw()
+        protected override void Display()
         {
-            CurrentScenario = scenario;
+            CurrentScenario = Value;
 
-            nameField.Draw();
+            nameField.Draw(Value.name);
 
             actorsFoldout.Draw();
             if (actorsFoldout.Value)
                 using (Indent.Draw())
-                    actorsList.Draw();
+                    actorsList.Draw(Value.Actors);
 
             choicesFoldout.Draw();
             if (choicesFoldout.Value)
                 using (Indent.Draw())
-                    choiceList.Draw();
+                    choiceList.Draw(Value.Choices);
 
             endNarrativeLabel.Draw();
-            endNarrativeField.Draw();
+            endNarrativeField.Draw(Value.endNarrative);
         }
     }
 }

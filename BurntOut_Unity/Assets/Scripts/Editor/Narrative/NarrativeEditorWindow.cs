@@ -2,8 +2,6 @@
 using UnityEditor;
 using System.Collections.Generic;
 using System;
-using UnityEngine.SceneManagement;
-using System.IO;
 using OOEditor;
 
 namespace Narrative.Inspector
@@ -13,6 +11,8 @@ namespace Narrative.Inspector
     /// </summary>
     public class NarrativeEditorWindow : EditorWindow
     {
+        // Scene controls
+        private SceneNarrationEditor sceneEditor;
         private readonly List<ScenarioEditor> scenarioEditors = new List<ScenarioEditor>();
         private ScrollView scrollView = new ScrollView();
 
@@ -26,8 +26,7 @@ namespace Narrative.Inspector
         private readonly OverrideTextStyle toolbarTextStyle = new OverrideTextStyle(12);
         private readonly OverrideTextStyle textStyle = new OverrideTextStyle();
 
-        // Scene controls
-        SceneNarrationEditor sceneEditor;
+        private int ScenarioNum => tabs.Value - 1;
 
         public void OnEnable()
         {
@@ -87,8 +86,8 @@ namespace Narrative.Inspector
             if (EditorUtility.DisplayDialog("Remove Scenario",
                            "Are you sure you want to delete this scenario?", "Delete", "Cancel"))
             {
-                sceneNarrative.scenarios.RemoveAt(tabs.Value - 1);
-                scenarioEditors.RemoveAt(tabs.Value - 1);
+                sceneNarrative.scenarios.RemoveAt(ScenarioNum);
+                scenarioEditors.RemoveAt(ScenarioNum);
                 tabs.RemoveTab(tabs.Value);
 
                 // Ensure there's at least one scenario
@@ -103,7 +102,7 @@ namespace Narrative.Inspector
 
         private void SaveScenarioBtn_Pressed(object sender, EventArgs e)
         {
-            NarrativeFileManager.SaveScenario(sceneNarrative.scenarios[tabs.Value - 1]);
+            NarrativeFileManager.SaveScenario(sceneNarrative.scenarios[ScenarioNum]);
         }
 
         private void LoadScenarioBtn_Pressed(object sender, EventArgs e)
@@ -112,8 +111,8 @@ namespace Narrative.Inspector
             if (scenario == null)
                 return;
 
-            sceneNarrative.scenarios[tabs.Value - 1] = scenario;
-            scenarioEditors[tabs.Value - 1] = new ScenarioEditor(scenario);
+            sceneNarrative.scenarios[ScenarioNum] = scenario;
+            scenarioEditors[ScenarioNum] = new ScenarioEditor(scenario);
         }
 
         private void SaveAllBtn_Pressed(object sender, EventArgs e)
@@ -191,14 +190,14 @@ namespace Narrative.Inspector
             }
 
             // Ensure scenarios in the editor match the scenarios in the scene
-            if (scenarioEditors.Count != sceneNarrative.scenarios.Count ||
-                scenarioEditors[0].scenario != sceneNarrative.scenarios[0])
+            if (scenarioEditors.Count != sceneNarrative.scenarios.Count)
             {
                 scenarioEditors.Clear();
                 foreach (Scenario scenario in sceneNarrative.scenarios)
                     scenarioEditors.Add(new ScenarioEditor(scenario));
             }
 
+            /*
             // Draw the toolbar for scenario management
             using (Toolbar.Draw())
             using (toolbarTextStyle.Draw())
@@ -224,14 +223,14 @@ namespace Narrative.Inspector
             }
 
             using (textStyle.Draw())
-            using (scrollView.Draw())
+            using (scrollView.Draw())//*/
             {
                 // Edit basic scene info
                 if (tabs.Value == 0)
-                    sceneEditor.Draw();
+                    sceneEditor.Draw(sceneNarrative);
                 // Edit selected scenario
                 else
-                    scenarioEditors[tabs.Value - 1].Draw();
+                    scenarioEditors[ScenarioNum].Draw(sceneNarrative.scenarios[ScenarioNum]);
             }
         }
     }
