@@ -14,7 +14,7 @@ namespace OOEditor
 
         protected string Name { get; set; }
 
-        private string focusedControl = "";
+        private static string focusedControl = "";
         /// <summary>
         /// Returns the name of the current focused control.
         /// </summary>

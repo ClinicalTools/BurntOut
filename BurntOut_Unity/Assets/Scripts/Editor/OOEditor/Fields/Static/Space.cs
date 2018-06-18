@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using OOEditor.Internal;
+using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
@@ -12,7 +13,7 @@ namespace OOEditor
         {
             get
             {
-                return width;
+                return OOEditorManager.ScaledWidth(width, GUIStyle?.fontSize ?? 0);
             }
         }
 
@@ -21,9 +22,7 @@ namespace OOEditor
             this.width = width;
         }
 
-        protected override void Display(Rect position)
-        {
-            GUILayout.Space(position.x);
-        }
+        // Nothing needs to be drawn, as just creating the rectangle reserves the space
+        protected override void Display(Rect position) { }
     }
 }

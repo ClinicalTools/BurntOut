@@ -138,6 +138,7 @@ namespace OOEditor
                 Changed?.Invoke(this, e);
             }
         }
+
         /// <summary>
         /// Updates the list's reference and then draws it.
         /// </summary>

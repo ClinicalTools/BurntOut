@@ -38,6 +38,7 @@ namespace OOEditor.Internal
         /// Allows listening to whether there are changes in objects in a range
         /// </summary>
         public static event EventHandler Changed;
+
         public static void ElementChanged(object sender, EventArgs e)
         {
             Changed?.Invoke(sender, e);
