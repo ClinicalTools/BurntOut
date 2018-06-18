@@ -9,24 +9,15 @@ namespace OOEditor
     {
         private const float BUTTON_WIDTH = 30;
 
-        protected LabelField TopUpSpace { get; }
+        protected GUISpace ButtonSpace { get; }
         protected List<Button> UpButtons { get; } = new List<Button>();
         protected List<Button> DownButtons { get; } = new List<Button>();
-        protected LabelField BottomDownSpace { get; }
         protected List<Button> DelButtons { get; } = new List<Button>();
         protected Button AddButton { get; }
 
         public GUIList(List<T> value) : base(value)
         {
-            TopUpSpace = new LabelField(" ")
-            {
-
-                MaxWidth = BUTTON_WIDTH
-            };
-            BottomDownSpace = new LabelField(" ")
-            {
-                MaxWidth = BUTTON_WIDTH
-            };
+            ButtonSpace = new GUISpace(BUTTON_WIDTH);
             AddButton = new Button("+")
             {
                 MaxWidth = 128
@@ -51,7 +42,7 @@ namespace OOEditor
                     SwapRows(index, index - 1);
                 };
 
-                var upButton = new Button("▲")
+                var upButton = new Button("▲", $"Move up")
                 {
                     MaxWidth = BUTTON_WIDTH
                 };
@@ -59,7 +50,7 @@ namespace OOEditor
                 UpButtons.Add(upButton);
 
                 // Create the down button for the last row
-                var downButton = new Button("▼")
+                var downButton = new Button("▼", $"Move down")
                 {
                     MaxWidth = BUTTON_WIDTH
                 };
@@ -67,7 +58,7 @@ namespace OOEditor
                 DownButtons.Add(downButton);
             }
 
-            var delButton = new Button("X")
+            var delButton = new Button("X", $"Delete")
             {
                 MaxWidth = BUTTON_WIDTH
             };
@@ -102,12 +93,12 @@ namespace OOEditor
                     if (i > 0)
                         UpButtons[i - 1].Draw();
                     else
-                        TopUpSpace.Draw();
+                        ButtonSpace.Draw();
 
                     if (i < List.Count - 1)
                         DownButtons[i].Draw();
                     else
-                        BottomDownSpace.Draw();
+                        ButtonSpace.Draw();
 
                     DelButtons[i].Draw();
                 }

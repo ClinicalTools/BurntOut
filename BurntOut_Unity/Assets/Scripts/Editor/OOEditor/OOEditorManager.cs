@@ -87,8 +87,6 @@ namespace OOEditor.Internal
 
         private static Rect GetPosInHorizontalRect(Rect rect, EditorGUIElement guiElement)
         {
-            GUIStyle style = guiElement.GUIStyle;
-
             if (guiElement.MinWidth > 0)
                 minDrawWidth -= guiElement.MinWidth;
             float maxWidth = rect.width - minDrawWidth;
@@ -117,10 +115,6 @@ namespace OOEditor.Internal
                 options.Add(GUILayout.MaxWidth(guiElement.MaxWidth));
             if (guiElement.Width > 0)
                 options.Add(GUILayout.Width(guiElement.Width));
-
-            // Elements in toolbar are scaled to fit their contents
-            if (guiElement.Width <= 0 && guiElement.MinWidth <= 0 && guiElement.MaxWidth <= 0 && InToolbar)
-                options.Add(GUILayout.Width(style.CalcSize(content).x));
 
             // This gets the width of the element without adding much (if any) height
             Rect scale;

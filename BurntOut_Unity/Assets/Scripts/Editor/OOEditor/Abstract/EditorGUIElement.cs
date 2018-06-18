@@ -6,7 +6,7 @@ namespace OOEditor
     public abstract class EditorGUIElement
     {
         // 4,294,967,295 elements should be enough
-        // Note that this is shared between all OO gui elements, not just those in a particular window
+        // Note that this is shared between all instances of EditorGUIElement, not just those in a particular window
         protected static uint elementNums = 0;
 
         protected string Name { get; set; }

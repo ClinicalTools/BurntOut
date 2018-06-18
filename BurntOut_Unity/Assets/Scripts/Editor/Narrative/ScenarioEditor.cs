@@ -10,14 +10,13 @@ namespace Narrative.Inspector
     {
         public static Scenario CurrentScenario { get; private set; }
 
+        private readonly ReorderableList<Actor, ActorDrawer> actorsList;
         private readonly FoldoutList<Choice, ChoiceEditor> choiceList;
 
-        private TextField nameField;
-        private Foldout actorsFoldout, choicesFoldout;
-        private LabelField endNarrativeLabel;
-        private TextArea endNarrativeField;
-
-        private GUIList<Actor, ActorDrawer> actorsList;
+        private readonly TextField nameField;
+        private readonly Foldout actorsFoldout, choicesFoldout;
+        private readonly LabelField endNarrativeLabel;
+        private readonly TextArea endNarrativeField;
 
         public ScenarioEditor(Scenario value) : base(value)
         {
@@ -31,7 +30,7 @@ namespace Narrative.Inspector
 
             actorsFoldout = new Foldout("Actors");
             actorsFoldout.Style.FontStyle = FontStyle.Bold;
-            actorsList = new GUIList<Actor, ActorDrawer>(base.Value.Actors)
+            actorsList = new ReorderableList<Actor, ActorDrawer>(base.Value.Actors)
             {
                 DefaultElement = () => { return new Actor(base.Value.Actors.ToArray()); }
             };

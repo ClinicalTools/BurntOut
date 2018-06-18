@@ -18,12 +18,12 @@ namespace OOEditor
                     if (i > 0)
                         UpButtons[i - 1].Draw();
                     else
-                        TopUpSpace.Draw();
+                        ButtonSpace.Draw();
 
                     if (i < List.Count - 1)
                         DownButtons[i].Draw();
                     else
-                        BottomDownSpace.Draw();
+                        ButtonSpace.Draw();
 
                     DelButtons[i].Draw();
                 }
