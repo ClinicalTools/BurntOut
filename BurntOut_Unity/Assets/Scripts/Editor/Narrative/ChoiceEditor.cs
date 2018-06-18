@@ -1,107 +1,88 @@
-﻿using CtiEditor;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using OOEditor;
 using UnityEngine;
 
-/// <summary>
-/// Manages the editing of a choice for a given scenario.
-/// </summary>
-public class ChoiceEditor
+namespace Narrative.Inspector
 {
-    private bool eventsFoldout;
-    private bool optionsFoldout;
-    private readonly List<bool> optionFoldout = new List<bool>();
-    private readonly List<OptionEditor> optionEditors = new List<OptionEditor>();
-    private readonly TasksEditor tasksEditor;
-
-    private readonly Scenario scenario;
-    private readonly Choice choice;
-
-    public ChoiceEditor(Choice choice, Scenario scenario)
+    /// <summary>
+    /// Manages the editing of a choice for a given scenario.
+    /// </summary>
+    public class ChoiceEditor : FoldoutClassDrawer<Choice>
     {
-        this.choice = choice;
-        this.scenario = scenario;
+        public static Choice CurrentChoice { get; private set; }
 
-        foreach (Option option in choice.Options)
+
+        protected string FoldoutName =>
+            $"Choice {ScenarioEditor.CurrentScenario.Choices.IndexOf(Value) + 1} - {Value.name}";
+        protected override Foldout Foldout { get; }
+
+        protected Color? FoldoutColor
         {
-            optionFoldout.Add(false);
-            optionEditors.Add(new OptionEditor(option, scenario));
+            get
+            {
+                if (Value.Options.Exists(option => option.result == OptionResult.CONTINUE))
+                    return null;
+                else
+                    return EditorColors.Red;
+            }
         }
 
-        tasksEditor = new TasksEditor(choice.Events, scenario);
-    }
+        private readonly TextField nameField;
+        private readonly Foldout eventsFoldout;
+        private readonly ReorderableList<Task, TaskDrawer> taskList;
+        private readonly TextField textField;
+        private readonly Foldout optionsFoldout;
+        private readonly FoldoutList<Option, OptionEditor> optionList;
 
-    public void Edit()
-    {
-        choice.name = CtiEditorGUI.TextField(choice.name, "Name: ", "Name to be displayed in the editor");
-
-        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
-            eventsFoldout = CtiEditorGUI.Foldout(eventsFoldout, "Events");
-
-        if (eventsFoldout)
-            using (CtiEditorGUI.Indent())
-                tasksEditor.Edit();
-
-        choice.text = CtiEditorGUI.TextField(choice.text, "Text: ", "Text to be displayed in game");
-
-        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
-            optionsFoldout = CtiEditorGUI.Foldout(optionsFoldout, "Options");
-
-        if (optionsFoldout)
+        public ChoiceEditor(Choice value) : base(value)
         {
-            using (CtiEditorGUI.Indent())
+            CurrentChoice = Value;
+
+            Foldout = new Foldout(FoldoutName);
+            Foldout.Style.FontColor = FoldoutColor;
+
+            nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
+            nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
-                EditorHelper.FoldoutListEdit(
-                    // Add element
-                    () =>
-                    {
-                        Option option = new Option();
-                        choice.Options.Add(option);
-                        optionEditors.Add(new OptionEditor(option, scenario));
-                    },
-                    // Move element
-                    (int orig, int newPos) =>
-                    {
-                        Option option = choice.Options[orig];
-                        choice.Options.RemoveAt(orig);
-                        choice.Options.Insert(newPos, option);
+                Value.name = e.Value;
+                Foldout.Content.text = FoldoutName;
+            };
 
-                        OptionEditor optionEditor = optionEditors[orig];
-                        optionEditors.RemoveAt(orig);
-                        optionEditors.Insert(newPos, optionEditor);
-                    },
-                    // Remove element
-                    (int i) =>
-                    {
-                        choice.Options.RemoveAt(i);
-                        optionEditors.RemoveAt(i);
+            textField = new TextField(Value.text, "Text:", "Text to be displayed in game");
+            textField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            {
+                Value.text = e.Value;
+            };
 
-                    },
-                    // Folded out display
-                    (int i) =>
-                    {
-                        using (CtiEditorGUI.Container())
-                            optionEditors[i].Edit();
-                    },
-                    optionFoldout,
-                    // Foldout title
-                    (int i) => { return ("Option " + (i + 1) + " - " + choice.Options[i].name); },
-                    // Foldout color
-                    (int i) =>
-                    {
-                        if (choice.Options[i].result == OptionResults.CONTINUE)
-                            return EditorHelper.ContinueColor;
-                        else if (choice.Options[i].result == OptionResults.TRY_AGAIN)
-                            return EditorHelper.TryAgainColor;
-                        else if (choice.Options[i].result == OptionResults.END)
-                            return EditorHelper.EndColor;
+            eventsFoldout = new Foldout(false, "Events");
+            eventsFoldout.Style.FontStyle = FontStyle.Bold;
+            taskList = new ReorderableList<Task, TaskDrawer>(base.Value.Events);
 
-                        return GUI.contentColor;
-                    },
-                    "Remove Option",
-                    "Are you sure you want to delete this option?"
-                );
-            }
+            optionsFoldout = new Foldout(false, "Options");
+            optionsFoldout.Style.FontStyle = FontStyle.Bold;
+            optionList = new FoldoutList<Option, OptionEditor>(base.Value.Options);
+            optionList.Changed += (object sender, ListChangedArgs<Option> e) =>
+            {
+                Foldout.Style.FontColor = FoldoutColor;
+            };
+        }
+
+        protected override void Display()
+        {
+            CurrentChoice = Value;
+
+            nameField.Draw(Value.name);
+
+            eventsFoldout.Draw();
+            if (eventsFoldout.Value)
+                using (Indent.Draw())
+                    taskList.Draw(Value.Events);
+
+            textField.Draw(Value.text);
+
+            optionsFoldout.Draw();
+            if (optionsFoldout.Value)
+                using (Indent.Draw())
+                    optionList.Draw(Value.Options);
         }
     }
 }

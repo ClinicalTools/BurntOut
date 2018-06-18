@@ -163,7 +163,7 @@ public class DialogueManager : MonoBehaviour
 
                 switch (option.result)
                 {
-                    case OptionResults.CONTINUE:
+                    case OptionResult.CONTINUE:
                         choiceNum++;
                         // Load tasks for the next choice
                         if (choiceNum < scenario.Choices.Count)
@@ -171,11 +171,11 @@ public class DialogueManager : MonoBehaviour
 
                         ShowFeedback(option.feedback);
                         break;
-                    case OptionResults.END:
+                    case OptionResult.END:
                         lost = true;
                         ShowFeedback(option.feedback);
                         break;
-                    case OptionResults.TRY_AGAIN:
+                    case OptionResult.TRY_AGAIN:
                         tasks = new Queue<Task>(scenario.Choices[choiceNum].Events);
                         ShowFeedback(option.feedback);
                         break;

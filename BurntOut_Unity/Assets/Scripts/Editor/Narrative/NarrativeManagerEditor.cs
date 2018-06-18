@@ -1,14 +1,17 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(NarrativeManager))]
-public class NarrativeManagerEditor : Editor
+namespace Narrative.Inspector
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(NarrativeManager))]
+    public class NarrativeManagerEditor : Editor
     {
-        if (GUILayout.Button("Open Narrative Manager Editor"))
+        public override void OnInspectorGUI()
         {
-            NarrativeEditorWindow.Init();
+            if (GUILayout.Button("Open Narrative Manager Editor"))
+            {
+                NarrativeEditorWindow.Init();
+            }
         }
     }
 }

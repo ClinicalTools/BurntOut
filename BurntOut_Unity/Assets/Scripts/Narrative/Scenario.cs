@@ -79,7 +79,7 @@ public class Scenario
     {
         // Using hash of current time to get a number that will hopefully be unique
         var hash = DateTime.Now.GetHashCode();
-
+        
         // Ensure no other scenario in the passed list has the same id
         // a true flag means that the code hasn't hit another scenario with the same id
         bool flag = false;

@@ -1,129 +1,70 @@
-﻿using CtiEditor;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using OOEditor;
 using UnityEngine;
 
-/// <summary>
-/// Manages the editing of a scenario.
-/// </summary>
-public class ScenarioEditor
+namespace Narrative.Inspector
 {
-    private bool actorsFoldout;
-    private bool choicesFoldout;
-    private readonly List<bool> choiceFoldout = new List<bool>();
-    private readonly List<ChoiceEditor> choiceEditors = new List<ChoiceEditor>();
-    public readonly Scenario scenario;
-    private float endNarrativeWidth;
-
-    public ScenarioEditor(Scenario scenario)
+    /// <summary>
+    /// Manages the editing of a scenario.
+    /// </summary>
+    public class ScenarioEditor : ClassDrawer<Scenario>
     {
-        this.scenario = scenario;
-        foreach (Choice choice in scenario.Choices)
+        public static Scenario CurrentScenario { get; private set; }
+
+        private readonly ReorderableList<Actor, ActorDrawer> actorsList;
+        private readonly FoldoutList<Choice, ChoiceEditor> choiceList;
+
+        private readonly TextField nameField;
+        private readonly Foldout actorsFoldout, choicesFoldout;
+        private readonly LabelField endNarrativeLabel;
+        private readonly TextArea endNarrativeField;
+
+        public ScenarioEditor(Scenario value) : base(value)
         {
-            choiceFoldout.Add(false);
-            choiceEditors.Add(new ChoiceEditor(choice, scenario));
-        }
-    }
+            CurrentScenario = Value;
 
-    public void Edit()
-    {
-        scenario.name = CtiEditorGUI.TextField(scenario.name, "Name: ", "Name to be displayed in the editor");
-
-        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
-            actorsFoldout = CtiEditorGUI.Foldout(actorsFoldout, "Actors");
-
-        if (actorsFoldout)
-        {
-            using (CtiEditorGUI.Indent())
+            nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
+            nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
             {
-                EditorHelper.ListEdit(
-                    scenario.Actors.Count,
-                    // Add element
-                    () =>
-                    {
-                        scenario.Actors.Add(
-                            new Actor(scenario.Actors.ToArray()));
-                    },
-                    // Move element
-                    (int orig, int newPos) =>
-                    {
-                        Actor actor = scenario.Actors[orig];
-                        scenario.Actors.RemoveAt(orig);
-                        scenario.Actors.Insert(newPos, actor);
-                    },
-                    // Remove element
-                    (int i) => { scenario.Actors.RemoveAt(i); },
-                    // Display element
-                    (int i) =>
-                    {
-                        scenario.Actors[i].name = CtiEditorGUI.TextField(scenario.Actors[i].name);
-                    },
-                    "Remove Actor",
-                    "Are you sure you want to delete this actor?"
-                );
-            }
-        }
+                base.Value.name = e.Value;
+            };
 
-        using (CtiEditorGUI.LabelFontStyle(FontStyle.Bold))
-            choicesFoldout = CtiEditorGUI.Foldout(choicesFoldout, "Choices");
-
-        if (choicesFoldout)
-        {
-            using (CtiEditorGUI.Indent())
+            actorsFoldout = new Foldout("Actors");
+            actorsFoldout.Style.FontStyle = FontStyle.Bold;
+            actorsList = new ReorderableList<Actor, ActorDrawer>(base.Value.Actors)
             {
-                EditorHelper.FoldoutListEdit(
-                    // Add element
-                    () =>
-                    {
-                        Choice choice = new Choice();
-                        scenario.Choices.Add(choice);
-                        choiceEditors.Add(new ChoiceEditor(choice, scenario));
-                    },
-                    // Move element
-                    (int orig, int newPos) =>
-                    {
-                        Choice choice = scenario.Choices[orig];
-                        scenario.Choices.RemoveAt(orig);
-                        scenario.Choices.Insert(newPos, choice);
+                DefaultElement = () => { return new Actor(base.Value.Actors.ToArray()); }
+            };
 
-                        ChoiceEditor choiceEditor = choiceEditors[orig];
-                        choiceEditors.RemoveAt(orig);
-                        choiceEditors.Insert(newPos, choiceEditor);
-                    },
-                    // Remove element
-                    (int i) =>
-                    {
-                        scenario.Choices.RemoveAt(i);
-                        choiceEditors.RemoveAt(i);
+            choicesFoldout = new Foldout("Choices");
+            choicesFoldout.Style.FontStyle = FontStyle.Bold;
+            choiceList = new FoldoutList<Choice, ChoiceEditor>(base.Value.Choices);
 
-                    },
-                    // Folded out display
-                    (int i) =>
-                    {
-                        using (CtiEditorGUI.Container())
-                            choiceEditors[i].Edit();
-                    },
-                    choiceFoldout,
-                    // Foldout title
-                    (int i) => { return ("Choice " + (i + 1) + " - " + scenario.Choices[i].name); },
-                    // Foldout color
-                    (int i) =>
-                    {
-                        // Red if there is no option to continue
-                        foreach (Option option in scenario.Choices[i].Options)
-                            if (option.result == OptionResults.CONTINUE)
-                                return GUI.contentColor;
-
-                        return EditorHelper.ErrorColor;
-                    },
-                    "Remove Choice",
-                    "Are you sure you want to delete this choice?"
-                );
-            }
+            endNarrativeLabel = new LabelField("End Narrative:");
+            endNarrativeField = new TextArea(base.Value.endNarrative);
+            endNarrativeField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            {
+                base.Value.endNarrative = e.Value;
+            };
         }
 
-        CtiEditorGUI.LabelField("End Narrative:");
-        EditorStyles.textField.wordWrap = true;
-        scenario.endNarrative = CtiEditorGUI.TextArea(scenario.endNarrative, ref endNarrativeWidth);
+        protected override void Display()
+        {
+            CurrentScenario = Value;
+
+            nameField.Draw(Value.name);
+
+            actorsFoldout.Draw();
+            if (actorsFoldout.Value)
+                using (Indent.Draw())
+                    actorsList.Draw(Value.Actors);
+
+            choicesFoldout.Draw();
+            if (choicesFoldout.Value)
+                using (Indent.Draw())
+                    choiceList.Draw(Value.Choices);
+
+            endNarrativeLabel.Draw();
+            endNarrativeField.Draw(Value.endNarrative);
+        }
     }
 }
