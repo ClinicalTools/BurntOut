@@ -14,27 +14,10 @@ namespace OOEditor
 
         protected string Name { get; set; }
 
-        private static string focusedControl = "";
-        /// <summary>
-        /// Returns the name of the current focused control.
-        /// </summary>
-        /// <remarks>
-        /// GUI.GetNameOfFocusedControl() sometimes returns an empty string, so this gets the latest valid name
-        /// </remarks>
-        protected string FocusedControlName
-        {
-            get
-            {
-                var control = GUI.GetNameOfFocusedControl();
-                if (!string.IsNullOrEmpty(control))
-                    focusedControl = control;
-                return focusedControl;
-            }
-        }
         /// <summary>
         /// True if the control has focus
         /// </summary>
-        public bool Focused => FocusedControlName.Contains(Name);
+        public bool Focused => OOEditorManager.FocusedControlName.Contains(Name);
 
         /// <summary>
         /// Text and tooltip for the element
@@ -170,7 +153,7 @@ namespace OOEditor
             if (position.width > 1)
                 ValidWidth = position.width;
 
-            // Setting name is importnat for checking if focused
+            // Setting name is important for checking if focused
             GUI.SetNextControlName(Name);
             Display(position);
         }

@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using OOEditor.Internal;
+using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
@@ -33,7 +34,7 @@ namespace OOEditor
 
             // For some reason the toggle doesn't always show as active when the style dictates drawing as though it were
             // This grabs the control from the label, if that was clicked, and makes the toggle the focus
-            if (Focused && FocusedControlName != Name)
+            if (Focused && OOEditorManager.FocusedControlName != Name)
                 GUI.FocusControl(Name);
         }
     }

@@ -51,7 +51,7 @@ namespace OOEditor
         {
             get
             {
-                return Focused && !FocusedControlName.Contains("field");
+                return Focused && !OOEditorManager.FocusedControlName.Contains("field");
             }
         }
 

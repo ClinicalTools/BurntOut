@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using OOEditor.Internal;
+using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
@@ -48,7 +49,7 @@ namespace OOEditor
         {
             get
             {
-                return Focused && !FocusedControlName.Contains("field");
+                return Focused && !OOEditorManager.FocusedControlName.Contains("field");
             }
         }
 

@@ -21,6 +21,31 @@ namespace OOEditor.Internal
         public static bool InHorizontal { get; set; }
         public static bool InToolbar { get; set; }
 
+        private static string focusedControl = "";
+        /// <summary>
+        /// Returns the name of the current focused control.
+        /// </summary>
+        /// <remarks>
+        /// GUI.GetNameOfFocusedControl() sometimes returns an empty string, so this gets the latest valid name
+        /// </remarks>
+        public static string FocusedControlName
+        {
+            get
+            {
+                var control = GUI.GetNameOfFocusedControl();
+                if (!string.IsNullOrEmpty(control))
+                    focusedControl = control;
+                return focusedControl;
+            }
+        }
+        /// <summary>
+        /// Allows removing the focus from an unselected control without focusing something else.
+        /// </summary>
+        public static void ResetFocusedControl()
+        {
+            focusedControl = "";
+        }
+
         /// <summary>
         /// Style used for labels and elements like foldouts. 
         /// 

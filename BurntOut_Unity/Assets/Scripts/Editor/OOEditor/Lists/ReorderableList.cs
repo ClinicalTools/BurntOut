@@ -66,12 +66,16 @@ namespace OOEditor
                     // No element should be selected after the selected element was removed
                     list.index = -1;
                 },
-                // When the list is reordered, the drawers must all be updated to match
                 onReorderCallbackWithDetails = (ReorderableList list, int oldIndex, int newIndex) =>
                 {
                     var drawer = Drawers[oldIndex];
                     Drawers.RemoveAt(oldIndex);
                     Drawers.Insert(newIndex, drawer);
+                },
+                // Remove the selection from the highlighted control when a row is clicked
+                onSelectCallback = (ReorderableList list) =>
+                {
+                    OOEditorManager.ResetFocusedControl();
                 }
             };
         }
@@ -94,8 +98,6 @@ namespace OOEditor
             // The line is four pixels larger than however large the style would end up being
             list.elementHeight = style.CalcHeight(new GUIContent(), 100) + 4;
 
-            // Setting name is importnat for checking if focused
-            GUI.SetNextControlName("list!!!");
             list.DoLayoutList();
         }
     }
