@@ -58,11 +58,23 @@ namespace OOEditor
 
         public void SetTabName(int index, string tabName)
         {
+            if (index < 0 || index >= tabs.Count)
+            {
+                Debug.LogError("Invalid tab index");
+                return;
+            }
+
             tabs[index].Content.text = tabName;
         }
 
         public void RemoveTab(int index)
         {
+            if (index < 0 || index >= tabs.Count)
+            {
+                Debug.LogError("Invalid tab index");
+                return;
+            }
+
             tabs.RemoveAt(index);
             Value = Value;
         }

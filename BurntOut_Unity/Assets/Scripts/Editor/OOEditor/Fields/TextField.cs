@@ -15,7 +15,7 @@ namespace OOEditor
 
         protected override GUIStyle BaseStyle => EditorStyles.textField;
         protected override GUIStyle ToolbarStyle => EditorStyles.toolbarTextField;
-        protected override float AbsoluteMinWidth { get; } = 10;
+        protected override float ReservedWidth { get; } = 10;
 
         public TextField(string value) : base()
         {

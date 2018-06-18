@@ -9,7 +9,7 @@ namespace OOEditor
         protected override GUIStyle BaseStyle => EditorStyles.numberField;
         protected override GUIStyle ToolbarStyle => EditorStyles.toolbarTextField;
         
-        protected override float AbsoluteMinWidth { get; } = 10;
+        protected override float ReservedWidth { get; } = 10;
 
         public IntField(int value) : base()
         {

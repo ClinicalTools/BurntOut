@@ -1,23 +1,45 @@
 ﻿using OOEditor.Internal;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace OOEditor
 {
+    /// <summary>
+    /// Handles the basic parts of an editor GUI list.
+    /// </summary>
+    /// <typeparam name="T">Type of element to draw</typeparam>
+    /// <typeparam name="TDrawer">Drawer type to use to draw each element</typeparam>
+    /// <remarks>
+    /// Opted to keep this in the Lists folder, rather than the abstract folder, 
+    /// as there's so few lists, and all rely on this file. 
+    /// </remarks>
     public abstract class OOList<T, TDrawer> where TDrawer : IGUIObjectDrawer<T>
     {
+        /// <summary>
+        /// List to manage
+        /// </summary>
         public List<T> List { get; set; }
+        /// <summary>
+        /// List of drawers to draw the elements in the stored list.
+        /// </summary>
+        protected List<TDrawer> Drawers { get; } = new List<TDrawer>();
 
+        /// <summary>
+        /// Occurs when the list is changed.
+        /// </summary>
         public event EventHandler<ListChangedArgs<T>> Changed;
 
-        protected List<TDrawer> Drawers { get; } = new List<TDrawer>();
 
         /// <summary>
         /// Used if the element to initialize shouldn't be initialized with the default constructor.
         /// </summary>
         public Func<T> DefaultElement { get; set; }
 
+
+        /// <summary>
+        /// Creates a new OOList to display the values in the passed list.
+        /// </summary>
+        /// <param name="value">List of values to display</param>
         public OOList(List<T> value)
         {
             List = value;
@@ -26,6 +48,9 @@ namespace OOEditor
                 AddRow();
         }
 
+        /// <summary>
+        /// Swaps the values and drawers at the passed indices.
+        /// </summary>
         protected virtual void SwapRows(int index1, int index2)
         {
             var val = List[index1];
@@ -37,7 +62,8 @@ namespace OOEditor
         }
 
         /// <summary>
-        /// Creates a new row
+        /// Creates a new row. 
+        /// If there are the same number of drawers as elements, also creates a new element.
         /// </summary>
         protected virtual void AddRow()
         {
@@ -56,9 +82,11 @@ namespace OOEditor
             var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
             Drawers.Add(drawer);
         }
+
         /// <summary>
-        /// Deletes a row
+        /// Removes a row and the corresponding element at a given index.
         /// </summary>
+        /// <param name="index">Index to remove at</param>
         protected virtual void RemoveRow(int index)
         {
             // Check if we need to remove a value with this row
@@ -67,7 +95,11 @@ namespace OOEditor
             Drawers.RemoveAt(index);
         }
 
+        // Used to call the changed event in the first draw
         private bool firstDraw = true;
+        /// <summary>
+        /// Draws the list.
+        /// </summary>
         public virtual void Draw()
         {
             // First draw calls changed, since it changed from its default
@@ -117,11 +149,19 @@ namespace OOEditor
             Draw();
         }
 
+        /// <summary>
+        /// If a contained drawer have been modified, the list is processed as changed.
+        /// </summary>
+        /// <param name="sender">Changed object</param>
+        /// <param name="e">Arguments regarding the change</param>
         protected void OnChanged(object sender, EventArgs e)
         {
             Changed?.Invoke(this, new ListChangedArgs<T>(List));
         }
 
+        /// <summary>
+        /// Displays the list.
+        /// </summary>
         protected abstract void Display();
     }
 }

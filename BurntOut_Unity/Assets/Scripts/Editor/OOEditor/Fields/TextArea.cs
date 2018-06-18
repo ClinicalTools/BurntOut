@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
@@ -19,33 +18,37 @@ namespace OOEditor
         public override GUIContent Content => new GUIContent(Value);
 
 
-    protected override GUIStyle BaseStyle
-    {
-        get
+        protected override GUIStyle BaseStyle
         {
-            EditorStyles.textArea.wordWrap = true;
-            return EditorStyles.textArea;
+            get
+            {
+                EditorStyles.textArea.wordWrap = true;
+                return EditorStyles.textArea;
+            }
+        }
+
+        public TextArea(string value) : base(value)
+        {
+            Value = value;
+        }
+
+        protected override void Display(Rect position)
+        {
+            // Ensures value isn't null (happens on scene change for some reason)
+            Value = Value;
+
+            var style = GUIStyle;
+            position.height = GUIStyle.CalcHeight(Content, ValidWidth);
+            var spacing = position.height - style.CalcHeight(new GUIContent(" "), ValidWidth);
+            // Spacing from new line characters is 
+            var newLineCount = Value.Split('\n').Length - 1;
+            // At font 20, lines start adding an extra 4 pixels, rather than 3. 
+            // I doubt we'll go higher than that, so that's good enough for now.
+            // 8 is the lowest I checked, and that also uses 3. No practical reason to go lower.
+            spacing -= newLineCount * ((int)(style.fontSize * 1.055) + 3);
+            GUILayoutUtility.GetRect(1, spacing);
+
+            Value = EditorGUI.TextArea(position, Value, GUIStyle);
         }
     }
-
-    public TextArea(string value) : base(value)
-    {
-        Value = value;
-    }
-
-    protected override void Display(Rect position)
-    {
-        var style = GUIStyle;
-        position.height = GUIStyle.CalcHeight(Content, ValidWidth);
-        var spacing = position.height - style.CalcHeight(new GUIContent(" "), ValidWidth);
-        var newLineCount = Value.Split('\n').Length - 1;
-        // At font 20, lines start adding an extra 4 pixels, rather than 3. 
-        // I doubt we'll go higher than that, so that's good enough for now.
-        // 8 is the lowest I checked, and that also uses 3. No practical reason to go lower.
-        spacing -= newLineCount * ((int)(style.fontSize * 1.055) + 3);
-        GUILayoutUtility.GetRect(1, spacing);
-
-        Value = EditorGUI.TextArea(position, Value, GUIStyle);
-    }
-}
 }

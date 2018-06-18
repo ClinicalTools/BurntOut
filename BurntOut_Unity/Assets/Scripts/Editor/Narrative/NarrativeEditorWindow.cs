@@ -59,6 +59,7 @@ namespace Narrative.Inspector
             {
                 sceneManagerObj.AddComponent<NarrativeManager>();
                 sceneManager = sceneManagerObj.GetComponent<NarrativeManager>();
+                sceneNarrative = sceneManager.sceneNarrative;
 
                 // Add one scenario
                 Scenario scenario = new Scenario(new Scenario[0]);
@@ -70,7 +71,6 @@ namespace Narrative.Inspector
 
         void OnInspectorUpdate()
         {
-            var oldSceneNarrative = sceneNarrative;
             ResetSceneManager();
         }
 

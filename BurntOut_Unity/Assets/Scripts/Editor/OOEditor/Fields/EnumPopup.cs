@@ -33,7 +33,7 @@ namespace OOEditor
             }
         }
 
-        protected override float AbsoluteMinWidth { get; } = 20;
+        protected override float ReservedWidth { get; } = 20;
 
         protected override void ResetGUIStyle()
         {

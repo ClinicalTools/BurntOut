@@ -5,15 +5,33 @@ using UnityEngine;
 
 namespace OOEditor.Internal
 {
+    /// <summary>
+    /// Allows GUIElements to work together and draw correctly.
+    /// </summary>
     public static class OOEditorManager
     {
+        // Default horizontal spacing between queue items emptied into a horizontal rect
         private const int SPACING = 3;
+        /// <summary>
+        /// Set to true if you want to draw elements at once. 
+        /// Particularly useful when drawing into a horizontal rect for a ReorderableList.
+        /// </summary>
         public static bool Wait { get; set; }
 
         public static bool InHorizontal { get; set; }
         public static bool InToolbar { get; set; }
 
+        /// <summary>
+        /// Style used for labels and elements like foldouts. 
+        /// 
+        /// <para>Set with the <see cref="OOEditor.OverrideLabelStyle"/> class.</para>
+        /// </summary>
         public static EditorStyle OverrideLabelStyle { get; set; }
+        /// <summary>
+        /// Style used for all text. Overrides all other styles.
+        /// 
+        /// <para>Set with the <see cref="OOEditor.OverrideTextStyle"/> class.</para>
+        /// </summary>
         public static EditorStyle OverrideTextStyle { get; set; }
 
         /// <summary>
@@ -25,76 +43,97 @@ namespace OOEditor.Internal
             Changed?.Invoke(sender, e);
         }
 
-        private static Queue<EditorGUIElement> drawElements = new Queue<EditorGUIElement>();
-        private static Queue<GUIContent> drawContents = new Queue<GUIContent>();
-        private static Queue<Action<Rect>> draws = new Queue<Action<Rect>>();
+        // Queue of draw information
+        // Should later use a struct or class, rather than a tuple
+        private static readonly Queue<Tuple<EditorGUIElement, Action<Rect>, GUIContent>> drawQueue
+            = new Queue<Tuple<EditorGUIElement, Action<Rect>, GUIContent>>();
         private static float minDrawWidth;
+        /// <summary>
+        /// Adds a GUI element to the draw queue. 
+        /// Immediately empties the draw queue if <see cref="Wait"/> is false. 
+        /// </summary>
+        /// <param name="element">GUI element to draw</param>
+        /// <param name="draw">Action to draw the element in a given rectangle</param>
+        /// <param name="content">GUIContent to base element's height off of</param>
+        /// <remarks>
+        /// Element and content should later be replaced with a general width and height element.
+        /// </remarks>
         internal static void DrawGuiElement(EditorGUIElement element, Action<Rect> draw, GUIContent content = null)
         {
+            // If there's no content, create content with a single space to avoid any potential errors
             if (content == null)
                 content = new GUIContent(" ");
 
+            // Ensure enough room is reserved when drawing elements in horizontal rect
             if (element.MinWidth > 0)
                 minDrawWidth += element.MinWidth;
-            if (draws.Count > 0)
+            if (drawQueue.Count > 0)
                 minDrawWidth += SPACING;
-            drawElements.Enqueue(element);
-            drawContents.Enqueue(content);
-            draws.Enqueue(draw);
+
+            // Organize the data together into a tuple (later may be its own struct)
+            var tuple = new Tuple<EditorGUIElement, Action<Rect>, GUIContent>(element, draw, content);
+            drawQueue.Enqueue(tuple);
 
             if (!Wait)
                 EmptyQueue();
         }
 
-        private static Rect queueRect;
-        public static void EmptyQueueInHorizontalRect(Rect rect)
-        {
-            Wait = false;
-            while (drawElements.Count > 0)
-            {
-                var draw = draws.Dequeue();
-                var elem = drawElements.Dequeue();
-                drawContents.Dequeue();
-                Rect pos = GetPosInHorizontalRect(rect, elem);
-                draw(pos);
-                rect.x += pos.width + SPACING;
-                rect.width -= pos.width + SPACING;
-            }
-            minDrawWidth = 0;
-        }
-
-        public static void EmptyQueue()
-        {
-            Wait = false;
-            while (drawElements.Count > 0)
-            {
-                var draw = draws.Dequeue();
-                var elem = drawElements.Dequeue();
-                var contents = drawContents.Dequeue();
-                Rect pos = GetDimensions(contents, elem);
-                draw(pos);
-            }
-            minDrawWidth = 0;
-        }
 
         private static Rect horizontalRect;
-        internal static void ResetHorizontalRect()
+        /// <summary>
+        /// Resets the rectangle being used in width calculations.
+        /// Automatically reset when not in a horizontal.
+        /// </summary>
+        public static void ResetHorizontalRect()
         {
             using (Horizontal.Draw())
                 GUILayout.FlexibleSpace();
             horizontalRect = GUILayoutUtility.GetLastRect();
         }
 
+
+        private static Rect queueRect;
+        /// <summary>
+        /// Draws all elements in the queue in a passed horizontal rectangle. 
+        /// Particularly useful when drawing into a horizontal rect for a ReorderableList.
+        /// </summary>
+        /// <param name="rect">Rectangle to draw elements horizontally within</param>
+        public static void EmptyQueueInHorizontalRect(Rect rect)
+        {
+            Wait = false;
+            while (drawQueue.Count > 0)
+            {
+                var draw = drawQueue.Dequeue();
+                var elem = draw.Item1;
+                var displayAction = draw.Item2;
+
+                Rect pos = GetPosInHorizontalRect(rect, elem);
+                displayAction(pos);
+                // Decrease the last position from the rectangle being drawn in
+                rect.x += pos.width + SPACING;
+                rect.width -= pos.width + SPACING;
+            }
+            minDrawWidth = 0;
+        }
+
+        // Calculates a position for an element in a horizontal rectangle.
         private static Rect GetPosInHorizontalRect(Rect rect, EditorGUIElement guiElement)
         {
+            // Remove the calculations pertaining to this element from minDrawWidth
+            minDrawWidth -= SPACING;
             if (guiElement.MinWidth > 0)
                 minDrawWidth -= guiElement.MinWidth;
+
+            // Our width is maxWidth if able. If there's no maxWidth, we just use an average width between elements
+            // Ideally this should be much more complex, but this is good enough for now
             float maxWidth = rect.width - minDrawWidth;
-            float preferredWidth = Mathf.Min(maxWidth, rect.width / (draws.Count + 1));
+            float preferredWidth = Mathf.Min(maxWidth, rect.width / (drawQueue.Count + 1));
             if (guiElement.MinWidth > 0)
                 preferredWidth = guiElement.MinWidth;
+            // Use the default width if possible
             if (guiElement.Width > 0 && guiElement.Width < maxWidth)
                 preferredWidth = guiElement.Width;
+            // Use the max width if possible and it is smaller than the preferred width
             if (guiElement.MaxWidth > 0 && guiElement.MaxWidth < preferredWidth)
                 preferredWidth = guiElement.MaxWidth;
 
@@ -102,6 +141,25 @@ namespace OOEditor.Internal
 
             return rect;
         }
+
+        /// <summary>
+        /// Draws all elements in the draw queue.
+        /// </summary>
+        public static void EmptyQueue()
+        {
+            Wait = false;
+            while (drawQueue.Count > 0)
+            {
+                var draw = drawQueue.Dequeue();
+                var elem = draw.Item1;
+                var displayAction = draw.Item2;
+                var contents = draw.Item3;
+                Rect pos = GetDimensions(contents, elem);
+                displayAction(pos);
+            }
+            minDrawWidth = 0;
+        }
+
         // Gets the rect for the GUI object based on the content, style, and width parameters
         private static Rect GetDimensions(GUIContent content, EditorGUIElement guiElement)
         {
@@ -123,6 +181,7 @@ namespace OOEditor.Internal
 
             scale = horizontalRect;
 
+            // The 8 pixels is the offset relevant for text areas. As this is only relevant to text areas right now, this should later be outsourced to them
             var height = style.CalcHeight(content, scale.width - 8);
 
             // I have no idea how to get height to work properly, so I just did all 3 of these to be safe.
@@ -130,8 +189,7 @@ namespace OOEditor.Internal
             options.Add(GUILayout.MaxHeight(height));
             options.Add(GUILayout.Height(height));
 
-            Rect position;
-            position = EditorGUILayout.GetControlRect(false, height, style, options.ToArray());
+            Rect position = EditorGUILayout.GetControlRect(false, height, style, options.ToArray());
             position.height = height;
 
             return position;
@@ -167,6 +225,13 @@ namespace OOEditor.Internal
             78.25f, 79.79f, 80.91f, 82.02f, 83.04f, 83.65f, 84.68f, 85.7f, 86.17f, 87.6f,
             88.45f, 88.94f, 90.41f, 91.15f, 92.51f, 93.7f, 94.21f, 95.11f, 96.46f, 97.05f
         };
+        /// <summary>
+        /// Scales the passed width by the font-size.
+        /// Default widths are based on a font-size of 11.
+        /// </summary>
+        /// <param name="width">Default width at font-size 11</param>
+        /// <param name="fontSize">Font-size to scale to fit</param>
+        /// <returns>A float of the width for the new font-size</returns>
         public static float ScaledWidth(float width, int fontSize)
         {
             if (fontSize == 0 || fontSize == 11)

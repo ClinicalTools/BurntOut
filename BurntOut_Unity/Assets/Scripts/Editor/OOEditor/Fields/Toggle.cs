@@ -9,7 +9,7 @@ namespace OOEditor
 
         protected override GUIStyle BaseStyle => EditorStyles.toggle;
 
-        protected override float AbsoluteMinWidth { get; } = 14;
+        protected override float ReservedWidth { get; } = 14;
 
         public Toggle() : base() { }
         public Toggle(string text) : base(text) { }

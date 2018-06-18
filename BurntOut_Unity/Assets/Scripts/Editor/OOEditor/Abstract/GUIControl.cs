@@ -4,9 +4,16 @@ using UnityEngine;
 
 namespace OOEditor
 {
+    /// <summary>
+    /// A GUI element that stores a value.
+    /// </summary>
+    /// <typeparam name="T">Type of value to store</typeparam>
     public abstract class GUIControl<T> : EditorGUIElement, IGUIObjectDrawer<T>
     {
         private T value;
+        /// <summary>
+        /// Value being represented by the control.
+        /// </summary>
         public virtual T Value
         {
             get
@@ -15,6 +22,8 @@ namespace OOEditor
             }
             set
             {
+                // If the value has changed, and the control has been drawn at least once, 
+                //  call the changed event
                 if (!value.Equals(this.value) && !firstDraw)
                     Changed?.Invoke(this, new ControlChangedArgs<T>(this.value, value));
 
@@ -22,6 +31,10 @@ namespace OOEditor
             }
         }
 
+        /// <summary>
+        /// Occurs when the control's value changes.
+        /// </summary>
+        /// <remarks>Not called before the first draw.</remarks>
         public event EventHandler<ControlChangedArgs<T>> Changed;
 
         protected override void ResetGUIStyle()
@@ -44,6 +57,9 @@ namespace OOEditor
         protected GUIControl(string text, string tooltip) : base(text, tooltip) { }
 
         private bool firstDraw = true;
+        /// <summary>
+        /// Draws the control.
+        /// </summary>
         public override void Draw()
         {
             ResetGUIStyle();
