@@ -38,6 +38,7 @@ namespace Narrative.Inspector
         private readonly TextField textField;
 
         private readonly EnumPopup resultPopup;
+        private readonly TextField healthChangeField;
 
         private readonly LabelField feedbackLabel;
         private readonly TextArea feedback;
@@ -76,6 +77,18 @@ namespace Narrative.Inspector
                 resultPopup.Style.FontColor = color;
             };
 
+            healthChangeField = new TextField(Value.HealthChangeStr, "Health Change:");
+            healthChangeField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            {
+                Value.HealthChangeStr = e.Value;
+                if (Value.healthChange > 0)
+                    healthChangeField.Style.FontColor = EditorColors.LightGreen;
+                else if (Value.healthChange < 0)
+                    healthChangeField.Style.FontColor = EditorColors.LightRed;
+                else 
+                    healthChangeField.Style.FontColor = EditorColors.LightYellow;
+            };
+
             feedbackLabel = new LabelField("Feedback:");
             feedback = new TextArea(Value.feedback);
             feedback.Changed += (object sender, ControlChangedArgs<string> e) =>
@@ -95,6 +108,7 @@ namespace Narrative.Inspector
                     taskList.Draw(Value.Events);
 
             resultPopup.Draw(Value.result);
+            healthChangeField.Draw(Value.HealthChangeStr);
 
             feedbackLabel.Draw();
             feedback.Draw(Value.feedback);

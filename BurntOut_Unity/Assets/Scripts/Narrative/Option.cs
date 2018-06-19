@@ -28,22 +28,25 @@ public class Option
 
     public OptionResult result;
 
-    public int HealthChange
+    public int healthChange;
+    public string HealthChangeStr
     {
         get
         {
-            switch (result)
-            {
-                case OptionResult.CONTINUE:
-                    return 10;
-                case OptionResult.TRY_AGAIN:
-                    return -30;
-                case OptionResult.END:
-                    return -60;
-                default:
-                    Debug.Log("Invalid option result");
-                    return 0;
-            }
+            string str = "";
+            if (healthChange > 0)
+                str += '+';
+            str += healthChange;
+            str += '%';
+
+            return str;
+        }
+        set
+        {
+            int oldHealthChange = healthChange;
+            value = value.Replace("%", "");
+            if (!Int32.TryParse(value, out healthChange))
+                healthChange = oldHealthChange;
         }
     }
 
