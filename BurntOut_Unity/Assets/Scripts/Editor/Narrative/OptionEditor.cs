@@ -50,14 +50,14 @@ namespace Narrative.Inspector
             Foldout.Style.FontColor = ResultColor;
 
             nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
-            nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            nameField.Changed += (sender, e) =>
             {
                 Value.name = e.Value;
                 Foldout.Content.text = FoldoutName;
             };
 
             textField = new TextField(Value.text, "Text:", "Text to be displayed in game");
-            textField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            textField.Changed += (sender, e) =>
             {
                 Value.text = e.Value;
             };
@@ -68,7 +68,7 @@ namespace Narrative.Inspector
             taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
 
             resultPopup = new EnumPopup(Value.result, "Result:");
-            resultPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
+            resultPopup.Changed += (sender, e) =>
             {
                 Value.result = (OptionResult)(e.Value);
 
@@ -78,7 +78,7 @@ namespace Narrative.Inspector
             };
 
             healthChangeField = new TextField(Value.HealthChangeStr, "Health Change:");
-            healthChangeField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            healthChangeField.Changed += (sender, e) =>
             {
                 Value.HealthChangeStr = e.Value;
                 if (Value.healthChange > 0)
@@ -91,7 +91,7 @@ namespace Narrative.Inspector
 
             feedbackLabel = new LabelField("Feedback:");
             feedback = new TextArea(Value.feedback);
-            feedback.Changed += (object sender, ControlChangedArgs<string> e) =>
+            feedback.Changed += (sender, e) =>
             {
                 Value.feedback = e.Value;
             };

@@ -23,27 +23,27 @@ namespace Narrative.Inspector
             CurrentScenario = Value;
 
             nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
-            nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            nameField.Changed += (sender, e) =>
             {
-                base.Value.name = e.Value;
+                Value.name = e.Value;
             };
 
             actorsFoldout = new Foldout("Actors");
             actorsFoldout.Style.FontStyle = FontStyle.Bold;
-            actorsList = new ReorderableList<Actor, ActorDrawer>(base.Value.Actors)
+            actorsList = new ReorderableList<Actor, ActorDrawer>(Value.Actors)
             {
-                DefaultElement = () => { return new Actor(base.Value.Actors.ToArray()); }
+                DefaultElement = () => new Actor(Value.Actors.ToArray())
             };
 
             choicesFoldout = new Foldout("Choices");
             choicesFoldout.Style.FontStyle = FontStyle.Bold;
-            choiceList = new FoldoutList<Choice, ChoiceEditor>(base.Value.Choices);
+            choiceList = new FoldoutList<Choice, ChoiceEditor>(Value.Choices);
 
             endNarrativeLabel = new LabelField("End Narrative:");
-            endNarrativeField = new TextArea(base.Value.endNarrative);
-            endNarrativeField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            endNarrativeField = new TextArea(Value.endNarrative);
+            endNarrativeField.Changed += (sender, e) =>
             {
-                base.Value.endNarrative = e.Value;
+                Value.endNarrative = e.Value;
             };
         }
 

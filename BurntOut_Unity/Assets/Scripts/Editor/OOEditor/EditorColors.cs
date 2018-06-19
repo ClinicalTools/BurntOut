@@ -3,9 +3,8 @@
 namespace OOEditor
 {
     /// <summary>
-    /// Various colors designed to work with Unity's Professional editor skin.
+    /// Various colors designed to work with Unity's light and dark editor skins.
     /// </summary>
-    /// <remarks>Later, these will preferably return a color based on the skin</remarks>
     public static class EditorColors
     {
         // Typically used to highlight errors

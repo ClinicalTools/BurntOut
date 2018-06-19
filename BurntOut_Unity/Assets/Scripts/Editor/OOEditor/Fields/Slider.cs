@@ -1,63 +1,83 @@
 ﻿using OOEditor.Internal;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
 {
-    public class FloatSlider : GUIControlField<float>
+    /// <summary>
+    /// Make a slider the user can drag to change a float value between a min and a max (inclusive).
+    /// </summary>
+    public class Slider : GUIControlField<float>
     {
-        float value;
         public override float Value
         {
-            get { return value; }
+            get { return base.Value; }
             set
             {
-                if (value > Max)
-                    value = Max;
-                else if (value < Min)
-                    value = Min;
-                this.value = value;
+                base.Value = Mathf.Clamp(value, Min, Max);
             }
         }
+        /// <summary>
+        /// The lowest possible value. Located on the left end of the slider.
+        /// </summary>
         public float Min { get; set; }
+        /// <summary>
+        /// The maximum possible value. Located on the right end of the slider.
+        /// </summary>
         public float Max { get; set; }
 
         protected override GUIStyle BaseStyle => EditorStyles.numberField;
         protected override GUIStyle ToolbarStyle => EditorStyles.toolbarTextField;
 
-        protected override float ReservedWidth { get; } = 10; 
+        protected override float ReservedWidth { get; } = 10;
 
-        public FloatSlider(float value, float min, float max) : base()
+        /// <summary>
+        /// Make a slider the user can drag to change a float value between a min and a max.
+        /// </summary>
+        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
+        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
+        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
+        public Slider(float value, float min, float max)
         {
-            Value = value;
             Min = min;
             Max = max;
+            Value = value;
         }
-        public FloatSlider(float value, float min, float max, string text) : base(text)
+        /// <summary>
+        /// Make a slider the user can drag to change a float value between a min and a max.
+        /// </summary>
+        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
+        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
+        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
+        /// <param name="text">Optional label in front of the slider.</param>
+        public Slider(float value, float min, float max, string text) : base(text)
         {
-            Value = value;
             Min = min;
             Max = max;
+            Value = value;
         }
-        public FloatSlider(float value, float min, float max, string text, string tooltip) : base(text, tooltip)
+        /// <summary>
+        /// Make a slider the user can drag to change a float value between a min and a max.
+        /// </summary>
+        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
+        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
+        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
+        /// <param name="text">Optional label in front of the slider.</param>
+        /// <param name="tooltip">Tooltip of the optional label in front of the slider.</param>
+        public Slider(float value, float min, float max, string text, string tooltip) : base(text, tooltip)
         {
-            Value = value;
             Min = min;
             Max = max;
+            Value = value;
         }
 
-        private bool SliderFocused
-        {
-            get
-            {
-                return Focused && !OOEditorManager.FocusedControlName.Contains("field");
-            }
-        }
+        // Checks whether the slider portion of the control is selected
+        private bool SliderFocused => Focused && !OOEditorManager.FocusedControlName.Contains("field");
 
         protected override void Display(Rect position)
         {
-            Rect fieldPos = new Rect(position);
+            // Reserve space for the number portion of the slider
+            var fieldPos = new Rect(position);
             if (fieldPos.width > 50)
             {
                 fieldPos.x += fieldPos.width - 50;
@@ -120,7 +140,8 @@ namespace OOEditor
                 if (Value != newValue)
                     Value = Mathf.Round(newValue * 100) / 100;
             }
-
+            
+            // Create the number field representing the same value
             GUI.SetNextControlName(Name + "field");
             Value = EditorGUI.FloatField(fieldPos, Value, GUIStyle);
         }

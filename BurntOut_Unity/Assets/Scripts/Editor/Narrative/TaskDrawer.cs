@@ -16,7 +16,7 @@ namespace Narrative.Inspector
             {
                 FitWidth = true
             };
-            actionPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
+            actionPopup.Changed += (sender, e) =>
             {
                 Value.action = (TaskAction)e.Value;
             };
@@ -26,14 +26,14 @@ namespace Narrative.Inspector
             {
                 FitWidth = true
             };
-            actorPopup.Changed += (object sender, ControlChangedArgs<int> e) =>
+            actorPopup.Changed += (sender, e) =>
             {
                 if (e.Value >= 0)
                     Value.actorId = scenario.Actors[e.Value].id;
             };
 
             dialogueField = new TextField(Value.dialogue);
-            dialogueField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            dialogueField.Changed += (sender, e) =>
             {
                 Value.dialogue = e.Value;
             };
@@ -42,7 +42,7 @@ namespace Narrative.Inspector
             {
                 FitWidth = true
             };
-            emotionPopup.Changed += (object sender, ControlChangedArgs<Enum> e) =>
+            emotionPopup.Changed += (sender, e) =>
             {
                 Value.emotion = (TaskEmotion)e.Value;
             };

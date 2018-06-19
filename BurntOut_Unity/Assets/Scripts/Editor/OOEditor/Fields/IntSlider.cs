@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace OOEditor
 {
+    /// <summary>
+    /// Make a slider the user can drag to change an int value between a min and a max (inclusive).
+    /// </summary>
     public class IntSlider : GUIControlField<int>
     {
         public override int Value
@@ -18,7 +21,13 @@ namespace OOEditor
                 base.Value = value;
             }
         }
+        /// <summary>
+        /// The lowest possible value. Located on the left end of the slider.
+        /// </summary>
         public int Min { get; set; }
+        /// <summary>
+        /// The maximum possible value. Located on the right end of the slider.
+        /// </summary>
         public int Max { get; set; }
 
         protected override GUIStyle BaseStyle => EditorStyles.numberField;
@@ -26,18 +35,39 @@ namespace OOEditor
 
         protected override float ReservedWidth { get; } = 10;
 
-        public IntSlider(int value, int min, int max) : base()
+        /// <summary>
+        /// Make a slider the user can drag to change an int value between a min and a max.
+        /// </summary>
+        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
+        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
+        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
+        public IntSlider(int value, int min, int max)
         {
             Min = min;
             Max = max;
             Value = value;
         }
+        /// <summary>
+        /// Make a slider the user can drag to change an int value between a min and a max.
+        /// </summary>
+        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
+        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
+        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
+        /// <param name="text">Optional label in front of the slider</param>
         public IntSlider(int value, int min, int max, string text) : base(text)
         {
             Min = min;
             Max = max;
             Value = value;
         }
+        /// <summary>
+        /// Make a slider the user can drag to change an int value between a min and a max.
+        /// </summary>
+        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
+        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
+        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
+        /// <param name="text">Optional label in front of the slider.</param>
+        /// <param name="tooltip">Tooltip of the optional label in front of the slider.</param>
         public IntSlider(int value, int min, int max, string text, string tooltip) : base(text, tooltip)
         {
             Min = min;
@@ -45,17 +75,12 @@ namespace OOEditor
             Value = value;
         }
 
-        private bool SliderFocused
-        {
-            get
-            {
-                return Focused && !OOEditorManager.FocusedControlName.Contains("field");
-            }
-        }
+        private bool SliderFocused => Focused && !OOEditorManager.FocusedControlName.Contains("field");
 
         protected override void Display(Rect position)
         {
-            Rect fieldPos = new Rect(position);
+            // Reserve space for the number portion of the slider
+            var fieldPos = new Rect(position);
             if (fieldPos.width > 50)
             {
                 fieldPos.x += fieldPos.width - 50;
@@ -111,6 +136,7 @@ namespace OOEditor
                 Value = Mathf.RoundToInt(GUI.HorizontalSlider(position, Value, Min, Max, GUI.skin.horizontalSlider, style));
             }
 
+            // Create the number field representing the same value
             GUI.SetNextControlName(Name + "field");
             Value = EditorGUI.IntField(fieldPos, Value, GUIStyle);
         }

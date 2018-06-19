@@ -5,10 +5,10 @@ namespace Narrative.Inspector
 {
     public class SceneNarrationEditor : ClassDrawer<SceneNarrative>
     {
-        LabelField startNarrationLabel;
-        TextArea startNarrationField;
-        LabelField endNarrationLabel;
-        TextArea endNarrationField;
+        private readonly LabelField startNarrationLabel;
+        private readonly TextArea startNarrationField;
+        private readonly LabelField endNarrationLabel;
+        private readonly TextArea endNarrationField;
 
         public SceneNarrationEditor(SceneNarrative value) : base(value)
         {
@@ -16,7 +16,7 @@ namespace Narrative.Inspector
             startNarrationLabel.Style.FontStyle = FontStyle.Bold;
 
             startNarrationField = new TextArea(Value.startNarration);
-            startNarrationField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            startNarrationField.Changed += (sender, e) =>
             {
                 Value.startNarration = e.Value;
             };
@@ -26,7 +26,7 @@ namespace Narrative.Inspector
 
 
             endNarrationField = new TextArea(Value.endNarration);
-            endNarrationField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            endNarrationField.Changed += (sender, e) =>
             {
                 Value.endNarration = e.Value;
             };

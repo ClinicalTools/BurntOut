@@ -91,7 +91,7 @@ namespace Narrative.Inspector
             {
                 MaxWidth = 150
             };
-            fontSizeSlider.Changed += (object sender, ControlChangedArgs<int> e) =>
+            fontSizeSlider.Changed += (sender, e) =>
             {
                 textStyle.FontSize = e.Value;
             };

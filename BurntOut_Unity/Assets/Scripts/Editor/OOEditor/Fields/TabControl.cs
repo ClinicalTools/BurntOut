@@ -1,8 +1,6 @@
 ﻿using OOEditor.Internal;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 namespace OOEditor
@@ -45,8 +43,9 @@ namespace OOEditor
         {
             var newTab = new ToggleButton(false, tabName);
             int tabNum = tabs.Count;
-            newTab.Pressed += (object o, EventArgs e) =>
+            newTab.Pressed += (o, e) =>
             {
+                ((ToggleButton) o).Value = true;
                 if (Value != tabNum)
                 {
                     Value = tabNum;

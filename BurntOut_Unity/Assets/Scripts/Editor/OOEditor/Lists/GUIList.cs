@@ -37,7 +37,7 @@ namespace OOEditor
                 MaxWidth = 128
             };
             AddButton.Style.FontStyle = FontStyle.Bold;
-            AddButton.Pressed += (object o, EventArgs e) =>
+            AddButton.Pressed += (sender, e) =>
             {
                 AddRow();
             };
@@ -82,7 +82,7 @@ namespace OOEditor
                 MaxWidth = BUTTON_WIDTH
             };
             delButton.Style.FontStyle = FontStyle.Bold;
-            delButton.Pressed += (object o, EventArgs e) =>
+            delButton.Pressed += (sender, e) =>
             {
                 RemoveRow(index);
             };

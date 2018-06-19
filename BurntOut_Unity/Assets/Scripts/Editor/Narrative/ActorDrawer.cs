@@ -4,12 +4,12 @@ namespace Narrative.Inspector
 {
     public class ActorDrawer : ClassDrawer<Actor>
     {
-        TextField actorName;
+        private readonly TextField actorName;
 
         public ActorDrawer(Actor value) : base(value)
         {
             actorName = new TextField(Value.name);
-            actorName.Changed += (object sender, ControlChangedArgs<string> e) =>
+            actorName.Changed += (sender, e) =>
             {
                 Value.name = e.Value;
             };
