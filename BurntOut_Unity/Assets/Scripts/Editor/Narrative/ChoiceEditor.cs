@@ -9,8 +9,7 @@ namespace Narrative.Inspector
     public class ChoiceEditor : FoldoutClassDrawer<Choice>
     {
         public static Choice CurrentChoice { get; private set; }
-
-
+        
         protected string FoldoutName =>
             $"Choice {ScenarioEditor.CurrentScenario.Choices.IndexOf(Value) + 1} - {Value.name}";
         protected override Foldout Foldout { get; }
@@ -41,26 +40,26 @@ namespace Narrative.Inspector
             Foldout.Style.FontColor = FoldoutColor;
 
             nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
-            nameField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            nameField.Changed += (sender, e) =>
             {
                 Value.name = e.Value;
                 Foldout.Content.text = FoldoutName;
             };
 
             textField = new TextField(Value.text, "Text:", "Text to be displayed in game");
-            textField.Changed += (object sender, ControlChangedArgs<string> e) =>
+            textField.Changed += (sender, e) =>
             {
                 Value.text = e.Value;
             };
 
             eventsFoldout = new Foldout(false, "Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
-            taskList = new ReorderableList<Task, TaskDrawer>(base.Value.Events);
+            taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
 
             optionsFoldout = new Foldout(false, "Options");
             optionsFoldout.Style.FontStyle = FontStyle.Bold;
-            optionList = new FoldoutList<Option, OptionEditor>(base.Value.Options);
-            optionList.Changed += (object sender, ListChangedArgs<Option> e) =>
+            optionList = new FoldoutList<Option, OptionEditor>(Value.Options);
+            optionList.Changed += (sender, e) =>
             {
                 Foldout.Style.FontColor = FoldoutColor;
             };

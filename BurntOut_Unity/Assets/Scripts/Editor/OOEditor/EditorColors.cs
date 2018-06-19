@@ -12,8 +12,51 @@ namespace OOEditor
         public static Color Red { get; } = new Color(1f, .4f, .4f);
 
         // Light colors are typically used for a dark theme
-        public static Color LightGreen { get; } = new Color(.7f, 1f, .7f);
-        public static Color LightYellow { get; } = new Color(1f, 1f, .7f);
-        public static Color LightRed { get; } = new Color(1f, .7f, .7f);
+        public static Color LightGreen
+        {
+            get
+            {
+                switch (GUI.skin.name)
+                {
+                    case "LightSkin":
+                        return new Color(.1f, .5f, .1f);
+                    case "DarkSkin":
+                        return new Color(.7f, 1f, .7f);
+                    default:
+                        return new Color(.7f, 1f, .7f);
+                }
+            }
+        }
+        public static Color LightYellow
+        {
+            get
+            {
+                switch (GUI.skin.name)
+                {
+                    case "LightSkin":
+                        return new Color(.5f, .5f, .1f);
+                    case "DarkSkin":
+                        return new Color(1f, 1f, .7f);
+                    default:
+                        return new Color(1f, 1f, .7f);
+                }
+            }
+        }
+
+        public static Color LightRed
+        {
+            get
+            {
+                switch (GUI.skin.name)
+                {
+                    case "LightSkin":
+                        return new Color(.5f, .1f, .1f);
+                    case "DarkSkin":
+                        return new Color(1f, .7f, .7f);
+                    default:
+                        return new Color(1f, .7f, .7f);
+                }
+            }
+        }
     }
 }
