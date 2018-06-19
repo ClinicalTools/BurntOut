@@ -18,7 +18,7 @@ namespace OOEditor
         /// <summary>
         /// Creates arguments to be used for a editor list's changed event.
         /// </summary>
-        /// <param name="value">Current value held by the editor list</param>
+        /// <param name="value">Current value held by the editor list.</param>
         public ListChangedArgs(List<T> value)
         {
             Value = value;

@@ -13,7 +13,7 @@ namespace OOEditor
         /// <summary>
         /// Creates a new FoldoutList to display the values in the passed list.
         /// </summary>
-        /// <param name="value">List of values to display</param>
+        /// <param name="value">List of values to display.</param>
         public FoldoutList(List<T> value) : base(value) { }
         
         /// <summary>

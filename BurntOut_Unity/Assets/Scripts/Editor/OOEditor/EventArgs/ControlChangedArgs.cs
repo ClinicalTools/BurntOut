@@ -14,8 +14,8 @@ namespace OOEditor
         /// <summary>
         /// Creates arguments to be used for a control's changed event.
         /// </summary>
-        /// <param name="lastValue">Previous value held by the control</param>
-        /// <param name="value">Current value held by the control</param>
+        /// <param name="lastValue">Previous value held by the control.</param>
+        /// <param name="value">Current value held by the control.</param>
         public ControlChangedArgs(T lastValue, T value)
         {
             LastValue = lastValue;

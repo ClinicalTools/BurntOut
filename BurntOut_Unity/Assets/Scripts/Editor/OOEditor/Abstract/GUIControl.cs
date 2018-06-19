@@ -55,7 +55,7 @@ namespace OOEditor
                 OOEditorManager.OverrideTextStyle.ApplyToStyle(GUIStyle);
         }
 
-        protected GUIControl() : base() { }
+        protected GUIControl() { }
         protected GUIControl(string text) : base(text) { }
         protected GUIControl(string text, string tooltip) : base(text, tooltip) { }
 
@@ -79,7 +79,7 @@ namespace OOEditor
         /// <summary>
         /// Updates the control's value and then draws it.
         /// </summary>
-        /// <param name="value">Updated value for the control</param>
+        /// <param name="value">Updated value for the control.</param>
         public void Draw(T value)
         {
             this.value = value;

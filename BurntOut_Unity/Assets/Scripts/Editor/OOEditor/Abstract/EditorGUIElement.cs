@@ -147,7 +147,7 @@ namespace OOEditor
         /// <summary>
         /// Checks whether the width is valid, and sets the control's name.
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="position">Position to draw in.</param>
         protected virtual void PrepareDisplay(Rect position)
         {
             if (position.width > 1)
@@ -162,7 +162,7 @@ namespace OOEditor
         /// Draws the GUI element in a passed rectangle. 
         /// Not always called immediately after <see cref="Draw"/>.
         /// </summary>
-        /// <param name="position">Position to draw the element in</param>
+        /// <param name="position">Position to draw the element in.</param>
         protected abstract void Display(Rect position);
     }
 }

@@ -22,7 +22,7 @@ namespace OOEditor
         /// <summary>
         /// Creates a new ReorderableList to display the values in the passed list.
         /// </summary>
-        /// <param name="value">List of values to display</param>
+        /// <param name="value">List of values to display.</param>
         public ReorderableList(List<T> value) : base(value)
         {
             list = new ReorderableList(List, typeof(T))

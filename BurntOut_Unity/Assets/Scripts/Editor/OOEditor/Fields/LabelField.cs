@@ -11,9 +11,9 @@ namespace OOEditor
         protected override GUIStyle BaseStyle => EditorStyles.label;
 
         /// <summary>
-        /// Make a label field. (Useful for showing read-only info.)
+        /// Makes a label field. (Useful for showing read-only info.)
         /// </summary>
-        /// <param name="text">Text to display with the label</param>
+        /// <param name="text">Text to display with the label.</param>
         public LabelField(string text) : base(text) { }
         public LabelField(string text, string tooltip) : base(text, tooltip) { }
 

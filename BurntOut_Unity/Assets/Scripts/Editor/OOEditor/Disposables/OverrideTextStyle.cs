@@ -30,7 +30,7 @@ namespace OOEditor
             }
         }
 
-        public OverrideTextStyle() : base() { }
+        public OverrideTextStyle() { }
         public OverrideTextStyle(Color fontColor) : base(fontColor) { }
         public OverrideTextStyle(FontStyle fontStyle) : base(fontStyle) { }
         public OverrideTextStyle(FontStyle fontStyle, Color fontColor) : base(fontStyle, fontColor) { }
@@ -38,7 +38,7 @@ namespace OOEditor
         public OverrideTextStyle(int fontSize, FontStyle fontStyle) : base(fontSize, fontStyle) { }
         public OverrideTextStyle(int fontSize, FontStyle fontStyle, Color fontColor) 
             : base(fontSize, fontStyle, fontColor) { }
-        public OverrideTextStyle(EditorStyle style) : base()
+        public OverrideTextStyle(EditorStyle style)
         {
             FontSize = style.FontSize;
             FontStyle = style.FontStyle;

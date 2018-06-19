@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 
@@ -31,16 +32,14 @@ public class SceneChange : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
 
         StartCoroutine(Transition());
-
-
     }
 
     public IEnumerator Transition() {
 
-        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+        player.GetComponent<FirstPersonController>().enabled = false;
         screenfade.SetBool("fade", true);
         yield return new WaitForSeconds(0.5f);
-        Application.LoadLevel(level);
+        SceneManager.LoadScene(level);
     }
 
 }

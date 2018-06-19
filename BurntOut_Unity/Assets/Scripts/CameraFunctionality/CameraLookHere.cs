@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraLookHere : MonoBehaviour {
+public class CameraLookHere : MonoBehaviour
+{
 
     private Camera playerCamera;
     private PlayerRotateToTarget myRotateTo;
@@ -10,62 +11,43 @@ public class CameraLookHere : MonoBehaviour {
     private Main_GameManager gamemanager;
 
     public float bounds = 1;
-    private float Xmax;
-    private float Ymax;
-    private float Xmin;
-    private float Ymin;
+    private float xMax, yMax, xMin, yMin;
 
     // Use this for initialization
-    void Start() {
-
+    void Start()
+    {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
         gamemanager = FindObjectOfType<Main_GameManager>();
 
         myRotateTo.enabled = true;
-        myRotateTo.target = this.gameObject;
+        myRotateTo.target = gameObject;
 
-        Xmax = transform.position.x + bounds;
-        Ymax = transform.position.y + bounds;
-        Xmin = transform.position.x - bounds;
-        Ymin = transform.position.y - bounds;
-
+        xMax = transform.position.x + bounds;
+        yMax = transform.position.y + bounds;
+        xMin = transform.position.x - bounds;
+        yMin = transform.position.y - bounds;
     }
 
-    private void Update() {
-
-        if (!gamemanager.isCurrentlyExamine) {
-
+    private void Update()
+    {
+        if (!gamemanager.isCurrentlyExamine)
+        {
             Move();
 
-            if (transform.position.x >= Xmax) {
-                transform.position = new Vector3(Xmax, transform.position.y, transform.position.z);
-            }
-
-            if (transform.position.y >= Ymax) {
-                transform.position = new Vector3(transform.position.x, Ymax, transform.position.z);
-            }
-
-            if (transform.position.x <= Xmin) {
-                transform.position = new Vector3(Xmin, transform.position.y, transform.position.z);
-            }
-
-            if (transform.position.y <= Ymin) {
-                transform.position = new Vector3(transform.position.x, Ymin, transform.position.z);
-            }
+            var xPos = Mathf.Clamp(transform.position.x, xMin, xMax);
+            var yPos = Mathf.Clamp(transform.position.y, yMin, yMax);
+            transform.position = new Vector3(xPos, yPos, transform.position.z);
         }
     }
 
     public int speed = 10;
 
-    public void Move() {
+    public void Move()
+    {
+        var movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 
-        Vector3 Movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-
-        transform.position += Movement * speed * Time.deltaTime;
-
+        transform.position += movement * speed * Time.deltaTime;
     }
-
-
 }

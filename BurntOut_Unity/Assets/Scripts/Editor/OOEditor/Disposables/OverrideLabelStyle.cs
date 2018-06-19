@@ -29,7 +29,7 @@ namespace OOEditor
             }
         }
 
-        public OverrideLabelStyle() : base() { }
+        public OverrideLabelStyle() { }
         public OverrideLabelStyle(Color fontColor) : base(fontColor) { }
         public OverrideLabelStyle(FontStyle fontStyle) : base(fontStyle) { }
         public OverrideLabelStyle(FontStyle fontStyle, Color fontColor) : base(fontStyle, fontColor) { }
@@ -37,7 +37,7 @@ namespace OOEditor
         public OverrideLabelStyle(int fontSize, FontStyle fontStyle) : base(fontSize, fontStyle) { }
         public OverrideLabelStyle(int fontSize, FontStyle fontStyle, Color fontColor)
             : base(fontSize, fontStyle, fontColor) { }
-        public OverrideLabelStyle(EditorStyle style) : base()
+        public OverrideLabelStyle(EditorStyle style)
         {
             FontSize = style.FontSize;
             FontStyle = style.FontStyle;

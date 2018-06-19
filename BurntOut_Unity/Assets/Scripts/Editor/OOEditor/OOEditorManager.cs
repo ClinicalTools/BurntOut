@@ -78,9 +78,9 @@ namespace OOEditor.Internal
         /// Adds a GUI element to the draw queue. 
         /// Immediately empties the draw queue if <see cref="Wait"/> is false. 
         /// </summary>
-        /// <param name="element">GUI element to draw</param>
-        /// <param name="draw">Action to draw the element in a given rectangle</param>
-        /// <param name="content">GUIContent to base element's height off of</param>
+        /// <param name="element">GUI element to draw.</param>
+        /// <param name="draw">Action to draw the element in a given rectangle.</param>
+        /// <param name="content">GUIContent to base element's height off of.</param>
         /// <remarks>
         /// Element and content should later be replaced with a general width and height element.
         /// </remarks>
@@ -123,7 +123,7 @@ namespace OOEditor.Internal
         /// Draws all elements in the queue in a passed horizontal rectangle. 
         /// Particularly useful when drawing into a horizontal rect for a ReorderableList.
         /// </summary>
-        /// <param name="rect">Rectangle to draw elements horizontally within</param>
+        /// <param name="rect">Rectangle to draw elements horizontally within.</param>
         public static void EmptyQueueInHorizontalRect(Rect rect)
         {
             Wait = false;
@@ -255,8 +255,8 @@ namespace OOEditor.Internal
         /// Scales the passed width by the font-size.
         /// Default widths are based on a font-size of 11.
         /// </summary>
-        /// <param name="width">Default width at font-size 11</param>
-        /// <param name="fontSize">Font-size to scale to fit</param>
+        /// <param name="width">Default width at font-size 11.</param>
+        /// <param name="fontSize">Font-size to scale to fit.</param>
         /// <returns>A float of the width for the new font-size</returns>
         public static float ScaledWidth(float width, int fontSize)
         {

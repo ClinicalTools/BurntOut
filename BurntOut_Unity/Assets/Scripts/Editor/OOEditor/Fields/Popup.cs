@@ -52,23 +52,34 @@ namespace OOEditor
         public string[] Options { get; set; }
 
 
+        /// <summary>
+        /// Makes a popup selection field.
+        /// </summary>
+        /// <param name="value">The initial enum value.</param>
+        /// <param name="options">Options the user has to select from.</param>
         public Popup(int value, string[] options) 
         {
             Options = options;
             Value = value;
         }
+        /// <summary>
+        /// Makes a popup selection field.
+        /// </summary>
+        /// <param name="value">The initial enum value.</param>
+        /// <param name="options">Options the user has to select from.</param>
+        /// <param name="text">Optional label in front of the popup.</param>
         public Popup(int value, string[] options, string text) : base(text)
         {
             Options = options;
             Value = value;
         }
         /// <summary>
-        /// Make an enum popup selection field.
+        /// Makes a popup selection field.
         /// </summary>
-        /// <param name="value">The initial enum value</param>
-        /// <param name="options">Options the user has to select from</param>
-        /// <param name="text">Optional label in front of the popup</param>
-        /// <param name="tooltip">Tooltip of the optional label in front of the popup</param>
+        /// <param name="value">The initial enum value.</param>
+        /// <param name="options">Options the user has to select from.</param>
+        /// <param name="text">Optional label in front of the popup.</param>
+        /// <param name="tooltip">Tooltip of the optional label in front of the popup.</param>
         public Popup(int value, string[] options, string text, string tooltip) : base(text, tooltip)
         {
             Options = options;

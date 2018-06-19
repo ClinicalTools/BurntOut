@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class DoorInteractICU : MonoBehaviour {
+public class DoorInteractICU : MonoBehaviour
+{
 
     public bool isAroundStation;
     public bool playerFacing;
@@ -14,9 +16,10 @@ public class DoorInteractICU : MonoBehaviour {
 
     public float maxAngle = 35;
 
-    void Update() {
-
-        if (isAroundStation) {
+    private void Update()
+    {
+        if (isAroundStation)
+        {
             Vector3 vec = transform.position - player.transform.position;
             vec.y = 0;
 
@@ -34,47 +37,49 @@ public class DoorInteractICU : MonoBehaviour {
         }
 
         // if player is around patient, allow player to interact with it
-        if (Input.GetKeyDown(KeyCode.E) && isAroundStation && playerFacing) {
+        if (Input.GetKeyDown(KeyCode.E) && isAroundStation && playerFacing)
+        {
             interactPrompt.transform.parent.gameObject.SetActive(false);
 
             // INTERACTION HERE
             StartCoroutine(Transition());
-
         }
     }
 
-    private void Look() {
-
+    private void Look()
+    {
         interactPrompt.transform.parent.gameObject.SetActive(true);
         interactPrompt.text = "Press 'e' to return to Central";
-
     }
 
-    private void LookAway() {
+    private void LookAway()
+    {
         interactPrompt.transform.parent.gameObject.SetActive(false);
     }
 
     // detect if player is within interact range
-    void OnTriggerEnter(Collider col) {
+    private void OnTriggerEnter(Collider col)
+    {
         if (col.gameObject.name == "Player")
             isAroundStation = true;
     }
 
     // return to default state when out of range
-    void OnTriggerExit(Collider col) {
-        if (col.gameObject.name == "Player") {
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.name == "Player")
+        {
             isAroundStation = false;
             playerFacing = false;
             LookAway();
         }
     }
 
-    public IEnumerator Transition() {
-
+    public IEnumerator Transition()
+    {
         screenfade.SetBool("fade", true);
 
         yield return new WaitForSeconds(0.5f);
-        Application.LoadLevel("Central");
-
+        SceneManager.LoadScene("Central");
     }
 }

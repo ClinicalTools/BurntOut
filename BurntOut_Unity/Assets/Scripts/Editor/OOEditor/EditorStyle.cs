@@ -59,7 +59,7 @@ namespace OOEditor
         /// <summary>
         /// Applies this style to a passed GUIStyle.
         /// </summary>
-        /// <param name="style">GUIStyle to apply this style to</param>
+        /// <param name="style">GUIStyle to apply this style to.</param>
         public void ApplyToStyle(GUIStyle style)
         {
             if (FontSize > 0)

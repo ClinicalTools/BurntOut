@@ -4,25 +4,53 @@ using UnityEngine;
 
 namespace OOEditor
 {
+    /// <summary>
+    /// A control that can be toggled.
+    /// </summary>
     public class Toggle : GUIControlField<bool>
     {
-        public override bool Value { get; set; }
-
         protected override GUIStyle BaseStyle => EditorStyles.toggle;
 
         protected override float ReservedWidth { get; } = 14;
 
-        public Toggle() : base() { }
+        /// <summary>
+        /// Makes a toggle that starts unselected.
+        /// </summary>
+        public Toggle() { }
+        /// <summary>
+        /// Makes a toggle that starts unselected.
+        /// </summary>
+        /// <param name="text">Optional label in front of the control.</param>
         public Toggle(string text) : base(text) { }
+        /// <summary>
+        /// Makes a toggle that starts unselected.
+        /// </summary>
+        /// <param name="text">Optional label in front of the control.</param>
+        /// <param name="tooltip">Tooltip of the optional label in front of the control.</param>
         public Toggle(string text, string tooltip) : base(text, tooltip) { }
-        public Toggle(bool value) : base()
+        /// <summary>
+        /// Makes a toggle.
+        /// </summary>
+        /// <param name="value">Whether the toggle starts selected.</param>
+        public Toggle(bool value)
         {
             Value = value;
         }
+        /// <summary>
+        /// Makes a toggle.
+        /// </summary>
+        /// <param name="value">Whether the toggle starts selected.</param>
+        /// <param name="text">Optional label in front of the control.</param>
         public Toggle(bool value, string text) : base(text)
         {
             Value = value;
         }
+        /// <summary>
+        /// Makes a toggle.
+        /// </summary>
+        /// <param name="value">Whether the toggle starts selected.</param>
+        /// <param name="text">Optional label in front of the control.</param>
+        /// <param name="tooltip">Tooltip of the optional label in front of the control.</param>
         public Toggle(bool value, string text, string tooltip) : base(text, tooltip)
         {
             Value = value;

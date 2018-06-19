@@ -14,7 +14,7 @@
         /// <summary>
         /// Initializes a class drawer with a given value.
         /// </summary>
-        /// <param name="value">Initial value to set for the class</param>
+        /// <param name="value">Initial value to set for the class.</param>
         protected ClassDrawer(T value)
         {
             Value = value;
@@ -23,7 +23,7 @@
         /// <summary>
         /// Updates the class's value and then draws it.
         /// </summary>
-        /// <param name="value">Updated value to draw</param>
+        /// <param name="value">Updated value to draw.</param>
         public void Draw(T value)
         {
             Value = value;

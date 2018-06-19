@@ -23,7 +23,7 @@
         /// <summary>
         /// Initializes a class drawer with a given value.
         /// </summary>
-        /// <param name="value">Initial value to set for the class</param>
+        /// <param name="value">Initial value to set for the class.</param>
         public FoldoutClassDrawer(T value) : base(value) { }
 
         /// <summary>

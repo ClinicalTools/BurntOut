@@ -20,7 +20,7 @@ public class ReplenishTeleport : MonoBehaviour
     public Animator myAnimator;
     public bool trigger = true;
 
-    void Update()
+    private void Update()
     {
         if (isAroundStation)
         {
@@ -69,14 +69,14 @@ public class ReplenishTeleport : MonoBehaviour
     }
 
     // detect if player is within interact range
-    void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.name == "Player")
             isAroundStation = true;
     }
 
     // return to default state when out of range
-    void OnTriggerExit(Collider col)
+    private void OnTriggerExit(Collider col)
     {
         if (col.gameObject.name == "Player")
         {
@@ -100,10 +100,11 @@ public class ReplenishTeleport : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public IEnumerator TransitionToCentral() {
+    public IEnumerator TransitionToCentral()
+    {
         myAnimator.SetBool("fade", true);
 
         yield return new WaitForSeconds(0.5f);
-        Application.LoadLevel("Central");
+        SceneManager.LoadScene("Central");
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ExitHospital : MonoBehaviour {
@@ -25,7 +26,7 @@ public class ExitHospital : MonoBehaviour {
         globalstats = FindObjectOfType<GlobalStats>();
     }
 
-    void Update() {
+    private void Update() {
 
         if (isAroundStation) {
             Vector3 vec = transform.position - player.transform.position;
@@ -77,13 +78,13 @@ public class ExitHospital : MonoBehaviour {
     }
 
     // detect if player is within interact range
-    void OnTriggerEnter(Collider col) {
+    private void OnTriggerEnter(Collider col) {
         if (col.gameObject.name == "Player")
             isAroundStation = true;
     }
 
     // return to default state when out of range
-    void OnTriggerExit(Collider col) {
+    private void OnTriggerExit(Collider col) {
         if (col.gameObject.name == "Player") {
             isAroundStation = false;
             playerFacing = false;
@@ -97,6 +98,6 @@ public class ExitHospital : MonoBehaviour {
         screenfade.SetBool("fade", true);
 
         yield return new WaitForSeconds(0.5f);
-        Application.LoadLevel("Central");
+        SceneManager.LoadScene("Central");
     }
 }

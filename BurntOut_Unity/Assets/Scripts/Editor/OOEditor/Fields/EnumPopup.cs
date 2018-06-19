@@ -50,7 +50,7 @@ namespace OOEditor
         }
 
         /// <summary>
-        /// Make an enum popup selection field.
+        /// Makes an enum popup selection field.
         /// </summary>
         /// <param name="value">The initial enum value.</param>
         public EnumPopup(Enum value)
@@ -58,7 +58,7 @@ namespace OOEditor
             Value = value;
         }
         /// <summary>
-        /// Make an enum popup selection field.
+        /// Makes an enum popup selection field.
         /// </summary>
         /// <param name="value">The initial enum value.</param>
         /// <param name="text">Optional label in front of the field.</param>
@@ -67,7 +67,7 @@ namespace OOEditor
             Value = value;
         }
         /// <summary>
-        /// Make an enum popup selection field.
+        /// Makes an enum popup selection field.
         /// </summary>
         /// <param name="value">The initial enum value.</param>
         /// <param name="text">Optional label in front of the popup.</param>

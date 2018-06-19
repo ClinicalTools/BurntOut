@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class InteractiveNode : MonoBehaviour {
-
+public class InteractiveNode : MonoBehaviour
+{
     public int id;
 
     public Material fx_MS_Material;
@@ -23,32 +21,32 @@ public class InteractiveNode : MonoBehaviour {
 
     public bool mouseHovered;
 
-    void Start() {
-
+    private void Start()
+    {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
         myAnimator = gameObject.GetComponent<Animator>();
 
         if (fx_moveStation)
-            this.gameObject.GetComponent<MeshRenderer>().material = fx_MS_Material;
+            gameObject.GetComponent<MeshRenderer>().material = fx_MS_Material;
         if (fx_moveTo)
-            this.gameObject.GetComponent<MeshRenderer>().material = fx_MT_Material;
-        
+            gameObject.GetComponent<MeshRenderer>().material = fx_MT_Material;
     }
 
-    public void MoveTo() {
-        myMoveTo.target = this.gameObject;
+    public void MoveTo()
+    {
+        myMoveTo.target = gameObject;
     }
 
-    public void OnMouseOver() {
+    public void OnMouseOver()
+    {
         myAnimator.enabled = true;
         mouseHovered = true;
     }
-    public void OnMouseExit() {
+    public void OnMouseExit()
+    {
         myAnimator.enabled = false;
         mouseHovered = false;
     }
-
-
 }

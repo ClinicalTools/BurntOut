@@ -27,7 +27,7 @@ namespace OOEditor
         /// <summary>
         /// Creates a new GUIList to display the values in the passed list.
         /// </summary>
-        /// <param name="value">List of values to display</param>
+        /// <param name="value">List of values to display.</param>
         public GUIList(List<T> value) : base(value)
         {
             ButtonSpace = new GUISpace(BUTTON_WIDTH);

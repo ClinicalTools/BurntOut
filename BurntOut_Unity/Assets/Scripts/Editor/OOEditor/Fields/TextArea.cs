@@ -3,8 +3,14 @@ using UnityEngine;
 
 namespace OOEditor
 {
+    /// <summary>
+    /// Control to edit a potentially multiple-line block of text.
+    /// </summary>
     public class TextArea : GUIControl<string>
     {
+        /// <summary>
+        /// Value being represented by the control.
+        /// </summary>
         public override string Value
         {
             get { return base.Value; }
@@ -15,9 +21,11 @@ namespace OOEditor
             }
         }
 
+        /// <summary>
+        /// Content displayed by the control.
+        /// </summary>
         public override GUIContent Content => new GUIContent(Value);
-
-
+        
         protected override GUIStyle BaseStyle
         {
             get
@@ -27,6 +35,10 @@ namespace OOEditor
             }
         }
 
+        /// <summary>
+        /// Makes a text area.
+        /// </summary>
+        /// <param name="value">Initial value to edit.</param>
         public TextArea(string value) : base(value)
         {
             Value = value;

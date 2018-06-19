@@ -39,7 +39,7 @@ namespace OOEditor
         /// <summary>
         /// Creates a new OOList to display the values in the passed list.
         /// </summary>
-        /// <param name="value">List of values to display</param>
+        /// <param name="value">List of values to display.</param>
         public OOList(List<T> value)
         {
             List = value;
@@ -86,7 +86,7 @@ namespace OOEditor
         /// <summary>
         /// Removes a row and the corresponding element at a given index.
         /// </summary>
-        /// <param name="index">Index to remove at</param>
+        /// <param name="index">Index to remove at.</param>
         protected virtual void RemoveRow(int index)
         {
             // Check if we need to remove a value with this row
@@ -142,7 +142,7 @@ namespace OOEditor
         /// <summary>
         /// Updates the list's reference and then draws it.
         /// </summary>
-        /// <param name="list">Reference of list to draw</param>
+        /// <param name="list">Reference of list to draw.</param>
         public void Draw(List<T> list)
         {
             List = list;
@@ -153,8 +153,8 @@ namespace OOEditor
         /// <summary>
         /// If a contained drawer have been modified, the list is processed as changed.
         /// </summary>
-        /// <param name="sender">Changed object</param>
-        /// <param name="e">Arguments regarding the change</param>
+        /// <param name="sender">Changed object.</param>
+        /// <param name="e">Arguments regarding the change.</param>
         protected void OnChanged(object sender, EventArgs e)
         {
             Changed?.Invoke(this, new ListChangedArgs<T>(List));

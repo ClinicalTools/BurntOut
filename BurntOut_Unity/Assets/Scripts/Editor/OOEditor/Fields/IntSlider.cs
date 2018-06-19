@@ -5,7 +5,7 @@ using UnityEngine;
 namespace OOEditor
 {
     /// <summary>
-    /// Make a slider the user can drag to change an int value between a min and a max (inclusive).
+    /// Makes a slider the user can drag to change an int value between a min and a max (inclusive).
     /// </summary>
     public class IntSlider : GUIControlField<int>
     {
@@ -36,7 +36,7 @@ namespace OOEditor
         protected override float ReservedWidth { get; } = 10;
 
         /// <summary>
-        /// Make a slider the user can drag to change an int value between a min and a max.
+        /// Makes a slider the user can drag to change an int value between a min and a max.
         /// </summary>
         /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
         /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
@@ -48,12 +48,12 @@ namespace OOEditor
             Value = value;
         }
         /// <summary>
-        /// Make a slider the user can drag to change an int value between a min and a max.
+        /// Makes a slider the user can drag to change an int value between a min and a max.
         /// </summary>
         /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
         /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
         /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
-        /// <param name="text">Optional label in front of the slider</param>
+        /// <param name="text">Optional label in front of the slider.</param>
         public IntSlider(int value, int min, int max, string text) : base(text)
         {
             Min = min;
@@ -61,7 +61,7 @@ namespace OOEditor
             Value = value;
         }
         /// <summary>
-        /// Make a slider the user can drag to change an int value between a min and a max.
+        /// Makes a slider the user can drag to change an int value between a min and a max.
         /// </summary>
         /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
         /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>

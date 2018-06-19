@@ -48,7 +48,7 @@ namespace OOEditor
         /// </summary>
         protected abstract float ReservedWidth { get; }
 
-        protected GUIControlField() : base() { }
+        protected GUIControlField() { }
         protected GUIControlField(string text) : base(text) { }
         protected GUIControlField(string text, string tooltip) : base(text, tooltip) { }
 
