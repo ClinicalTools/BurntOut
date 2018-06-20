@@ -181,12 +181,16 @@ public class Main_GameManager : MonoBehaviour
     public void ScreenBlur()
     {
         dofSettings.focusDistance = 0.1f;
+        dofSettings.aperture = 10;
+        dofSettings.focalLength = 25;
         ppScene.profile.depthOfField.settings = dofSettings;
     }
 
     public void ScreenUnblur()
     {
         dofSettings.focusDistance = 0.94f;
+        dofSettings.aperture = 5;
+        dofSettings.focalLength = 50;
         ppScene.profile.depthOfField.settings = dofSettings;
     }
 

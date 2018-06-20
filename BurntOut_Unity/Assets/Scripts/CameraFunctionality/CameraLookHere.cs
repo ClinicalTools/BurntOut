@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraLookHere : MonoBehaviour
 {
 
     private Camera playerCamera;
     private PlayerRotateToTarget myRotateTo;
-    private PlayerMoveToTarget myMoveTo;
     private Main_GameManager gamemanager;
 
     public float bounds = 1;
@@ -18,7 +15,6 @@ public class CameraLookHere : MonoBehaviour
     {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
-        myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
         gamemanager = FindObjectOfType<Main_GameManager>();
 
         myRotateTo.enabled = true;

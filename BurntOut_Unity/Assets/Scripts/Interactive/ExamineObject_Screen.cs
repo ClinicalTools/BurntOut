@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ExamineObject_Screen : MonoBehaviour {
-
+public class ExamineObject_Screen : MonoBehaviour
+{
     private Camera mainCamera;
 
     private ParticleSystem myParticleSystem;
@@ -18,10 +16,11 @@ public class ExamineObject_Screen : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         mainCamera = Camera.main;
 
-        gamemanager = GameObject.FindObjectOfType<Main_GameManager>();
+        gamemanager = FindObjectOfType<Main_GameManager>();
 
         myParticleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
         myParticleSystem.gameObject.SetActive(false);
@@ -31,55 +30,42 @@ public class ExamineObject_Screen : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-
-        if (gamemanager.isCurrentlyExamine == false) {
-            abilityToRunScript = true;
-        }
-
-        if (gamemanager.isCurrentlyExamine == true) {
-            abilityToRunScript = false;
-        }
-                
+    void Update()
+    {
+        abilityToRunScript = !gamemanager.isCurrentlyExamine;
     }
 
-    private void OnMouseOver() {
-
+    private void OnMouseOver()
+    {
         if (abilityToRunScript)
-        myParticleSystem.gameObject.SetActive(true);
-
+            myParticleSystem.gameObject.SetActive(true);
     }
 
-    private void OnMouseExit() {
-
+    private void OnMouseExit()
+    {
         if (abilityToRunScript)
-        myParticleSystem.gameObject.SetActive(false);
-
+            myParticleSystem.gameObject.SetActive(false);
     }
 
-    private void OnMouseDown() {
-
-        if (abilityToRunScript) {
+    private void OnMouseDown()
+    {
+        if (abilityToRunScript)
+        {
             gamemanager.ScreenBlur();
             myCanvas.SetActive(true);
             myCanvasObject.SetActive(true);
-            
+
             gamemanager.isCurrentlyExamine = true;
         }
-
-
     }
 
-    public void ExitExamine() {
-
+    public void ExitExamine()
+    {
         gamemanager.ScreenUnblur();
         myCanvas.SetActive(false);
         myCanvasObject.SetActive(false);
-        
+
         gamemanager.isCurrentlyExamine = false;
         myParticleSystem.gameObject.SetActive(false);
     }
-
-
-
 }

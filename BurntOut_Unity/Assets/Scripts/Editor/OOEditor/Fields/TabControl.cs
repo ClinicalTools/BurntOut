@@ -79,7 +79,7 @@ namespace OOEditor
         {
             if (index < 0 || index >= tabs.Count)
             {
-                Debug.LogError("Invalid tab index");
+                //Debug.LogError("Invalid tab index");
                 return;
             }
 
