@@ -8,25 +8,40 @@ namespace OOEditor
     public static class EditorColors
     {
         // Typically used to highlight errors
-        public static Color Red { get; } = new Color(1f, .4f, .4f);
+        public static Color Error { get; } = new Color(1f, .4f, .4f);
 
         // Light colors are typically used for a dark theme
-        public static Color LightGreen
+        public static Color Green
         {
             get
             {
                 switch (GUI.skin.name)
                 {
                     case "LightSkin":
-                        return new Color(.1f, .5f, .1f);
+                        return new Color(.1f, .5f, .15f);
                     case "DarkSkin":
-                        return new Color(.7f, 1f, .7f);
+                        return new Color(.7f, 1f, .8f);
                     default:
-                        return new Color(.7f, 1f, .7f);
+                        return new Color(.7f, 1f, .8f);
                 }
             }
         }
-        public static Color LightYellow
+        public static Color YellowGreen
+        {
+            get
+            {
+                switch (GUI.skin.name)
+                {
+                    case "LightSkin":
+                        return new Color(.35f, .45f, .1f);
+                    case "DarkSkin":
+                        return new Color(.85f, .95f, .7f);
+                    default:
+                        return new Color(.85f, .95f, .7f);
+                }
+            }
+        }
+        public static Color Yellow
         {
             get
             {
@@ -42,7 +57,7 @@ namespace OOEditor
             }
         }
 
-        public static Color LightRed
+        public static Color Red
         {
             get
             {

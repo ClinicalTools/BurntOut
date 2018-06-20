@@ -21,7 +21,7 @@ namespace Narrative.Inspector
                 if (Value.Options.Exists(option => option.result == OptionResult.CONTINUE))
                     return null;
                 else
-                    return EditorColors.Red;
+                    return EditorColors.Error;
             }
         }
 

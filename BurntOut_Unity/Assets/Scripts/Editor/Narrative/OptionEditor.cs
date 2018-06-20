@@ -20,11 +20,11 @@ namespace Narrative.Inspector
                 switch (Value.result)
                 {
                     case OptionResult.CONTINUE:
-                        return EditorColors.LightGreen;
+                        return EditorColors.Green;
                     case OptionResult.TRY_AGAIN:
-                        return EditorColors.LightYellow;
+                        return EditorColors.Yellow;
                     case OptionResult.END:
-                        return EditorColors.LightRed;
+                        return EditorColors.Red;
                     default:
                         return null;
                 }
@@ -81,12 +81,14 @@ namespace Narrative.Inspector
             healthChangeField.Changed += (sender, e) =>
             {
                 Value.HealthChangeStr = e.Value;
-                if (Value.healthChange > 0)
-                    healthChangeField.Style.FontColor = EditorColors.LightGreen;
-                else if (Value.healthChange < 0)
-                    healthChangeField.Style.FontColor = EditorColors.LightRed;
+                if (Value.healthChange > 10)
+                    healthChangeField.Style.FontColor = EditorColors.Green;
+                else if (Value.healthChange > 0)
+                    healthChangeField.Style.FontColor = EditorColors.YellowGreen;
+                else if (Value.healthChange > -10)
+                    healthChangeField.Style.FontColor = EditorColors.Yellow;
                 else 
-                    healthChangeField.Style.FontColor = EditorColors.LightYellow;
+                    healthChangeField.Style.FontColor = EditorColors.Red;
             };
 
             feedbackLabel = new LabelField("Feedback:");
