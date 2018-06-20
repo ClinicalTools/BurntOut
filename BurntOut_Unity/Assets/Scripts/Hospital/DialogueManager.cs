@@ -51,12 +51,6 @@ public class DialogueManager : MonoBehaviour
         }
         continueButton.onClick.AddListener(delegate { ProgressNarrative(); });
     }
-    
-    private void Update()
-    {
-        //if (InDialogue && Input.GetMouseButtonDown(0))
-            //ProgressNarrative();
-    }
 
     // Resets the dialogue manager to be used with a passed scenario
     public void StartScenario(Scenario scenario)
