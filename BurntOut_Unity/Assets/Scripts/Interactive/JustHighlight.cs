@@ -7,7 +7,6 @@ public class JustHighlight : MonoBehaviour
     private Main_GameManager gamemanager;
 
     public bool ableToRunScript;
-
     // Use this for initialization
     void Start()
     {
@@ -31,11 +30,12 @@ public class JustHighlight : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (ableToRunScript)
+        if (ableToRunScript) { 
             myParticleSystem.gameObject.SetActive(false);
+        }
     }
 
-    private void OnMouseDown()
+    private void OnMouseUpAsButton()
     {
         if (ableToRunScript)
         {

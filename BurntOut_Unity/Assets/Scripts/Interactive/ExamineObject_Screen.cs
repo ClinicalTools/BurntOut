@@ -41,7 +41,7 @@ public class ExamineObject_Screen : MonoBehaviour
             myParticleSystem.gameObject.SetActive(false);
     }
 
-    private void OnMouseDown()
+    private void OnMouseUpAsButton()
     {
         if (abilityToRunScript)
         {

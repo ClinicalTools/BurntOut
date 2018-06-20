@@ -6,6 +6,7 @@ public class DialogueManager : MonoBehaviour
 {
     // References to other gui objects set in the editor
     public Button[] buttons = new Button[3];
+    public Button continueButton;
     public Text dialogueText;
     public Text feedbackText;
     public Text promptText;
@@ -48,12 +49,13 @@ public class DialogueManager : MonoBehaviour
             buttons[i].onClick.AddListener(delegate { OptionClicked(optionNum); });
             buttonsText[i] = buttons[i].gameObject.GetComponentInChildren<Text>();
         }
+        continueButton.onClick.AddListener(delegate { ProgressNarrative(); });
     }
     
     private void Update()
     {
-        if (InDialogue && Input.GetMouseButtonDown(0))
-            ProgressNarrative();
+        //if (InDialogue && Input.GetMouseButtonDown(0))
+            //ProgressNarrative();
     }
 
     // Resets the dialogue manager to be used with a passed scenario

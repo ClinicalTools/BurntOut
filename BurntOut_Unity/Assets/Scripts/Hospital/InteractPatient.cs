@@ -13,7 +13,7 @@ public class InteractPatient : MonoBehaviour
     //for room detection
     public bool doorClosedInBounds;
 
-    public Text interactPrompt; 
+    public Text interactPrompt;
     public GameObject player;
 
     public Main_GameManager gameManager;
@@ -79,12 +79,12 @@ public class InteractPatient : MonoBehaviour
     }
 
     // for clicking mechanics
-    private void OnMouseDown() {
-
-        if (gameManager.scene.name == "Hospital_Patient_SingleRoom") {
-
-            if (!gameManager.isCurrentlyExamine) {
-
+    private void OnMouseUpAsButton()
+    {
+        if (gameManager.scene.name == "Hospital_Patient_SingleRoom")
+        {
+            if (!gameManager.isCurrentlyExamine)
+            {
                 interactPrompt.transform.parent.gameObject.SetActive(false);
                 gameManager.currentRoom = this;
                 dialogueManager.StartDialogue();
@@ -101,11 +101,10 @@ public class InteractPatient : MonoBehaviour
 
         interactPrompt.transform.parent.gameObject.SetActive(true);
 
-        if (doorClosedInBounds) { 
+        if (doorClosedInBounds)
             interactPrompt.text = "Press 'e' to talk to " + scenario.GetActor(patientId).name;
-        } else {
+        else
             interactPrompt.text = "YOU MUST CLOSE DOOR FIRST!";
-        }
     }
 
     private void LookAway()
@@ -119,7 +118,6 @@ public class InteractPatient : MonoBehaviour
     {
         if (col.gameObject.name == "Player")
             isAroundPatient = true;
-
     }
 
     // return to default state when out of range
@@ -132,5 +130,4 @@ public class InteractPatient : MonoBehaviour
             LookAway();
         }
     }
-
 }
