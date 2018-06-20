@@ -28,13 +28,13 @@ namespace Narrative.Inspector
 
         private int ScenarioNum => tabs.Value - 1;
 
-
+        private static NarrativeEditorWindow window;
         // Add menu named "Scene Manager" to the Window menu
         [MenuItem("Window/Narrative Manager")]
         public static void Init()
         {
             // Get existing open window or if none, make a new one:
-            NarrativeEditorWindow window = GetWindow<NarrativeEditorWindow>("Narrative");
+            window = GetWindow<NarrativeEditorWindow>("Narrative");
             window.Show();
         }
 
@@ -72,6 +72,7 @@ namespace Narrative.Inspector
         void OnInspectorUpdate()
         {
             ResetSceneManager();
+            Repaint();
         }
 
         public void OnEnable()
