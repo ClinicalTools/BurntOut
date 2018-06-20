@@ -1,19 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ExamineObject_Canvas : MonoBehaviour {
 
 
     public float distanceFromCamera = 0.1f;
-    private GameObject targetlocation;
     private Camera mainCamera;
 
 
     public void Start() {
         mainCamera = Camera.main;
-        targetlocation = GameObject.FindGameObjectWithTag("CloseExamine");
-
+        
         StartCoroutine(SetPosAndRot());
     }
 

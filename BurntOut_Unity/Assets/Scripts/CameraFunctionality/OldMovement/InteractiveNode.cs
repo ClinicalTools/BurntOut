@@ -15,7 +15,6 @@ public class InteractiveNode : MonoBehaviour
     public StationaryMovementNode nextStation;
 
     private Camera playerCamera;
-    private PlayerRotateToTarget myRotateTo;
     private PlayerMoveToTarget myMoveTo;
     private Animator myAnimator;
 
@@ -24,7 +23,6 @@ public class InteractiveNode : MonoBehaviour
     private void Start()
     {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         myMoveTo = playerCamera.GetComponent<PlayerMoveToTarget>();
         myAnimator = gameObject.GetComponent<Animator>();
 

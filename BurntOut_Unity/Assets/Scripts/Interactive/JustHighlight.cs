@@ -1,75 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class JustHighlight : MonoBehaviour {
-
-    private Camera mainCamera;
-
+public class JustHighlight : MonoBehaviour
+{
     private ParticleSystem myParticleSystem;
 
-    private Transform startingTransform;
     private Main_GameManager gamemanager;
 
-    public bool abilityToRunScript;
-
+    public bool ableToRunScript;
 
     // Use this for initialization
-    void Start() {
-        mainCamera = Camera.main;
-        gamemanager = GameObject.FindObjectOfType<Main_GameManager>();
+    void Start()
+    {
+        gamemanager = FindObjectOfType<Main_GameManager>();
 
         myParticleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
         myParticleSystem.gameObject.SetActive(false);
-
-        startingTransform = transform;
     }
 
     // Update is called once per frame
-    void Update() {
-
-        if (gamemanager.isCurrentlyExamine == false) {
-            abilityToRunScript = true;
-        }
-
-        if (gamemanager.isCurrentlyExamine == true) {
-            abilityToRunScript = false;
-        }
-
-
-
+    void Update()
+    {
+        ableToRunScript = !gamemanager.isCurrentlyExamine;
     }
 
-    private void OnMouseOver() {
-
-        if (abilityToRunScript)
+    private void OnMouseOver()
+    {
+        if (ableToRunScript)
             myParticleSystem.gameObject.SetActive(true);
-
     }
 
-    private void OnMouseExit() {
-
-        if (abilityToRunScript)
+    private void OnMouseExit()
+    {
+        if (ableToRunScript)
             myParticleSystem.gameObject.SetActive(false);
-
     }
 
-    private void OnMouseDown() {
-
-        if (abilityToRunScript) {
+    private void OnMouseDown()
+    {
+        if (ableToRunScript)
+        {
             gamemanager.ScreenBlur();
-
 
             gamemanager.isCurrentlyExamine = true;
         }
-
-
     }
 
-    public void ExitExamine() {
-
+    public void ExitExamine()
+    {
         gamemanager.ScreenUnblur();
-
 
         gamemanager.isCurrentlyExamine = false;
         myParticleSystem.gameObject.SetActive(false);

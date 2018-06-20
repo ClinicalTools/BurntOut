@@ -25,10 +25,6 @@ public class Main_GameManager : MonoBehaviour
     // Win UI
     public UI_Star[] Stars;
     public UI_Star[] BadStars;
-    public UI_Star Star_RoomA;
-    public UI_Star Star_RoomB;
-    public UI_Star Star_RoomABAD;
-    public UI_Star Star_RoomBBAD;
 
     //player controller
     public GameObject player;
@@ -54,7 +50,7 @@ public class Main_GameManager : MonoBehaviour
     private void Awake()
     {
         // LOAD DATA HERE
-        globalStats = GameObject.FindObjectOfType<GlobalStats>();
+        globalStats = FindObjectOfType<GlobalStats>();
         playerStats.CurrentHealth = globalStats.currentHealth;
 
         Cursor.visible = true;
@@ -109,13 +105,10 @@ public class Main_GameManager : MonoBehaviour
         ScreenUnblur();
 
         hospitalwin = false;
-
-
     }
 
     void Update()
     {
-
         // pause screen 
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -181,7 +174,7 @@ public class Main_GameManager : MonoBehaviour
     public void ScreenBlur()
     {
         dofSettings.focusDistance = 0.1f;
-        dofSettings.aperture = 10;
+        dofSettings.aperture = 14;
         dofSettings.focalLength = 25;
         ppScene.profile.depthOfField.settings = dofSettings;
     }
@@ -234,8 +227,8 @@ public class Main_GameManager : MonoBehaviour
             currentRoom.gameObject.SetActive(false);
             globalStats.isMrJohnsonCompleted = true;
         }
-
     }
+
     public void RoomLost()
     {
 
