@@ -9,21 +9,10 @@ namespace Narrative.Inspector
     public class ChoiceEditor : FoldoutClassDrawer<Choice>
     {
         public static Choice CurrentChoice { get; private set; }
-        
+
         protected string FoldoutName =>
             $"Choice {ScenarioEditor.CurrentScenario.Choices.IndexOf(Value) + 1} - {Value.name}";
         protected override Foldout Foldout { get; }
-
-        protected Color? FoldoutColor
-        {
-            get
-            {
-                if (Value.Options.Exists(option => option.result == OptionResult.CONTINUE))
-                    return null;
-                else
-                    return EditorColors.Error;
-            }
-        }
 
         private readonly TextField nameField;
         private readonly Foldout eventsFoldout;
@@ -37,7 +26,7 @@ namespace Narrative.Inspector
             CurrentChoice = Value;
 
             Foldout = new Foldout(FoldoutName);
-            Foldout.Style.FontColor = FoldoutColor;
+            ResetFoldout();
 
             nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
             nameField.Changed += (sender, e) =>
@@ -61,8 +50,22 @@ namespace Narrative.Inspector
             optionList = new FoldoutList<Option, OptionEditor>(Value.Options);
             optionList.Changed += (sender, e) =>
             {
-                Foldout.Style.FontColor = FoldoutColor;
+                ResetFoldout();
             };
+        }
+
+        private void ResetFoldout()
+        {
+            if (Value.Options.Exists(option => option.result == OptionResult.CONTINUE))
+            {
+                Foldout.Style.FontColor = null;
+                Foldout.Content.tooltip = "";
+            }
+            else
+            {
+                Foldout.Style.FontColor = EditorColors.Error;
+                Foldout.Content.tooltip = "No continue option";
+            }
         }
 
         protected override void Display()

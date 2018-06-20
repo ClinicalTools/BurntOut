@@ -85,7 +85,7 @@ namespace Narrative.Inspector
                     healthChangeField.Style.FontColor = EditorColors.Green;
                 else if (Value.healthChange > 0)
                     healthChangeField.Style.FontColor = EditorColors.YellowGreen;
-                else if (Value.healthChange > -10)
+                else if (Value.healthChange >= -10)
                     healthChangeField.Style.FontColor = EditorColors.Yellow;
                 else 
                     healthChangeField.Style.FontColor = EditorColors.Red;

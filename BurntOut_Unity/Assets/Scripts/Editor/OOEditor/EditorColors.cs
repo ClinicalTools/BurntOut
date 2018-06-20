@@ -8,7 +8,7 @@ namespace OOEditor
     public static class EditorColors
     {
         // Typically used to highlight errors
-        public static Color Error { get; } = new Color(1f, .4f, .4f);
+        public static Color Error { get; } = new Color(1f, .3f, .3f);
 
         // Light colors are typically used for a dark theme
         public static Color Green
@@ -20,7 +20,7 @@ namespace OOEditor
                     case "LightSkin":
                         return new Color(.1f, .5f, .15f);
                     case "DarkSkin":
-                        return new Color(.7f, 1f, .8f);
+                        return new Color(.55f, .9f, .55f);
                     default:
                         return new Color(.7f, 1f, .8f);
                 }
@@ -35,7 +35,7 @@ namespace OOEditor
                     case "LightSkin":
                         return new Color(.35f, .45f, .1f);
                     case "DarkSkin":
-                        return new Color(.85f, .95f, .7f);
+                        return new Color(.8f, 1, .6f);
                     default:
                         return new Color(.85f, .95f, .7f);
                 }
@@ -50,7 +50,7 @@ namespace OOEditor
                     case "LightSkin":
                         return new Color(.5f, .5f, .1f);
                     case "DarkSkin":
-                        return new Color(1f, 1f, .7f);
+                        return new Color(.95f, .9f, .5f);
                     default:
                         return new Color(1f, 1f, .7f);
                 }
@@ -66,7 +66,7 @@ namespace OOEditor
                     case "LightSkin":
                         return new Color(.5f, .1f, .1f);
                     case "DarkSkin":
-                        return new Color(1f, .7f, .7f);
+                        return new Color(1, .6f, .6f);
                     default:
                         return new Color(1f, .7f, .7f);
                 }
