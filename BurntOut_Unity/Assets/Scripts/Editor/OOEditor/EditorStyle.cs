@@ -86,11 +86,12 @@ namespace OOEditor
 
         // Blends two colors, keeping color magnitude of the original's, or 50%, whichever is more
         // Multiplies the alphas
+        // Honestly, this method is an awful way of doing the colors, but this isn't a priority atm
         private Color BlendColors(Color original, Color blend)
         {
             var c1Height = Mathf.Sqrt(original.r * original.r + original.g * original.g + 
                 original.b * original.b);
-            // Minimum magnitude to ensure we don't see 
+            // Minimum magnitude to ensure we don't see black text
             var colorHeight = Mathf.Max(c1Height, .6f);
 
             var vec = new Vector3((original.r + blend.r) / 2, (original.g + blend.g) / 2,
