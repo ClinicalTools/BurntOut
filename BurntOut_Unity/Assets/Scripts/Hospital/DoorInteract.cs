@@ -17,7 +17,7 @@ public class DoorInteract : MonoBehaviour {
     public GameObject doorHandle;
 
     public DetectPlayerInRoom detectPlayerinRoom;
-    public InteractPatient patient;
+    public InteractActor patient;
     public bool doorlocked;
 
     public float maxAngle = 35;

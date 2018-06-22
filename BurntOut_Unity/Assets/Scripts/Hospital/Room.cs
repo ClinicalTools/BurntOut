@@ -12,7 +12,7 @@ public class Room : MonoBehaviour
         if (col.gameObject.name == "Player")
         {
             dialogueManager.StartScenario(
-                GameObject.Find("NarrativeManager").GetComponent<NarrativeManager>().
+                FindObjectOfType<NarrativeManager>().
                 sceneNarrative.GetScenario(scenarioId));
         }
 

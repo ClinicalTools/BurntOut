@@ -68,18 +68,40 @@ namespace OOEditor
                 style.fontStyle = (FontStyle)FontStyle;
             if (FontColor != null)
             {
+                BlendColors(style.normal.textColor, (Color)FontColor);
+
                 // I believe the first 4 correspond to how an element is drawn by default
-                style.active.textColor = (Color)FontColor;
-                style.focused.textColor = (Color)FontColor;
-                style.hover.textColor = (Color)FontColor;
-                style.normal.textColor = (Color)FontColor;
+                style.active.textColor = BlendColors(style.active.textColor, (Color)FontColor);
+                style.focused.textColor = BlendColors(style.focused.textColor, (Color)FontColor);
+                style.hover.textColor = BlendColors(style.hover.textColor, (Color)FontColor);
+                style.normal.textColor = BlendColors(style.normal.textColor, (Color)FontColor);
                 // I believe the last 4 correspond to how elements with boolean values are often drawn 
                 //   after being selected
-                style.onActive.textColor = (Color)FontColor;
-                style.onFocused.textColor = (Color)FontColor;
-                style.onHover.textColor = (Color)FontColor;
-                style.onNormal.textColor = (Color)FontColor;
+                style.onActive.textColor = BlendColors(style.onActive.textColor, (Color)FontColor);
+                style.onFocused.textColor = BlendColors(style.onFocused.textColor, (Color)FontColor);
+                style.onHover.textColor = BlendColors(style.onHover.textColor, (Color)FontColor);
+                style.onNormal.textColor = BlendColors(style.onNormal.textColor, (Color)FontColor);
             }
+        }
+
+        // Blends two colors, keeping color magnitude of the original's, or 50%, whichever is more
+        // Multiplies the alphas
+        private Color BlendColors(Color original, Color blend)
+        {
+            var c1Height = Mathf.Sqrt(original.r * original.r + original.g * original.g + 
+                original.b * original.b);
+            // Minimum magnitude to ensure we don't see 
+            var colorHeight = Mathf.Max(c1Height, .6f);
+
+            var vec = new Vector3((original.r + blend.r) / 2, (original.g + blend.g) / 2,
+                 (original.b + blend.b) / 2);
+            vec.Normalize();
+            vec *= colorHeight;
+            // Cap colors at 1, with the exception of green. Since it's a brighter color, cap it lower
+            var newColor = new Color(Mathf.Min(vec.x, 1), Mathf.Min(vec.y, .9f), Mathf.Min(vec.z, 1),
+                original.a * blend.a);
+
+            return newColor;
         }
     }
 }

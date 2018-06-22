@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractPatient : MonoBehaviour
+public class InteractActor : MonoBehaviour
 {
     [HideInInspector]
-    public int patientId;
+    public int actorId;
     public bool completed;
     public bool lost;
     public bool isAroundPatient;
@@ -49,7 +49,6 @@ public class InteractPatient : MonoBehaviour
                 Look();
             else if (playerFacing)
                 interactPrompt.transform.parent.gameObject.SetActive(!dialogueManager.InDialogue);
-
         }
 
         // if player is around patient, allow player to interact with it
@@ -81,7 +80,7 @@ public class InteractPatient : MonoBehaviour
     // for clicking mechanics
     private void OnMouseUpAsButton()
     {
-        if (gameManager.scene.name == "Hospital_Patient_SingleRoom")
+        //if (gameManager.scene.name == "Hospital_Patient_SingleRoom")
         {
             if (!gameManager.isCurrentlyExamine)
             {
@@ -90,7 +89,6 @@ public class InteractPatient : MonoBehaviour
                 dialogueManager.StartDialogue();
             }
         }
-
     }
 
     // change prompt
@@ -102,7 +100,7 @@ public class InteractPatient : MonoBehaviour
         interactPrompt.transform.parent.gameObject.SetActive(true);
 
         if (doorClosedInBounds)
-            interactPrompt.text = "Press 'e' to talk to " + scenario.GetActor(patientId).name;
+            interactPrompt.text = "Press 'e' to talk to " + scenario.GetActor(actorId).name;
         else
             interactPrompt.text = "YOU MUST CLOSE DOOR FIRST!";
     }

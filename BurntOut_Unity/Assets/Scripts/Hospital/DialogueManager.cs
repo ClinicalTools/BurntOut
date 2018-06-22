@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +12,12 @@ public class DialogueManager : MonoBehaviour
     public Text feedbackText;
     public Text promptText;
     public GameObject UI_ChoiceDia;
-    
+
     // Other references
     public PlayerStats stats;
     public Main_GameManager gameManager;
 
-    
+
     private Text[] buttonsText;
 
     private Scenario scenario;
@@ -31,15 +32,20 @@ public class DialogueManager : MonoBehaviour
     private bool lost;
 
     // Indicates whether the auto progression should be running
-    //private bool runAutoProgress;
-    //private Coroutine autoProgress;
     // Queue of tasks (actions, emotions, and dialogue) to perform in current choice or option
     private Queue<Task> tasks;
     public bool InDialogue { get; private set; }
 
+    private readonly Dictionary<int, GameObject> actors = new Dictionary<int, GameObject>();
+
+    PlayerRotateToTarget myRotateTo;
+
     // Initialize references to button text
     void Start()
     {
+        var playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
+
         buttonsText = new Text[buttons.Length];
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -50,6 +56,12 @@ public class DialogueManager : MonoBehaviour
             buttonsText[i] = buttons[i].gameObject.GetComponentInChildren<Text>();
         }
         continueButton.onClick.AddListener(delegate { ProgressNarrative(); });
+
+
+        var rooms = FindObjectsOfType<Room>();
+        var scenarioId = rooms[0].scenarioId;
+        var sceneNarrative = FindObjectOfType<NarrativeManager>().sceneNarrative;
+        StartScenario(sceneNarrative.GetScenario(scenarioId));
     }
 
     // Resets the dialogue manager to be used with a passed scenario
@@ -66,7 +78,7 @@ public class DialogueManager : MonoBehaviour
 
         tasks = new Queue<Task>(scenario.Choices[0].Events);
 
-        for (int i = 0; i < buttons.Length; i++)
+        for (var i = 0; i < buttons.Length; i++)
             buttons[i].gameObject.SetActive(false);
 
         feedbackText.transform.parent.gameObject.SetActive(false);
@@ -74,6 +86,20 @@ public class DialogueManager : MonoBehaviour
         dialogueText.transform.parent.gameObject.SetActive(true);
 
         UI_ChoiceDia.SetActive(false);
+
+        ResetActors();
+    }
+
+    private void ResetActors()
+    {
+        actors.Clear();
+
+        var rooms = FindObjectsOfType<Room>();
+        var room = rooms.First(r => r.scenarioId == scenario.id);
+
+        var actorList = room.GetComponentsInChildren<InteractActor>();
+        foreach (var actor in actorList)
+            actors.Add(actor.actorId, actor.gameObject);
     }
 
     /// <summary>
@@ -187,6 +213,8 @@ public class DialogueManager : MonoBehaviour
             switch (task.action)
             {
                 case TaskAction.TALK:
+                    if (actors.ContainsKey(task.actorId))
+                        myRotateTo.target = actors[task.actorId];
                     ShowText(scenario.GetActor(task.actorId).name, task.dialogue);
                     break;
                 case TaskAction.EMOTION:
@@ -243,7 +271,7 @@ public class DialogueManager : MonoBehaviour
         optionSelected = option;
 
         tasks = new Queue<Task>(scenario.Choices[choiceNum].Options[option].Events);
-        
+
         stats.CurrentHealth += scenario.Choices[choiceNum].Options[option].healthChange;
 
         ProgressNarrative();

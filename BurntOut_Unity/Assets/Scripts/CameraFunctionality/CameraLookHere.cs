@@ -2,9 +2,6 @@
 
 public class CameraLookHere : MonoBehaviour
 {
-
-    private Camera playerCamera;
-    private PlayerRotateToTarget myRotateTo;
     private Main_GameManager gamemanager;
 
     public float bounds = 1;
@@ -13,8 +10,8 @@ public class CameraLookHere : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
+        var playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        var myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         gamemanager = FindObjectOfType<Main_GameManager>();
 
         myRotateTo.enabled = true;

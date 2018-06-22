@@ -9,7 +9,7 @@ public class Main_GameManager : MonoBehaviour
     private int roomsLost;
 
     // store current patient
-    public InteractPatient currentRoom;
+    public InteractActor currentRoom;
 
     public Animator screenfade;
 
@@ -65,7 +65,7 @@ public class Main_GameManager : MonoBehaviour
 
         scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "Hospital_Patient_SingleRoom")
+        //if (scene.name == "Hospital_Patient_SingleRoom")
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -201,7 +201,7 @@ public class Main_GameManager : MonoBehaviour
 
         isCurrentlyExamine = false;
 
-        if (scene.name == "ICU_New" || scene.name == "Hospital_Patient_SingleRoom")
+        if (scene.name == "ICU_New" || scene.name == "Hospital_Patient_SingleRoom" || scene.name == "2")
             currentRoom.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
 
         UI_ChoiceDia.SetActive(false);
@@ -219,7 +219,7 @@ public class Main_GameManager : MonoBehaviour
         currentRoom.completed = true;
         playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
 
-        if (scene.name == "Hospital_Patient_SingleRoom")
+        //if (scene.name == "Hospital_Patient_SingleRoom")
         {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
@@ -240,7 +240,7 @@ public class Main_GameManager : MonoBehaviour
         currentRoom.lost = true;
         playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
 
-        if (scene.name == "Hospital_Patient_SingleRoom")
+        //if (scene.name == "Hospital_Patient_SingleRoom")
         {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;

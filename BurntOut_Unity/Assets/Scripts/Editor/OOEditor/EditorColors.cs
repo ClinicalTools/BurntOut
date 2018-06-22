@@ -8,69 +8,12 @@ namespace OOEditor
     public static class EditorColors
     {
         // Typically used to highlight errors
-        public static Color Error { get; } = new Color(1f, .3f, .3f);
+        public static Color Error { get; } = new Color(10, 0, 0);
 
         // Light colors are typically used for a dark theme
-        public static Color Green
-        {
-            get
-            {
-                switch (GUI.skin.name)
-                {
-                    case "LightSkin":
-                        return new Color(.1f, .5f, .15f);
-                    case "DarkSkin":
-                        return new Color(.55f, .9f, .55f);
-                    default:
-                        return new Color(.7f, 1f, .8f);
-                }
-            }
-        }
-        public static Color YellowGreen
-        {
-            get
-            {
-                switch (GUI.skin.name)
-                {
-                    case "LightSkin":
-                        return new Color(.35f, .45f, .1f);
-                    case "DarkSkin":
-                        return new Color(.8f, 1, .6f);
-                    default:
-                        return new Color(.85f, .95f, .7f);
-                }
-            }
-        }
-        public static Color Yellow
-        {
-            get
-            {
-                switch (GUI.skin.name)
-                {
-                    case "LightSkin":
-                        return new Color(.5f, .5f, .1f);
-                    case "DarkSkin":
-                        return new Color(.95f, .9f, .5f);
-                    default:
-                        return new Color(1f, 1f, .7f);
-                }
-            }
-        }
-
-        public static Color Red
-        {
-            get
-            {
-                switch (GUI.skin.name)
-                {
-                    case "LightSkin":
-                        return new Color(.5f, .1f, .1f);
-                    case "DarkSkin":
-                        return new Color(1, .6f, .6f);
-                    default:
-                        return new Color(1f, .7f, .7f);
-                }
-            }
-        }
+        public static Color Green { get; } = new Color(0, 1, 0);
+        public static Color YellowGreen { get; } = new Color(.5f, 1, 0);
+        public static Color Yellow { get; } = new Color(1, 1, 0);
+        public static Color Red { get; } = new Color(1, 0, 0);
     }
 }

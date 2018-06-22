@@ -31,7 +31,7 @@ namespace Narrative.Inspector
                 Value.endNarration = e.Value;
             };
         }
-
+        
         protected override void Display()
         {
             startNarrationLabel.Draw();
