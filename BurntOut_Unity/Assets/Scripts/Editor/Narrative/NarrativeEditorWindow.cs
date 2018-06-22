@@ -154,7 +154,7 @@ namespace Narrative.Inspector
 
         private void LoadScenarioBtn_Pressed(object sender, EventArgs e)
         {
-            var scenario = NarrativeFileManager.LoadScenario(sceneNarrative);
+            var scenario = NarrativeFileManager.LoadScenario(sceneNarrative.scenarios);
             if (scenario == null)
                 return;
 

@@ -10,7 +10,10 @@ public class Actor
 
     [SerializeField]
     public string name;
-    
+
+    public Sprite icon;
+    public Sprite normal;
+
     public Actor(Actor[] actors)
     {
         // Using hash of current time to get a number that will hopefully be unique

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -79,7 +80,7 @@ namespace Narrative.Inspector
             return false;
         }
 
-        public static Scenario LoadScenario(SceneNarrative sceneNarrative)
+        public static Scenario LoadScenario(List<Scenario> scenarios)
         {
             // Get the folder to load the scenario from
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -92,8 +93,8 @@ namespace Narrative.Inspector
                 string json = File.ReadAllText(path);
 
                 var scenario = JsonUtility.FromJson<Scenario>(json);
-                for (int i = 0; i < sceneNarrative.scenarios.Count; i++)
-                    scenario.ResetHash(sceneNarrative.scenarios.ToArray());
+                for (int i = 0; i < scenarios.Count; i++)
+                    scenario.ResetHash(scenarios.ToArray());
 
                 return scenario;
             }
