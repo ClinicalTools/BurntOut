@@ -4542,8 +4542,12 @@ MonoBehaviour:
       actors:
       - id: -542058693
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: -535933802
         name: Ms. Jackson
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       choices:
       - name: Ms. Jackson's concerns about the tests 1
         text: 'What do you say in response to Ms. Jackson? '
@@ -4587,6 +4591,7 @@ MonoBehaviour:
             dialogue: "I know they\u2019re common, but that doesn\u2019t help alleviate
               my anxiety."
           result: 0
+          healthChange: 0
           feedback: 'Patients are unique and see their situation as unique. From the
             professional perspective the experiences seem similar. However, that''s
             not how patients see it. It''s best for you not to express the commonality
@@ -4599,6 +4604,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: I appreciate that. The waiting is just killing me.
           result: 2
+          healthChange: 0
           feedback: "It's nice to reassure the patient and convey a positive outlook.
             In this case, the test is not a chance to find out really bad news, but
             is indeed fairly routine part of medicine. You shouldn't be afraid to
@@ -4616,6 +4622,7 @@ MonoBehaviour:
             dialogue: "Well, it\u2019s my life, so of course I\u2019m worried! You
               don\u2019t seem to care about what might be going on with me!"
           result: 1
+          healthChange: 0
           feedback: At face value this sounds like a rejection of the patient's concern.
             You should instead recognize and validate their concern in order to console
             the patient and help them decrease their stress related to the test.
@@ -4637,6 +4644,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: "I guess you\u2019re a lot stronger than I am, then."
           result: 1
+          healthChange: 0
           feedback: 'It''s okay to share a personal struggle with the patient, as
             it enhances patient rapport if you can help the patient see that you are
             human, too. However, it could also have the opposite effect and make the
@@ -4652,6 +4660,7 @@ MonoBehaviour:
               got nothing to do most of the day except sit around and think about
               the worse case scenario, it just makes it worse."
           result: 0
+          healthChange: 0
           feedback: "While it\u2019s good to ascertain if Ms. Jackson might need help
             dealing with her anxiety, it\u2019s best to address her immediate concerns
             at the moment. This would offer an opportunity for you to provide a more
@@ -4666,6 +4675,7 @@ MonoBehaviour:
               the same kinds of symptoms he had. I\u2019m always tired, been losing
               weight, and I get fever and chills every night."
           result: 2
+          healthChange: 0
           feedback: Presenting the question in this manner offers an opportunity for
             you to provide a more complete answer as well as to consult the patient.
             This will help them decrease their stress related to the test.
@@ -4685,6 +4695,7 @@ MonoBehaviour:
             dialogue: "And one of them might be leukemia! I just know that\u2019s
               the reason."
           result: 0
+          healthChange: 0
           feedback: Acknowledging her concerns and trying to assure Ms. Jackson about
             her symptoms seems like a good idea, but it leaves the door open to having
             her think that her suspicion is still correct.
@@ -4706,6 +4717,7 @@ MonoBehaviour:
             dialogue: "I guess we\u2019ll find out tomorrow and deal with whatever
               comes."
           result: 2
+          healthChange: 0
           feedback: "It was a good approach to acknowledge Ms. Jackson\u2019s concerns
             regarding similarity to her father\u2019s diagnosis and the unlikelihood
             that she will have a similar result."
@@ -4719,6 +4731,7 @@ MonoBehaviour:
             dialogue: "But it could be, right? (She starts crying) And then I\u2019d
               be dying of the same thing that took my father!"
           result: 1
+          healthChange: 0
           feedback: "While the technical information may be correct, the way you deliver
             your assurances makes a difference. Instead of denying Ms. Jackson\u2019s
             concerns, instead you should acknowledge them and help to alleviate her
@@ -4737,8 +4750,12 @@ MonoBehaviour:
       actors:
       - id: -369657928
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: -334617666
         name: Mr. Johnson
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       choices:
       - name: Lower Mr. Peterson's stess levels
         text: "What can you say to lower Mr. Peterson\u2019s stress levels?"
@@ -4770,6 +4787,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: No! I want another doctor! You are too rude.
           result: 1
+          healthChange: 0
           feedback: "Belittling the patient\u2019s concerns is not an effective way
             to de-escalate the situation. Patients are unique and see their situation
             as unique. Instead, you should acknowledge their concerns and work to
@@ -4784,6 +4802,7 @@ MonoBehaviour:
             dialogue: "If that were true, you wouldn\u2019t have made me sit here,
               waiting and worrying, all this time."
           result: 0
+          healthChange: 0
           feedback: While you did attempt to express concern for Mr. Peterson, the
             phrasing made it more about you than your patient. You may be tired and
             stressed out, but your focus should be on your patient, acknowledging
@@ -4799,6 +4818,7 @@ MonoBehaviour:
               just been sitting here waiting and worrying, thinking up worse and worse
               scenarios."
           result: 2
+          healthChange: 0
           feedback: "Acknowledging the patient\u2019s concern, as well as providing
             assurance that you would like to answer any of their questions, helps
             Mr. Peterson know that you are there for him. Do not let a patient\u2019s
@@ -4838,6 +4858,7 @@ MonoBehaviour:
             dialogue: "It\u2019s not a big deal that I\u2019m boring? Or that you\u2019re
               tired?"
           result: 0
+          healthChange: 0
           feedback: It is reasonable to not expose patients to personal feelings or
             concerns. It makes sense to not divulge serious life moments or strong
             emotions, which are things you might struggle with. However, acknowledging
@@ -4855,6 +4876,7 @@ MonoBehaviour:
             dialogue: "Yeah, I guess you would be. You\u2019ve probably been on your
               feet for over twelve hours now."
           result: 2
+          healthChange: 0
           feedback: "It's okay to share a personal struggle with the patient, as it
             enhances patient rapport if you can help the patient see that you are
             human, too, and you have reactions to situations just as they do. In this
@@ -4875,6 +4897,7 @@ MonoBehaviour:
             dialogue: "No, I don\u2019t think so. You don\u2019t seem to care about
               what I\u2019m saying."
           result: 1
+          healthChange: 0
           feedback: "Some patients may not have the sophisticated knowledge you have,
             but they're pretty good at pattern recognition and denying reality is
             very rarely a successful strategy. Many patients will perceive this as
@@ -4899,6 +4922,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: "I promise, Mr. Peterson. You\u2019re fine."
           result: 0
+          healthChange: 0
           feedback: While you are doing a good job of assuring Mr. Peterson that the
             spots are not a concern, you did not actually say what they were and why
             they are not an immediate medical issue. Another approach would have been
@@ -4913,6 +4937,7 @@ MonoBehaviour:
             dialogue: How was I to know? It looked serious and I thought you needed
               to see it!
           result: 1
+          healthChange: 0
           feedback: "Chastising the patient for his approach to the health concern
             is not helpful for either you or Mr. Peterson. Your patient\u2019s concerns
             should be acknowledged and addressed in a way that educates him without
@@ -4935,6 +4960,7 @@ MonoBehaviour:
               do, we\u2019ll remove them, but you shouldn\u2019t worry about that
               at the moment."
           result: 2
+          healthChange: 0
           feedback: "It\u2019s a good approach to explain the patient\u2019s medical
             situation to them in language they can understand. Additionally, you took
             the time to answer Mr. Peterson\u2019s follow-up questions and assure
@@ -4952,8 +4978,12 @@ MonoBehaviour:
       actors:
       - id: 764233178
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: 777917692
         name: PATIENT
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       choices:
       - name: Choice 1
         text: Choice 1 Text
@@ -4975,6 +5005,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: cool
           result: 2
+          healthChange: 0
           feedback: You clicked continue
         - name: i did not
           text: End 1
@@ -4984,6 +5015,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: Not cool
           result: 1
+          healthChange: 0
           feedback: You clicked end
         - name: oh hai mark
           text: Try Again 1
@@ -4993,6 +5025,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: kinda cool
           result: 0
+          healthChange: 0
           feedback: You clicked try again
       endNarrative: End Narrative
     - id: -1615940435
@@ -5000,8 +5033,12 @@ MonoBehaviour:
       actors:
       - id: 764233178
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: 777917692
         name: PATIENT
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       choices:
       - name: Choice 1
         text: Choice 1 Text
@@ -5023,6 +5060,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: cool
           result: 2
+          healthChange: 0
           feedback: You clicked continue
         - name: i did not
           text: End 1
@@ -5032,6 +5070,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: Not cool
           result: 1
+          healthChange: 0
           feedback: 
         - name: oh hai mark
           text: Try Again 1
@@ -5041,6 +5080,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: kinda cool
           result: 0
+          healthChange: 0
           feedback: You clicked try again
       endNarrative: End Narrative
     - id: -1525175486
@@ -5048,8 +5088,12 @@ MonoBehaviour:
       actors:
       - id: 764233178
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: 777917692
         name: PATIENT
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       choices:
       - name: Choice 1
         text: Choice 1 Text
@@ -5071,6 +5115,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: cool
           result: 2
+          healthChange: 0
           feedback: You clicked continue
         - name: i did not
           text: End 1
@@ -5080,6 +5125,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: Not cool
           result: 1
+          healthChange: 0
           feedback: 
         - name: oh hai mark
           text: Try Again 1
@@ -5089,6 +5135,7 @@ MonoBehaviour:
             emotion: 0
             dialogue: kinda cool
           result: 0
+          healthChange: 0
           feedback: You clicked try again
       endNarrative: End Narrative
     startNarration: "It\u2019s been a long day and the demands have been coming left
@@ -8849,6 +8896,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a181389db95819d4681fb976625c3c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 0}
+  GOODstar: 0
+  BADstar: 0
 --- !u!95 &601015616
 Animator:
   serializedVersion: 3
@@ -11323,6 +11373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a181389db95819d4681fb976625c3c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 0}
+  GOODstar: 0
+  BADstar: 0
 --- !u!95 &817890653
 Animator:
   serializedVersion: 3
@@ -13444,6 +13497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a181389db95819d4681fb976625c3c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 0}
+  GOODstar: 0
+  BADstar: 0
 --- !u!95 &1024949220
 Animator:
   serializedVersion: 3
@@ -14285,10 +14341,6 @@ MonoBehaviour:
   - {fileID: 1831825400}
   - {fileID: 1024949219}
   - {fileID: 1376196570}
-  Star_RoomA: {fileID: 1939611828}
-  Star_RoomB: {fileID: 817890652}
-  Star_RoomABAD: {fileID: 1831825400}
-  Star_RoomBBAD: {fileID: 1024949219}
   player: {fileID: 927959813}
   playerCam: {fileID: 1448730419}
   playerStats: {fileID: 927959815}
@@ -16757,6 +16809,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a181389db95819d4681fb976625c3c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 0}
+  GOODstar: 0
+  BADstar: 0
 --- !u!95 &1376196571
 Animator:
   serializedVersion: 3
@@ -18644,6 +18699,70 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1553153642}
+--- !u!1 &1559584495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1559584498}
+  - component: {fileID: 1559584497}
+  - component: {fileID: 1559584496}
+  m_Layer: 0
+  m_Name: ScenarioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1559584496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1559584495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50207b89989d11742afcce7a99b18174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenario:
+    id: 2118705821
+    name: 
+    actors: []
+    choices: []
+    endNarrative: 
+--- !u!114 &1559584497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1559584495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50207b89989d11742afcce7a99b18174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenario:
+    id: 2118705821
+    name: 
+    actors: []
+    choices: []
+    endNarrative: 
+--- !u!4 &1559584498
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1559584495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1560043946
 GameObject:
   m_ObjectHideFlags: 0
@@ -22742,6 +22861,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a181389db95819d4681fb976625c3c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 0}
+  GOODstar: 0
+  BADstar: 0
 --- !u!95 &1831825401
 Animator:
   serializedVersion: 3
@@ -23985,6 +24107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a181389db95819d4681fb976625c3c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 0}
+  GOODstar: 0
+  BADstar: 0
 --- !u!1 &1940823736
 GameObject:
   m_ObjectHideFlags: 0
@@ -24596,6 +24721,7 @@ MonoBehaviour:
   - {fileID: 469622539}
   - {fileID: 116756026}
   - {fileID: 1890029492}
+  continueButton: {fileID: 0}
   dialogueText: {fileID: 1695099775}
   feedbackText: {fileID: 1888343773}
   promptText: {fileID: 1300543637}
@@ -26453,7 +26579,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHospitalCompleted: 0
+  isMrJohnsonCompleted: 0
   currentHealth: 80
+  GOOD_stars: 0
+  BAD_stars: 0
 --- !u!4 &2109364712
 Transform:
   m_ObjectHideFlags: 0

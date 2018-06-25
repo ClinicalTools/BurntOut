@@ -1,6 +1,7 @@
 ﻿using OOEditor.Internal;
 using UnityEditor;
 using UnityEngine;
+using System;
 
 namespace OOEditor
 {
@@ -55,7 +56,7 @@ namespace OOEditor
         // Draws the label portion of the control
         protected override void PrepareDisplay(Rect position)
         {
-            if (Content != null)
+            if (Content != null && !string.IsNullOrEmpty(Content.text))
             {
                 // Ensure width is at least as big as the larger of the minimum widths
                 float minWidth = Mathf.Max(ReservedWidth, MinWidth);

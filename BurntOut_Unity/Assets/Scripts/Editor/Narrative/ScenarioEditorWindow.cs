@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
-using System;
 using OOEditor;
+using System;
 
 namespace Narrative.Inspector
 {
@@ -24,7 +24,11 @@ namespace Narrative.Inspector
         private Button loadBtn, saveBtn;
         private readonly OverrideTextStyle toolbarTextStyle = new OverrideTextStyle(12);
         private readonly OverrideTextStyle textStyle = new OverrideTextStyle();
-        
+        private DropdownMenuButton actorSelectButton;
+
+        // Actor drawer
+        private ActorPopupWindow actorDrawer;
+
         private static ScenarioEditorWindow window;
         // Add menu named "Scene Manager" to the Window menu
         [MenuItem("Window/Scenario Manager")]
@@ -85,6 +89,11 @@ namespace Narrative.Inspector
             {
                 InitScenarioManager();
             };
+
+        }
+
+        private void test()
+        {
         }
 
         private void InitScenarioControls()
@@ -95,7 +104,7 @@ namespace Narrative.Inspector
                 return;
             }
 
-            string[] tabNames = { "Actors", "Events" };
+            string[] tabNames = { "General", "Actors", "Events" };
             tabs = new TabControl(0, tabNames);
 
             fontSizeSlider = new IntSlider(11, 10, 20)
@@ -116,6 +125,10 @@ namespace Narrative.Inspector
             loadBtn.Pressed += LoadBtn_Pressed;
 
             scenarioEditor = new ScenarioEditor(scenarioManager.scenario);
+
+            actorDrawer = new ActorPopupWindow(scenarioManager.scenario.Actors);
+            actorSelectButton = new DropdownMenuButton(
+                ActorPopupWindow.ActorMenu(scenarioManager.scenario.Actors), "Actor stuff");
         }
 
         private void SaveBtn_Pressed(object sender, EventArgs e)
@@ -168,7 +181,8 @@ namespace Narrative.Inspector
                         scenarioEditor.Draw(scenarioManager.scenario);
                     // Edit scenario
                     else
-                        scenarioEditor.Draw(scenarioManager.scenario);
+                        actorDrawer.Draw(scenarioManager.scenario.Actors);
+                        //actorSelectButton.Draw();
                 }
             }
         }

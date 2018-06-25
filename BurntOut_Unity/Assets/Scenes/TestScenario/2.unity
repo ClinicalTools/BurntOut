@@ -4914,8 +4914,12 @@ MonoBehaviour:
       actors:
       - id: -542058693
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: -535933802
         name: Ms. Jackson
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       choices:
       - name: Ms. Jackson's concerns about the tests 1
         text: 'What do you say in response to Ms. Jackson? '
@@ -13014,6 +13018,70 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 981239142}
+--- !u!1 &983121463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 983121466}
+  - component: {fileID: 983121465}
+  - component: {fileID: 983121464}
+  m_Layer: 0
+  m_Name: ScenarioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &983121464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 983121463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50207b89989d11742afcce7a99b18174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenario:
+    id: 1609108761
+    name: 
+    actors: []
+    choices: []
+    endNarrative: 
+--- !u!114 &983121465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 983121463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50207b89989d11742afcce7a99b18174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenario:
+    id: 1609108761
+    name: 
+    actors: []
+    choices: []
+    endNarrative: 
+--- !u!4 &983121466
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 983121463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989074762
 GameObject:
   m_ObjectHideFlags: 0
@@ -13325,6 +13393,63 @@ Transform:
   m_PrefabParentObject: {fileID: 4507276330809956, guid: aedbccd9881656c479304a4780a88dc2,
     type: 2}
   m_PrefabInternal: {fileID: 1326504658}
+--- !u!1001 &1012069340
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -22.920803
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -10.223713
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 19.101927
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 114773091362105420, guid: 97b2e34fbcd6f81438df0488356e60df,
+        type: 2}
+      propertyPath: actor.icon
+      value: 
+      objectReference: {fileID: 2800000, guid: 4bfa77d4bb309ff4f8368c1fc58edec8, type: 3}
+    - target: {fileID: 114773091362105420, guid: 97b2e34fbcd6f81438df0488356e60df,
+        type: 2}
+      propertyPath: actor.name
+      value: Hello
+      objectReference: {fileID: 0}
+    - target: {fileID: 114773091362105420, guid: 97b2e34fbcd6f81438df0488356e60df,
+        type: 2}
+      propertyPath: actor.normal
+      value: 
+      objectReference: {fileID: 2800000, guid: 43d14d2bcf93bfe4b860ae5681cc21a5, type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1021398924
 Prefab:
   m_ObjectHideFlags: 0

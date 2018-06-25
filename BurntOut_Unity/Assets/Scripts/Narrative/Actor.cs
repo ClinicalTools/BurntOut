@@ -6,13 +6,14 @@ public class Actor
 {
     // Number to represent this actor.
     [SerializeField]
+    //[HideInInspector]
     public int id;
 
     [SerializeField]
     public string name;
 
-    public Sprite icon;
-    public Sprite normal;
+    public Texture2D icon;
+    public Texture2D normal;
 
     public Actor(Actor[] actors)
     {
