@@ -55,11 +55,10 @@ namespace OOEditor
                 OOEditorManager.OverrideTextStyle.ApplyToStyle(GUIStyle);
         }
 
-        protected GUIControl() { }
-        protected GUIControl(string text) : base(text) { }
-        protected GUIControl(string text, string tooltip) : base(text, tooltip) { }
+        protected GUIControl(string text = null, string tooltip = null, Texture image = null) 
+            : base(text, tooltip, image) { }
 
-        private bool firstDraw = true;
+        protected bool firstDraw = true;
         /// <summary>
         /// Draws the control.
         /// </summary>

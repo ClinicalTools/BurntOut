@@ -112,20 +112,19 @@ namespace OOEditor
         protected abstract GUIStyle BaseStyle { get; }
         protected virtual GUIStyle ToolbarStyle => BaseStyle;
 
-        protected EditorGUIElement()
+        protected EditorGUIElement(string text = null, string tooltip = null, Texture image = null)
         {
-            // Creates a unique name for this element based on the current element number
+            Content = new GUIContent();
+
+            if (text != null)
+                Content.text = text;
+            if (tooltip != null)
+                Content.tooltip = tooltip;
+            if (image != null)
+                Content.image = image;
+
+
             Name = (elementNums++).ToString("X8");
-        }
-        protected EditorGUIElement(string text)
-        {
-            Name = (elementNums++).ToString("X8");
-            Content = new GUIContent(text);
-        }
-        protected EditorGUIElement(string text, string tooltip)
-        {
-            Name = (elementNums++).ToString("X8");
-            Content = new GUIContent(text, tooltip);
         }
 
         /// <summary>

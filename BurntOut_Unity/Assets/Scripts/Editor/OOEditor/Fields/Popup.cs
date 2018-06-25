@@ -51,28 +51,6 @@ namespace OOEditor
         /// </summary>
         public string[] Options { get; set; }
 
-
-        /// <summary>
-        /// Makes a popup selection field.
-        /// </summary>
-        /// <param name="value">The initial enum value.</param>
-        /// <param name="options">Options the user has to select from.</param>
-        public Popup(int value, string[] options) 
-        {
-            Options = options;
-            Value = value;
-        }
-        /// <summary>
-        /// Makes a popup selection field.
-        /// </summary>
-        /// <param name="value">The initial enum value.</param>
-        /// <param name="options">Options the user has to select from.</param>
-        /// <param name="text">Optional label in front of the popup.</param>
-        public Popup(int value, string[] options, string text) : base(text)
-        {
-            Options = options;
-            Value = value;
-        }
         /// <summary>
         /// Makes a popup selection field.
         /// </summary>
@@ -80,7 +58,9 @@ namespace OOEditor
         /// <param name="options">Options the user has to select from.</param>
         /// <param name="text">Optional label in front of the popup.</param>
         /// <param name="tooltip">Tooltip of the optional label in front of the popup.</param>
-        public Popup(int value, string[] options, string text, string tooltip) : base(text, tooltip)
+        /// <param name="image">Image to display at the front of the optional label.</param>
+        public Popup(int value, string[] options, string text = null, string tooltip = null, 
+            Texture image = null) : base(text, tooltip, image)
         {
             Options = options;
             Value = value;

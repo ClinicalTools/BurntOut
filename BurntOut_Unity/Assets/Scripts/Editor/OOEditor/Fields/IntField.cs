@@ -17,26 +17,11 @@ namespace OOEditor
         /// Makes a text field for entering integers.
         /// </summary>
         /// <param name="value">The initial value being edited.</param>
-        public IntField(int value)
-        {
-            Value = value;
-        }
-        /// <summary>
-        /// Makes a text field for entering integers.
-        /// </summary>
-        /// <param name="value">The initial value being edited.</param>
-        /// <param name="text">Optional label in front of the field.</param>
-        public IntField(int value, string text) : base(text)
-        {
-            Value = value;
-        }
-        /// <summary>
-        /// Makes a text field for entering integers.
-        /// </summary>
-        /// <param name="value">The initial value being edited.</param>
         /// <param name="text">Optional label in front of the field.</param>
         /// <param name="tooltip">Tooltip of the optional label in front of the field.</param>
-        public IntField(int value, string text, string tooltip) : base(text, tooltip)
+        /// <param name="image">Image to display at the front of the optional label.</param>
+        public IntField(int value, string text = null, string tooltip = null, Texture image = null)
+            : base(text, tooltip, image)
         {
             Value = value;
         }

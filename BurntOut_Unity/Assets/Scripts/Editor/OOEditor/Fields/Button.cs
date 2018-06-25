@@ -20,18 +20,11 @@ namespace OOEditor
         /// <summary>
         /// Makes a single press button.
         /// </summary>
-        public Button() { }
-        /// <summary>
-        /// Makes a single press button.
-        /// </summary>
-        /// <param name="text">Text to display on the button.</param>
-        public Button(string text) : base(text) { }
-        /// <summary>
-        /// Makes a single press button.
-        /// </summary>
         /// <param name="text">Text to display on the button.</param>
         /// <param name="tooltip">The tooltip of the button.</param>
-        public Button(string text, string tooltip) : base(text, tooltip) { }
+        /// <param name="image">Image to display on the button.</param>
+        public Button(string text = null, string tooltip = null, Texture image = null) 
+            : base(text, tooltip, image) { }
 
         protected override void Display(Rect position)
         {

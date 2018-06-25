@@ -52,6 +52,19 @@ public class Scenario
 
         return arr;
     }
+    [SerializeField]
+    [XmlArray("ActorIds"), XmlArrayItem("ActorId")]
+    private List<int> actorIds;
+    public List<int> ActorIds
+    {
+        get
+        {
+            if (actorIds == null)
+                actorIds = new List<int>();
+
+            return actorIds;
+        }
+    }
 
     [SerializeField]
     [XmlArray("Choices"), XmlArrayItem("Choice")]

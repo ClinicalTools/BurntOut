@@ -23,28 +23,11 @@ namespace OOEditor
         /// Make a button that reacts to mouse down, for displaying your own dropdown content.
         /// </summary>
         /// <param name="menu">Menu to display on a button press.</param>
-        public DropdownMenuButton(GenericMenu menu)
-        {
-            Menu = menu;
-        }
-        /// <summary>
-        /// Make a button that reacts to mouse down, for displaying your own dropdown content.
-        /// </summary>
-        /// <param name="menu">Menu to display on a button press.</param>
-        /// <param name="text">Text to display on the button.</param>
-        public DropdownMenuButton(GenericMenu menu, string text) 
-            : base(text)
-        {
-            Menu = menu;
-        }
-        /// <summary>
-        /// Make a button that reacts to mouse down, for displaying your own dropdown content.
-        /// </summary>
-        /// <param name="menu">Menu to display on a button press.</param>
         /// <param name="text">Text to display on the button.</param>
         /// <param name="tooltip">The tooltip of the button.</param>
-        public DropdownMenuButton(GenericMenu menu, string text, 
-            string tooltip) : base(text, tooltip)
+        /// <param name="image">Image to display on the button.</param>
+        public DropdownMenuButton(GenericMenu menu, string text = null, string tooltip = null, 
+            Texture image = null) : base(text, tooltip, image)
         {
             Menu = menu;
         }

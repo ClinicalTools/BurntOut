@@ -49,9 +49,8 @@ namespace OOEditor
         /// </summary>
         protected abstract float ReservedWidth { get; }
 
-        protected GUIControlField() { }
-        protected GUIControlField(string text) : base(text) { }
-        protected GUIControlField(string text, string tooltip) : base(text, tooltip) { }
+        protected GUIControlField(string text = null, string tooltip = null, Texture image = null) 
+            : base(text, tooltip, image) { }
 
         // Draws the label portion of the control
         protected override void PrepareDisplay(Rect position)
@@ -66,7 +65,7 @@ namespace OOEditor
                 // Width cannot be less than 0
                 width = Mathf.Max(width, 1);
                 Rect labelRect = new Rect(position.x, position.y, width, position.height);
-
+                GUILabelStyle.imagePosition = ImagePosition.ImageAbove;
                 // Gives the label a unique name that can be referenced by the element's name
                 GUI.SetNextControlName(Name + "label");
                 EditorGUI.LabelField(labelRect, Content, GUILabelStyle);

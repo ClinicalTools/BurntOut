@@ -37,34 +37,11 @@ namespace OOEditor
         /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
         /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
         /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
-        public Slider(float value, float min, float max)
-        {
-            Min = min;
-            Max = max;
-            Value = value;
-        }
-        /// <summary>
-        /// Makes a slider the user can drag to change a float value between a min and a max.
-        /// </summary>
-        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
-        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
-        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
-        /// <param name="text">Optional label in front of the slider.</param>
-        public Slider(float value, float min, float max, string text) : base(text)
-        {
-            Min = min;
-            Max = max;
-            Value = value;
-        }
-        /// <summary>
-        /// Makes a slider the user can drag to change a float value between a min and a max.
-        /// </summary>
-        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
-        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
-        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
         /// <param name="text">Optional label in front of the slider.</param>
         /// <param name="tooltip">Tooltip of the optional label in front of the slider.</param>
-        public Slider(float value, float min, float max, string text, string tooltip) : base(text, tooltip)
+        /// <param name="image">Image to display at the front of the optional label.</param>
+        public Slider(float value, float min, float max, string text = null, string tooltip = null,
+            Texture image = null) : base(text, tooltip, image)
         {
             Min = min;
             Max = max;

@@ -13,49 +13,30 @@ namespace OOEditor
         /// <summary>
         /// Makes a label with a foldout arrow to the left of it.
         /// </summary>
-        public Foldout() { }
-        /// <summary>
-        /// Makes a label with a foldout arrow to the left of it.
-        /// </summary>
-        /// <param name="text">The label to show.</param>
-        public Foldout(string text) : base(text) { }
-        /// <summary>
-        /// Makes a label with a foldout arrow to the left of it.
-        /// </summary>
         /// <param name="text">The label to show.</param>
         /// <param name="tooltip">The tooltip of the foldout.</param>
-        public Foldout(string text, string tooltip) : base(text, tooltip) { }
+        /// <param name="image">Image to draw at the beginning of the foldout.</param>
+        public Foldout(string text = null, string tooltip = null, Texture image = null) 
+            : base(text, tooltip, image) { }
         /// <summary>
         /// Makes a label with a foldout arrow to the left of it.
         /// </summary>
         /// <param name="value">Whether the foldout starts expanded.</param>
-        public Foldout(bool value)
-        {
-            Value = value;
-        }
-        /// <summary>
-        /// Makes a label with a foldout arrow to the left of it.
-        /// </summary>
-        /// <param name="value">Whether the foldout starts expanded.</param>
-        /// <param name="text">The label to show.</param>
-        public Foldout(bool value, string text) : base(text)
-        {
-            Value = value;
-        }
         /// <summary>
         /// Makes a label with a foldout arrow to the left of it.
         /// </summary>
         /// <param name="value">Whether the foldout starts expanded.</param>
         /// <param name="text">The label to show.</param>
         /// <param name="tooltip">The tooltip of the foldout.</param>
-        public Foldout(bool value, string text, string tooltip) : base(text, tooltip)
+        /// <param name="image">Image to draw at the beginning of the foldout.</param>
+        public Foldout(bool value, string text = null, string tooltip = null, Texture image = null)
+            : base(text, tooltip, image)
         {
             Value = value;
         }
 
         protected override void Display(Rect position)
         {
-            //GUIStyle.normal.textColor == new Color();
             Value = EditorGUI.Foldout(position, Value, Content, GUIStyle);
         }
     }

@@ -14,8 +14,10 @@ namespace OOEditor
         /// Makes a label field. (Useful for showing read-only info.)
         /// </summary>
         /// <param name="text">Text to display with the label.</param>
-        public LabelField(string text) : base(text) { }
-        public LabelField(string text, string tooltip) : base(text, tooltip) { }
+        /// <param name="tooltip">Tooltip of the label.</param>
+        /// <param name="image">Image to display at the beginning of the label.</param>
+        public LabelField(string text, string tooltip = null, Texture image = null) 
+            : base(text, tooltip, image) { }
 
         protected override void Display(Rect position)
         {

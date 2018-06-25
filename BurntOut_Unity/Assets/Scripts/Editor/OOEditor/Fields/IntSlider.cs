@@ -38,37 +38,16 @@ namespace OOEditor
         /// <summary>
         /// Makes a slider the user can drag to change an int value between a min and a max.
         /// </summary>
-        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
-        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
-        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
-        public IntSlider(int value, int min, int max)
-        {
-            Min = min;
-            Max = max;
-            Value = value;
-        }
-        /// <summary>
-        /// Makes a slider the user can drag to change an int value between a min and a max.
-        /// </summary>
-        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
-        /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
-        /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
-        /// <param name="text">Optional label in front of the slider.</param>
-        public IntSlider(int value, int min, int max, string text) : base(text)
-        {
-            Min = min;
-            Max = max;
-            Value = value;
-        }
-        /// <summary>
-        /// Makes a slider the user can drag to change an int value between a min and a max.
-        /// </summary>
-        /// <param name="value">The initial value the slider shows. This determines the position of the draggable thumb.</param>
+        /// <param name="value">
+        /// The initial value the slider shows. This determines the position of the draggable thumb.
+        /// </param>
         /// <param name="min">The lowest possible value. Located on the left end of the slider.</param>
         /// <param name="max">The maximum possible value. Located on the right end of the slider.</param>
         /// <param name="text">Optional label in front of the slider.</param>
         /// <param name="tooltip">Tooltip of the optional label in front of the slider.</param>
-        public IntSlider(int value, int min, int max, string text, string tooltip) : base(text, tooltip)
+        /// <param name="image">Image to display at the front of the optional label.</param>
+        public IntSlider(int value, int min, int max, string text = null, string tooltip = null, 
+            Texture image = null) : base(text, tooltip, image)
         {
             Min = min;
             Max = max;

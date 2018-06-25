@@ -92,10 +92,6 @@ namespace Narrative.Inspector
 
         }
 
-        private void test()
-        {
-        }
-
         private void InitScenarioControls()
         {
             if (scenarioManager?.scenario == null)
@@ -126,7 +122,7 @@ namespace Narrative.Inspector
 
             scenarioEditor = new ScenarioEditor(scenarioManager.scenario);
 
-            actorDrawer = new ActorPopupWindow(scenarioManager.scenario.Actors);
+            actorDrawer = new ActorPopupWindow(scenarioManager.scenario.ActorIds);
             actorSelectButton = new DropdownMenuButton(
                 ActorPopupWindow.ActorMenu(scenarioManager.scenario.Actors), "Actor stuff");
         }
@@ -153,7 +149,7 @@ namespace Narrative.Inspector
             }
             else
             {
-                if (scenarioEditor == null)
+                if (scenarioEditor == null || actorDrawer == null)
                     InitScenarioControls();
 
                 // Allows the scene to save changes and 'undo' to be possible
@@ -181,7 +177,7 @@ namespace Narrative.Inspector
                         scenarioEditor.Draw(scenarioManager.scenario);
                     // Edit scenario
                     else
-                        actorDrawer.Draw(scenarioManager.scenario.Actors);
+                        actorDrawer.Draw(scenarioManager.scenario.ActorIds);
                         //actorSelectButton.Draw();
                 }
             }

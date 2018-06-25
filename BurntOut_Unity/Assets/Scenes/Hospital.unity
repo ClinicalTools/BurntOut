@@ -18730,7 +18730,159 @@ MonoBehaviour:
   scenario:
     id: 2118705821
     name: 
-    actors: []
+    actors:
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 4bfa77d4bb309ff4f8368c1fc58edec8, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 4bfa77d4bb309ff4f8368c1fc58edec8, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 4bfa77d4bb309ff4f8368c1fc58edec8, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 4bfa77d4bb309ff4f8368c1fc58edec8, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 3b4e9b9b407902a42a06bacc16b38341, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 3b4e9b9b407902a42a06bacc16b38341, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 3b4e9b9b407902a42a06bacc16b38341, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 3b4e9b9b407902a42a06bacc16b38341, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 3b4e9b9b407902a42a06bacc16b38341, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaA
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaAbc
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: 1097336261
+      name: Name
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaAbc
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
+    - id: -608044098
+      name: AaAbaaa
+      icon: {fileID: 2800000, guid: 9f5a2aac81a94ec4a9655c0ad24ecc2e, type: 3}
+      normal: {fileID: 0}
     choices: []
     endNarrative: 
 --- !u!114 &1559584497

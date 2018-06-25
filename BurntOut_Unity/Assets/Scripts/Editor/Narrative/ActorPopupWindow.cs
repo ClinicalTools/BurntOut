@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ActorPopupWindow
 {
-    public List<Actor> Actors { get; set; }
+    public List<int> ActorIds { get; set; }
 
     public static GenericMenu ActorMenu(IEnumerable<Actor> actors)
     {
@@ -30,12 +30,13 @@ public class ActorPopupWindow
     }
 
 
-    private readonly List<Toggle> actorToggles = new List<Toggle>();
+    private readonly List<ToggleLeft> actorToggles = new List<ToggleLeft>();
     private List<Actor> allActors = new List<Actor>();
 
-    public ActorPopupWindow(List<Actor> actors)
+    public ActorPopupWindow(List<int> actorIds)
     {
-        Actors = actors;
+        ActorIds = actorIds;
+
         var actorObjs = Resources.FindObjectsOfTypeAll<ActorObject>();
 
         foreach (var actorObj in actorObjs.Where(a => a.actor != null))
@@ -55,34 +56,38 @@ public class ActorPopupWindow
         bool actorsChanged = actorList.Count != allActors.Count;
         if (!actorsChanged)
             for (var i = 0; i < actorList.Count; i++)
-                if (actorList[i] != allActors[i])
+            {
+                if (allActors[i] != actorList[i] || 
+                    actorToggles[i].Content.text.Trim() != actorList[i].name.Trim() ||
+                    actorToggles[i].Content.image != actorList[i].icon)
                 {
                     actorsChanged = true;
                     break;
                 }
+            }
 
         if (!actorsChanged)
             return;
 
         allActors = actorList;
+        ResetToggles();
     }
 
     private void ResetToggles()
     {
-        Debug.Log("resetting toggles");
-
         actorToggles.Clear();
 
         foreach (var actor in allActors)
         {
-            var toggle = new Toggle(Actors.Contains(actor), actor.name);
-            var thisActor = actor;
-            toggle.Changed += (o, sender) =>
+            var toggle = new ToggleLeft(
+                ActorIds.Contains(actor.id), " " + actor.name, null, actor.icon);
+            var id = actor.id;
+            toggle.Pressed += (o, sender) =>
             {
-                if (sender.Value)
-                    Actors.Remove(thisActor);
-                else
-                    Actors.Add(thisActor);
+                if (!sender.Value)
+                    ActorIds.Remove(id);
+                else if (!ActorIds.Contains(id))
+                    ActorIds.Add(id);
             };
             actorToggles.Add(toggle);
         }
@@ -98,20 +103,21 @@ public class ActorPopupWindow
             actorList.Add(actorObj.actor);
 
         foreach (var actor in actorList)
-            selected = EditorGUILayout.ToggleLeft(new GUIContent(actor.name, actor.icon), selected);
+            selected = EditorGUILayout.ToggleLeft(new GUIContent(" " + actor.name, actor.icon), selected);
 
     }
 
-    public void Draw(List<Actor> actors)
+    public void Draw(List<int> actors)
     {
-        if (actors != Actors)
+        if (actors != ActorIds)
         {
-            Actors = actors;
+            ActorIds = actors;
             ResetToggles();
         }
         UpdateAllActors();
 
-        foreach (var toggle in actorToggles)
-            toggle.Draw();
+        using (GUIContainer.Draw())
+            foreach (var toggle in actorToggles)
+                toggle.Draw();
     }
 }

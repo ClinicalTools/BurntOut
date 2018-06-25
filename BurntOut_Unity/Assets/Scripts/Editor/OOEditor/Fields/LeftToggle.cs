@@ -1,4 +1,5 @@
 ﻿using OOEditor.Internal;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,11 +8,19 @@ namespace OOEditor
     /// <summary>
     /// A control that can be toggled.
     /// </summary>
-    public class Toggle : GUIControlField<bool>
+    public class ToggleLeft : GUIControl<bool>
     {
-        protected override GUIStyle BaseStyle => EditorStyles.toggle;
+        /// <summary>
+        /// Occurs when the control is pressed.
+        /// </summary>
+        public event EventHandler<ControlChangedArgs<bool>> Pressed;
 
-        protected override float ReservedWidth { get; } = 14;
+        // Using the Toggle style draws two toggle bokes
+        protected override GUIStyle BaseStyle =>
+            new GUIStyle(EditorStyles.label)
+            {
+                imagePosition = ImagePosition.ImageAbove
+            };
 
         /// <summary>
         /// Makes a toggle that starts unselected.
@@ -19,7 +28,7 @@ namespace OOEditor
         /// <param name="text">Optional label in front of the control.</param>
         /// <param name="tooltip">Tooltip of the optional label in front of the control.</param>
         /// <param name="image">Image to display at the front of the optional label.</param>
-        public Toggle(string text = null, string tooltip = null, Texture image = null) 
+        public ToggleLeft(string text = null, string tooltip = null, Texture image = null)
             : base(text, tooltip, image) { }
         /// <summary>
         /// Makes a toggle.
@@ -28,7 +37,7 @@ namespace OOEditor
         /// <param name="text">Optional label in front of the control.</param>
         /// <param name="tooltip">Tooltip of the optional label in front of the control.</param>
         /// <param name="image">Image to display at the front of the optional label.</param>
-        public Toggle(bool value, string text = null, string tooltip = null, Texture image = null)
+        public ToggleLeft(bool value, string text = null, string tooltip = null, Texture image = null)
             : base(text, tooltip, image)
         {
             Value = value;
@@ -36,10 +45,17 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            Debug.Log(position.height + " " + position.y);
-            position.y += (position.height / 2) -6; 
+            Rect togglePos = new Rect(position.x, position.y + position.height / 2 - 6,
+                16, position.height);
+            position.x += 16;
+            position.width -= 16;
 
-            Value = EditorGUI.Toggle(position, Value, GUIStyle);
+            var lastValue = Value;
+            Value = EditorGUI.ToggleLeft(togglePos, "", Value, GUIStyle);
+            EditorGUI.LabelField(position, Content, GUIStyle);
+
+            if (Value != lastValue)
+                Pressed?.Invoke(this, new ControlChangedArgs<bool>(lastValue, Value));
 
             // For some reason the toggle doesn't always show as active when the style dictates drawing as though it were
             // This grabs the control from the label, if that was clicked, and makes the toggle the focus

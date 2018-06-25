@@ -53,26 +53,11 @@ namespace OOEditor
         /// Makes an enum popup selection field.
         /// </summary>
         /// <param name="value">The initial enum value.</param>
-        public EnumPopup(Enum value)
-        {
-            Value = value;
-        }
-        /// <summary>
-        /// Makes an enum popup selection field.
-        /// </summary>
-        /// <param name="value">The initial enum value.</param>
-        /// <param name="text">Optional label in front of the field.</param>
-        public EnumPopup(Enum value, string text) : base(text)
-        {
-            Value = value;
-        }
-        /// <summary>
-        /// Makes an enum popup selection field.
-        /// </summary>
-        /// <param name="value">The initial enum value.</param>
         /// <param name="text">Optional label in front of the popup.</param>
         /// <param name="tooltip">Tooltip of the optional label in front of the popup.</param>
-        public EnumPopup(Enum value, string text, string tooltip) : base(text, tooltip)
+        /// <param name="image">Image to display at the front of the optional label.</param>
+        public EnumPopup(Enum value, string text = null, string tooltip = null, Texture image = null) 
+            : base(text, tooltip, image)
         {
             Value = value;
         }
