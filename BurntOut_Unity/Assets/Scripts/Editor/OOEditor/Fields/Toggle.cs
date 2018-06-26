@@ -36,7 +36,6 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            Debug.Log(position.height + " " + position.y);
             position.y += (position.height / 2) -6; 
 
             Value = EditorGUI.Toggle(position, Value, GUIStyle);

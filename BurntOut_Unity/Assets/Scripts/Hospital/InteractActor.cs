@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Narrative;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InteractActor : MonoBehaviour

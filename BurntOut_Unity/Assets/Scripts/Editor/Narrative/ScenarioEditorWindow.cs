@@ -24,10 +24,16 @@ namespace Narrative.Inspector
         private Button loadBtn, saveBtn;
         private readonly OverrideTextStyle toolbarTextStyle = new OverrideTextStyle(12);
         private readonly OverrideTextStyle textStyle = new OverrideTextStyle();
-        private DropdownMenuButton actorSelectButton;
+
+        // General scenario drawer
+        private ScenarioGeneralEditor scenarioGeneralEditor;
 
         // Actor drawer
         private ActorPopupWindow actorDrawer;
+        
+        // Choice drawer
+        private FoldoutList<Choice, ChoiceEditor> choiceList;
+
 
         private static ScenarioEditorWindow window;
         // Add menu named "Scene Manager" to the Window menu
@@ -89,7 +95,6 @@ namespace Narrative.Inspector
             {
                 InitScenarioManager();
             };
-
         }
 
         private void InitScenarioControls()
@@ -120,11 +125,11 @@ namespace Narrative.Inspector
             loadBtn.Style.FontStyle = FontStyle.Bold;
             loadBtn.Pressed += LoadBtn_Pressed;
 
+            scenarioGeneralEditor = new ScenarioGeneralEditor(scenarioManager.scenario);
             scenarioEditor = new ScenarioEditor(scenarioManager.scenario);
+            choiceList = new FoldoutList<Choice, ChoiceEditor>(scenarioManager.scenario.Choices);
 
             actorDrawer = new ActorPopupWindow(scenarioManager.scenario.ActorIds);
-            actorSelectButton = new DropdownMenuButton(
-                ActorPopupWindow.ActorMenu(scenarioManager.scenario.Actors), "Actor stuff");
         }
 
         private void SaveBtn_Pressed(object sender, EventArgs e)
@@ -149,6 +154,9 @@ namespace Narrative.Inspector
             }
             else
             {
+                if (scenarioManager == null)
+                    ResetScenarioManager();
+                
                 if (scenarioEditor == null || actorDrawer == null)
                     InitScenarioControls();
 
@@ -174,11 +182,12 @@ namespace Narrative.Inspector
                 {
                     // Edit basic scene info
                     if (tabs.Value == 0)
-                        scenarioEditor.Draw(scenarioManager.scenario);
+                        scenarioGeneralEditor.Draw(scenarioManager.scenario);
                     // Edit scenario
-                    else
+                    else if (tabs.Value == 1)
                         actorDrawer.Draw(scenarioManager.scenario.ActorIds);
-                        //actorSelectButton.Draw();
+                    else if (tabs.Value == 2)
+                        choiceList.Draw(scenarioManager.scenario.Choices);
                 }
             }
         }

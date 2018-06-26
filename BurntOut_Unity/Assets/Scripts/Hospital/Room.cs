@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Narrative;
+using UnityEngine;
 
 public class Room : MonoBehaviour
 {

@@ -1,9 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ActorObject : MonoBehaviour
+namespace Narrative
 {
-    public Actor actor;
+    public class ActorObject : MonoBehaviour
+    {
+        public Actor actor;
+        
+        // for clicking mechanics
+        private void OnMouseUpAsButton()
+        {
+            if (!Main_GameManager.Instance.isCurrentlyExamine)
+                DialogueManager.Instance.StartDialogue();
+        }
+    }
 }

@@ -21,7 +21,7 @@ namespace OOEditor
             get
             {
                 // Only elements without labels that fit their width need a width calculated
-                if (!FitWidth || Content != null)
+                if (!FitWidth || (Content != null && !string.IsNullOrEmpty(Content.text)))
                     return 0;
 
                 var style = GUIStyle;
@@ -56,7 +56,7 @@ namespace OOEditor
         /// <param name="text">Optional label in front of the popup.</param>
         /// <param name="tooltip">Tooltip of the optional label in front of the popup.</param>
         /// <param name="image">Image to display at the front of the optional label.</param>
-        public EnumPopup(Enum value, string text = null, string tooltip = null, Texture image = null) 
+        public EnumPopup(Enum value, string text = null, string tooltip = null, Texture image = null)
             : base(text, tooltip, image)
         {
             Value = value;

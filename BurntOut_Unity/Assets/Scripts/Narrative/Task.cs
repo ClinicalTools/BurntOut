@@ -1,20 +1,23 @@
 ﻿using System;
 
-public enum TaskAction
+namespace Narrative
 {
-    TALK, ACTION, EMOTION
-}
+    public enum TaskAction
+    {
+        TALK, ACTION, EMOTION
+    }
 
-public enum TaskEmotion
-{
-    NEUTRAL, HAPPY, SAD, ANGRY, SCARED
-}
+    public enum TaskEmotion
+    {
+        NEUTRAL, HAPPY, SAD, ANGRY, SCARED
+    }
 
-[Serializable]
-public class Task
-{
-    public TaskAction action;
-    public int actorId;
-    public TaskEmotion emotion;
-    public string dialogue;
+    [Serializable]
+    public class Task
+    {
+        public TaskAction action;
+        public int actorId;
+        public TaskEmotion emotion;
+        public string dialogue;
+    }
 }

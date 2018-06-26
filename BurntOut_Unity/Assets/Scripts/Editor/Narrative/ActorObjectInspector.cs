@@ -3,28 +3,31 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(ActorObject))]
-public class ActorObjectInspector : Editor
+namespace Narrative.Inspector
 {
-    ActorObject obj;
-    public void OnEnable()
+    [CustomEditor(typeof(ActorObject))]
+    public class ActorObjectInspector : Editor
     {
-        obj = (ActorObject)target;
-        if (obj.actor == null)
+        private ActorObject obj;
+        public void OnEnable()
         {
-            var actors = Resources.FindObjectsOfTypeAll<ActorObject>();
+            obj = (ActorObject)target;
+            if (obj.actor == null)
+            {
+                var actors = Resources.FindObjectsOfTypeAll<ActorObject>();
 
-            var actorList = new List<Actor>();
-            foreach (var actorObj in actors.Where(a => a.actor != null))
-                actorList.Add(actorObj.actor);
+                var actorList = new List<Actor>();
+                foreach (var actorObj in actors.Where(a => a.actor != null))
+                    actorList.Add(actorObj.actor);
 
-            obj.actor = new Actor(actorList.ToArray());
+                obj.actor = new Actor(actorList.ToArray());
+            }
+
         }
 
-    }
-
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+        }
     }
 }

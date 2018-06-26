@@ -30,15 +30,16 @@ public class JustHighlight : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (ableToRunScript) { 
+        if (ableToRunScript) 
             myParticleSystem.gameObject.SetActive(false);
-        }
     }
 
     private void OnMouseUpAsButton()
     {
         if (ableToRunScript)
         {
+            myParticleSystem.gameObject.SetActive(false);
+
             gamemanager.ScreenBlur();
 
             gamemanager.isCurrentlyExamine = true;

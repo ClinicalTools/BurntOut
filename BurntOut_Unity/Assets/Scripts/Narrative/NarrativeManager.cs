@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
-[ExecuteInEditMode]
-public class NarrativeManager : MonoBehaviour
+namespace Narrative
 {
-    public static NarrativeManager Instance { get; private set; }
-
-    private void OnEnable()
+    [ExecuteInEditMode]
+    public class NarrativeManager : MonoBehaviour
     {
-        Instance = this;
+        public static NarrativeManager Instance { get; private set; }
 
-        // Ensure there's at least one scenario
-        if (sceneNarrative.scenarios.Count == 0)
+        private void OnEnable()
         {
-            Scenario scenario = new Scenario(new Scenario[0]);
-            sceneNarrative.scenarios.Add(scenario);
+            Instance = this;
+
+            // Ensure there's at least one scenario
+            if (sceneNarrative.scenarios.Count == 0)
+            {
+                Scenario scenario = new Scenario(new Scenario[0]);
+                sceneNarrative.scenarios.Add(scenario);
+            }
+
         }
 
+        [SerializeField]
+        public SceneNarrative sceneNarrative = new SceneNarrative();
     }
-
-    [SerializeField]
-    public SceneNarrative sceneNarrative = new SceneNarrative();
 }

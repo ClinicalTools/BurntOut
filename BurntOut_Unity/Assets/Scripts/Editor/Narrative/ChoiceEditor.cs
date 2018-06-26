@@ -1,4 +1,5 @@
 ﻿using OOEditor;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Narrative.Inspector
@@ -10,13 +11,21 @@ namespace Narrative.Inspector
     {
         public static Choice CurrentChoice { get; private set; }
 
-        protected string FoldoutName =>
-            $"Choice {ScenarioEditor.CurrentScenario.Choices.IndexOf(Value) + 1} - {Value.name}";
+        protected string FoldoutName => $"{(Value.isChoice ? "Choice" : "Events")} - {Value.name}";
         protected override Foldout Foldout { get; }
 
+        // Basic info fields
         private readonly TextField nameField;
+        private readonly Toggle continueLast;
+        private readonly Foldout triggersFoldout;
+        private readonly ReorderableList<Trigger, TriggerDrawer> triggerList;
+
+        // Actual event related fields
         private readonly Foldout eventsFoldout;
         private readonly ReorderableList<Task, TaskDrawer> taskList;
+
+        // Choice related fields
+        private readonly Toggle choiceToggle;
         private readonly TextField textField;
         private readonly Foldout optionsFoldout;
         private readonly FoldoutList<Option, OptionEditor> optionList;
@@ -35,15 +44,33 @@ namespace Narrative.Inspector
                 Foldout.Content.text = FoldoutName;
             };
 
-            textField = new TextField(Value.text, "Text:", "Text to be displayed in game");
-            textField.Changed += (sender, e) =>
+            continueLast = new Toggle(Value.continueLast, "Continue Last Event:", 
+                "Immediately starts the events after the previous events.");
+            continueLast.Changed += (sender, e) =>
             {
-                Value.text = e.Value;
+                Value.continueLast = e.Value;
             };
+            triggersFoldout = new Foldout("Triggers");
+            triggersFoldout.Style.FontStyle = FontStyle.Bold;
+            triggerList = new ReorderableList<Trigger, TriggerDrawer>(Value.Triggers);
 
             eventsFoldout = new Foldout(false, "Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
             taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
+
+            choiceToggle = new Toggle(Value.isChoice, "Choice:");
+            choiceToggle.Changed += (sender, e) =>
+            {
+                Value.isChoice = e.Value;
+                Foldout.Content.text = FoldoutName;
+                ResetFoldout();
+            };
+
+            textField = new TextField(Value.text, "Prompt:", "Choice prompt displayed in game");
+            textField.Changed += (sender, e) =>
+            {
+                Value.text = e.Value;
+            };
 
             optionsFoldout = new Foldout(false, "Options");
             optionsFoldout.Style.FontStyle = FontStyle.Bold;
@@ -56,7 +83,7 @@ namespace Narrative.Inspector
 
         private void ResetFoldout()
         {
-            if (Value.Options.Exists(option => option.result == OptionResult.CONTINUE))
+            if (!Value.isChoice || Value.Options.Exists(option => option.result == OptionResult.CONTINUE))
             {
                 Foldout.Style.FontColor = null;
                 Foldout.Content.tooltip = "";
@@ -74,17 +101,34 @@ namespace Narrative.Inspector
 
             nameField.Draw(Value.name);
 
+            // Trigger drawing
+            triggersFoldout.Draw();
+            if (triggersFoldout.Value)
+                using (Indent.Draw())
+                {
+                    continueLast.Draw();
+                    if (!Value.continueLast)
+                    triggerList.Draw(Value.Triggers);
+                }
+
+            // Event drawing
             eventsFoldout.Draw();
             if (eventsFoldout.Value)
                 using (Indent.Draw())
                     taskList.Draw(Value.Events);
 
-            textField.Draw(Value.text);
-
-            optionsFoldout.Draw();
-            if (optionsFoldout.Value)
+            // Choice drawing
+            choiceToggle.Draw();
+            if (Value.isChoice)
                 using (Indent.Draw())
-                    optionList.Draw(Value.Options);
+                {
+                    textField.Draw(Value.text);
+
+                    optionsFoldout.Draw();
+                    if (optionsFoldout.Value)
+                        using (Indent.Draw())
+                            optionList.Draw(Value.Options);
+                }
         }
     }
 }

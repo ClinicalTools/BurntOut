@@ -5,6 +5,8 @@ using System.Collections;
 
 public class Main_GameManager : MonoBehaviour
 {
+    public static Main_GameManager Instance { get; private set; }
+
     private int roomsWon;
     private int roomsLost;
 
@@ -49,6 +51,8 @@ public class Main_GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         // LOAD DATA HERE
         globalStats = FindObjectOfType<GlobalStats>();
         playerStats.CurrentHealth = globalStats.currentHealth;
@@ -201,7 +205,7 @@ public class Main_GameManager : MonoBehaviour
 
         isCurrentlyExamine = false;
 
-        if (scene.name == "ICU_New" || scene.name == "Hospital_Patient_SingleRoom" || scene.name == "2")
+        if (scene.name == "ICU_New" || scene.name == "Hospital_Patient_SingleRoom")
             currentRoom.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
 
         UI_ChoiceDia.SetActive(false);

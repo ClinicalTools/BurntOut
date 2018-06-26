@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Narrative;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager Instance { get; private set; }
+
     // References to other gui objects set in the editor
     public Button[] buttons = new Button[3];
     public Button continueButton;
@@ -38,10 +41,15 @@ public class DialogueManager : MonoBehaviour
 
     private readonly Dictionary<int, GameObject> actors = new Dictionary<int, GameObject>();
 
-    PlayerRotateToTarget myRotateTo;
+    private PlayerRotateToTarget myRotateTo;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Initialize references to button text
-    void Start()
+    private void Start()
     {
         var playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
@@ -99,7 +107,8 @@ public class DialogueManager : MonoBehaviour
 
         var actorList = room.GetComponentsInChildren<InteractActor>();
         foreach (var actor in actorList)
-            actors.Add(actor.actorId, actor.gameObject);
+            if (!actors.ContainsKey(actor.actorId))
+                actors.Add(actor.actorId, actor.gameObject);
     }
 
     /// <summary>
@@ -213,8 +222,8 @@ public class DialogueManager : MonoBehaviour
             switch (task.action)
             {
                 case TaskAction.TALK:
-                    if (actors.ContainsKey(task.actorId))
-                        myRotateTo.target = actors[task.actorId];
+                    //if (actors.ContainsKey(task.actorId))
+                        //myRotateTo.target = actors[task.actorId];
                     ShowText(scenario.GetActor(task.actorId).name, task.dialogue);
                     break;
                 case TaskAction.EMOTION:

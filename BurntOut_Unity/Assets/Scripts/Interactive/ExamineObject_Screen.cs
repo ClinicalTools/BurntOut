@@ -11,6 +11,7 @@ public class ExamineObject_Screen : MonoBehaviour
 
     public bool abilityToRunScript;
 
+    public int id = 0;
 
     // Use this for initialization
     void Start()
