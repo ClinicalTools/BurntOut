@@ -58,9 +58,11 @@ namespace OOEditor
                 },
                 onAddCallback = (ReorderableList list) =>
                 {
-                    Debug.Log("adding row");
                     AddRow();
 
+                    // Occasionally had some issues where new lines wouldn't show up for reorderable lists
+                    // Updating the list reference each draw seems to fix that, 
+                    // but I'm ensuring it redraws to be safe
                     EditorWindow.focusedWindow.Repaint();
                 },
                 onRemoveCallback = (ReorderableList list) =>

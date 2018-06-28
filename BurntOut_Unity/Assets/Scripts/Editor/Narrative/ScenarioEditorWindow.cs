@@ -49,8 +49,12 @@ namespace Narrative.Inspector
 
         private void ResetScenarioManager()
         {
+            var oldManger = scenarioManager;
             // If I don't reload this often, the editor will become disconnected from the object after a test play.
             scenarioManager = FindObjectOfType<ScenarioManager>();
+
+            if (oldManger != scenarioManager)
+                InitScenarioManager();
         }
 
         private void InitScenarioManager()

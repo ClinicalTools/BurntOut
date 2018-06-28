@@ -162,9 +162,7 @@ namespace Narrative
         }
 
         public void ActorInteract(ActorObject actorObject)
-        {
-            Debug.Log(choices.Count);
-
+        { 
             if (eventSet < choices.Count)
                 StartDialogue();
         }
@@ -172,8 +170,6 @@ namespace Narrative
         private void StartDialogue()
         {
             inDialogue = true;
-
-            Debug.Log("starting dialogue");
 
             Main_GameManager.Instance.ScreenBlur();
             Main_GameManager.Instance.isCurrentlyExamine = true;

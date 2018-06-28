@@ -171,7 +171,6 @@ public class Main_GameManager : MonoBehaviour
 
     public void ScreenBlur()
     {
-        Debug.Log("blur");
         dofSettings.focusDistance = 0.1f;
         dofSettings.aperture = 14;
         dofSettings.focalLength = 25;
@@ -180,7 +179,6 @@ public class Main_GameManager : MonoBehaviour
 
     public void ScreenUnblur()
     {
-        Debug.Log("unblur");
         dofSettings.focusDistance = 0.94f;
         dofSettings.aperture = 5;
         // Somehow this setting made things start to appear blurry, and I have no idea why
