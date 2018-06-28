@@ -3509,35 +3509,39 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.44
       objectReference: {fileID: 0}
     - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.745
       objectReference: {fileID: 0}
     - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -8.908
       objectReference: {fileID: 0}
     - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.08280819
       objectReference: {fileID: 0}
     - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9965655
       objectReference: {fileID: 0}
     - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1600184846242674, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
+      propertyPath: m_Name
+      value: Mr. Peterson
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
@@ -3767,7 +3771,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.04
+      value: -6.09
       objectReference: {fileID: 0}
     - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3775,7 +3779,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.48
+      value: -10.385
       objectReference: {fileID: 0}
     - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3783,7 +3787,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.095845714
+      value: -0.50392467
       objectReference: {fileID: 0}
     - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_LocalRotation.z
@@ -3791,11 +3795,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.99539626
+      value: 0.86374766
       objectReference: {fileID: 0}
     - target: {fileID: 4703572937978296, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277152290782062, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_Name
+      value: Dr. Belmont
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
@@ -16879,7 +16887,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1280727971}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.482, y: 0, z: -10.491}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2000011294}

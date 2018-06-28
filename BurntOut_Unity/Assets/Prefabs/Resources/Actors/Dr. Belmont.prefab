@@ -38,13 +38,10 @@ GameObject:
   - component: {fileID: 4703572937978296}
   - component: {fileID: 114773091362105420}
   - component: {fileID: 136768195709181078}
-  - component: {fileID: 64176707484149782}
   - component: {fileID: 114219023401432206}
   - component: {fileID: 212169966573370976}
-  - component: {fileID: 136457043424729414}
-  - component: {fileID: 64338921304751480}
   m_Layer: 0
-  m_Name: Actor
+  m_Name: Dr. Belmont
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,42 +66,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1277152290782062}
-  m_LocalRotation: {x: 0, y: -0.095845714, z: 0, w: 0.99539626}
-  m_LocalPosition: {x: 1.04, y: 0.77, z: 1.48}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_Children:
   - {fileID: 4533261569244898}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -11, z: 0}
---- !u!64 &64176707484149782
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1277152290782062}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
---- !u!64 &64338921304751480
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1277152290782062}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114219023401432206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -132,20 +101,7 @@ MonoBehaviour:
     id: -608044
     name: Dr. Belmont
     icon: {fileID: 2800000, guid: 95e3a5b924e02b549b805747a0e2d689, type: 3}
-    normal: {fileID: 2800000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
---- !u!136 &136457043424729414
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1277152290782062}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.45
-  m_Height: 18.1
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.26, z: 0}
+    normal: {fileID: 2800000, guid: a5d4e81a69c16e447855502b47487e48, type: 3}
 --- !u!136 &136768195709181078
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -4781,7 +4737,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a5d4e81a69c16e447855502b47487e48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

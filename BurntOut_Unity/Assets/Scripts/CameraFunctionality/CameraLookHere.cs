@@ -6,12 +6,13 @@ public class CameraLookHere : MonoBehaviour
 
     public float bounds = 1;
     private float xMax, yMax, xMin, yMin;
+    private PlayerRotateToTarget myRotateTo;
 
     // Use this for initialization
     void Start()
     {
         var playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        var myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
+        myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
         gamemanager = FindObjectOfType<Main_GameManager>();
 
         myRotateTo.enabled = true;
@@ -27,11 +28,9 @@ public class CameraLookHere : MonoBehaviour
     {
         if (!gamemanager.isCurrentlyExamine)
         {
+
             Move();
 
-            var xPos = Mathf.Clamp(transform.position.x, xMin, xMax);
-            var yPos = Mathf.Clamp(transform.position.y, yMin, yMax);
-            transform.position = new Vector3(xPos, yPos, transform.position.z);
         }
     }
 
@@ -39,8 +38,18 @@ public class CameraLookHere : MonoBehaviour
 
     public void Move()
     {
+
+        if (myRotateTo.target != null && myRotateTo.target != gameObject)
+            return;
+
+        myRotateTo.target = gameObject;
+        
         var movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 
         transform.position += movement * speed * Time.deltaTime;
+
+        var xPos = Mathf.Clamp(transform.position.x, xMin, xMax);
+        var yPos = Mathf.Clamp(transform.position.y, yMin, yMax);
+        transform.position = new Vector3(xPos, yPos, transform.position.z);
     }
 }

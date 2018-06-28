@@ -5,11 +5,11 @@ public class PlayerRotateToTarget : MonoBehaviour
 
     public GameObject target;
     public float speed;
-    private Main_GameManager gamemanager;
 
     private void Start()
     {
-        gamemanager = FindObjectOfType<Main_GameManager>();
+        if (target == null)
+            target = Camera.main.gameObject;
     }
 
     void Update()
@@ -24,10 +24,15 @@ public class PlayerRotateToTarget : MonoBehaviour
         var newDirection = Vector3.RotateTowards(transform.forward, targetDirection, step, 0f);
 
         var rotation = Quaternion.LookRotation(newDirection);
-        if (transform.rotation == rotation)
+
+        var lastRotation = transform.rotation;
+        transform.rotation = rotation;
+
+        if (Mathf.Abs(lastRotation.w - rotation.w) < .0001f && Mathf.Abs(lastRotation.x - rotation.x) < .0001f
+            && Mathf.Abs(lastRotation.y - rotation.y) < .0001f && Mathf.Abs(lastRotation.z - rotation.z) < .0001f)
+        {
             target = null;
-        else
-            transform.rotation = Quaternion.LookRotation(newDirection);
+        }
     }
 
 
