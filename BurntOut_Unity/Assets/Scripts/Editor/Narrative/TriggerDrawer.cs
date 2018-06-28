@@ -23,15 +23,14 @@ namespace Narrative.Inspector
                 Value.type = (TriggerType)e.Value;
             };
 
-            UpdateSceneActors();
-            actorPopup = new Popup(GetActorIndex(Value.id), ActorNames())
+            actorPopup = new Popup(GetActorIndex(Value.id), SceneActors.NpcNames)
             {
                 FitWidth = true
             };
             actorPopup.Changed += (sender, e) =>
             {
                 if (e.Value >= 0)
-                    Value.id = GetActorId(actorPopup.Options[e.Value]);
+                    Value.id = SceneActors.GetActorId(actorPopup.Options[e.Value]);
             };
         }
 
@@ -39,47 +38,10 @@ namespace Narrative.Inspector
         {
             var index = -1;
             for (int i = 0; i < sceneActors.Count; i++)
-                if (sceneActors[i].id == Value.id)
+                if (sceneActors[i].id == actorId)
                     index = i;
 
             return index;
-        }
-
-        private int GetActorId(string actorName)
-        {
-            return sceneActors.Find(a => a.name == actorName)?.id ?? 0;
-        }
-
-        private void UpdateSceneActors()
-        {
-            sceneActors.Clear();
-
-            var actorObjs = Object.FindObjectsOfType<ActorObject>().Where(a => a.actor != null);
-            if (actorObjs.Count() != sceneActors.Count)
-            {
-                sceneActors.Clear();
-                foreach (var actorObj in actorObjs)
-                    sceneActors.Add(actorObj.actor);
-
-                if (actorPopup != null)
-                    actorPopup.Options = ActorNames();
-            }
-            else
-            {
-                var i = 0;
-                foreach (var actorObj in actorObjs)
-                    if (actorPopup.Options[i] != actorObj.actor.name)
-                        actorPopup.Options[i] = actorObj.actor.name;
-            }
-        }
-
-        private string[] ActorNames()
-        {
-            var actorNames = new string[sceneActors.Count];
-            for (var i = 0; i < sceneActors.Count; i++)
-                actorNames[i] = sceneActors[i].name;
-
-            return actorNames;
         }
 
         protected override void Display()
@@ -93,8 +55,8 @@ namespace Narrative.Inspector
                 case TriggerType.INTERACT:
                     break;
                 case TriggerType.TALK:
-                    UpdateSceneActors();
-                    actorPopup.Draw(GetActorIndex(Value.id));
+                    actorPopup.Options = SceneActors.NpcNames;
+                    actorPopup.Draw(SceneActors.GetNpcIndex(Value.id));
                     break;
             }
         }

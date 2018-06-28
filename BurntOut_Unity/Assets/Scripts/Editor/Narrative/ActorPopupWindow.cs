@@ -34,6 +34,7 @@ namespace Narrative.Inspector
 
             bool actorsChanged = actorList.Count != allActors.Count;
             if (!actorsChanged)
+            {
                 for (var i = 0; i < actorList.Count; i++)
                 {
                     if (allActors[i] != actorList[i] ||
@@ -44,6 +45,7 @@ namespace Narrative.Inspector
                         break;
                     }
                 }
+            }
 
             if (!actorsChanged)
                 return;

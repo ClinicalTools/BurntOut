@@ -10,26 +10,24 @@ public class PlayerRotateToTarget : MonoBehaviour
     private void Start()
     {
         gamemanager = FindObjectOfType<Main_GameManager>();
-
-        if (gamemanager.scene.name == "Hospital_Patient_SingleRoom" && target == null)
-            target = Camera.main.gameObject;
-
-        if (gamemanager.scene.name == "ICU_New" && target == null)
-            target = Camera.main.gameObject;
-
-        if (target == null)
-            target = Camera.main.gameObject;
     }
 
     void Update()
     {
+        if (target == null)
+            return;
+
         Vector3 targetDirection = target.transform.position - transform.position;
         Debug.DrawRay(transform.position, targetDirection, Color.red);
 
         float step = speed * Time.deltaTime;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, step, 0f);
+        var newDirection = Vector3.RotateTowards(transform.forward, targetDirection, step, 0f);
 
-        transform.rotation = Quaternion.LookRotation(newDirection);
+        var rotation = Quaternion.LookRotation(newDirection);
+        if (transform.rotation == rotation)
+            target = null;
+        else
+            transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
 

@@ -71,13 +71,7 @@ public class Main_GameManager : MonoBehaviour
 
         //if (scene.name == "Hospital_Patient_SingleRoom")
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-
-        if (scene.name == "ICU_New")
-        {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
 
@@ -177,6 +171,7 @@ public class Main_GameManager : MonoBehaviour
 
     public void ScreenBlur()
     {
+        Debug.Log("blur");
         dofSettings.focusDistance = 0.1f;
         dofSettings.aperture = 14;
         dofSettings.focalLength = 25;
@@ -185,9 +180,12 @@ public class Main_GameManager : MonoBehaviour
 
     public void ScreenUnblur()
     {
+        Debug.Log("unblur");
         dofSettings.focusDistance = 0.94f;
         dofSettings.aperture = 5;
-        dofSettings.focalLength = 50;
+        // Somehow this setting made things start to appear blurry, and I have no idea why
+        //dofSettings.focalLength = 50;
+        dofSettings.focalLength = 1;
         ppScene.profile.depthOfField.settings = dofSettings;
     }
 

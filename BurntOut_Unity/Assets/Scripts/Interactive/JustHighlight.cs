@@ -4,14 +4,10 @@ public class JustHighlight : MonoBehaviour
 {
     private ParticleSystem myParticleSystem;
 
-    private Main_GameManager gamemanager;
-
     public bool ableToRunScript;
     // Use this for initialization
     void Start()
     {
-        gamemanager = FindObjectOfType<Main_GameManager>();
-
         myParticleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
         myParticleSystem.gameObject.SetActive(false);
     }
@@ -19,7 +15,7 @@ public class JustHighlight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ableToRunScript = !gamemanager.isCurrentlyExamine;
+        ableToRunScript = !Main_GameManager.Instance.isCurrentlyExamine;
     }
 
     private void OnMouseOver()
@@ -39,18 +35,11 @@ public class JustHighlight : MonoBehaviour
         if (ableToRunScript)
         {
             myParticleSystem.gameObject.SetActive(false);
-
-            gamemanager.ScreenBlur();
-
-            gamemanager.isCurrentlyExamine = true;
         }
     }
 
     public void ExitExamine()
     {
-        gamemanager.ScreenUnblur();
-
-        gamemanager.isCurrentlyExamine = false;
         myParticleSystem.gameObject.SetActive(false);
     }
 

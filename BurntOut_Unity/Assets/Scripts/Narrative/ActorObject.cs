@@ -5,12 +5,12 @@ namespace Narrative
     public class ActorObject : MonoBehaviour
     {
         public Actor actor;
-        
+
         // for clicking mechanics
         private void OnMouseUpAsButton()
         {
             if (!Main_GameManager.Instance.isCurrentlyExamine)
-                DialogueManager.Instance.StartDialogue();
+                ScenarioDialogueManager.Instance.ActorInteract(this);
         }
     }
 }

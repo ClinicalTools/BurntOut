@@ -64,17 +64,14 @@ namespace Narrative.Inspector
                 scenarioManagerObj = new GameObject(gameObjectName);
                 Undo.RegisterCreatedObjectUndo(scenarioManagerObj, "Created scenario manager");
                 scenarioManager = null;
-                scenarioManagerObj.AddComponent<ScenarioManager>();
             }
             else
             {
                 scenarioManager = scenarioManagerObj.GetComponent<ScenarioManager>();
             }
+
             if (scenarioManager == null)
-            {
-                scenarioManagerObj.AddComponent<ScenarioManager>();
-                scenarioManager = scenarioManagerObj.GetComponent<ScenarioManager>();
-            }
+                scenarioManager = scenarioManagerObj.AddComponent<ScenarioManager>();
 
             if (scenarioManager.scenario == null)
                 scenarioManager.scenario = new Scenario(new Scenario[0]);

@@ -1,5 +1,6 @@
 ﻿using OOEditor;
 using System;
+using System.Linq;
 
 namespace Narrative.Inspector
 {
@@ -22,14 +23,14 @@ namespace Narrative.Inspector
             };
 
             Scenario scenario = ScenarioEditor.CurrentScenario;
-            actorPopup = new Popup(scenario.ActorIndex(Value.actorId), scenario.ActorNames())
+            actorPopup = new Popup(SceneActors.GetActorIndex(Value.actorId), SceneActors.ActorNames)
             {
                 FitWidth = true
             };
             actorPopup.Changed += (sender, e) =>
             {
                 if (e.Value >= 0)
-                    Value.actorId = scenario.Actors[e.Value].id;
+                    Value.actorId = SceneActors.GetActorId(actorPopup.Options[e.Value]);
             };
 
             dialogueField = new TextField(Value.dialogue);
@@ -53,8 +54,8 @@ namespace Narrative.Inspector
             actionPopup.Draw(Value.action);
 
             Scenario scenario = ScenarioEditor.CurrentScenario;
-            actorPopup.Options = scenario.ActorNames();
-            actorPopup.Draw(scenario.ActorIndex(Value.actorId));
+            actorPopup.Options = SceneActors.ActorNames;
+            actorPopup.Draw(SceneActors.GetActorIndex(Value.actorId));
 
             switch (Value.action)
             {

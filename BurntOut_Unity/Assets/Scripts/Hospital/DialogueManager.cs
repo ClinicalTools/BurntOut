@@ -1,6 +1,6 @@
 ﻿using Narrative;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,7 +51,7 @@ public class DialogueManager : MonoBehaviour
     // Initialize references to button text
     private void Start()
     {
-        var playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        var playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
 
         buttonsText = new Text[buttons.Length];
@@ -68,8 +68,8 @@ public class DialogueManager : MonoBehaviour
 
         var rooms = FindObjectsOfType<Room>();
         var scenarioId = rooms[0].scenarioId;
-        var sceneNarrative = FindObjectOfType<NarrativeManager>().sceneNarrative;
-        StartScenario(sceneNarrative.GetScenario(scenarioId));
+        var scenario = FindObjectOfType<ScenarioManager>().scenario;
+        StartScenario(scenario);
     }
 
     // Resets the dialogue manager to be used with a passed scenario
@@ -80,7 +80,7 @@ public class DialogueManager : MonoBehaviour
             return;
 
         this.scenario = scenario;
-        choiceNum = -1;
+        choiceNum = 0;
         optionSelected = -1;
         lost = false;
 
@@ -102,13 +102,13 @@ public class DialogueManager : MonoBehaviour
     {
         actors.Clear();
 
-        var rooms = FindObjectsOfType<Room>();
-        var room = rooms.First(r => r.scenarioId == scenario.id);
+        //var rooms = FindObjectsOfType<Room>();
+        //var room = rooms.First(r => r.scenarioId == scenario.id);
 
-        var actorList = room.GetComponentsInChildren<InteractActor>();
-        foreach (var actor in actorList)
-            if (!actors.ContainsKey(actor.actorId))
-                actors.Add(actor.actorId, actor.gameObject);
+        //var actorList = room.GetComponentsInChildren<InteractActor>();
+        //foreach (var actor in actorList)
+        //if (!actors.ContainsKey(actor.actorId))
+        //actors.Add(actor.actorId, actor.gameObject);
     }
 
     /// <summary>
@@ -116,6 +116,39 @@ public class DialogueManager : MonoBehaviour
     /// </summary>
     public void StartDialogue()
     {
+        UI_ChoiceDia.SetActive(true);
+
+        // If dialogue hasn't started yet, start it
+        if (choiceNum < 0)
+        {
+            choiceNum = 0;
+            ProgressNarrative();
+        }
+
+        InDialogue = true;
+    }
+
+    private IEnumerator RotateAndMoveToActor()
+    {
+        Debug.Log("Waiting 1 second...");
+        yield return new WaitForSeconds(1.0f);
+        Debug.Log("Done!");
+    }
+
+    /// <summary>
+    /// Start talking with the patient
+    /// </summary>
+    public void StartDialogue(ActorObject actorObject)
+    {
+        //*
+        if (!scenario.Choices[choiceNum].Triggers.Exists(
+            t => t.type == TriggerType.TALK && t.id == actorObject.actor.id))
+        {
+            return;
+        }
+        //*/
+
+
         UI_ChoiceDia.SetActive(true);
 
         // If dialogue hasn't started yet, start it
@@ -182,7 +215,7 @@ public class DialogueManager : MonoBehaviour
             dialogueText.transform.parent.gameObject.SetActive(false);
 
             // No option selected, so prompt the player to pick one
-            if (optionSelected < 0)
+            if (optionSelected < 0 && scenario.Choices[choiceNum].continueLast)
             {
                 PromptChoice();
             }
@@ -223,7 +256,7 @@ public class DialogueManager : MonoBehaviour
             {
                 case TaskAction.TALK:
                     //if (actors.ContainsKey(task.actorId))
-                        //myRotateTo.target = actors[task.actorId];
+                    //myRotateTo.target = actors[task.actorId];
                     ShowText(scenario.GetActor(task.actorId).name, task.dialogue);
                     break;
                 case TaskAction.EMOTION:

@@ -58,13 +58,18 @@ namespace OOEditor
                 },
                 onAddCallback = (ReorderableList list) =>
                 {
+                    Debug.Log("adding row");
                     AddRow();
+
+                    EditorWindow.focusedWindow.Repaint();
                 },
                 onRemoveCallback = (ReorderableList list) =>
                 {
                     RemoveRow(list.index);
                     // No element should be selected after the selected element was removed
                     list.index = -1;
+
+                    EditorWindow.focusedWindow.Repaint();
                 },
                 onReorderCallbackWithDetails = (ReorderableList list, int oldIndex, int newIndex) =>
                 {
@@ -98,7 +103,9 @@ namespace OOEditor
             // The line is four pixels larger than however large the style would end up being
             list.elementHeight = style.CalcHeight(new GUIContent(), 100) + 4;
 
-            list.DoLayoutList();
+            list.list = List;
+            if (List != null)
+                list.DoLayoutList();
         }
     }
 }
