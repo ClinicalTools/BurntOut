@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Narrative
@@ -11,6 +12,22 @@ namespace Narrative
         public int id;
 
         public string name;
+
+        public string scenePath;
+        public bool sceneChange;
+        public bool autoChangeScene = true;
+        [SerializeField]
+        private List<Trigger> sceneChangeTriggers;
+        public List<Trigger> SceneChangeTriggers
+        {
+            get
+            {
+                if (sceneChangeTriggers == null)
+                    sceneChangeTriggers = new List<Trigger>();
+
+                return sceneChangeTriggers;
+            }
+        }
 
         [SerializeField]
         private List<Actor> actors;

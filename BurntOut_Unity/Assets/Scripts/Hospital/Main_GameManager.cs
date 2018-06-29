@@ -263,9 +263,11 @@ public class Main_GameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void Transition()
+    private string nextScene;
+    public void Transition(string nextScene = "Central")
     {
-        StartCoroutine(TransitionToCentral());
+        this.nextScene = nextScene; 
+        StartCoroutine(TransitionToScene());
     }
 
     public IEnumerator LoseWithDelay()
@@ -280,14 +282,13 @@ public class Main_GameManager : MonoBehaviour
         Cursor.visible = true;
 
     }
-
-    public IEnumerator TransitionToCentral()
+    
+    public IEnumerator TransitionToScene()
     {
-
         screenfade.SetBool("fade", true);
 
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("Central");
+        SceneManager.LoadScene(nextScene);
     }
 
     public IEnumerator UpdateStars()

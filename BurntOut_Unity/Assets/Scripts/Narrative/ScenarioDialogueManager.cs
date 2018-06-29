@@ -120,7 +120,7 @@ namespace Narrative
             }
             else
             {
-                nameText.text = "player";
+                nameText.text = "Player";
                 actorImage.color = new Color(.8f, .8f, .8f);
             }
             dialogueText.text = dialogue;
@@ -175,6 +175,7 @@ namespace Narrative
             if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
                 t => t.type == TriggerType.TALK && t.id == actorObject.actor.id))
             {
+                PlayerRotateToTarget.Instance.MoveLook(actorObject.gameObject, 2);
                 StartDialogue();
             }
         }
@@ -197,6 +198,9 @@ namespace Narrative
 
         private void EndDialogue()
         {
+            if (eventSet >= choices.Count && scenario.sceneChange && scenario.autoChangeScene)
+                ChangeScenes();
+
             inDialogue = false;
 
             foreach (var actorObject in actorObjects)
@@ -208,6 +212,13 @@ namespace Narrative
             animator.SetTrigger("DialogueEnd");
 
             DialogueUI.SetActive(false);
+
+            PlayerRotateToTarget.Instance.ReturnPosition();
+        }
+
+        private void ChangeScenes()
+        {
+            Main_GameManager.Instance.Transition(scenario.scenePath);
         }
 
         private void ShowOptions()

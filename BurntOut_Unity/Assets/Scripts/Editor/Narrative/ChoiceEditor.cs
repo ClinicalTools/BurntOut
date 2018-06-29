@@ -1,5 +1,4 @@
 ﻿using OOEditor;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Narrative.Inspector
@@ -44,8 +43,8 @@ namespace Narrative.Inspector
                 Foldout.Content.text = FoldoutName;
             };
 
-            continueLast = new Toggle(Value.continueLast, "Continue Last Event:", 
-                "Immediately starts the events after the previous events.");
+            continueLast = new Toggle(Value.continueLast, "Continue Last Event:",
+                "Immediately starts the events after the previous events");
             continueLast.Changed += (sender, e) =>
             {
                 Value.continueLast = e.Value;
@@ -106,9 +105,9 @@ namespace Narrative.Inspector
             if (triggersFoldout.Value)
                 using (Indent.Draw())
                 {
-                    continueLast.Draw();
+                    continueLast.Draw(Value.continueLast);
                     if (!Value.continueLast)
-                    triggerList.Draw(Value.Triggers);
+                        triggerList.Draw(Value.Triggers);
                 }
 
             // Event drawing

@@ -1,15 +1,26 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerRotateToTarget : MonoBehaviour
 {
+    private const float TOLERANCE = .0001f;
 
+    public static PlayerRotateToTarget Instance { get; private set; }
     public GameObject target;
     public float speed;
 
-    private void Start()
+    private bool inDefaultPos = true;
+    public bool CameraWait
     {
-        if (target == null)
-            target = Camera.main.gameObject;
+        get
+        {
+            return Main_GameManager.Instance.isCurrentlyExamine || !inDefaultPos;
+        }
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 
     void Update()
@@ -28,12 +39,73 @@ public class PlayerRotateToTarget : MonoBehaviour
         var lastRotation = transform.rotation;
         transform.rotation = rotation;
 
-        if (Mathf.Abs(lastRotation.w - rotation.w) < .0001f && Mathf.Abs(lastRotation.x - rotation.x) < .0001f
-            && Mathf.Abs(lastRotation.y - rotation.y) < .0001f && Mathf.Abs(lastRotation.z - rotation.z) < .0001f)
+        if (Mathf.Abs(lastRotation.w - rotation.w) < TOLERANCE && Mathf.Abs(lastRotation.x - rotation.x) < TOLERANCE
+            && Mathf.Abs(lastRotation.y - rotation.y) < TOLERANCE && Mathf.Abs(lastRotation.z - rotation.z) < TOLERANCE)
         {
             target = null;
         }
     }
 
 
+    private GameObject moveLookTarget;
+    private Vector3 movePos;
+    private Vector3 oldPos, oldDir;
+    private Quaternion oldRot;
+    /// <summary>
+    /// Looks at an object then moves dist from the front of it.
+    /// </summary>
+    /// <param name="target">Object to look at and move in front of.</param>
+    /// <param name="dist">Distance from the start of the object to move to.</param>
+    public void MoveLook(GameObject target, float dist)
+    {
+        inDefaultPos = false;
+
+        moveLookTarget = target;
+
+        oldPos = transform.position;
+        oldDir = transform.forward;
+        oldRot = transform.rotation;
+        movePos = target.transform.position + (target.transform.forward * -dist);
+
+        this.target = target;
+        StartCoroutine(MoveLook());
+    }
+
+    private IEnumerator MoveLook()
+    {
+        while (target == moveLookTarget)
+            yield return null;
+
+        var distStep = Vector3.Distance(transform.position, movePos) / 30;
+        while (transform.position != movePos)
+        {
+            transform.rotation = Quaternion.LookRotation(moveLookTarget.transform.position - transform.position);
+            transform.position = Vector3.MoveTowards(transform.position, movePos, distStep);
+            yield return new WaitForSecondsRealtime(1f / 60f);
+        }
+
+        yield return null;
+    }
+
+    public void ReturnPosition()
+    {
+        StartCoroutine(ReturnPos());
+    }
+
+    private IEnumerator ReturnPos()
+    {
+        var rotStep = Quaternion.Angle(transform.rotation, oldRot) * Mathf.Deg2Rad / 30;
+        var distStep = Vector3.Distance(transform.position, oldPos) / 30;
+        while (transform.position != oldPos)
+        {
+            var dir = Vector3.RotateTowards(transform.forward, oldDir, rotStep, 0f);
+            transform.rotation = Quaternion.LookRotation(dir);
+            transform.position = Vector3.MoveTowards(transform.position, oldPos, distStep);
+            yield return new WaitForSecondsRealtime(1f / 60f);
+        }
+
+        inDefaultPos = true;
+
+        yield return null;
+    }
 }

@@ -2,18 +2,16 @@
 
 public class CameraLookHere : MonoBehaviour
 {
-    private Main_GameManager gamemanager;
 
     public float bounds = 1;
     private float xMax, yMax, xMin, yMin;
     private PlayerRotateToTarget myRotateTo;
-
+    
     // Use this for initialization
     void Start()
     {
         var playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
-        gamemanager = FindObjectOfType<Main_GameManager>();
 
         myRotateTo.enabled = true;
         myRotateTo.target = gameObject;
@@ -26,12 +24,8 @@ public class CameraLookHere : MonoBehaviour
 
     private void Update()
     {
-        if (!gamemanager.isCurrentlyExamine)
-        {
-
+        if (!myRotateTo.CameraWait)
             Move();
-
-        }
     }
 
     public int speed = 10;

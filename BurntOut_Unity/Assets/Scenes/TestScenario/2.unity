@@ -4475,7 +4475,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 200, y: 21}
+  m_SizeDelta: {x: 200, y: 25}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &296053847
 MonoBehaviour:
@@ -4498,10 +4498,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -5231,6 +5231,10 @@ MonoBehaviour:
     scenarios:
     - id: 2094913720
       name: Blood Test Results
+      scenePath: 
+      sceneChange: 0
+      autoChangeScene: 0
+      sceneChangeTriggers: []
       actors:
       - id: -542058693
         name: player
@@ -8476,11 +8480,11 @@ RectTransform:
   m_Father: {fileID: 4658157}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 500, y: -200}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!225 &546146398
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -8575,7 +8579,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_SizeDelta: {x: -30, y: -30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &556881479
 CanvasRenderer:
@@ -8604,10 +8608,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 16
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -13598,6 +13602,12 @@ MonoBehaviour:
   scenario:
     id: 1609108761
     name: 
+    scenePath: Assets/Scenes/ICU.unity
+    sceneChange: 1
+    autoChangeScene: 0
+    sceneChangeTriggers:
+    - type: 1
+      id: -608044
     actors: []
     actorIds: 
     choices:
@@ -13609,30 +13619,33 @@ MonoBehaviour:
         id: -608044
       events:
       - action: 0
+        actorId: -608044
+        emotion: 0
+        dialogue: Hello there.
+      - action: 0
         actorId: 0
         emotion: 0
-        dialogue: a
+        dialogue: Dr. Belmont.
       - action: 0
         actorId: 1097336261
         emotion: 0
-        dialogue: b
-      - action: 0
-        actorId: -608044
-        emotion: 0
-        dialogue: c
+        dialogue: Yep.
       isChoice: 0
       options: []
     - name: Dr. Belmont asks a question
       text: Question prompt
       continueLast: 1
-      triggers: []
+      triggers:
+      - type: 1
+        id: 1097336261
       events:
       - action: 0
         actorId: 0
         emotion: 0
-        dialogue: '!'
+        dialogue: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. '
       - action: 0
-        actorId: -608044
+        actorId: 1097336261
         emotion: 0
         dialogue: '?'
       isChoice: 1
@@ -13712,10 +13725,15 @@ MonoBehaviour:
         dialogue: x
       isChoice: 0
       options: []
-    hasStartNarrative: 1
+    hasStartNarrative: 0
     startNarrative: 
     hasEndNarrative: 1
-    endNarrative: 
+    endNarrative: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+      sunt in culpa qui officia deserunt mollit anim id est laborum.
 --- !u!4 &983121466
 Transform:
   m_ObjectHideFlags: 0
@@ -16603,19 +16621,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3523918, y: 0.13771208, z: 0.05329397}
   m_Center: {x: 0.00000020116568, y: 0.00000000372529, z: -0.00062182284}
---- !u!114 &1263972150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1263972143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1884176c5b52d7439a76df06e83f8ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1448730419}
-  speed: 1000
 --- !u!1001 &1266988835
 Prefab:
   m_ObjectHideFlags: 0
@@ -17257,7 +17262,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 800, y: 800}
   m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.613
   m_PhysicalUnit: 3
@@ -22088,7 +22093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 140}
+  m_AnchoredPosition: {x: 10, y: 165}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0, y: 0}
 --- !u!225 &1672879899
@@ -25694,7 +25699,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 10}
-  m_SizeDelta: {x: -20, y: 125}
+  m_SizeDelta: {x: -20, y: 150}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!225 &1930029670
 CanvasGroup:
@@ -26591,7 +26596,6 @@ GameObject:
   - component: {fileID: 1985737915}
   - component: {fileID: 1985737914}
   - component: {fileID: 1985737918}
-  - component: {fileID: 1985737917}
   - component: {fileID: 1985737913}
   m_Layer: 0
   m_Name: Standing health monitor
@@ -26683,19 +26687,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1985737911}
   m_Mesh: {fileID: 4300000, guid: 606ea0bc37f5198409f783e078cd7c0b, type: 3}
---- !u!114 &1985737917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1985737911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1884176c5b52d7439a76df06e83f8ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 1000
 --- !u!114 &1985737918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27626,7 +27617,6 @@ GameObject:
   - component: {fileID: 2024139942}
   - component: {fileID: 2024139941}
   - component: {fileID: 2024139940}
-  - component: {fileID: 2024139937}
   - component: {fileID: 2024139939}
   - component: {fileID: 2024139938}
   m_Layer: 0
@@ -27636,19 +27626,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &2024139937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2024139936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1884176c5b52d7439a76df06e83f8ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1580270892}
-  speed: 1000
 --- !u!114 &2024139938
 MonoBehaviour:
   m_ObjectHideFlags: 0

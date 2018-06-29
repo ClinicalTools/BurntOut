@@ -10,7 +10,7 @@ namespace Narrative
         public string name;
         public string text;
 
-        public bool continueLast;
+        public bool continueLast = true;
         [SerializeField]
         private List<Trigger> triggers;
         public List<Trigger> Triggers

@@ -24,7 +24,7 @@ namespace OOEditor
             {
                 // If the value has changed, and the control has been drawn at least once, 
                 //  call the changed event
-                if (!value.Equals(this.value) && !firstDraw)
+                if (!firstDraw && !(value?.Equals(this.value) ?? this.value == null))
                 {
                     var changedArgs = new ControlChangedArgs<T>(this.value, value);
                     Changed?.Invoke(this, changedArgs);
