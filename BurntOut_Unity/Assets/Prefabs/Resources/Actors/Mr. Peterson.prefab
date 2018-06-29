@@ -66,8 +66,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1600184846242674}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.08280819, z: 0, w: 0.9965655}
+  m_LocalPosition: {x: -5.44, y: 0.745, z: -8.908}
   m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_Children:
   - {fileID: 4048614916378446}
@@ -101,7 +101,7 @@ MonoBehaviour:
     id: 1097336261
     name: Mr. Peterson
     icon: {fileID: 2800000, guid: 7fbe7ce84676bbd4e9fe08c7086c8066, type: 3}
-    normal: {fileID: 2800000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
+    normal: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
 --- !u!136 &136792222612499164
 CapsuleCollider:
   m_ObjectHideFlags: 1

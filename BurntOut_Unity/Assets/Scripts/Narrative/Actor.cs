@@ -15,7 +15,7 @@ namespace Narrative
         public string name;
 
         public Texture2D icon;
-        public Texture2D normal;
+        public Sprite normal;
 
         public Actor(Actor[] actors)
         {

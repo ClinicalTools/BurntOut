@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public PlayerStats stats;
     public Main_GameManager gameManager;
 
+    private SpriteRenderer[] sceneActorSprites;
 
     private Text[] buttonsText;
 

@@ -16,6 +16,7 @@ namespace Narrative
         public Text dialogueText;
         public Text feedbackText;
         public Text promptText;
+        public Image actorImage;
         public GameObject DialogueUI;
 
         private Text[] optionButtonsText;
@@ -31,6 +32,8 @@ namespace Narrative
         {
             scenario = ScenarioManager.Instance.scenario;
             choices = scenario.Choices;
+
+            actorObjects = FindObjectsOfType<ActorObject>();
 
             optionButtonsText = new Text[optionButtons.Length];
             for (int i = 0; i < optionButtons.Length; i++)
@@ -110,10 +113,16 @@ namespace Narrative
         {
             var actor = actorObjects.FirstOrDefault(a => a.actor.id == actorId)?.actor;
             if (actor != null)
+            {
+                actorImage.sprite = actor.normal;
+                actorImage.color = new Color(1, 1, 1);
                 nameText.text = actor.name;
+            }
             else
+            {
                 nameText.text = "player";
-
+                actorImage.color = new Color(.8f, .8f, .8f);
+            }
             dialogueText.text = dialogue;
         }
 
@@ -162,19 +171,27 @@ namespace Narrative
         }
 
         public void ActorInteract(ActorObject actorObject)
-        { 
-            if (eventSet < choices.Count)
+        {
+            if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
+                t => t.type == TriggerType.TALK && t.id == actorObject.actor.id))
+            {
                 StartDialogue();
+            }
         }
 
         private void StartDialogue()
         {
             inDialogue = true;
 
+            foreach (var actorObject in actorObjects)
+                actorObject.Hide();
+
             Main_GameManager.Instance.ScreenBlur();
             Main_GameManager.Instance.isCurrentlyExamine = true;
 
             DialogueUI.SetActive(true);
+            var animator = DialogueUI.GetComponent<Animator>();
+            animator.SetTrigger("DialogueStart");
             ProgressNarrative();
         }
 
@@ -182,8 +199,13 @@ namespace Narrative
         {
             inDialogue = false;
 
+            foreach (var actorObject in actorObjects)
+                actorObject.Show();
+
             Main_GameManager.Instance.ScreenUnblur();
             Main_GameManager.Instance.isCurrentlyExamine = false;
+            var animator = DialogueUI.GetComponent<Animator>();
+            animator.SetTrigger("DialogueEnd");
 
             DialogueUI.SetActive(false);
         }
