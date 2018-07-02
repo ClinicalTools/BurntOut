@@ -11,7 +11,6 @@ public class Main_GameManager : MonoBehaviour
     private int roomsLost;
 
     // store current patient
-    public InteractActor currentRoom;
 
     public Animator screenfade;
 
@@ -20,7 +19,6 @@ public class Main_GameManager : MonoBehaviour
     public GameObject Canvas_Loss;
 
     // UIs
-    public GameObject UI_ChoiceDia;
     public GameObject UI_ReadingStation;
     public GameObject UI_MatchingStation;
 
@@ -35,7 +33,6 @@ public class Main_GameManager : MonoBehaviour
     public PostProcessingBehaviour ppScene;
 
     DepthOfFieldModel.Settings dofSettings;
-    public DialogueManager dialogueManager;
 
     public bool gameover;
     public bool gamePaused;
@@ -84,13 +81,7 @@ public class Main_GameManager : MonoBehaviour
         {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
         }
-
-        // hide unnessesary UI here
-        if (scene.name != "ICU_New")
-            UI_ChoiceDia.SetActive(false);
-
-        currentRoom = null;
-
+        
         // make game active
         Time.timeScale = 1;
 
@@ -189,8 +180,6 @@ public class Main_GameManager : MonoBehaviour
 
     public void ExitRoom()
     {
-        dialogueManager.EndDialogue();
-
         // freeze player controller
 
         if (scene.name == "Hospital" || scene.name == "VitalitySpace")
@@ -201,10 +190,6 @@ public class Main_GameManager : MonoBehaviour
 
         isCurrentlyExamine = false;
 
-        if (scene.name == "ICU_New" || scene.name == "Hospital_Patient_SingleRoom")
-            currentRoom.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
-
-        UI_ChoiceDia.SetActive(false);
         ScreenUnblur();
 
     }
@@ -215,8 +200,6 @@ public class Main_GameManager : MonoBehaviour
         if (roomsWon >= 3)
             hospitalwin = true;
 
-        currentRoom.door.doorlocked = false;
-        currentRoom.completed = true;
         playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
 
         //if (scene.name == "Hospital_Patient_SingleRoom")
@@ -224,7 +207,6 @@ public class Main_GameManager : MonoBehaviour
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
             globalStats.GOOD_stars += 1;
-            currentRoom.gameObject.SetActive(false);
             globalStats.isMrJohnsonCompleted = true;
         }
     }
@@ -236,8 +218,6 @@ public class Main_GameManager : MonoBehaviour
         if (roomsLost >= 3)
             Lose();
 
-        currentRoom.door.doorlocked = false;
-        currentRoom.lost = true;
         playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
 
         //if (scene.name == "Hospital_Patient_SingleRoom")
@@ -245,7 +225,6 @@ public class Main_GameManager : MonoBehaviour
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
             playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
             globalStats.BAD_stars += 1;
-            currentRoom.gameObject.SetActive(false);
             globalStats.isMrJohnsonCompleted = true;
         }
     }
