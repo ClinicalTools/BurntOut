@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,8 @@ namespace Narrative
         public Text promptText;
         public Image actorImage;
         public GameObject DialogueUI;
+
+        public Animator myanim;
 
         private Text[] optionButtonsText;
         private ActorObject[] actorObjects;
@@ -191,8 +194,7 @@ namespace Narrative
             Main_GameManager.Instance.isCurrentlyExamine = true;
 
             DialogueUI.SetActive(true);
-            var animator = DialogueUI.GetComponent<Animator>();
-            animator.SetTrigger("DialogueStart");
+            myanim.SetTrigger("DialogueStart");
             ProgressNarrative();
         }
 
@@ -208,12 +210,22 @@ namespace Narrative
 
             Main_GameManager.Instance.ScreenUnblur();
             Main_GameManager.Instance.isCurrentlyExamine = false;
-            var animator = DialogueUI.GetComponent<Animator>();
-            animator.SetTrigger("DialogueEnd");
 
-            DialogueUI.SetActive(false);
+            myanim.SetBool("End", true);
+
+            StartCoroutine(DisableDiaUI());
 
             PlayerRotateToTarget.Instance.ReturnPosition();
+        }
+
+        public IEnumerator DisableDiaUI() {
+
+            yield return new WaitForSeconds(2f);
+            DialogueUI.SetActive(false);
+
+            myanim.SetBool("End", false);
+
+
         }
 
         private void ChangeScenes()

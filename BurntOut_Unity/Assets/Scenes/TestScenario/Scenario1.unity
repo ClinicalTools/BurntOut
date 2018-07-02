@@ -24605,6 +24605,7 @@ MonoBehaviour:
   promptText: {fileID: 1112106004}
   actorImage: {fileID: 546146399}
   DialogueUI: {fileID: 1302764019}
+  myanim: {fileID: 1302764024}
 --- !u!1 &1981495767
 GameObject:
   m_ObjectHideFlags: 0
