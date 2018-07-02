@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112000002, guid: 389e7ac25c27e7f4fa74ccd00b6ca4b9,
+  m_LightingDataAsset: {fileID: 112000002, guid: 20c66fc449cd2394381f17fde02b54ab,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -17885,7 +17885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 420, y: -200.90001}
+  m_AnchoredPosition: {x: 706, y: -200.90001}
   m_SizeDelta: {x: 339.13, y: 40.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1423015037
@@ -18969,6 +18969,10 @@ Prefab:
       propertyPath: m_Name
       value: DoubleSidedWall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1560181652496432, guid: b5e9cfefc90b5584b99bbbb8eab3305f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5e9cfefc90b5584b99bbbb8eab3305f, type: 2}
   m_IsPrefabParent: 0
@@ -19785,7 +19789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 420.0001, y: -162.6}
+  m_AnchoredPosition: {x: 706.0001, y: -162.6}
   m_SizeDelta: {x: 339.13, y: 40.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1591376148
@@ -21547,7 +21551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 420.0001, y: -239.3}
+  m_AnchoredPosition: {x: 706.0001, y: -239.3}
   m_SizeDelta: {x: 339.13, y: 40.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1735461579

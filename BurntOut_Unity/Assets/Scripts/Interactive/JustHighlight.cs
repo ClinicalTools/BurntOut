@@ -16,6 +16,9 @@ public class JustHighlight : MonoBehaviour
     void Update()
     {
         ableToRunScript = !Main_GameManager.Instance.isCurrentlyExamine;
+        if (!ableToRunScript)
+            myParticleSystem.gameObject.SetActive(false);
+
     }
 
     private void OnMouseOver()
