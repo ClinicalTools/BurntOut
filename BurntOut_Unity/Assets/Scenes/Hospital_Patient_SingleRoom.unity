@@ -1381,13 +1381,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1127561627}
         m_MethodName: Transition
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Central
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -2731,6 +2731,7 @@ MonoBehaviour:
   myCanvas: {fileID: 1981495767}
   myCanvasObject: {fileID: 1985737911}
   abilityToRunScript: 0
+  id: 0
 --- !u!1 &191329022
 GameObject:
   m_ObjectHideFlags: 0
@@ -5109,14 +5110,25 @@ MonoBehaviour:
     scenarios:
     - id: 2094913720
       name: Blood Test Results
+      scenePath: 
+      sceneChange: 0
+      autoChangeScene: 0
+      sceneChangeTriggers: []
       actors:
       - id: -542058693
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: -535933802
         name: Ms. Jackson
+        icon: {fileID: 0}
+        normal: {fileID: 0}
+      actorIds: 
       choices:
       - name: Ms. Jackson's concerns about the tests 1
         text: 'What do you say in response to Ms. Jackson? '
+        continueLast: 1
+        triggers: []
         events:
         - action: 2
           actorId: -535933802
@@ -5143,6 +5155,7 @@ MonoBehaviour:
           emotion: 0
           dialogue: "I\u2019m supposed to get my blood test results back tomorrow
             and I\u2019m worried about what they might find."
+        isChoice: 0
         options:
         - name: Tests are a common part of the process
           text: Tests are a common part of the process.
@@ -5194,12 +5207,15 @@ MonoBehaviour:
             the patient and help them decrease their stress related to the test.
       - name: Ms. Jackson's concerns about the tests 2
         text: What is a good way to continue the conversation with Ms. Jackson?
+        continueLast: 1
+        triggers: []
         events:
         - action: 0
           actorId: -535933802
           emotion: 0
           dialogue: "My sister tells me I shouldn\u2019t be worried either, but it\u2019s
             just my nature. I\u2019m the worrier in the family."
+        isChoice: 0
         options:
         - name: Worrying never solves anything
           text: "\u201CI used to be that way, too, but worrying never solves anything.
@@ -5249,7 +5265,10 @@ MonoBehaviour:
         text: "Now that you know Ms. Jackson\u2019s concerns, you can better address
           the situation. What is a good way to alleviate her stress regarding the
           test results?"
+        continueLast: 1
+        triggers: []
         events: []
+        isChoice: 0
         options:
         - name: There are a number of possible reasons
           text: "\u201CI understand your concerns, but there are a number of reasons
@@ -5302,6 +5321,9 @@ MonoBehaviour:
             your assurances makes a difference. Instead of denying Ms. Jackson\u2019s
             concerns, instead you should acknowledge them and help to alleviate her
             worries."
+      hasStartNarrative: 0
+      startNarrative: 
+      hasEndNarrative: 0
       endNarrative: 'Having a good relationship with patients is an important part
         of avoiding burnout. If you see patients as tasks to be beaten, then patient
         care does indeed become tedious and annoying. Without the human element and
@@ -5313,14 +5335,25 @@ MonoBehaviour:
         providing care to patients. '
     - id: 1780528331
       name: Spot on Leg
+      scenePath: 
+      sceneChange: 0
+      autoChangeScene: 0
+      sceneChangeTriggers: []
       actors:
       - id: -369657928
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: -334617666
         name: Mr. Johnson
+        icon: {fileID: 0}
+        normal: {fileID: 0}
+      actorIds: 
       choices:
       - name: Lower Mr. Peterson's stess levels
         text: "What can you say to lower Mr. Peterson\u2019s stress levels?"
+        continueLast: 1
+        triggers: []
         events:
         - action: 0
           actorId: -334617666
@@ -5335,6 +5368,7 @@ MonoBehaviour:
           emotion: 0
           dialogue: "Well, it wasn\u2019t soon enough! I could be dying and you wouldn\u2019t
             care."
+        isChoice: 0
         options:
         - name: I'm sure it isn't anything to worry about
           text: "You\u2019re not dying and I\u2019m sure the spot isn\u2019t anything
@@ -5388,6 +5422,8 @@ MonoBehaviour:
             focus back to their concern."
       - name: Explain the yawning
         text: How should you respond?
+        continueLast: 1
+        triggers: []
         events:
         - action: 0
           actorId: -334617666
@@ -5406,6 +5442,7 @@ MonoBehaviour:
           actorId: -334617666
           emotion: 0
           dialogue: "Sorry I\u2019m boring you."
+        isChoice: 0
         options:
         - name: No big deal
           text: "It\u2019s no big deal."
@@ -5469,7 +5506,10 @@ MonoBehaviour:
         text: "Mr. Peterson let\u2019s you examine his leg finally and you determine
           that the spot is likely a cherry angioma. How would you address the situation
           with Mr. Peterson?"
+        continueLast: 1
+        triggers: []
         events: []
+        isChoice: 0
         options:
         - name: "People at your age get those spots all the time. It\u2019s fine."
           text: "People at your age get those spots all the time. It\u2019s fine."
@@ -5527,6 +5567,9 @@ MonoBehaviour:
             situation to them in language they can understand. Additionally, you took
             the time to answer Mr. Peterson\u2019s follow-up questions and assure
             him that you have his best interest in mind when dealing with this situation."
+      hasStartNarrative: 0
+      startNarrative: 
+      hasEndNarrative: 0
       endNarrative: Patients often ask more of you than you feel you can deliver.
         Unfortunately, cutting corners and disconnecting from patients does not make
         the process any easier. In the end, it is more efficient and more amenable
@@ -5537,14 +5580,25 @@ MonoBehaviour:
         need from the patients you are already working with.
     - id: -1036331199
       name: 3
+      scenePath: 
+      sceneChange: 0
+      autoChangeScene: 0
+      sceneChangeTriggers: []
       actors:
       - id: 764233178
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: 777917692
         name: PATIENT
+        icon: {fileID: 0}
+        normal: {fileID: 0}
+      actorIds: 
       choices:
       - name: Choice 1
         text: Choice 1 Text
+        continueLast: 1
+        triggers: []
         events:
         - action: 0
           actorId: 777917692
@@ -5554,6 +5608,7 @@ MonoBehaviour:
           actorId: 777917692
           emotion: 0
           dialogue: dialogue 2
+        isChoice: 0
         options:
         - name: i did not hit her
           text: Continue 1
@@ -5585,17 +5640,31 @@ MonoBehaviour:
           result: 0
           healthChange: 0
           feedback: You clicked try again
+      hasStartNarrative: 0
+      startNarrative: 
+      hasEndNarrative: 0
       endNarrative: End Narrative
     - id: -1615940435
       name: 4
+      scenePath: 
+      sceneChange: 0
+      autoChangeScene: 0
+      sceneChangeTriggers: []
       actors:
       - id: 764233178
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: 777917692
         name: PATIENT
+        icon: {fileID: 0}
+        normal: {fileID: 0}
+      actorIds: 
       choices:
       - name: Choice 1
         text: Choice 1 Text
+        continueLast: 1
+        triggers: []
         events:
         - action: 0
           actorId: 777917692
@@ -5605,6 +5674,7 @@ MonoBehaviour:
           actorId: 777917692
           emotion: 0
           dialogue: dialogue 2
+        isChoice: 0
         options:
         - name: i did not hit her
           text: Continue 1
@@ -5636,17 +5706,31 @@ MonoBehaviour:
           result: 0
           healthChange: 0
           feedback: You clicked try again
+      hasStartNarrative: 0
+      startNarrative: 
+      hasEndNarrative: 0
       endNarrative: End Narrative
     - id: -1525175486
       name: 5
+      scenePath: 
+      sceneChange: 0
+      autoChangeScene: 0
+      sceneChangeTriggers: []
       actors:
       - id: 764233178
         name: player
+        icon: {fileID: 0}
+        normal: {fileID: 0}
       - id: 777917692
         name: PATIENT
+        icon: {fileID: 0}
+        normal: {fileID: 0}
+      actorIds: 
       choices:
       - name: Choice 1
         text: Choice 1 Text
+        continueLast: 1
+        triggers: []
         events:
         - action: 0
           actorId: 777917692
@@ -5656,6 +5740,7 @@ MonoBehaviour:
           actorId: 777917692
           emotion: 0
           dialogue: dialogue 2
+        isChoice: 0
         options:
         - name: i did not hit her
           text: Continue 1
@@ -5687,6 +5772,9 @@ MonoBehaviour:
           result: 0
           healthChange: 0
           feedback: You clicked try again
+      hasStartNarrative: 0
+      startNarrative: 
+      hasEndNarrative: 0
       endNarrative: End Narrative
     startNarration: "It\u2019s been a long day and the demands have been coming left
       and right. You\u2019ve been seeing patients, filling our paperwork, and trying
@@ -7074,8 +7162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 1976377578}
-  scenarioId: -1615940435
 --- !u!65 &453512560
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13675,8 +13761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 1976377578}
-  scenarioId: 1780528331
 --- !u!65 &949995578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14087,8 +14171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 1976377578}
-  scenarioId: -1525175486
 --- !u!65 &999058649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15278,12 +15360,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92222e22a10996d45bd189ccfb3c605c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRoom: {fileID: 0}
   screenfade: {fileID: 145111414}
   Canvas_Paused: {fileID: 1138629943}
   Canvas_Win: {fileID: 989074762}
   Canvas_Loss: {fileID: 1628650966}
-  UI_ChoiceDia: {fileID: 1590599582}
   UI_ReadingStation: {fileID: 1936958792}
   UI_MatchingStation: {fileID: 1194110597}
   Stars:
@@ -15298,7 +15378,6 @@ MonoBehaviour:
   playerCam: {fileID: 1448730419}
   playerStats: {fileID: 927959815}
   ppScene: {fileID: 1867126365}
-  dialogueManager: {fileID: 1976377578}
   gameover: 0
   gamePaused: 0
   hospitalwin: 0
@@ -15528,6 +15607,7 @@ MonoBehaviour:
   myCanvas: {fileID: 2131489090}
   myCanvasObject: {fileID: 2024139936}
   abilityToRunScript: 0
+  id: 0
 --- !u!1 &1149026243
 GameObject:
   m_ObjectHideFlags: 0
@@ -22806,8 +22886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 1976377578}
-  scenarioId: 2094913720
 --- !u!65 &1738577847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24093,8 +24171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 1976377578}
-  scenarioId: 1780528331
 --- !u!65 &1822107026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26226,17 +26302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7649cde0b99c5e4f99cbd8d7dedcbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 469622539}
-  - {fileID: 116756026}
-  - {fileID: 1890029492}
-  continueButton: {fileID: 1699658686}
-  dialogueText: {fileID: 1695099775}
-  feedbackText: {fileID: 1888343773}
-  promptText: {fileID: 1300543637}
-  UI_ChoiceDia: {fileID: 1590599582}
-  stats: {fileID: 927959815}
-  gameManager: {fileID: 1127561627}
 --- !u!4 &1976377579
 Transform:
   m_ObjectHideFlags: 0
@@ -27450,6 +27515,7 @@ MonoBehaviour:
   myCanvas: {fileID: 1527520831}
   myCanvasObject: {fileID: 1263972143}
   abilityToRunScript: 0
+  id: 0
 --- !u!65 &2025319163
 BoxCollider:
   m_ObjectHideFlags: 0

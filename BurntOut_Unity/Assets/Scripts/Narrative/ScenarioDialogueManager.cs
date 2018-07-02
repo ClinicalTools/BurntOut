@@ -209,9 +209,8 @@ namespace Narrative
                 actorObject.Show();
 
             Main_GameManager.Instance.ScreenUnblur();
-            Main_GameManager.Instance.isCurrentlyExamine = false;
-
             myanim.SetBool("End", true);
+
 
             StartCoroutine(DisableDiaUI());
 
@@ -220,10 +219,11 @@ namespace Narrative
 
         public IEnumerator DisableDiaUI() {
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             DialogueUI.SetActive(false);
 
             myanim.SetBool("End", false);
+            Main_GameManager.Instance.isCurrentlyExamine = false;
 
 
         }
@@ -236,23 +236,6 @@ namespace Narrative
         private void ShowOptions()
         {
             continueButton.gameObject.SetActive(false);
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
             //
             //
             //
