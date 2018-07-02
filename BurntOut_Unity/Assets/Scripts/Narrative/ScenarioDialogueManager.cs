@@ -224,7 +224,30 @@ namespace Narrative
         private void ShowOptions()
         {
             continueButton.gameObject.SetActive(false);
-            dialogueText.transform.parent.gameObject.SetActive(false);
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //dialogueText.transform.parent.gameObject.SetActive(false);
 
             promptText.transform.parent.gameObject.SetActive(true);
             promptText.text = choices[eventSet].text;
