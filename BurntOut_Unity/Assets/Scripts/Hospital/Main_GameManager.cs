@@ -71,7 +71,7 @@ public class Main_GameManager : MonoBehaviour
 
         //if (scene.name == "Hospital_Patient_SingleRoom")
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
 

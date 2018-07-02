@@ -2741,10 +2741,6 @@ MonoBehaviour:
   - {fileID: 1831825400}
   - {fileID: 1024949219}
   - {fileID: 1376196570}
-  Star_RoomA: {fileID: 1939611828}
-  Star_RoomB: {fileID: 817890652}
-  Star_RoomABAD: {fileID: 1831825400}
-  Star_RoomBBAD: {fileID: 1024949219}
   player: {fileID: 927959813}
   playerCam: {fileID: 1448730419}
   playerStats: {fileID: 927959815}
@@ -7247,7 +7243,7 @@ GameObject:
   - component: {fileID: 753638565}
   - component: {fileID: 753638564}
   m_Layer: 0
-  m_Name: Hospital (Patient) Single room
+  m_Name: Mr Peterson's Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7280,7 +7276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef63a0806e954048ad206ec16b76d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: Hospital_Patient_SingleRoom
+  level: Scenario1
   screenfade: {fileID: 145111414}
   player: {fileID: 927959813}
   mrJohnsonRoom: 1
