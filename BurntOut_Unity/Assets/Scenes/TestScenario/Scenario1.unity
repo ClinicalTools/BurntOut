@@ -12270,7 +12270,8 @@ Prefab:
       propertyPath: stats
       value: 
       objectReference: {fileID: 927959815}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114600997867801376, guid: b76b7cfd99beca341bca677a59612e08, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b76b7cfd99beca341bca677a59612e08, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &917583054 stripped
@@ -12496,7 +12497,6 @@ GameObject:
   - component: {fileID: 949995576}
   - component: {fileID: 949995579}
   - component: {fileID: 949995578}
-  - component: {fileID: 949995577}
   m_Layer: 0
   m_Name: RoomB
   m_TagString: Untagged
@@ -12519,19 +12519,6 @@ Transform:
   m_Father: {fileID: 1809351561}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &949995577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 949995575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 0}
-  scenarioId: 2094913720
 --- !u!65 &949995578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14336,12 +14323,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92222e22a10996d45bd189ccfb3c605c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRoom: {fileID: 0}
   screenfade: {fileID: 145111414}
   Canvas_Paused: {fileID: 1138629943}
   Canvas_Win: {fileID: 989074762}
   Canvas_Loss: {fileID: 1628650966}
-  UI_ChoiceDia: {fileID: 0}
   UI_ReadingStation: {fileID: 1936958792}
   UI_MatchingStation: {fileID: 1194110597}
   Stars:
@@ -14356,7 +14341,6 @@ MonoBehaviour:
   playerCam: {fileID: 1448730419}
   playerStats: {fileID: 927959815}
   ppScene: {fileID: 1867126365}
-  dialogueManager: {fileID: 0}
   gameover: 0
   gamePaused: 0
   hospitalwin: 0
@@ -26769,7 +26753,8 @@ Prefab:
       propertyPath: patient
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114197618774563088, guid: ea26f8e90f8491f449609c6e30495fa6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ea26f8e90f8491f449609c6e30495fa6, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2099881335 stripped
