@@ -15,7 +15,10 @@ namespace Narrative.Inspector
 
         public ActorPrefabDrawer(Actor value) : base(value)
         {
-            Foldout = new Foldout(value.name, null, value.icon?.texture);
+            if (value.icon != null)
+                Foldout = new Foldout(value.name, null, value.icon.texture);
+            else
+                Foldout = new Foldout(value.name, null);
             Foldout.Style.FontStyle = FontStyle.Bold;
 
             actorName = new TextField(Value.name, "Name:");
@@ -30,7 +33,8 @@ namespace Narrative.Inspector
             spriteField.Changed += (sender, e) =>
             {
                 Value.icon = e.Value;
-                Foldout.Content.image = Value.icon?.texture;
+                if (Value.icon != null)
+                    Foldout.Content.image = Value.icon?.texture;
             };
             spriteTuples.Add(new Tuple<LabelField, SpriteField>(spriteLabel, spriteField));
 

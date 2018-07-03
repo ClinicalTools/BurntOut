@@ -27,7 +27,7 @@ namespace Narrative.Inspector
 
         // General scenario drawer
         private SceneGeneralEditor scenarioGeneralEditor;
-                
+
         // Choice drawer
         private FoldoutList<Choice, ChoiceEditor> choiceList;
 
@@ -128,7 +128,7 @@ namespace Narrative.Inspector
             scenarioGeneralEditor = new SceneGeneralEditor(scenarioManager.scenario);
             scenarioEditor = new ScenarioEditor(scenarioManager.scenario);
             choiceList = new FoldoutList<Choice, ChoiceEditor>(scenarioManager.scenario.Choices);
-            sceneActorsEditor= new SceneActorsEditor(scenarioManager.scenario);
+            sceneActorsEditor = new SceneActorsEditor(scenarioManager.scenario);
         }
 
         private void SaveBtn_Pressed(object sender, EventArgs e)
@@ -155,7 +155,7 @@ namespace Narrative.Inspector
             {
                 if (scenarioManager == null || sceneActorsEditor == null)
                     ResetScenarioManager();
-                
+
                 if (scenarioEditor == null)
                     InitScenarioControls();
 
