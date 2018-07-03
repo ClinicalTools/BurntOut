@@ -2725,12 +2725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92222e22a10996d45bd189ccfb3c605c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRoom: {fileID: 0}
   screenfade: {fileID: 145111414}
   Canvas_Paused: {fileID: 1138629943}
   Canvas_Win: {fileID: 0}
   Canvas_Loss: {fileID: 0}
-  UI_ChoiceDia: {fileID: 1404819135}
   UI_ReadingStation: {fileID: 0}
   UI_MatchingStation: {fileID: 0}
   Stars:
@@ -2745,7 +2743,6 @@ MonoBehaviour:
   playerCam: {fileID: 1448730419}
   playerStats: {fileID: 927959815}
   ppScene: {fileID: 1448730421}
-  dialogueManager: {fileID: 0}
   gameover: 0
   gamePaused: 0
   hospitalwin: 0
@@ -4305,7 +4302,6 @@ GameObject:
   - component: {fileID: 453512558}
   - component: {fileID: 453512561}
   - component: {fileID: 453512560}
-  - component: {fileID: 453512559}
   m_Layer: 0
   m_Name: RoomD
   m_TagString: Untagged
@@ -4327,19 +4323,6 @@ Transform:
   m_Father: {fileID: 1809351561}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &453512559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 453512557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 0}
-  scenarioId: -1615940435
 --- !u!65 &453512560
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9882,7 +9865,6 @@ GameObject:
   - component: {fileID: 949995576}
   - component: {fileID: 949995579}
   - component: {fileID: 949995578}
-  - component: {fileID: 949995577}
   m_Layer: 0
   m_Name: RoomB
   m_TagString: Untagged
@@ -9904,19 +9886,6 @@ Transform:
   m_Father: {fileID: 1809351561}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &949995577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 949995575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 0}
-  scenarioId: 1780528331
 --- !u!65 &949995578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10330,7 +10299,6 @@ GameObject:
   - component: {fileID: 999058647}
   - component: {fileID: 999058650}
   - component: {fileID: 999058649}
-  - component: {fileID: 999058648}
   m_Layer: 0
   m_Name: RoomE
   m_TagString: Untagged
@@ -10352,19 +10320,6 @@ Transform:
   m_Father: {fileID: 1809351561}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &999058648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 999058646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 0}
-  scenarioId: -1525175486
 --- !u!65 &999058649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17794,7 +17749,6 @@ GameObject:
   - component: {fileID: 1738577845}
   - component: {fileID: 1738577848}
   - component: {fileID: 1738577847}
-  - component: {fileID: 1738577846}
   m_Layer: 0
   m_Name: RoomA
   m_TagString: Untagged
@@ -17816,19 +17770,6 @@ Transform:
   m_Father: {fileID: 1809351561}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1738577846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1738577844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 0}
-  scenarioId: 2094913720
 --- !u!65 &1738577847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18705,7 +18646,6 @@ GameObject:
   - component: {fileID: 1822107024}
   - component: {fileID: 1822107027}
   - component: {fileID: 1822107026}
-  - component: {fileID: 1822107025}
   m_Layer: 0
   m_Name: RoomC
   m_TagString: Untagged
@@ -18727,19 +18667,6 @@ Transform:
   m_Father: {fileID: 1809351561}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1822107025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1822107023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90986965942dfd045b414872194c1087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 0}
-  scenarioId: -1036331199
 --- !u!65 &1822107026
 BoxCollider:
   m_ObjectHideFlags: 0

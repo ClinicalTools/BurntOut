@@ -126,7 +126,8 @@ namespace Narrative
                 nameText.text = "Player";
                 actorImage.color = new Color(.8f, .8f, .8f);
             }
-            dialogueText.text = dialogue;
+            dialogueText.gameObject.GetComponent<TextTyper>().UpdateText(dialogue);
+            //dialogueText.text = dialogue;
         }
 
         private void ProcessCharacterEmotion(int actorId, TaskEmotion emotion)
