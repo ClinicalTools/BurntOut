@@ -64,7 +64,9 @@ namespace OOEditor
                 float minWidth = Mathf.Max(ReservedWidth, MinWidth);
 
                 // Typically use labelWidth for the width, but ensure at least MinWidth pixels are saved for the field
-                var width = Mathf.Min(EditorGUIUtility.labelWidth, position.width - minWidth);
+                var scaledLabelWidth = OOEditorManager.ScaledWidth(EditorGUIUtility.labelWidth, 
+                    OOEditorManager.OverrideTextStyle?.FontSize ?? 0);
+                var width = Mathf.Min(scaledLabelWidth, position.width - minWidth);
                 // Width cannot be less than 0
                 width = Mathf.Max(width, 1);
                 Rect labelRect = new Rect(position.x, position.y, width, position.height);
