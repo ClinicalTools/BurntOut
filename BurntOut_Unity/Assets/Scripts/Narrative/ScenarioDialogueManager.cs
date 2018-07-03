@@ -222,8 +222,6 @@ namespace Narrative
 
             myanim.SetBool("End", false);
             Main_GameManager.Instance.isCurrentlyExamine = false;
-
-
         }
 
         private void ChangeScenes()
