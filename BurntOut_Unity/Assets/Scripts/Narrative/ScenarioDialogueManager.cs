@@ -75,14 +75,7 @@ namespace Narrative
             {
                 if (inChoice)
                 {
-                    if (option.result == OptionResult.END)
-                    {
-                        EndDialogue();
-                        eventSet = choices.Count;
-                        return;
-                    }
-
-                    if (option.result == OptionResult.TRY_AGAIN)
+                    if (option.result == OptionResult.TRY_AGAIN || option.result == OptionResult.END)
                         eventSet--;
 
                     if (!string.IsNullOrEmpty(option.feedback))
@@ -115,19 +108,20 @@ namespace Narrative
             }
         }
 
+        private readonly Color darkenedCharColor = new Color(.8f, .8f, .8f);
         private void ProcessCharacterDialogue(int actorId, string dialogue)
         {
             var actor = actorObjects.FirstOrDefault(a => a.actor.id == actorId)?.actor;
             if (actor != null)
             {
                 actorImage.sprite = actor.neutral;
-                actorImage.color = new Color(1, 1, 1);
+                actorImage.color = Color.white;
                 nameText.text = actor.name;
             }
             else
             {
                 nameText.text = "Player";
-                actorImage.color = new Color(.8f, .8f, .8f);
+                actorImage.color = darkenedCharColor;
             }
             dialogueText.gameObject.GetComponent<TextTyper>().UpdateText(dialogue);
         }
