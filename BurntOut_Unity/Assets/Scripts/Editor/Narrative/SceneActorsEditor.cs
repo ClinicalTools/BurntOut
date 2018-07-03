@@ -38,6 +38,9 @@ namespace Narrative.Inspector
                 false, false, false);
             actorPrefabs.Changed += (sender, e) =>
             {
+                foreach (var resourceObj in resourceObjs)
+                    EditorUtility.SetDirty(resourceObj);
+
                 AssetDatabase.SaveAssets();
             };
 
