@@ -4,7 +4,7 @@ using UnityEngine;
 namespace OOEditor
 {
     /// <summary>
-    /// Basic class for 
+    /// Basic class for Editor GUI elements.
     /// </summary>
     public abstract class EditorGUIElement
     {
@@ -14,10 +14,28 @@ namespace OOEditor
 
         protected string Name { get; set; }
 
+        private bool wasFocused;
+        private bool isFocused;
         /// <summary>
         /// True if the control has focus
         /// </summary>
-        public bool Focused => OOEditorManager.FocusedControlName.Contains(Name);
+        public bool Focused
+        {
+            get
+            {
+                // Unity doesn't get the right focus every draw, so check what it was last draw
+                return isFocused || wasFocused;
+            }
+        }
+        /// <summary>
+        /// Refreshes whether the element is focused.
+        /// Should be called once at the start of PrepareDisplay.
+        /// </summary>
+        protected void UpdateFocused()
+        {
+            wasFocused = isFocused;
+            isFocused = OOEditorManager.FocusedControlName.Contains(Name);
+        } 
 
         /// <summary>
         /// Text and tooltip for the element
@@ -98,7 +116,10 @@ namespace OOEditor
                 GUIStyle = new GUIStyle(BaseStyle);
 
             if (Focused && !OOEditorManager.InToolbar)
+            {
                 GUIStyle.normal = GUIStyle.focused;
+                GUIStyle.onNormal = GUIStyle.onFocused;
+            }
 
             Style.ApplyToStyle(GUIStyle);
             // Basic elements treated like labels
@@ -149,11 +170,14 @@ namespace OOEditor
         /// <param name="position">Position to draw in.</param>
         protected virtual void PrepareDisplay(Rect position)
         {
+            UpdateFocused();
+
             if (position.width > 1)
                 ValidWidth = position.width;
 
             // Setting name is important for checking if focused
             GUI.SetNextControlName(Name);
+
             Display(position);
         }
 

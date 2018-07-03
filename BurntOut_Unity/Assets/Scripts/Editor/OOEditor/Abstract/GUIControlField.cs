@@ -33,8 +33,10 @@ namespace OOEditor
             
             GUILabelStyle = new GUIStyle(EditorStyles.label);
             if (Focused)
+            {
                 GUILabelStyle.normal = GUILabelStyle.focused;
-
+                GUILabelStyle.onNormal = GUILabelStyle.onFocused;
+            }
             // Apply the regular style, then override it with the label style.
             Style.ApplyToStyle(GUILabelStyle);
             LabelStyle.ApplyToStyle(GUILabelStyle);
@@ -55,6 +57,7 @@ namespace OOEditor
         // Draws the label portion of the control
         protected override void PrepareDisplay(Rect position)
         {
+            UpdateFocused();
             if (Content != null && !string.IsNullOrEmpty(Content.text))
             {
                 // Ensure width is at least as big as the larger of the minimum widths
