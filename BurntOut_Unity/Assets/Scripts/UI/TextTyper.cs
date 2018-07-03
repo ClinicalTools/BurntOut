@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 [RequireComponent (typeof (Text))]
@@ -7,6 +6,8 @@ using UnityEngine.UI;
 
 public class TextTyper : MonoBehaviour 
 {	
+    public static TextTyper Instance { get; private set; }
+
 	[SerializeField] private float typeSpeed;
 	[SerializeField] private float startDelay;
 	//[SerializeField] private float volumeVariation;
@@ -20,6 +21,8 @@ public class TextTyper : MonoBehaviour
 
 	void Awake()
 	{
+        Instance = this;
+
 		textComp = GetComponent<Text>();
 		//audioComp = GetComponent<AudioSource>();
 
