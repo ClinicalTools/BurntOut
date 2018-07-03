@@ -8111,7 +8111,7 @@ MonoBehaviour:
           dialogue: 6
         result: 0
         healthChange: 0
-        feedback: 
+        feedback: You picked the bad choice
       - name: Very bad choice
         text: Very bad
         events:
@@ -8129,7 +8129,7 @@ MonoBehaviour:
           dialogue: 9
         result: 1
         healthChange: 0
-        feedback: 
+        feedback: You picked the very bad choice
     - name: More talking with Dr. Belmont
       text: 
       continueLast: 0
@@ -8151,8 +8151,8 @@ MonoBehaviour:
         dialogue: x
       isChoice: 0
       options: []
-    hasStartNarrative: 0
-    startNarrative: 
+    hasStartNarrative: 1
+    startNarrative: Start narrative text
     hasEndNarrative: 1
     endNarrative: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

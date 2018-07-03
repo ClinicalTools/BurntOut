@@ -61,7 +61,7 @@ namespace Narrative
         private List<Choice> choices;
         private int eventSet = -1;
         private bool inChoice, inDialogue = false;
-        private OptionResult optionResult;
+        private Option option;
         // Indicates whether the auto progression should be running
         // Queue of tasks (actions, emotions, and dialogue) to perform in current choice or option
         private readonly Queue<Task> tasks = new Queue<Task>();
@@ -75,15 +75,18 @@ namespace Narrative
             {
                 if (inChoice)
                 {
-                    if (optionResult == OptionResult.END)
+                    if (option.result == OptionResult.END)
                     {
                         EndDialogue();
                         eventSet = choices.Count;
                         return;
                     }
 
-                    if (optionResult == OptionResult.TRY_AGAIN)
+                    if (option.result == OptionResult.TRY_AGAIN)
                         eventSet--;
+
+                    if (!string.IsNullOrEmpty(option.feedback))
+                        TextTyper.Instance.UpdateText(option.feedback);
 
                     inChoice = false;
                 }
@@ -127,7 +130,6 @@ namespace Narrative
                 actorImage.color = new Color(.8f, .8f, .8f);
             }
             dialogueText.gameObject.GetComponent<TextTyper>().UpdateText(dialogue);
-            //dialogueText.text = dialogue;
         }
 
         private void ProcessCharacterEmotion(int actorId, TaskEmotion emotion)
@@ -165,12 +167,12 @@ namespace Narrative
             foreach (var optionBtn in optionButtons)
                 optionBtn.gameObject.SetActive(false);
 
-            foreach (var task in choices[eventSet].Options[optionNum].Events)
+            option = choices[eventSet].Options[optionNum];
+            foreach (var task in option.Events)
                 tasks.Enqueue(task);
 
             dialogueText.transform.parent.gameObject.SetActive(true);
 
-            optionResult = choices[eventSet].Options[optionNum].result;
             ProgressNarrative();
         }
 
@@ -218,7 +220,8 @@ namespace Narrative
             PlayerRotateToTarget.Instance.ReturnPosition();
         }
 
-        public IEnumerator DisableDiaUI() {
+        public IEnumerator DisableDiaUI()
+        {
 
             yield return new WaitForSeconds(1f);
             DialogueUI.SetActive(false);
@@ -237,13 +240,6 @@ namespace Narrative
         private void ShowOptions()
         {
             continueButton.gameObject.SetActive(false);
-            //
-            //
-            //
-            //
-            //
-            //
-            //dialogueText.transform.parent.gameObject.SetActive(false);
 
             promptText.transform.parent.gameObject.SetActive(true);
             promptText.text = choices[eventSet].text;
