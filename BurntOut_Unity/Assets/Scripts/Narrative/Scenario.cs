@@ -65,18 +65,6 @@ namespace Narrative
 
             return arr;
         }
-        [SerializeField]
-        private List<int> actorIds;
-        public List<int> ActorIds
-        {
-            get
-            {
-                if (actorIds == null)
-                    actorIds = new List<int>();
-
-                return actorIds;
-            }
-        }
 
         [SerializeField]
         private List<Choice> choices;

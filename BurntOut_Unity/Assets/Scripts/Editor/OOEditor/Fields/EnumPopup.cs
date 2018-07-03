@@ -21,7 +21,7 @@ namespace OOEditor
             get
             {
                 // Only elements without labels that fit their width need a width calculated
-                if (!FitWidth || (Content != null && !string.IsNullOrEmpty(Content.text)))
+                if (!FitWidth || !string.IsNullOrEmpty(Content.text))
                     return 0;
 
                 var style = GUIStyle;

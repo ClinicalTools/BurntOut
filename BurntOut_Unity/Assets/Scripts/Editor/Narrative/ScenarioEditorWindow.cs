@@ -26,14 +26,13 @@ namespace Narrative.Inspector
         private readonly OverrideTextStyle textStyle = new OverrideTextStyle();
 
         // General scenario drawer
-        private ScenarioGeneralEditor scenarioGeneralEditor;
-
-        // Actor drawer
-        private ActorPopupWindow actorDrawer;
-        
+        private SceneGeneralEditor scenarioGeneralEditor;
+                
         // Choice drawer
         private FoldoutList<Choice, ChoiceEditor> choiceList;
 
+        // Actors drawer
+        private SceneActorsEditor sceneActorsEditor;
 
         private static ScenarioEditorWindow window;
         // Add menu named "Scene Manager" to the Window menu
@@ -126,11 +125,10 @@ namespace Narrative.Inspector
             loadBtn.Style.FontStyle = FontStyle.Bold;
             loadBtn.Pressed += LoadBtn_Pressed;
 
-            scenarioGeneralEditor = new ScenarioGeneralEditor(scenarioManager.scenario);
+            scenarioGeneralEditor = new SceneGeneralEditor(scenarioManager.scenario);
             scenarioEditor = new ScenarioEditor(scenarioManager.scenario);
             choiceList = new FoldoutList<Choice, ChoiceEditor>(scenarioManager.scenario.Choices);
-
-            actorDrawer = new ActorPopupWindow(scenarioManager.scenario.ActorIds);
+            sceneActorsEditor= new SceneActorsEditor(scenarioManager.scenario);
         }
 
         private void SaveBtn_Pressed(object sender, EventArgs e)
@@ -155,10 +153,10 @@ namespace Narrative.Inspector
             }
             else
             {
-                if (scenarioManager == null)
+                if (scenarioManager == null || sceneActorsEditor == null)
                     ResetScenarioManager();
                 
-                if (scenarioEditor == null || actorDrawer == null)
+                if (scenarioEditor == null)
                     InitScenarioControls();
 
                 // Allows the scene to save changes and 'undo' to be possible
@@ -186,7 +184,7 @@ namespace Narrative.Inspector
                         scenarioGeneralEditor.Draw(scenarioManager.scenario);
                     // Edit scenario
                     else if (tabs.Value == 1)
-                        actorDrawer.Draw(scenarioManager.scenario.ActorIds);
+                        sceneActorsEditor.Draw(scenarioManager.scenario);
                     else if (tabs.Value == 2)
                         choiceList.Draw(scenarioManager.scenario.Choices);
                 }

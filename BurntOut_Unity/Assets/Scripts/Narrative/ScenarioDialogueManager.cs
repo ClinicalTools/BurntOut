@@ -117,7 +117,7 @@ namespace Narrative
             var actor = actorObjects.FirstOrDefault(a => a.actor.id == actorId)?.actor;
             if (actor != null)
             {
-                actorImage.sprite = actor.normal;
+                actorImage.sprite = actor.neutral;
                 actorImage.color = new Color(1, 1, 1);
                 nameText.text = actor.name;
             }

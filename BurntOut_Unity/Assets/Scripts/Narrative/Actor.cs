@@ -14,8 +14,8 @@ namespace Narrative
         [SerializeField]
         public string name;
 
-        public Texture2D icon;
-        public Sprite normal;
+        public Sprite icon;
+        public Sprite neutral, happy, sad, angry, scared;
 
         public Actor(Actor[] actors)
         {

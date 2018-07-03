@@ -19,13 +19,24 @@ namespace OOEditor
     {
         private ReorderableList list;
 
+        public bool Draggable
+        {
+            get { return list.draggable; }
+            set { list.draggable = value; }
+        }
+
         /// <summary>
         /// Creates a new ReorderableList to display the values in the passed list.
         /// </summary>
         /// <param name="value">List of values to display.</param>
-        public ReorderableList(List<T> value) : base(value)
+        /// <param name="draggable">True if the elements can be reordered through dragging.</param>
+        /// <param name="displayAddButton">True if a new element button should be shown.</param>
+        /// <param name="displayRemoveButton">True if a remove element button should be shown.</param>
+        public ReorderableList(List<T> value, bool draggable = true, bool displayAddButton = true,
+            bool displayRemoveButton = true) : base(value)
         {
-            list = new ReorderableList(List, typeof(T))
+            list = new ReorderableList(List, typeof(T), draggable, true,
+                displayAddButton, displayRemoveButton)
             {
                 // Makes the header practically invisible
                 headerHeight = 4,

@@ -8,7 +8,11 @@ namespace OOEditor
     /// </summary>
     public class Foldout : GUIControl<bool>
     {
-        protected override GUIStyle BaseStyle => EditorStyles.foldout;
+        protected override GUIStyle BaseStyle =>
+            new GUIStyle(EditorStyles.foldout)
+            {
+                imagePosition = ImagePosition.ImageAbove
+            };
 
         /// <summary>
         /// Makes a label with a foldout arrow to the left of it.

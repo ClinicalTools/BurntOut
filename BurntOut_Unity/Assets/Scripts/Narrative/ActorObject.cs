@@ -54,7 +54,7 @@ namespace Narrative
 
         public void SetSprite(TaskEmotion emotion)
         {
-            sprite.sprite = actor.normal;
+            sprite.sprite = actor.neutral;
         }
     }
 }

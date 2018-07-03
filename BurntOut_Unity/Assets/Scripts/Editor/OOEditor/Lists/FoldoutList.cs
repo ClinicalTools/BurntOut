@@ -14,7 +14,11 @@ namespace OOEditor
         /// Creates a new FoldoutList to display the values in the passed list.
         /// </summary>
         /// <param name="value">List of values to display.</param>
-        public FoldoutList(List<T> value) : base(value) { }
+        /// <param name="reorderable">True if the elements can be reordered through displayed buttons.</param>
+        /// <param name="removable">True if the elements can be removed through displayed buttons.</param>
+        /// <param name="addable">True if new elements can be added through a displayed button.</param>
+        public FoldoutList(List<T> value, bool reorderable = true, bool removable = true, 
+            bool addable = true) : base(value, reorderable, removable, addable) { }
         
         /// <summary>
         /// Draws the foldout list.
@@ -27,21 +31,25 @@ namespace OOEditor
                 {
                     Drawers[i].DrawFoldout();
 
-                    // The first element cannot be moved up,
-                    //  so a blank space is used instead of a button
-                    if (i > 0)
-                        UpButtons[i - 1].Draw();
-                    else
-                        ButtonSpace.Draw();
+                    if (Reorderable)
+                    {
+                        // The first element cannot be moved up,
+                        //  so a blank space is used instead of a button
+                        if (i > 0)
+                            UpButtons[i - 1].Draw();
+                        else
+                            ButtonSpace.Draw();
 
-                    // The last element cannot be moved down,
-                    //  so a blank space is used instead of a button
-                    if (i < List.Count - 1)
-                        DownButtons[i].Draw();
-                    else
-                        ButtonSpace.Draw();
+                        // The last element cannot be moved down,
+                        //  so a blank space is used instead of a button
+                        if (i < List.Count - 1)
+                            DownButtons[i].Draw();
+                        else
+                            ButtonSpace.Draw();
+                    }
 
-                    DelButtons[i].Draw();
+                    if (Removable)
+                        DelButtons[i].Draw();
                 }
 
                 // Ensure the drawer is still valid, 
@@ -52,7 +60,8 @@ namespace OOEditor
                         Drawers[i].Draw(List[i]);
             }
 
-            AddButton.Draw();
+            if (Addable)
+                AddButton.Draw();
         }
     }
 }

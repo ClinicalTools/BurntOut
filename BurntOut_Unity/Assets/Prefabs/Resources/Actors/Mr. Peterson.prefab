@@ -100,8 +100,12 @@ MonoBehaviour:
   actor:
     id: 1097336261
     name: Mr. Peterson
-    icon: {fileID: 2800000, guid: 7fbe7ce84676bbd4e9fe08c7086c8066, type: 3}
-    normal: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
+    icon: {fileID: 21300000, guid: 7fbe7ce84676bbd4e9fe08c7086c8066, type: 3}
+    neutral: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    scared: {fileID: 0}
 --- !u!136 &136792222612499164
 CapsuleCollider:
   m_ObjectHideFlags: 1
