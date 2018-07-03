@@ -5,9 +5,11 @@ using UnityEngine;
 public class ICU_MovementManager : MonoBehaviour {
 
     public GameObject startingPosition;
+    public GameObject playerLookHere1;
+    public GameObject playerLookHere2;
     public GameObject startingRotation;
     public GameObject targetPosition;
-    public GameObject targetRotation;
+
 
     public GameObject targetsNextMoveToButton;
 
@@ -19,18 +21,20 @@ public class ICU_MovementManager : MonoBehaviour {
 
     private void Start() {
         targetsNextMoveToButton.SetActive(false);
+        playerLookHere1.SetActive(true);
+        playerLookHere2.SetActive(false);
     }
 
     public void MoveAndRotate() {
 
         if (phase == 0) {
             MoveToTarget();
-            RotateToTarget();
+            //RotateToTarget();
             phase = 1;
             targetsNextMoveToButton.SetActive(true);
         } else {
             MoveToTarget();
-            RotateToTarget();
+            //RotateToTarget();
             phase = 0;
             targetsNextMoveToButton.SetActive(false);
         }
@@ -40,29 +44,39 @@ public class ICU_MovementManager : MonoBehaviour {
 
         if (phase == 0) {
             myMoveTo.enabled = true;
-            myMoveTo.target = targetPosition;          
+            myMoveTo.target = targetPosition;
+
+            playerLookHere1.SetActive(false);
+            playerLookHere2.SetActive(true);
         }
 
         if (phase == 1) {
             myMoveTo.enabled = true;
             myMoveTo.target = startingPosition;
+
+            playerLookHere1.SetActive(true);
+            playerLookHere2.SetActive(false);
         }
 
     }
+
+    /*
 
     public void RotateToTarget() {
 
         if (phase == 0) {
             myRotateTo.enabled = true;
-            myRotateTo.target = targetRotation;
+            myRotateTo.target = playerLookHere1;
         }
 
         if (phase == 1) {
             myRotateTo.enabled = true;
-            myRotateTo.target = startingRotation;
+            myRotateTo.target = playerLookHere2;
         }
 
     }
+
+    */
     
 
 }
