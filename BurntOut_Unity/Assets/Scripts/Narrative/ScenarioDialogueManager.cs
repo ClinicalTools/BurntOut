@@ -157,6 +157,7 @@ namespace Narrative
             inChoice = true;
             continueButton.gameObject.SetActive(true);
 
+
             promptText.transform.parent.gameObject.SetActive(false);
             foreach (var optionBtn in optionButtons)
                 optionBtn.gameObject.SetActive(false);
@@ -182,6 +183,8 @@ namespace Narrative
 
         private void StartDialogue()
         {
+            continueButton.gameObject.SetActive(true);
+
             inDialogue = true;
 
             foreach (var actorObject in actorObjects)
@@ -197,6 +200,8 @@ namespace Narrative
 
         private void EndDialogue()
         {
+            continueButton.gameObject.SetActive(false);
+
             if (eventSet >= choices.Count && scenario.sceneChange && scenario.autoChangeScene)
                 ChangeScenes();
 
