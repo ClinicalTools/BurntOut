@@ -1,87 +1,109 @@
 ﻿using OOEditor;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Narrative.Inspector
 {
-    public class ActorPrefabDrawer : FoldoutClassDrawer<Actor>
+    public class ActorPrefabDrawer : FoldoutClassDrawer<ActorObject>
     {
-        private readonly TextField actorName;
+        private readonly DelayedTextField actorName;
         private readonly List<Tuple<LabelField, SpriteField>> spriteTuples
             = new List<Tuple<LabelField, SpriteField>>();
 
         protected override Foldout Foldout { get; }
 
-        public ActorPrefabDrawer(Actor value) : base(value)
+        public ActorPrefabDrawer(ActorObject value) : base(value)
         {
-            if (value.icon != null)
-                Foldout = new Foldout(value.name, null, value.icon.texture);
+            if (Value.actor.icon != null)
+                Foldout = new Foldout(Value.actor.name, null, Value.actor.icon.texture);
             else
-                Foldout = new Foldout(value.name, null);
+                Foldout = new Foldout(Value.actor.name, null);
             Foldout.Style.FontStyle = FontStyle.Bold;
 
-            actorName = new TextField(Value.name, "Name:");
+            actorName = new DelayedTextField(Value.actor.name, "Name:");
             actorName.Changed += (sender, e) =>
             {
-                Value.name = e.Value;
-                Foldout.Content.text = Value.name;
+                Value.actor.name = e.Value;
+                Foldout.Content.text = Value.actor.name;
+
+                EditorUtility.SetDirty(Value);
+                AssetDatabase.SaveAssets();
             };
 
-            var spriteLabel = new LabelField("Icon:");
-            var spriteField = new SpriteField(value.icon);
+            var spriteField = new SpriteField(Value.actor.icon);
             spriteField.Changed += (sender, e) =>
             {
-                Value.icon = e.Value;
-                if (Value.icon != null)
-                    Foldout.Content.image = Value.icon?.texture;
+                Value.actor.icon = e.Value;
+                if (Value.actor.icon != null)
+                    Foldout.Content.image = Value.actor.icon?.texture;
+
+                EditorUtility.SetDirty(Value);
+                AssetDatabase.SaveAssets();
             };
+            var spriteLabel = new LabelField(spriteField, "Icon:");
             spriteTuples.Add(new Tuple<LabelField, SpriteField>(spriteLabel, spriteField));
 
-            spriteLabel = new LabelField("Neutral:");
-            spriteField = new SpriteField(value.neutral);
+            spriteField = new SpriteField(Value.actor.neutral);
             spriteField.Changed += (sender, e) =>
             {
-                Value.neutral = e.Value;
+                Value.actor.neutral = e.Value;
+
+                EditorUtility.SetDirty(Value);
+                AssetDatabase.SaveAssets();
             };
+            spriteLabel = new LabelField(spriteField, "Neutral:");
             spriteTuples.Add(new Tuple<LabelField, SpriteField>(spriteLabel, spriteField));
 
-            spriteLabel = new LabelField("Happy:");
-            spriteField = new SpriteField(Value.happy);
+            spriteField = new SpriteField(Value.actor.happy);
             spriteField.Changed += (sender, e) =>
             {
-                Value.happy = e.Value;
+                Value.actor.happy = e.Value;
+
+                EditorUtility.SetDirty(Value);
+                AssetDatabase.SaveAssets();
             };
+            spriteLabel = new LabelField(spriteField, "Happy:");
             spriteTuples.Add(new Tuple<LabelField, SpriteField>(spriteLabel, spriteField));
 
-            spriteLabel = new LabelField("Sad:");
-            spriteField = new SpriteField(Value.sad);
+            spriteField = new SpriteField(Value.actor.sad);
             spriteField.Changed += (sender, e) =>
             {
-                Value.sad = e.Value;
+                Value.actor.sad = e.Value;
+
+                EditorUtility.SetDirty(Value);
+                AssetDatabase.SaveAssets();
             };
+            spriteLabel = new LabelField(spriteField, "Sad:");
             spriteTuples.Add(new Tuple<LabelField, SpriteField>(spriteLabel, spriteField));
 
-            spriteLabel = new LabelField("Angry:");
-            spriteField = new SpriteField(Value.angry);
+            spriteField = new SpriteField(Value.actor.angry);
             spriteField.Changed += (sender, e) =>
             {
-                Value.angry = e.Value;
+                Value.actor.angry = e.Value;
+
+                EditorUtility.SetDirty(Value);
+                AssetDatabase.SaveAssets();
             };
+            spriteLabel = new LabelField(spriteField, "Angry:");
             spriteTuples.Add(new Tuple<LabelField, SpriteField>(spriteLabel, spriteField));
 
-            spriteLabel = new LabelField("Scared:");
-            spriteField = new SpriteField(Value.scared);
+            spriteField = new SpriteField(Value.actor.scared);
             spriteField.Changed += (sender, e) =>
             {
-                Value.scared = e.Value;
+                Value.actor.scared = e.Value;
+
+                EditorUtility.SetDirty(Value);
+                AssetDatabase.SaveAssets();
             };
+            spriteLabel = new LabelField(spriteField, "Scared:");
             spriteTuples.Add(new Tuple<LabelField, SpriteField>(spriteLabel, spriteField));
         }
 
         protected override void Display()
         {
-            actorName.Draw(Value.name);
+            actorName.Draw(Value.actor.name);
 
             //using (GUIContainer.Draw())
             using (Horizontal.Draw())

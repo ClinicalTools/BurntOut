@@ -11,6 +11,11 @@ namespace Narrative.Inspector
     /// </summary>
     public class ScenarioEditorWindow : EditorWindow
     {
+        private const int DEFAULT_FONT_SIZE = 11;
+        private const int MIN_FONT_SIZE = 10;
+        private const int MAX_FONT_SIZE = 20;
+        private const int TOOLBAR_FONT_SIZE = 12;
+
         // Scene controls
         private ScenarioEditor scenarioEditor;
         private ScrollView scrollView = new ScrollView();
@@ -22,8 +27,8 @@ namespace Narrative.Inspector
         private TabControl tabs;
         private IntSlider fontSizeSlider;
         private Button loadBtn, saveBtn;
-        private readonly OverrideTextStyle toolbarTextStyle = new OverrideTextStyle(12);
-        private readonly OverrideTextStyle textStyle = new OverrideTextStyle();
+        private readonly OverrideTextStyle toolbarTextStyle = new OverrideTextStyle(TOOLBAR_FONT_SIZE);
+        private readonly OverrideTextStyle textStyle = new OverrideTextStyle(DEFAULT_FONT_SIZE);
 
         // General scenario drawer
         private SceneGeneralEditor scenarioGeneralEditor;
@@ -108,7 +113,7 @@ namespace Narrative.Inspector
             string[] tabNames = { "General", "Actors", "Events" };
             tabs = new TabControl(0, tabNames);
 
-            fontSizeSlider = new IntSlider(11, 10, 20)
+            fontSizeSlider = new IntSlider(DEFAULT_FONT_SIZE, MIN_FONT_SIZE, MAX_FONT_SIZE)
             {
                 MaxWidth = 150
             };

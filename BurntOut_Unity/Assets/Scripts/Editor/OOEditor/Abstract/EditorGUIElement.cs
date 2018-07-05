@@ -10,9 +10,9 @@ namespace OOEditor
     {
         // 4,294,967,295 elements should be enough
         // Note that this is shared between all instances of EditorGUIElement, not just those in a particular window
-        protected static uint elementNums = 0;
+        protected static uint ElementNums { get; set; } = 0;
 
-        protected string Name { get; set; }
+        public string Name { get; protected set; }
 
         private bool wasFocused;
         private bool isFocused;
@@ -145,7 +145,7 @@ namespace OOEditor
                 Content.image = image;
 
 
-            Name = (elementNums++).ToString("X8");
+            Name = (ElementNums++).ToString("X8");
         }
 
         /// <summary>

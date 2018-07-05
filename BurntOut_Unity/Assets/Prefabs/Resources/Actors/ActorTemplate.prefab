@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4043312191257904}
   - component: {fileID: 136004719035257584}
-  - component: {fileID: 114095168647864746}
+  - component: {fileID: 114504434433794190}
   - component: {fileID: 114885765217233510}
   - component: {fileID: 212713074730169338}
   m_Layer: 0
@@ -74,7 +74,7 @@ Transform:
   m_Father: {fileID: 4043312191257904}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -43.785004}
---- !u!114 &114095168647864746
+--- !u!114 &114504434433794190
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

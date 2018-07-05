@@ -30,6 +30,20 @@ namespace Narrative.Inspector
                 }
             }
         }
+        protected Color HealthColor
+        {
+            get
+            {
+                if (Value.healthChange > 10)
+                    return EditorColors.Green;
+                else if (Value.healthChange > 0)
+                    return EditorColors.YellowGreen;
+                else if (Value.healthChange >= -10)
+                    return EditorColors.Yellow;
+                else
+                    return EditorColors.Red;
+            }
+        }
 
         private Foldout eventsFoldout;
         private ReorderableList<Task, TaskDrawer> taskList;
@@ -68,6 +82,7 @@ namespace Narrative.Inspector
             taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
 
             resultPopup = new EnumPopup(Value.result, "Result:");
+            resultPopup.Style.FontColor = ResultColor;
             resultPopup.Changed += (sender, e) =>
             {
                 Value.result = (OptionResult)(e.Value);
@@ -78,25 +93,19 @@ namespace Narrative.Inspector
             };
 
             healthChangeField = new TextField(Value.HealthChangeStr, "Health Change:");
+            healthChangeField.Style.FontColor = HealthColor;
             healthChangeField.Changed += (sender, e) =>
             {
                 Value.HealthChangeStr = e.Value;
-                if (Value.healthChange > 10)
-                    healthChangeField.Style.FontColor = EditorColors.Green;
-                else if (Value.healthChange > 0)
-                    healthChangeField.Style.FontColor = EditorColors.YellowGreen;
-                else if (Value.healthChange >= -10)
-                    healthChangeField.Style.FontColor = EditorColors.Yellow;
-                else 
-                    healthChangeField.Style.FontColor = EditorColors.Red;
+                healthChangeField.Style.FontColor = HealthColor;
             };
 
-            feedbackLabel = new LabelField("Feedback:");
             feedback = new TextArea(Value.feedback);
             feedback.Changed += (sender, e) =>
             {
                 Value.feedback = e.Value;
             };
+            feedbackLabel = new LabelField(feedback, "Feedback:");
         }
 
         protected override void Display()

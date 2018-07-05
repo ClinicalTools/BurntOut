@@ -22,9 +22,8 @@ namespace OOEditor
             }
             set
             {
-                // If the value has changed, and the control has been drawn at least once, 
-                //  call the changed event
-                if (!firstDraw && !(value?.Equals(this.value) ?? this.value == null))
+                // If the value has changed, call the changed event
+                if (!(value?.Equals(this.value) ?? this.value == null))
                 {
                     var changedArgs = new ControlChangedArgs<T>(this.value, value);
                     Changed?.Invoke(this, changedArgs);
@@ -37,7 +36,6 @@ namespace OOEditor
         /// <summary>
         /// Occurs when the control's value changes.
         /// </summary>
-        /// <remarks>Not called before the first draw.</remarks>
         public event EventHandler<ControlChangedArgs<T>> Changed;
 
         protected override void ResetGUIStyle()
@@ -58,20 +56,12 @@ namespace OOEditor
         protected GUIControl(string text = null, string tooltip = null, Texture image = null) 
             : base(text, tooltip, image) { }
 
-        protected bool firstDraw = true;
         /// <summary>
         /// Draws the control.
         /// </summary>
         public override void Draw()
         {
             ResetGUIStyle();
-
-            // First draw calls changed, since it changed from its default
-            if (firstDraw)
-            {
-                Changed?.Invoke(this, new ControlChangedArgs<T>(default(T), Value));
-                firstDraw = false;
-            }
             OOEditorManager.DrawGuiElement(this, PrepareDisplay, Content);
         }
 
