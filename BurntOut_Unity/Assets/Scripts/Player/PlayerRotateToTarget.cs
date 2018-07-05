@@ -65,7 +65,16 @@ public class PlayerRotateToTarget : MonoBehaviour
         oldPos = transform.position;
         oldDir = transform.forward;
         oldRot = transform.rotation;
-        movePos = target.transform.position + (target.transform.forward * -dist);
+
+        var frontPos = target.transform.position + (target.transform.forward * dist);
+        var frontDist = Vector3.Distance(frontPos, oldPos);
+        var backPos = target.transform.position - (target.transform.forward * dist);
+        var backDist = Vector3.Distance(backPos, oldPos);
+
+        if (frontDist < backDist)
+            movePos = frontPos;
+        else
+            movePos = backPos;
 
         this.target = target;
         StartCoroutine(MoveLook());
