@@ -1,6 +1,7 @@
 ﻿using OOEditor.Internal;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace OOEditor
 {
@@ -48,17 +49,24 @@ namespace OOEditor
                 AddRow();
         }
 
+        // Used to ensure the correct control is selected after rows swap
+        private string setFocusedControl;
         /// <summary>
         /// Swaps the values and drawers at the passed indices.
         /// </summary>
         protected virtual void SwapRows(int index1, int index2)
         {
+            var focusedControl = GUI.GetNameOfFocusedControl();
+            
             var val = List[index1];
             List.RemoveAt(index1);
             List.Insert(index2, val);
             var draw = Drawers[index1];
             Drawers.RemoveAt(index1);
             Drawers.Insert(index2, draw);
+
+            // Ensure rearranging didn't change the focus
+            setFocusedControl = focusedControl;
         }
 
         /// <summary>
@@ -95,20 +103,11 @@ namespace OOEditor
             Drawers.RemoveAt(index);
         }
 
-        // Used to call the changed event in the first draw
-        private bool firstDraw = true;
         /// <summary>
         /// Draws the list.
         /// </summary>
         public virtual void Draw()
         {
-            // First draw calls changed, since it changed from its default
-            if (firstDraw)
-            {
-                Changed?.Invoke(this, new ListChangedArgs<T>(List));
-                firstDraw = false;
-            }
-
             var count = List.Count;
 
             // Since the list is shared outside this class, values must be constantly updated to avoid errors
@@ -117,13 +116,31 @@ namespace OOEditor
             while (Drawers.Count > List.Count)
                 RemoveRow(List.Count);
             for (var i = 0; i < List.Count; i++)
+            {
                 if (!Drawers[i].Value.Equals(List[i]))
-                    Drawers[i].Value = List[i];
+                {
+                    object[] args = { List[i] };
+                    Drawers[i] = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
+                }
+            }
+
+            // Ensures element that was previously selected if it swapped positions
+            if (setFocusedControl != null)
+            {
+                GUI.FocusControl(setFocusedControl);
+                setFocusedControl = null;
+            }
 
             // Listen to whether contained elements change
             OOEditorManager.Changed += OnChanged;
             Display();
             OOEditorManager.Changed -= OnChanged;
+
+
+            if (setFocusedControl != null)
+            {
+                GUI.FocusControl(setFocusedControl);
+            }
 
             // This allows value type lists to function correctly
             // Also ensures the drawer is using a valid reference

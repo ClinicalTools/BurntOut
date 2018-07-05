@@ -57,7 +57,7 @@ namespace OOEditor
                 if (i < Drawers.Count && Drawers[i].Expanded)
                     using (Indent.Draw())
                     using (GUIContainer.Draw())
-                        Drawers[i].Draw(List[i]);
+                        Drawers[i].Draw();
             }
 
             if (Addable)

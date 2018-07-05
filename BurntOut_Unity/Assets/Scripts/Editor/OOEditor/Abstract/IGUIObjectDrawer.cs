@@ -15,5 +15,9 @@
         /// </summary>
         /// <param name="value">Updated value to draw.</param>
         void Draw(T value);
+        /// <summary>
+        /// Draws the object in the editor.
+        /// </summary>
+        void Draw();
     }
 }

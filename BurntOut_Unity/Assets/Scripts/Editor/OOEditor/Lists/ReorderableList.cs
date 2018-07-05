@@ -53,7 +53,7 @@ namespace OOEditor
 
 
                     OOEditorManager.Wait = true;
-                    Drawers[index].Draw(List[index]);
+                    Drawers[index].Draw();
                     OOEditorManager.EmptyQueueInHorizontalRect(rect);
 
                     if (mouseEvent)

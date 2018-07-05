@@ -24,10 +24,18 @@
         /// Updates the class's value and then draws it.
         /// </summary>
         /// <param name="value">Updated value to draw.</param>
-        public void Draw(T value)
+        public virtual void Draw(T value)
         {
             Value = value;
 
+            Display();
+        }
+
+        /// <summary>
+        /// Draws the class in the editor.
+        /// </summary>
+        public virtual void Draw()
+        {
             Display();
         }
 

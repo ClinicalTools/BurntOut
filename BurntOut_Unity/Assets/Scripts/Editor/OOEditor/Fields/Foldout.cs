@@ -100,6 +100,7 @@ namespace OOEditor
             if (Event.current.rawType == EventType.MouseDown &&
                 position.Contains(Event.current.mousePosition))
             {
+                Debug.Log("clicked");
                 GUI.FocusControl(Name);
 
                 // Needed for things to be selected correctly

@@ -123,7 +123,7 @@ namespace OOEditor
             {
                 using (Horizontal.Draw())
                 {
-                    Drawers[i].Draw(List[i]);
+                    Drawers[i].Draw();
 
                     if (Reorderable)
                     {

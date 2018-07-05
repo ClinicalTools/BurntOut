@@ -8,9 +8,10 @@ namespace Narrative.Inspector
 {
     public class ActorPrefabDrawer : FoldoutClassDrawer<ActorObject>
     {
-        private readonly DelayedTextField actorName;
+        private readonly DelayedTextField actorNameField;
         private readonly List<Tuple<LabelField, SpriteField>> spriteTuples
             = new List<Tuple<LabelField, SpriteField>>();
+        private readonly Button deleteButton;
 
         protected override Foldout Foldout { get; }
 
@@ -22,8 +23,8 @@ namespace Narrative.Inspector
                 Foldout = new Foldout(Value.actor.name, null);
             Foldout.Style.FontStyle = FontStyle.Bold;
 
-            actorName = new DelayedTextField(Value.actor.name, "Name:");
-            actorName.Changed += (sender, e) =>
+            actorNameField = new DelayedTextField(Value.actor.name, "Name:");
+            actorNameField.Changed += (sender, e) =>
             {
                 Value.actor.name = e.Value;
                 Foldout.Content.text = Value.actor.name;
@@ -31,6 +32,9 @@ namespace Narrative.Inspector
                 EditorUtility.SetDirty(Value);
                 AssetDatabase.SaveAssets();
             };
+
+            deleteButton = new Button("Delete Actor Prefab");
+            deleteButton.Pressed += DeleteButton_Pressed;
 
             var spriteField = new SpriteField(Value.actor.icon);
             spriteField.Changed += (sender, e) =>
@@ -100,12 +104,17 @@ namespace Narrative.Inspector
             spriteLabel = new LabelField(spriteField, "Scared:");
             spriteTuples.Add(new Tuple<LabelField, SpriteField>(spriteLabel, spriteField));
         }
+        
+        private void DeleteButton_Pressed(object sender, EventArgs e)
+        {
+            var path = AssetDatabase.GetAssetPath(Value.gameObject);
+            AssetDatabase.DeleteAsset(path);
+        }
 
         protected override void Display()
         {
-            actorName.Draw(Value.actor.name);
+            actorNameField.Draw(Value.actor.name);
 
-            //using (GUIContainer.Draw())
             using (Horizontal.Draw())
             {
                 foreach (var spriteTuple in spriteTuples)
@@ -117,6 +126,8 @@ namespace Narrative.Inspector
                     }
                 }
             }
+
+            deleteButton.Draw();
         }
     }
 }

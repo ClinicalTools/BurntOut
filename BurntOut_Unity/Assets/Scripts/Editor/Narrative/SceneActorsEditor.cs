@@ -31,7 +31,6 @@ namespace Narrative.Inspector
             if (!AssetDatabase.IsValidFolder("Assets/Prefabs/Resources/Actors"))
                 AssetDatabase.CreateFolder("Assets/Prefabs/Resources", "Actors");
 
-
             var actorResources = Resources.LoadAll("Actors", typeof(ActorObject));
             foreach (var obj in actorResources)
             {
@@ -45,13 +44,6 @@ namespace Narrative.Inspector
 
             actorPrefabs = new FoldoutList<ActorObject, ActorPrefabDrawer>(actorPrefabsList,
                 false, false, false);
-            actorPrefabs.Changed += (sender, e) =>
-            {
-                //foreach (var resourceObj in actorResources)
-                    //EditorUtility.SetDirty(resourceObj);
-
-                //AssetDatabase.SaveAssets();
-            };
 
             createActorBtn = new Button("New Actor")
             {
@@ -92,6 +84,17 @@ namespace Narrative.Inspector
 
         protected override void Display()
         {
+            actorPrefabsList.Clear();
+            var actorResources = Resources.LoadAll("Actors", typeof(ActorObject));
+            foreach (var obj in actorResources)
+            {
+                var actor = (ActorObject)obj;
+                if (actor.actor?.id == 0)
+                    actorTemplate = actor.gameObject;
+                else if (actor.actor != null)
+                    actorPrefabsList.Add(actor);
+            }
+
             actorPrefabs.Draw(actorPrefabsList);
 
             using (Indent.Draw())

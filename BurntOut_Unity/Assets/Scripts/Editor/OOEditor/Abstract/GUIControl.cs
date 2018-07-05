@@ -69,7 +69,7 @@ namespace OOEditor
         /// Updates the control's value and then draws it.
         /// </summary>
         /// <param name="value">Updated value for the control.</param>
-        public void Draw(T value)
+        public virtual void Draw(T value)
         {
             this.value = value;
 
