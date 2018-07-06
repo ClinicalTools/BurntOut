@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScenario/Scenario1.unity
     guid: 7a1a8445a44661d4ca4cce811b60aba7
+  - enabled: 1
+    path: Assets/Scenes/TestScenario/ICU_Scenario.unity
+    guid: d11f4d668a4b15344bca2039662fca4d
   m_configObjects: {}
