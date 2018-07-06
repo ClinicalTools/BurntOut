@@ -13,7 +13,9 @@ namespace Narrative
         private const string PLAYER_NAME = "Player";
         private const string NARRATOR_NAME = "NARRATOR";
 
-        // References to other gui objects set in the editor
+        // References to other objects set in the editor
+        public ScenarioManager scenarioManager;
+
         public Button[] optionButtons = new Button[3];
         public Button continueButton;
         public Text nameText;
@@ -26,6 +28,13 @@ namespace Narrative
         private Text[] optionButtonsText;
         private ActorObject[] actorObjects;
 
+        // Data used to keep track of place in the dialogue 
+        private Scenario scenario;
+        private List<Choice> choices;
+        private int eventSet = -1;
+        private bool inChoice, inDialogue = false;
+        private Option option;
+        
         // Use this for initialization
         private void Awake()
         {
@@ -34,7 +43,7 @@ namespace Narrative
 
         private void Start()
         {
-            scenario = ScenarioManager.Instance.scenario;
+            scenario = scenarioManager.Scenario;
             choices = scenario.Choices;
 
             actorObjects = FindObjectsOfType<ActorObject>();
@@ -58,11 +67,6 @@ namespace Narrative
             DialogueUI.SetActive(false);
         }
 
-        private Scenario scenario;
-        private List<Choice> choices;
-        private int eventSet = -1;
-        private bool inChoice, inDialogue = false;
-        private Option option;
         // Indicates whether the auto progression should be running
         // Queue of tasks (actions, emotions, and dialogue) to perform in current choice or option
         private readonly Queue<Task> tasks = new Queue<Task>();

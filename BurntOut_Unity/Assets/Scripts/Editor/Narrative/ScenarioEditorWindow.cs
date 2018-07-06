@@ -81,8 +81,8 @@ namespace Narrative.Inspector
             if (scenarioManager == null)
                 scenarioManager = scenarioManagerObj.AddComponent<ScenarioManager>();
 
-            if (scenarioManager.scenario == null)
-                scenarioManager.scenario = new Scenario(new Scenario[0]);
+            if (scenarioManager.Scenario == null)
+                scenarioManager.Scenario = new Scenario(new Scenario[0]);
 
             InitScenarioControls();
         }
@@ -104,7 +104,7 @@ namespace Narrative.Inspector
 
         private void InitScenarioControls()
         {
-            if (scenarioManager?.scenario == null)
+            if (scenarioManager?.Scenario == null)
             {
                 Debug.LogError("Scenario Manager and its scenario should not be null.");
                 return;
@@ -130,15 +130,15 @@ namespace Narrative.Inspector
             loadBtn.Style.FontStyle = FontStyle.Bold;
             loadBtn.Pressed += LoadBtn_Pressed;
 
-            scenarioGeneralEditor = new SceneGeneralEditor(scenarioManager.scenario);
-            scenarioEditor = new ScenarioEditor(scenarioManager.scenario);
-            choiceList = new FoldoutList<Choice, ChoiceEditor>(scenarioManager.scenario.Choices);
-            sceneActorsEditor = new SceneActorsEditor(scenarioManager.scenario);
+            scenarioGeneralEditor = new SceneGeneralEditor(scenarioManager.Scenario);
+            scenarioEditor = new ScenarioEditor(scenarioManager.Scenario);
+            choiceList = new FoldoutList<Choice, ChoiceEditor>(scenarioManager.Scenario.Choices);
+            sceneActorsEditor = new SceneActorsEditor(scenarioManager.Scenario);
         }
 
         private void SaveBtn_Pressed(object sender, EventArgs e)
         {
-            NarrativeFileManager.SaveScenario(scenarioManager.scenario);
+            NarrativeFileManager.SaveScenario(scenarioManager.Scenario);
         }
 
         private void LoadBtn_Pressed(object sender, EventArgs e)
@@ -147,12 +147,12 @@ namespace Narrative.Inspector
             if (scenario == null)
                 return;
 
-            scenarioManager.scenario = scenario;
+            scenarioManager.Scenario = scenario;
         }
 
         void OnGUI()
         {
-            if (scenarioManager?.scenario == null)
+            if (scenarioManager?.Scenario == null)
             {
                 initButton.Draw();
             }
@@ -186,12 +186,12 @@ namespace Narrative.Inspector
                 {
                     // Edit basic scene info
                     if (tabs.Value == 0)
-                        scenarioGeneralEditor.Draw(scenarioManager.scenario);
+                        scenarioGeneralEditor.Draw(scenarioManager.Scenario);
                     // Edit scenario
                     else if (tabs.Value == 1)
-                        sceneActorsEditor.Draw(scenarioManager.scenario);
+                        sceneActorsEditor.Draw(scenarioManager.Scenario);
                     else if (tabs.Value == 2)
-                        choiceList.Draw(scenarioManager.scenario.Choices);
+                        choiceList.Draw(scenarioManager.Scenario.Choices);
                 }
             }
         }

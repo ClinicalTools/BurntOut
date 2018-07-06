@@ -14,7 +14,7 @@ namespace Narrative.Inspector
         private readonly FoldoutList<Choice, ChoiceEditor> choiceList;
 
         private readonly TextField nameField;
-        private readonly Foldout actorsFoldout, choicesFoldout;
+        private readonly Foldout choicesFoldout;
         private readonly LabelField endNarrativeLabel;
         private readonly TextArea endNarrativeField;
 
@@ -26,13 +26,6 @@ namespace Narrative.Inspector
             nameField.Changed += (sender, e) =>
             {
                 Value.name = e.Value;
-            };
-
-            actorsFoldout = new Foldout("Actors");
-            actorsFoldout.Style.FontStyle = FontStyle.Bold;
-            actorsList = new ReorderableList<Actor, ActorDrawer>(Value.Actors)
-            {
-                DefaultElement = () => new Actor(Value.Actors.ToArray())
             };
 
             choicesFoldout = new Foldout("Choices");
@@ -52,12 +45,7 @@ namespace Narrative.Inspector
             CurrentScenario = Value;
 
             nameField.Draw(Value.name);
-
-            actorsFoldout.Draw();
-            if (actorsFoldout.Value)
-                using (Indent.Draw())
-                    actorsList.Draw(Value.Actors);
-
+            
             choicesFoldout.Draw();
             if (choicesFoldout.Value)
                 using (Indent.Draw())
