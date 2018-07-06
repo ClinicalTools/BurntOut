@@ -47,8 +47,6 @@ namespace OOEditor
                 AddRow();
         }
 
-        // Used to ensure the correct control is selected after rows swap
-        private string setFocusedControl;
         /// <summary>
         /// Swaps the values and drawers at the passed indices.
         /// </summary>
@@ -62,9 +60,6 @@ namespace OOEditor
             var draw = Drawers[index1];
             Drawers.RemoveAt(index1);
             Drawers.Insert(index2, draw);
-
-            // Ensure rearranging didn't change the focus
-            setFocusedControl = focusedControl;
         }
 
         /// <summary>
@@ -139,24 +134,11 @@ namespace OOEditor
                 if (!Drawers[i].Value.Equals(List[i]))
                     Drawers[i] = CreateDrawer(i);
 
-            // Ensures element that was previously selected if it swapped positions
-            if (setFocusedControl != null)
-            {
-                GUI.FocusControl(setFocusedControl);
-                setFocusedControl = null;
-            }
-
             // Listen to whether contained elements change
             OOEditorManager.Changed += OnChanged;
             Display();
             OOEditorManager.Changed -= OnChanged;
-
-
-            if (setFocusedControl != null)
-            {
-                GUI.FocusControl(setFocusedControl);
-            }
-
+            
             // This allows value type lists to function correctly
             // Also ensures the drawer is using a valid reference
             for (int i = 0; i < List.Count; i++)

@@ -39,6 +39,16 @@ namespace OOEditor.Internal
             }
         }
         /// <summary>
+        /// Makes named control appear focused.
+        /// </summary>
+        /// <param name="name">Name of the control to focus.</param>
+        public static void SetFocusedControl(string name)
+        {
+            GUI.FocusControl(null);
+            focusedControl = name;
+        }
+
+        /// <summary>
         /// Allows removing the focus from an unselected control without focusing something else.
         /// </summary>
         public static void ResetFocusedControl()

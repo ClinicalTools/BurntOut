@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using OOEditor.Internal;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace OOEditor
 {
@@ -17,9 +20,33 @@ namespace OOEditor
         /// <param name="reorderable">True if the elements can be reordered through displayed buttons.</param>
         /// <param name="removable">True if the elements can be removed through displayed buttons.</param>
         /// <param name="addable">True if new elements can be added through a displayed button.</param>
-        public FoldoutList(List<T> value, bool reorderable = true, bool removable = true, 
+        public FoldoutList(List<T> value, bool reorderable = true, bool removable = true,
             bool addable = true) : base(value, reorderable, removable, addable) { }
-        
+
+        protected override void AddRow()
+        {
+            base.AddRow();
+
+            // Buttons of the row should highlight the foldout that moved
+            var index = UpButtons.Count - 1;
+            if (index > -1)
+            {
+                UpButtons[index].Pressed += (sender, e) =>
+                {
+                    OOEditorManager.SetFocusedControl(Drawers[index].Foldout.Name);
+                    //GUI.FocusControl(Drawers[index + 1].Foldout.Name);
+                    //Debug.Log("a" + Drawers[index].Foldout.Content.text);
+                };
+
+                DownButtons[index].Pressed += (sender, e) =>
+                {
+                    OOEditorManager.SetFocusedControl(Drawers[index + 1].Foldout.Name);
+                    //GUI.FocusControl(Drawers[index].Foldout.Name);
+                    //Debug.Log("b" + Drawers[index].Foldout.Content.text);
+                };
+            }
+        }
+
         /// <summary>
         /// Draws the foldout list.
         /// </summary>

@@ -13,7 +13,7 @@ namespace Narrative.Inspector
             = new List<Tuple<LabelField, SpriteField>>();
         private readonly Button deleteButton;
 
-        protected override Foldout Foldout { get; }
+        public override Foldout Foldout { get; }
 
         public ActorPrefabDrawer(ActorObject value, int index) : base(value, index)
         {

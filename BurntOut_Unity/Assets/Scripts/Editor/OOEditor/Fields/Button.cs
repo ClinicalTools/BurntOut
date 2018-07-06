@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOEditor.Internal;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,7 +31,11 @@ namespace OOEditor
         {
             Value = GUI.Button(position, Content, GUIStyle);
             if (Value)
+            {
+                GUI.FocusControl(null);
+                OOEditorManager.ResetFocusedControl();
                 Pressed?.Invoke(this, new EventArgs());
+            }
         }
     }
 }

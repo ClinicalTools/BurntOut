@@ -10,7 +10,7 @@ namespace Narrative.Inspector
     {
         protected string FoldoutName =>
             $"Option {Index + 1} - {Value.name}";
-        protected override Foldout Foldout { get; }
+        public override Foldout Foldout { get; }
 
         protected Color? ResultColor
         {

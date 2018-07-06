@@ -37,11 +37,11 @@ namespace OOEditor
                 }
             }
         }
-
+        
         /// <summary>
         /// Foldout representing the class drawer.
         /// </summary>
-        protected abstract Foldout Foldout { get; }
+        public abstract Foldout Foldout { get; }
 
         /// <summary>
         /// Occurs when the control's value changes.

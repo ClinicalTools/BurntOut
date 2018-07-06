@@ -9,7 +9,7 @@ namespace Narrative.Inspector
     public class ChoiceEditor : FoldoutClassDrawer<Choice>
     {
         protected string FoldoutName => $"{(Value.isChoice ? "Choice" : "Events")} - {Value.name}";
-        protected override Foldout Foldout { get; }
+        public override Foldout Foldout { get; }
 
         // Basic info fields
         private readonly TextField nameField;

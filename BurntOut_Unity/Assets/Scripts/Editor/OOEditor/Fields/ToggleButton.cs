@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOEditor.Internal;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,7 +33,11 @@ namespace OOEditor
             bool lastVal = Value;
             Value = GUI.Toggle(position, Value, Content, GUIStyle);
             if (lastVal != Value)
+            {
+                GUI.FocusControl(null);
+                OOEditorManager.ResetFocusedControl();
                 Pressed?.Invoke(this, new EventArgs());
+            }
         }
     }
 }
