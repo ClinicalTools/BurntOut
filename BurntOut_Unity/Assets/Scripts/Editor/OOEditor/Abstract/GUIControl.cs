@@ -23,13 +23,13 @@ namespace OOEditor
             set
             {
                 // If the value has changed, call the changed event
-                if (!(value?.Equals(this.value) ?? this.value == null))
+                if (!(value?.Equals(this.value) ?? (this.value == null)))
                 {
+                    this.value = value;
                     var changedArgs = new ControlChangedArgs<T>(this.value, value);
                     Changed?.Invoke(this, changedArgs);
                     OOEditorManager.ElementChanged(this, changedArgs);
                 }
-                this.value = value;
             }
         }
 

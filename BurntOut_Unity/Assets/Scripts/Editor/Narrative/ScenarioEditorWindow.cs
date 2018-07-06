@@ -17,7 +17,6 @@ namespace Narrative.Inspector
         private const int TOOLBAR_FONT_SIZE = 12;
 
         // Scene controls
-        private ScenarioEditor scenarioEditor;
         private ScrollView scrollView = new ScrollView();
 
         private readonly string gameObjectName = "ScenarioManager";
@@ -87,13 +86,13 @@ namespace Narrative.Inspector
             InitScenarioControls();
         }
 
-        void OnInspectorUpdate()
+        private void OnInspectorUpdate()
         {
             ResetScenarioManager();
             Repaint();
         }
 
-        public void OnEnable()
+        private void OnEnable()
         {
             initButton = new Button("Create Scenario Manager", "Creates a scenario manager for the current scene");
             initButton.Pressed += (o, sender) =>
@@ -131,7 +130,6 @@ namespace Narrative.Inspector
             loadBtn.Pressed += LoadBtn_Pressed;
 
             scenarioGeneralEditor = new SceneGeneralEditor(scenarioManager.Scenario);
-            scenarioEditor = new ScenarioEditor(scenarioManager.Scenario);
             choiceList = new FoldoutList<Choice, ChoiceEditor>(scenarioManager.Scenario.Choices);
             sceneActorsEditor = new SceneActorsEditor(scenarioManager.Scenario);
         }
@@ -158,10 +156,10 @@ namespace Narrative.Inspector
             }
             else
             {
-                if (scenarioManager == null || sceneActorsEditor == null)
+                if (scenarioManager == null)
                     ResetScenarioManager();
 
-                if (scenarioEditor == null)
+                if (scenarioGeneralEditor == null || choiceList == null || sceneActorsEditor == null)
                     InitScenarioControls();
 
                 // Allows the scene to save changes and 'undo' to be possible

@@ -328,7 +328,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1976377579}
   - {fileID: 983121466}
   - {fileID: 1280727972}
   m_Father: {fileID: 0}
@@ -7636,7 +7635,6 @@ MonoBehaviour:
     sceneChangeTriggers:
     - type: 1
       id: -608044
-    actors: []
     choices:
     - name: Talking to Dr. Belmont
       text: 
@@ -7648,7 +7646,7 @@ MonoBehaviour:
       - action: 0
         actorId: -608044
         emotion: 0
-        dialogue: Hello there. Yes you are thank you
+        dialogue: Hello there.
       - action: 0
         actorId: 1
         emotion: 0
@@ -7770,9 +7768,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1976377579}
   m_Father: {fileID: 21853133}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989074762
 GameObject:
@@ -9856,7 +9855,7 @@ Transform:
   - {fileID: 2000011294}
   - {fileID: 244093651}
   m_Father: {fileID: 21853133}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1299838305
 Prefab:
@@ -15983,11 +15982,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1976377577}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5118248, y: 1.5, z: 0.015053261}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1302764023}
-  m_Father: {fileID: 21853133}
+  m_Father: {fileID: 983121466}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1976377580
@@ -16001,6 +16000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a624d0bf28e87af4f93fbcf376f293b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scenarioManager: {fileID: 983121464}
   optionButtons:
   - {fileID: 1591376150}
   - {fileID: 1423015039}

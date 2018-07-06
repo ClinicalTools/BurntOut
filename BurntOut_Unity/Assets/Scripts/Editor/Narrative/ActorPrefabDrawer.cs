@@ -15,7 +15,7 @@ namespace Narrative.Inspector
 
         protected override Foldout Foldout { get; }
 
-        public ActorPrefabDrawer(ActorObject value) : base(value)
+        public ActorPrefabDrawer(ActorObject value, int index) : base(value, index)
         {
             if (Value.actor.icon != null)
                 Foldout = new Foldout(Value.actor.name, null, Value.actor.icon.texture);

@@ -6,7 +6,6 @@ namespace Narrative.Inspector
 {
     public class SceneGeneralEditor : ClassDrawer<Scenario>
     {
-        private readonly TextField nameField;
         private readonly Toggle startNarrativeToggle, endNarrativeToggle;
         private readonly TextArea startNarrativeField, endNarrativeField;
 
@@ -17,12 +16,6 @@ namespace Narrative.Inspector
 
         public SceneGeneralEditor(Scenario value) : base(value)
         {
-            nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
-            nameField.Changed += (sender, e) =>
-            {
-                Value.name = e.Value;
-            };
-
             startNarrativeToggle = new Toggle(Value.hasStartNarrative, "Start Narrative:");
             startNarrativeToggle.Changed += (sstarter, e) =>
             {
@@ -69,8 +62,6 @@ namespace Narrative.Inspector
 
         protected override void Display()
         {
-            //nameField.Draw(Value.name);
-
             startNarrativeToggle.Draw(Value.hasStartNarrative);
             if (Value.hasStartNarrative)
                 using (Indent.Draw())

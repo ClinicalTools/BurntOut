@@ -14,11 +14,11 @@ namespace Narrative.Inspector
             // Get the folder to save the scenario in
             string json = JsonUtility.ToJson(scenario);
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
+            path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name;
             Directory.CreateDirectory(path);
 
             // Name.yyyy.MM.dd.letter.json
-            string fileName = scenario.name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
+            string fileName = SceneManager.GetActiveScene().name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
 
             // Alphabetical character based on number of similar files saved today
             char lastLetter = 'a';

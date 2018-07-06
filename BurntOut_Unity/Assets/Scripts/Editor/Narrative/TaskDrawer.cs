@@ -21,8 +21,7 @@ namespace Narrative.Inspector
             {
                 Value.action = (TaskAction)e.Value;
             };
-
-            Scenario scenario = ScenarioEditor.CurrentScenario;
+            
             actorPopup = new Popup(SceneActors.GetActorIndex(Value.actorId), SceneActors.ActorNames)
             {
                 FitWidth = true
@@ -61,8 +60,6 @@ namespace Narrative.Inspector
         protected override void Display()
         {
             actionPopup.Draw(Value.action);
-
-            Scenario scenario = ScenarioEditor.CurrentScenario;
             actorPopup.Options = SceneActors.ActorNames;
 
             switch (Value.action)

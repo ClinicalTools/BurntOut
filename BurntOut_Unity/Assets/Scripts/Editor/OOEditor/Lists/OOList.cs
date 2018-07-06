@@ -57,7 +57,7 @@ namespace OOEditor
         protected virtual void SwapRows(int index1, int index2)
         {
             var focusedControl = GUI.GetNameOfFocusedControl();
-            
+
             var val = List[index1];
             List.RemoveAt(index1);
             List.Insert(index2, val);
@@ -67,6 +67,12 @@ namespace OOEditor
 
             // Ensure rearranging didn't change the focus
             setFocusedControl = focusedControl;
+        }
+
+        protected virtual object[] GetArgs(int index)
+        {
+            object[] args = { List[index] };
+            return args;
         }
 
         /// <summary>
@@ -86,8 +92,7 @@ namespace OOEditor
                 List.Add(val);
             }
 
-            object[] args = { List[Drawers.Count] };
-            var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
+            var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), GetArgs(Drawers.Count));
             Drawers.Add(drawer);
         }
 
@@ -116,13 +121,8 @@ namespace OOEditor
             while (Drawers.Count > List.Count)
                 RemoveRow(List.Count);
             for (var i = 0; i < List.Count; i++)
-            {
                 if (!Drawers[i].Value.Equals(List[i]))
-                {
-                    object[] args = { List[i] };
-                    Drawers[i] = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
-                }
-            }
+                    Drawers[i] = (TDrawer)Activator.CreateInstance(typeof(TDrawer), GetArgs(i));
 
             // Ensures element that was previously selected if it swapped positions
             if (setFocusedControl != null)

@@ -11,8 +11,6 @@ namespace Narrative
         // Number to represent this actor.
         public int id;
 
-        public string name;
-
         public string scenePath;
         public bool sceneChange;
         public bool autoChangeScene = true;

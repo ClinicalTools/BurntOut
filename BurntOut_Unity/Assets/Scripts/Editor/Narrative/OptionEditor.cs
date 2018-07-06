@@ -1,5 +1,4 @@
 ﻿using OOEditor;
-using System;
 using UnityEngine;
 
 namespace Narrative.Inspector
@@ -10,7 +9,7 @@ namespace Narrative.Inspector
     public class OptionEditor : FoldoutClassDrawer<Option>
     {
         protected string FoldoutName =>
-            $"Option {(ChoiceEditor.CurrentChoice.Options.IndexOf(Value) + 1)} - {Value.name}";
+            $"Option {Index + 1} - {Value.name}";
         protected override Foldout Foldout { get; }
 
         protected Color? ResultColor
@@ -58,10 +57,15 @@ namespace Narrative.Inspector
         private readonly TextArea feedback;
 
 
-        public OptionEditor(Option value) : base(value)
+        public OptionEditor(Option value, int index) : base(value, index)
         {
             Foldout = new Foldout(FoldoutName);
             Foldout.Style.FontColor = ResultColor;
+
+            IndexChanged += (sender, e) =>
+            {
+                Foldout.Content.text = FoldoutName;
+            };
 
             nameField = new TextField(Value.name, "Name:", "Name to be displayed in the editor");
             nameField.Changed += (sender, e) =>

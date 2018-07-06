@@ -8,8 +8,6 @@ namespace Narrative.Inspector
     /// </summary>
     public class ChoiceEditor : FoldoutClassDrawer<Choice>
     {
-        public static Choice CurrentChoice { get; private set; }
-
         protected string FoldoutName => $"{(Value.isChoice ? "Choice" : "Events")} - {Value.name}";
         protected override Foldout Foldout { get; }
 
@@ -29,10 +27,8 @@ namespace Narrative.Inspector
         private readonly Foldout optionsFoldout;
         private readonly FoldoutList<Option, OptionEditor> optionList;
 
-        public ChoiceEditor(Choice value) : base(value)
+        public ChoiceEditor(Choice value, int index) : base(value, index)
         {
-            CurrentChoice = Value;
-
             Foldout = new Foldout(FoldoutName);
             ResetFoldout();
 
@@ -96,8 +92,6 @@ namespace Narrative.Inspector
 
         protected override void Display()
         {
-            CurrentChoice = Value;
-
             nameField.Draw(Value.name);
 
             // Trigger drawing
