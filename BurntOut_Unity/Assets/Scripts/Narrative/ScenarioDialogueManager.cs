@@ -10,13 +10,14 @@ namespace Narrative
     {
         public static ScenarioDialogueManager Instance { get; private set; }
 
+        private const string PLAYER_NAME = "Player";
+        private const string NARRATOR_NAME = "NARRATOR";
+
         // References to other gui objects set in the editor
         public Button[] optionButtons = new Button[3];
         public Button continueButton;
         public Text nameText;
-        public Text dialogueText;
-        public Text feedbackText;
-        public Text promptText;
+        public TextTyper dialogueTyper;
         public Image actorImage;
         public GameObject DialogueUI;
 
@@ -79,7 +80,7 @@ namespace Narrative
                         eventSet--;
 
                     if (!string.IsNullOrEmpty(option.feedback))
-                        TextTyper.Instance.UpdateText(option.feedback);
+                        Main_GameManager.Instance.FeedbackTyper.UpdateText(option.feedback);
 
                     inChoice = false;
                 }
@@ -111,19 +112,33 @@ namespace Narrative
         private readonly Color darkenedCharColor = new Color(.8f, .8f, .8f);
         private void ProcessCharacterDialogue(int actorId, string dialogue)
         {
-            var actor = actorObjects.FirstOrDefault(a => a.actor.id == actorId)?.actor;
-            if (actor != null)
+            if (actorId == Actor.NARRATOR_ID)
             {
-                actorImage.sprite = actor.neutral;
-                actorImage.color = Color.white;
-                nameText.text = actor.name;
+                nameText.text = NARRATOR_NAME;
+                actorImage.color = darkenedCharColor;
+            }
+            else if (actorId == Actor.PLAYER_ID)
+            {
+                nameText.text = PLAYER_NAME;
+                actorImage.color = darkenedCharColor;
             }
             else
             {
-                nameText.text = "Player";
-                actorImage.color = darkenedCharColor;
+                var actor = actorObjects.FirstOrDefault(a => a.actor.id == actorId)?.actor;
+                if (actor != null)
+                {
+                    actorImage.sprite = actor.neutral;
+                    actorImage.color = Color.white;
+                    nameText.text = actor.name;
+                }
+                else
+                {
+                    nameText.text = "?";
+                    actorImage.color = darkenedCharColor;
+                }
             }
-            dialogueText.gameObject.GetComponent<TextTyper>().UpdateText(dialogue);
+
+            dialogueTyper.UpdateText(dialogue);
         }
 
         private void ProcessCharacterEmotion(int actorId, TaskEmotion emotion)
@@ -157,17 +172,13 @@ namespace Narrative
             inChoice = true;
             continueButton.gameObject.SetActive(true);
 
-
-            promptText.transform.parent.gameObject.SetActive(false);
             foreach (var optionBtn in optionButtons)
                 optionBtn.gameObject.SetActive(false);
 
             option = choices[eventSet].Options[optionNum];
             foreach (var task in option.Events)
                 tasks.Enqueue(task);
-
-            dialogueText.transform.parent.gameObject.SetActive(true);
-
+            
             ProgressNarrative();
         }
 
@@ -194,6 +205,7 @@ namespace Narrative
             Main_GameManager.Instance.isCurrentlyExamine = true;
 
             DialogueUI.SetActive(true);
+            dialogueTyper.Wait = true;
             myanim.SetTrigger("DialogueStart");
             ProgressNarrative();
         }
@@ -225,7 +237,7 @@ namespace Narrative
             yield return new WaitForSeconds(1f);
             DialogueUI.SetActive(false);
 
-            myanim.SetBool("End", false);
+            //myanim.SetBool("End", false);
             Main_GameManager.Instance.isCurrentlyExamine = false;
         }
 
@@ -238,8 +250,7 @@ namespace Narrative
         {
             continueButton.gameObject.SetActive(false);
 
-            promptText.transform.parent.gameObject.SetActive(true);
-            promptText.text = choices[eventSet].text;
+            dialogueTyper.UpdateText(choices[eventSet].text);
             for (int i = 0; i < choices[eventSet].Options.Count; i++)
             {
                 optionButtons[i].gameObject.SetActive(true);

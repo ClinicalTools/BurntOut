@@ -25,7 +25,7 @@ namespace OOEditor
         protected void UpdateFocused()
         {
             Focused = OOEditorManager.FocusedControlName.Contains(Name);
-        } 
+        }
 
         /// <summary>
         /// Text and tooltip for the element
@@ -111,12 +111,14 @@ namespace OOEditor
                 GUIStyle.onNormal = GUIStyle.onFocused;
             }
 
-            Style.ApplyToStyle(GUIStyle);
+
             // Basic elements treated like labels
             if (OOEditorManager.OverrideLabelStyle != null)
                 OOEditorManager.OverrideLabelStyle.ApplyToStyle(GUIStyle);
             if (OOEditorManager.OverrideTextStyle != null)
                 OOEditorManager.OverrideTextStyle.ApplyToStyle(GUIStyle);
+            
+            Style.ApplyToStyle(GUIStyle);
         }
 
 

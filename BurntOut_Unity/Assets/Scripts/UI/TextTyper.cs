@@ -1,71 +1,73 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent (typeof (Text))]
-[RequireComponent (typeof (RectTransform))]
+[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(RectTransform))]
 
-public class TextTyper : MonoBehaviour 
-{	
-    public static TextTyper Instance { get; private set; }
+public class TextTyper : MonoBehaviour
+{
+    public bool Wait;
 
-	[SerializeField] private float typeSpeed;
-	[SerializeField] private float startDelay;
-	[SerializeField] private bool startOnAwake;
+    [SerializeField] private float typeSpeed;
+    [SerializeField] private float startDelay;
+    [SerializeField] private bool startOnAwake;
 
-	private int counter;
-	private string textToType;
-	private bool typing;
-	private Text textComp;
+    private int counter;
+    private string textToType;
+    private Text textComp;
+    public bool Typing { get; private set; }
 
-	void Awake() {
-        Instance = this;
+    void Awake()
+    {
         textComp = GetComponent<Text>();
 
-		counter = 0;
-		textToType = textComp.text;
-		textComp.text = "";
-
-		if (startOnAwake){
-            StartTyping();
-		}
-	}
-
-
-    public void StartTyping() {	
-
-		if (!typing){
-			InvokeRepeating("Type", startDelay, typeSpeed);
-		} else {
-			print(gameObject.name + " : Is already typing!");
-		}
-	}
-
-	public void StopTyping() {
         counter = 0;
-        typing = false;
-		CancelInvoke("Type");
-	}
+        textToType = textComp.text;
+        textComp.text = "";
 
-    public void UpdateText(string newText) {   
+        if (startOnAwake)
+            StartTyping();
+    }
+
+    public void StartTyping()
+    {
+        if (!Typing)
+            InvokeRepeating("Type", startDelay, typeSpeed);
+        else
+            print(gameObject.name + " : Is already typing!");
+    }
+
+    public void StopTyping()
+    {
+        counter = 0;
+        Typing = false;
+        CancelInvoke("Type");
+    }
+
+    public void UpdateText(string newText)
+    {
         StopTyping();
         textComp.text = "";
         textToType = newText;
         StartTyping();
     }
 
-	private void Type() {	
-		typing = true;
-		textComp.text = textComp.text + textToType[counter];
-		//audioComp.Play();
-		counter++;
+    private void Type()
+    {
+        if (Wait)
+            return;
 
-		//RandomiseVolume();
+        Typing = true;
+        textComp.text = textComp.text + textToType[counter];
+        //audioComp.Play();
+        counter++;
 
-		if(counter == textToType.Length) {	
-			typing = false;
-			CancelInvoke("Type");
-		}
-	}
+        //RandomiseVolume();
 
-    public bool IsTyping() { return typing; }
+        if (counter == textToType.Length)
+        {
+            Typing = false;
+            CancelInvoke("Type");
+        }
+    }
 }

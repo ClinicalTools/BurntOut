@@ -7,6 +7,9 @@ namespace Narrative.Inspector
 {
     public static class SceneActors
     {
+        private const string NARRATOR_NAME = "NARRATOR";
+        private const string PLAYER_NAME = "PLAYER";
+
         private static void Init()
         {
             EditorApplication.hierarchyChanged += ResetActors;
@@ -34,17 +37,18 @@ namespace Narrative.Inspector
             else
                 for (var i = 0; i < validActors.Count; i++)
                     actors[i] = validActors[i];
-            
+
 
             if (npcNames == null || npcNames.Length != actors.Length)
                 npcNames = new string[actors.Length];
-            if (actorNames == null || actorNames.Length != actors.Length + 1)
-                actorNames = new string[actors.Length + 1];
-            actorNames[0] = "Player";
+            if (actorNames == null || actorNames.Length != actors.Length + 2)
+                actorNames = new string[actors.Length + 2];
+            actorNames[0] = NARRATOR_NAME;
+            actorNames[1] = PLAYER_NAME;
             for (int i = 0; i < actors.Length; i++)
             {
                 npcNames[i] = actors[i].name;
-                actorNames[i + 1] = actors[i].name;
+                actorNames[i + 2] = actors[i].name;
             }
         }
 
@@ -75,7 +79,12 @@ namespace Narrative.Inspector
 
         public static int GetActorId(string actorName)
         {
-            return Actors.FirstOrDefault(a => a.name == actorName)?.id ?? 0;
+            if (actorName == NARRATOR_NAME)
+                return Actor.NARRATOR_ID;
+            else if (actorName == PLAYER_NAME)
+                return Actor.PLAYER_ID;
+            else
+                return Actors.FirstOrDefault(a => a.name == actorName)?.id ?? 0;
         }
 
         private static string[] npcNames;
@@ -114,7 +123,17 @@ namespace Narrative.Inspector
 
         public static int GetActorIndex(int actorId)
         {
-            return GetNpcIndex(actorId) + 1;
+            if (actorId == Actor.NARRATOR_ID)
+                return 0;
+            else if (actorId == Actor.PLAYER_ID)
+                return 1;
+            
+            var npcIndex = GetNpcIndex(actorId);
+
+            if (npcIndex >= 0)
+                return npcIndex + 2;
+            else
+                return -1;
         }
     }
 }

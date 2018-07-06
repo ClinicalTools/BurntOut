@@ -6,10 +6,10 @@ namespace Narrative.Inspector
 {
     public class TaskDrawer : ClassDrawer<Task>
     {
-        EnumPopup actionPopup;
-        Popup actorPopup;
-        TextField dialogueField;
-        EnumPopup emotionPopup;
+        private readonly EnumPopup actionPopup;
+        private readonly Popup actorPopup, npcPopup;
+        private readonly TextField dialogueField;
+        private readonly EnumPopup emotionPopup;
         
         public TaskDrawer(Task value) : base(value)
         {
@@ -31,6 +31,15 @@ namespace Narrative.Inspector
             {
                 if (e.Value >= 0)
                     Value.actorId = SceneActors.GetActorId(actorPopup.Options[e.Value]);
+            };
+            npcPopup = new Popup(SceneActors.GetNpcIndex(Value.actorId), SceneActors.NpcNames)
+            {
+                FitWidth = true
+            };
+            npcPopup.Changed += (sender, e) =>
+            {
+                if (e.Value >= 0)
+                    Value.actorId = SceneActors.GetActorId(npcPopup.Options[e.Value]);
             };
 
             dialogueField = new TextField(Value.dialogue);
@@ -55,14 +64,15 @@ namespace Narrative.Inspector
 
             Scenario scenario = ScenarioEditor.CurrentScenario;
             actorPopup.Options = SceneActors.ActorNames;
-            actorPopup.Draw(SceneActors.GetActorIndex(Value.actorId));
 
             switch (Value.action)
             {
                 case TaskAction.TALK:
+                    actorPopup.Draw(SceneActors.GetActorIndex(Value.actorId));
                     dialogueField.Draw(Value.dialogue);
                     break;
                 case TaskAction.EMOTION:
+                    npcPopup.Draw(SceneActors.GetNpcIndex(Value.actorId));
                     emotionPopup.Draw(Value.emotion);
                     break;
             }

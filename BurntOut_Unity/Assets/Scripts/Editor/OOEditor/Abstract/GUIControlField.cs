@@ -37,13 +37,15 @@ namespace OOEditor
                 GUILabelStyle.normal = GUILabelStyle.focused;
                 GUILabelStyle.onNormal = GUILabelStyle.onFocused;
             }
-            // Apply the regular style, then override it with the label style.
-            Style.ApplyToStyle(GUILabelStyle);
-            LabelStyle.ApplyToStyle(GUILabelStyle);
+
             if (OOEditorManager.OverrideLabelStyle != null)
                 OOEditorManager.OverrideLabelStyle.ApplyToStyle(GUILabelStyle);
             if (OOEditorManager.OverrideTextStyle != null)
                 OOEditorManager.OverrideTextStyle.ApplyToStyle(GUILabelStyle);
+
+            // Apply the regular style, then override it with the label style.
+            Style.ApplyToStyle(GUILabelStyle);
+            LabelStyle.ApplyToStyle(GUILabelStyle);
         }
 
         /// <summary>

@@ -22,6 +22,9 @@ public class Main_GameManager : MonoBehaviour
     public GameObject UI_ReadingStation;
     public GameObject UI_MatchingStation;
 
+    // Feedback
+    public TextTyper FeedbackTyper;
+
     // Win UI
     public UI_Star[] Stars;
     public UI_Star[] BadStars;

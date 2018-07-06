@@ -48,9 +48,10 @@ namespace OOEditor
             if (Focused && !OOEditorManager.InToolbar)
                 GUIStyle.normal = GUIStyle.focused;
 
-            Style.ApplyToStyle(GUIStyle);
             if (OOEditorManager.OverrideTextStyle != null)
                 OOEditorManager.OverrideTextStyle.ApplyToStyle(GUIStyle);
+
+            Style.ApplyToStyle(GUIStyle);
         }
 
         protected GUIControl(string text = null, string tooltip = null, Texture image = null) 
