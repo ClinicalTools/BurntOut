@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using OOEditor;
 using System;
+using System.Text.RegularExpressions;
 
 namespace Narrative.Inspector
 {
@@ -15,80 +16,32 @@ namespace Narrative.Inspector
         private const int MIN_FONT_SIZE = 10;
         private const int MAX_FONT_SIZE = 20;
         private const int TOOLBAR_FONT_SIZE = 12;
+        private const string WINDOW_TITLE = "Actors";
+        private const string MENU_TITLE = "Window/Actor Prefabs Manager";
 
-        // Scene controls
-        private ScenarioEditor scenarioEditor;
-        private ScrollView scrollView = new ScrollView();
-        
-        private Button initButton;
         // Toolbar controls
-        private TabControl tabs;
         private IntSlider fontSizeSlider;
-        private Button loadBtn, saveBtn;
         private readonly OverrideTextStyle toolbarTextStyle = new OverrideTextStyle(TOOLBAR_FONT_SIZE);
         private readonly OverrideTextStyle textStyle = new OverrideTextStyle(DEFAULT_FONT_SIZE);
 
-        // General scenario drawer
-        private SceneGeneralEditor scenarioGeneralEditor;
-
-        // Choice drawer
-        private FoldoutList<Choice, ChoiceEditor> choiceList;
-
-        // Actors drawer
-        private SceneActorsEditor sceneActorsEditor;
+        // Drawers for Actor Prefabs portion 
+        private readonly ScrollView scrollView = new ScrollView();
+        private FoldoutList<ActorObject, ActorPrefabDrawer> actorPrefabsList;
+        private Button createActorBtn;
+        private GameObject actorTemplate;
+        private List<ActorObject> actorPrefabs = new List<ActorObject>();
 
         private static ActorPrefabsEditorWindow window;
-        // Add menu named "Scene Manager" to the Window menu
-        [MenuItem("Window/Scenario Manager")]
+        [MenuItem(MENU_TITLE)]
         public static void Init()
         {
             // Get existing open window or if none, make a new one:
-            window = GetWindow<ActorPrefabsEditorWindow>("Scenario");
+            window = GetWindow<ActorPrefabsEditorWindow>(WINDOW_TITLE);
             window.Show();
         }
 
-        private ScenarioManager scenarioManager;
-
-        private void ResetScenarioManager()
+        private void OnEnable()
         {
-            var oldManger = scenarioManager;
-            // If I don't reload this often, the editor will become disconnected from the object after a test play.
-            scenarioManager = FindObjectOfType<ScenarioManager>();
-
-            if (oldManger != scenarioManager)
-                InitScenarioManager();
-        }
-
-        private void InitScenarioManager()
-        {
-        }
-
-        void OnInspectorUpdate()
-        {
-            ResetScenarioManager();
-            Repaint();
-        }
-
-        public void OnEnable()
-        {
-            initButton = new Button("Create Scenario Manager", "Creates a scenario manager for the current scene");
-            initButton.Pressed += (o, sender) =>
-            {
-                InitScenarioManager();
-            };
-        }
-
-        private void InitScenarioControls()
-        {
-            if (scenarioManager?.scenario == null)
-            {
-                Debug.LogError("Scenario Manager and its scenario should not be null.");
-                return;
-            }
-
-            string[] tabNames = { "General", "Actors", "Events" };
-            tabs = new TabControl(0, tabNames);
-
             fontSizeSlider = new IntSlider(DEFAULT_FONT_SIZE, MIN_FONT_SIZE, MAX_FONT_SIZE)
             {
                 MaxWidth = 150
@@ -98,77 +51,95 @@ namespace Narrative.Inspector
                 textStyle.FontSize = e.Value;
             };
 
-            saveBtn = new Button("Save");
-            saveBtn.Style.FontStyle = FontStyle.Bold;
-            saveBtn.Pressed += SaveBtn_Pressed;
+            // Ensure the path is valid
+            if (!AssetDatabase.IsValidFolder("Assets/Prefabs"))
+                AssetDatabase.CreateFolder("Assets", "Prefabs");
+            if (!AssetDatabase.IsValidFolder("Assets/Prefabs/Resources"))
+                AssetDatabase.CreateFolder("Assets/Prefabs", "Resources");
+            if (!AssetDatabase.IsValidFolder("Assets/Prefabs/Resources/Actors"))
+                AssetDatabase.CreateFolder("Assets/Prefabs/Resources", "Actors");
 
-            loadBtn = new Button("Load");
-            loadBtn.Style.FontStyle = FontStyle.Bold;
-            loadBtn.Pressed += LoadBtn_Pressed;
+            // Find all the actors in that path
+            var actorResources = Resources.LoadAll("Actors", typeof(ActorObject));
+            foreach (var obj in actorResources)
+            {
+                var actor = (ActorObject)obj;
+                // The only actor with a 0 id is considered the template
+                if (actor.actor?.id == 0)
+                    actorTemplate = actor.gameObject;
+                else if (actor.actor != null)
+                    actorPrefabs.Add(actor);
+            }
 
-            scenarioGeneralEditor = new SceneGeneralEditor(scenarioManager.scenario);
-            scenarioEditor = new ScenarioEditor(scenarioManager.scenario);
-            choiceList = new FoldoutList<Choice, ChoiceEditor>(scenarioManager.scenario.Choices);
-            sceneActorsEditor = new SceneActorsEditor(scenarioManager.scenario);
+            actorPrefabsList = new FoldoutList<ActorObject, ActorPrefabDrawer>(actorPrefabs,
+                false, false, false);
+
+            createActorBtn = new Button("New Actor")
+            {
+                MaxWidth = 120
+            };
+            createActorBtn.Pressed += CreateActorBtn_Pressed;
         }
 
-        private void SaveBtn_Pressed(object sender, EventArgs e)
+        private void CreateActorBtn_Pressed(object sender, EventArgs e)
         {
-            NarrativeFileManager.SaveScenario(scenarioManager.scenario);
-        }
+            var path = EditorUtility.SaveFilePanel("New Actor", "Assets/Prefabs/Resources/Actors",
+                "", "prefab");
+            var regexPattern = @"/Assets/.*\.prefab";
+            var pathMatch = Regex.Match(path, regexPattern, RegexOptions.IgnoreCase);
+            if (!pathMatch.Success || !pathMatch.Value.ToLower().Contains("/resources/"))
+            {
+                EditorUtility.DisplayDialog("Error",
+                    "Asset must be saved as a prefab in a \"Resources\" folder," +
+                    " within the project's \"Assets\" folder.", "OK");
 
-        private void LoadBtn_Pressed(object sender, EventArgs e)
-        {
-            var scenario = NarrativeFileManager.LoadScenario(new List<Scenario>());
-            if (scenario == null)
                 return;
+            }
+            path = pathMatch.Value.Substring(1);
 
-            scenarioManager.scenario = scenario;
+            var prefab = PrefabUtility.CreatePrefab(path, actorTemplate);
+
+            var prefabActorObj = prefab.GetComponent<ActorObject>();
+
+            var actorsArr = new Actor[actorPrefabs.Count];
+            for (var i = 0; i < actorPrefabs.Count; i++)
+                actorsArr[i] = actorPrefabs[i].actor;
+            prefabActorObj.actor = new Actor(actorsArr);
+
+            actorPrefabs.Add(prefabActorObj);
+
+            AssetDatabase.SaveAssets();
         }
 
         void OnGUI()
         {
-            if (scenarioManager?.scenario == null)
+            // Draw the toolbar for scenario management
+            using (Toolbar.Draw())
+            using (toolbarTextStyle.Draw())
             {
-                initButton.Draw();
+                FlexibleSpace.Draw();
+
+                fontSizeSlider.Draw();
             }
-            else
+
+            using (textStyle.Draw())
+            using (scrollView.Draw())
             {
-                if (scenarioManager == null || sceneActorsEditor == null)
-                    ResetScenarioManager();
-
-                if (scenarioEditor == null)
-                    InitScenarioControls();
-
-                // Allows the scene to save changes and 'undo' to be possible
-                Undo.RecordObject(scenarioManager, "ScenarioManager change");
-
-                // Draw the toolbar for scenario management
-                using (Toolbar.Draw())
-                using (toolbarTextStyle.Draw())
+                actorPrefabs.Clear();
+                var actorResources = Resources.LoadAll("Actors", typeof(ActorObject));
+                foreach (var obj in actorResources)
                 {
-                    tabs.Draw();
-
-                    FlexibleSpace.Draw();
-
-                    fontSizeSlider.Draw();
-
-                    saveBtn.Draw();
-                    loadBtn.Draw();
+                    var actor = (ActorObject)obj;
+                    if (actor.actor?.id == 0)
+                        actorTemplate = actor.gameObject;
+                    else if (actor.actor != null)
+                        actorPrefabs.Add(actor);
                 }
 
-                using (textStyle.Draw())
-                using (scrollView.Draw())
-                {
-                    // Edit basic scene info
-                    if (tabs.Value == 0)
-                        scenarioGeneralEditor.Draw(scenarioManager.scenario);
-                    // Edit scenario
-                    else if (tabs.Value == 1)
-                        sceneActorsEditor.Draw(scenarioManager.scenario);
-                    else if (tabs.Value == 2)
-                        choiceList.Draw(scenarioManager.scenario.Choices);
-                }
+                actorPrefabsList.Draw(actorPrefabs);
+
+                using (Indent.Draw())
+                    createActorBtn.Draw();
             }
         }
     }

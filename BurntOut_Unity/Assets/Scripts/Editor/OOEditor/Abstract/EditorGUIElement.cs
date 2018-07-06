@@ -14,27 +14,17 @@ namespace OOEditor
 
         public string Name { get; protected set; }
 
-        private bool wasFocused;
-        private bool isFocused;
         /// <summary>
         /// True if the control has focus
         /// </summary>
-        public bool Focused
-        {
-            get
-            {
-                // Unity doesn't get the right focus every draw, so check what it was last draw
-                return isFocused || wasFocused;
-            }
-        }
+        public bool Focused { get; private set; }
         /// <summary>
         /// Refreshes whether the element is focused.
         /// Should be called once at the start of PrepareDisplay.
         /// </summary>
         protected void UpdateFocused()
         {
-            wasFocused = isFocused;
-            isFocused = OOEditorManager.FocusedControlName.Contains(Name);
+            Focused = OOEditorManager.FocusedControlName.Contains(Name);
         } 
 
         /// <summary>

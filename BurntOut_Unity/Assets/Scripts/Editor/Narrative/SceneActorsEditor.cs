@@ -14,10 +14,6 @@ namespace Narrative.Inspector
     public class SceneActorsEditor : ClassDrawer<Scenario>
     {
         private readonly FoldoutList<ActorObject, ActorPrefabDrawer> actorPrefabs;
-
-        private readonly List<Foldout> actorFoldouts;
-        private ActorPrefabDrawer sceneActorDrawer;
-        private readonly Popup actorPopup;
         private readonly Button createActorBtn;
         private GameObject actorTemplate;
         private List<ActorObject> actorPrefabsList = new List<ActorObject>();
