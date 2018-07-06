@@ -30,12 +30,10 @@ namespace OOEditor
         /// </summary>
         public event EventHandler<ListChangedArgs<T>> Changed;
 
-
         /// <summary>
         /// Used if the element to initialize shouldn't be initialized with the default constructor.
         /// </summary>
         public Func<T> DefaultElement { get; set; }
-
 
         /// <summary>
         /// Creates a new OOList to display the values in the passed list.
@@ -69,10 +67,27 @@ namespace OOEditor
             setFocusedControl = focusedControl;
         }
 
-        protected virtual object[] GetArgs(int index)
+        /// <summary>
+        /// Creates a drawer for the object at the given index.
+        /// </summary>
+        /// <param name="index">Index to create a drawer for.</param>
+        /// <returns>A drawer for the object at the given index.</returns>
+        protected virtual TDrawer CreateDrawer(int index)
         {
-            object[] args = { List[index] };
-            return args;
+            TDrawer drawer;
+            // Try to pass the index if possible, so the element knows where it is
+            object[] args = { List[index], index };
+            try
+            {
+                drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
+            }
+            catch (MissingMethodException)
+            {
+                args = new object[] { List[index] };
+                drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), args);
+            }
+
+            return drawer;
         }
 
         /// <summary>
@@ -92,7 +107,7 @@ namespace OOEditor
                 List.Add(val);
             }
 
-            var drawer = (TDrawer)Activator.CreateInstance(typeof(TDrawer), GetArgs(Drawers.Count));
+            var drawer = CreateDrawer(Drawers.Count);
             Drawers.Add(drawer);
         }
 
@@ -122,7 +137,7 @@ namespace OOEditor
                 RemoveRow(List.Count);
             for (var i = 0; i < List.Count; i++)
                 if (!Drawers[i].Value.Equals(List[i]))
-                    Drawers[i] = (TDrawer)Activator.CreateInstance(typeof(TDrawer), GetArgs(i));
+                    Drawers[i] = CreateDrawer(i);
 
             // Ensures element that was previously selected if it swapped positions
             if (setFocusedControl != null)

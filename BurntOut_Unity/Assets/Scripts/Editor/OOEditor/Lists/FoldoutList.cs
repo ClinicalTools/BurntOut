@@ -20,12 +20,6 @@ namespace OOEditor
         public FoldoutList(List<T> value, bool reorderable = true, bool removable = true, 
             bool addable = true) : base(value, reorderable, removable, addable) { }
         
-        protected override object[] GetArgs(int index)
-        {
-            object[] args = { List[index], index };
-            return args;
-        }
-        
         /// <summary>
         /// Draws the foldout list.
         /// </summary>
