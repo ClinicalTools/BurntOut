@@ -33,6 +33,10 @@ namespace OOEditor.Internal
         {
             get
             {
+                // Sometimes highlights strangely if allowed to use pressured events
+                if (Event.current.pressure > 0)
+                    return focusedControl;
+
                 // Sometimes Unity will flip between two values, 
                 // so it's important to get them only when they're most likely to be correct.
                 // This seems to generall fix it, although it's not perfect 
