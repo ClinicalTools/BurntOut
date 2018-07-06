@@ -22,6 +22,7 @@ namespace OOEditor.Internal
         public static bool InToolbar { get; set; }
 
         private static string focusedControl = "";
+        private static bool waitForRepaint = false;
         /// <summary>
         /// Returns the name of the current focused control.
         /// </summary>
@@ -32,9 +33,26 @@ namespace OOEditor.Internal
         {
             get
             {
+                // Sometimes Unity will flip between two values, 
+                // so it's important to get them only when they're most likely to be correct.
+                // This seems to generall fix it, although it's not perfect 
+                if (waitForRepaint)
+                {
+                    if (Event.current.type == EventType.Repaint)
+                        waitForRepaint = false;
+
+                    return focusedControl;
+                }
+
+                if (Event.current.type != EventType.Layout)
+                    return focusedControl;
+
                 var control = GUI.GetNameOfFocusedControl();
                 if (!string.IsNullOrEmpty(control))
+                {
                     focusedControl = control;
+                    waitForRepaint = true;
+                }
                 return focusedControl;
             }
         }

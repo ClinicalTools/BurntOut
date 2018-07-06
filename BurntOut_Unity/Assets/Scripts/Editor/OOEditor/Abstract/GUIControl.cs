@@ -46,7 +46,10 @@ namespace OOEditor
                 GUIStyle = new GUIStyle(BaseStyle);
 
             if (Focused && !OOEditorManager.InToolbar)
+            {
                 GUIStyle.normal = GUIStyle.focused;
+                GUIStyle.onNormal = GUIStyle.onFocused;
+            }
 
             if (OOEditorManager.OverrideTextStyle != null)
                 OOEditorManager.OverrideTextStyle.ApplyToStyle(GUIStyle);
@@ -54,7 +57,7 @@ namespace OOEditor
             Style.ApplyToStyle(GUIStyle);
         }
 
-        protected GUIControl(string text = null, string tooltip = null, Texture image = null) 
+        protected GUIControl(string text = null, string tooltip = null, Texture image = null)
             : base(text, tooltip, image) { }
 
         /// <summary>
