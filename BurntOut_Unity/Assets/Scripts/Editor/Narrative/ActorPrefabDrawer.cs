@@ -104,11 +104,16 @@ namespace Narrative.Inspector
             spriteLabel = new LabelField(spriteField, "Scared:");
             spriteTuples.Add(new Tuple<LabelField, SpriteField>(spriteLabel, spriteField));
         }
-        
+
         private void DeleteButton_Pressed(object sender, EventArgs e)
         {
-            var path = AssetDatabase.GetAssetPath(Value.gameObject);
-            AssetDatabase.DeleteAsset(path);
+            if (EditorUtility.DisplayDialog("Delete Actor",
+                $"Are you sure you want to delete the prefab for {Value.actor.name} ({Value.name})?",
+                "Delete", "Cancel"))
+            {
+                var path = AssetDatabase.GetAssetPath(Value.gameObject);
+                AssetDatabase.DeleteAsset(path);
+            }
         }
 
         protected override void Display()
