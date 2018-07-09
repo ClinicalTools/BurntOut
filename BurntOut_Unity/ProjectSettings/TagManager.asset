@@ -8,6 +8,7 @@ TagManager:
   - GlobalStats
   - WSUI
   - CloseExamine
+  - Activatable
   layers:
   - Default
   - TransparentFX

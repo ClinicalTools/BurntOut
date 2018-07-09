@@ -1,23 +1,35 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Narrative
 {
-    public enum TaskAction
+    public enum TaskType
     {
-        TALK, ACTION, EMOTION
+        Talk, Action, Emotion
     }
 
     public enum TaskEmotion
     {
-        NEUTRAL, HAPPY, SAD, ANGRY, SCARED
+        Neutral, Happy, Sad, Angry, Scared
+    }
+
+    public enum TaskAction
+    {
+        MoveTo, Show, Hide, Script
     }
 
     [Serializable]
     public class Task
     {
-        public TaskAction action;
+        public TaskType type;
+
         public int actorId;
         public TaskEmotion emotion;
         public string dialogue;
+
+        // Actions
+        public TaskAction action;
+        public PositionNode position;
+        public GameObject activatable;
     }
 }

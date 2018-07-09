@@ -30,7 +30,27 @@ namespace OOEditor
                 var names = Enum.GetNames(Value.GetType());
                 foreach (var name in names)
                 {
-                    var content = new GUIContent(name);
+                    // Add spaces like Unity does
+                    var str = "";
+                    bool wasUpper = true;
+                    foreach (var ch in name)
+                    {
+                        if (char.IsUpper(ch))
+                        {
+                            if (!wasUpper)
+                                str += ' ';
+
+                            wasUpper = true;
+                        }
+                        else
+                        {
+                            wasUpper = false;
+                        }
+
+                        str += ch;
+                    }
+
+                    var content = new GUIContent(str);
                     var width = style.CalcSize(content).x;
                     if (width > longestWidth)
                         longestWidth = width;

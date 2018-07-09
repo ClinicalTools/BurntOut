@@ -14,8 +14,6 @@ namespace Narrative
         private const string NARRATOR_NAME = "NARRATOR";
 
         // References to other objects set in the editor
-        public ScenarioManager scenarioManager;
-
         public Button[] optionButtons = new Button[3];
         public Button continueButton;
         public Text nameText;
@@ -43,7 +41,7 @@ namespace Narrative
 
         private void Start()
         {
-            scenario = scenarioManager.Scenario;
+            scenario = ScenarioManager.Instance.Scenario;
             choices = scenario.Choices;
 
             actorObjects = FindObjectsOfType<ActorObject>();
@@ -105,15 +103,15 @@ namespace Narrative
 
         private void ProcessTask(Task task)
         {
-            switch (task.action)
+            switch (task.type)
             {
-                case TaskAction.ACTION:
+                case TaskType.Action:
                     ProgressNarrative();
                     break;
-                case TaskAction.EMOTION:
+                case TaskType.Emotion:
                     ProcessCharacterEmotion(task.actorId, task.emotion);
                     break;
-                case TaskAction.TALK:
+                case TaskType.Talk:
                     ProcessCharacterDialogue(task.actorId, task.dialogue);
                     break;
             }
@@ -195,7 +193,7 @@ namespace Narrative
         public void ActorInteract(ActorObject actorObject)
         {
             if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
-                t => t.type == TriggerType.TALK && t.id == actorObject.actor.id))
+                t => t.type == TriggerType.Talk && t.id == actorObject.actor.id))
             {
                 PlayerRotateToTarget.Instance.ZoomLook(actorObject.gameObject, 2);
                 StartDialogue();

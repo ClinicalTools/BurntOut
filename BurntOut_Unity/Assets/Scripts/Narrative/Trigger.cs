@@ -2,7 +2,7 @@
 
 namespace Narrative
 {
-    public enum TriggerType { ENTER, TALK, INTERACT}
+    public enum TriggerType { Enter, Talk, Interact}
 
     [Serializable]
     public class Trigger

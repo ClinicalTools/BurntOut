@@ -102,8 +102,8 @@ namespace Narrative.Inspector
         public static int GetNpcIndex(int actorId)
         {
             var index = -1;
-            for (int i = 0; i < actors.Length; i++)
-                if (actors[i].id == actorId)
+            for (int i = 0; i < Actors.Length; i++)
+                if (Actors[i].id == actorId)
                     index = i;
 
             return index;

@@ -50,11 +50,11 @@ namespace Narrative.Inspector
 
             switch (Value.type)
             {
-                case TriggerType.ENTER:
+                case TriggerType.Enter:
                     break;
-                case TriggerType.INTERACT:
+                case TriggerType.Interact:
                     break;
-                case TriggerType.TALK:
+                case TriggerType.Talk:
                     actorPopup.Options = SceneActors.NpcNames;
                     actorPopup.Draw(SceneActors.GetNpcIndex(Value.id));
                     break;
