@@ -167,7 +167,7 @@ public class Main_GameManager : MonoBehaviour
     {
         dofSettings.focusDistance = 0.1f;
         dofSettings.aperture = 14;
-        dofSettings.focalLength = 25;
+        dofSettings.focalLength = 21;
         ppScene.profile.depthOfField.settings = dofSettings;
     }
 

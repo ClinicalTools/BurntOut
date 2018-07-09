@@ -72,6 +72,12 @@ namespace Narrative
         private readonly Queue<Task> tasks = new Queue<Task>();
         private void ProgressNarrative()
         {
+            if (dialogueTyper.Typing)
+            {
+                dialogueTyper.FinishTyping();
+                return;
+            }
+
             if (tasks.Count == 0 && choices[eventSet].isChoice && !inChoice)
             {
                 ShowOptions();
@@ -210,8 +216,8 @@ namespace Narrative
 
             DialogueUI.SetActive(true);
             dialogueTyper.Wait = true;
-            myanim.SetTrigger("DialogueStart");
             ProgressNarrative();
+            myanim.SetTrigger("DialogueStart");
         }
 
         private void EndDialogue()

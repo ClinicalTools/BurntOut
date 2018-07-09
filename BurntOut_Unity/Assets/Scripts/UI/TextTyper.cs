@@ -32,9 +32,14 @@ public class TextTyper : MonoBehaviour
     public void StartTyping()
     {
         if (!Typing)
+        {
+            Typing = true;
             InvokeRepeating("Type", startDelay, typeSpeed);
+        }
         else
+        {
             print(gameObject.name + " : Is already typing!");
+        }
     }
 
     public void StopTyping()
@@ -42,6 +47,12 @@ public class TextTyper : MonoBehaviour
         counter = 0;
         Typing = false;
         CancelInvoke("Type");
+    }
+
+    public void FinishTyping()
+    {
+        textComp.text = textToType;
+        StopTyping();
     }
 
     public void UpdateText(string newText)
@@ -54,17 +65,23 @@ public class TextTyper : MonoBehaviour
 
     private void Type()
     {
-        if (Wait)
+        if (Wait || textToType == null)
             return;
 
-        Typing = true;
+        if (counter >= textToType.Length)
+        {
+            Typing = false;
+            CancelInvoke("Type");
+            return;
+        }
+
         textComp.text = textComp.text + textToType[counter];
         //audioComp.Play();
         counter++;
 
         //RandomiseVolume();
 
-        if (counter == textToType.Length)
+        if (counter >= textToType.Length)
         {
             Typing = false;
             CancelInvoke("Type");

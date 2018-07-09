@@ -52,8 +52,6 @@ namespace OOEditor
         /// </summary>
         protected virtual void SwapRows(int index1, int index2)
         {
-            var focusedControl = GUI.GetNameOfFocusedControl();
-
             var val = List[index1];
             List.RemoveAt(index1);
             List.Insert(index2, val);
