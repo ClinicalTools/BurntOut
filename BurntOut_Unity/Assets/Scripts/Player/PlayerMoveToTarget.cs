@@ -10,8 +10,8 @@ public class PlayerMoveToTarget : MonoBehaviour {
     void Update() {
         
         if (target != null) {
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+            //float step = speed * Time.deltaTime;
+            //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
         }
 
     }

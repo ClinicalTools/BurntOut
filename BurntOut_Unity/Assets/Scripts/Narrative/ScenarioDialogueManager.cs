@@ -197,7 +197,7 @@ namespace Narrative
             if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
                 t => t.type == TriggerType.TALK && t.id == actorObject.actor.id))
             {
-                PlayerRotateToTarget.Instance.MoveLook(actorObject.gameObject, 2);
+                PlayerRotateToTarget.Instance.ZoomLook(actorObject.gameObject, 2);
                 StartDialogue();
             }
         }

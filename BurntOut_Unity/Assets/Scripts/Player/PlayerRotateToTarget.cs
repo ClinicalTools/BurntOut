@@ -10,11 +10,12 @@ public class PlayerRotateToTarget : MonoBehaviour
     public float speed;
 
     private bool inDefaultPos = true;
+    private bool cameraMoving = false;
     public bool CameraWait
     {
         get
         {
-            return Main_GameManager.Instance.isCurrentlyExamine || !inDefaultPos;
+            return Main_GameManager.Instance.isCurrentlyExamine || !inDefaultPos || cameraMoving;
         }
     }
 
@@ -48,15 +49,49 @@ public class PlayerRotateToTarget : MonoBehaviour
 
 
     private GameObject moveLookTarget;
-    private Vector3 movePos;
+    private Vector3 movePos, lookPos;
     private Vector3 oldPos, oldDir;
     private Quaternion oldRot;
+
+    public void MoveTo(GameObject moveTarget, GameObject lookTarget)
+    {
+        cameraMoving = true;
+        moveLookTarget = moveTarget;
+        movePos = moveTarget.transform.position;
+        lookPos = lookTarget.transform.position;
+
+        target = moveTarget;
+        StartCoroutine(MoveTo());
+    }
+
+    private IEnumerator MoveTo()
+    {
+        while (target == moveLookTarget)
+            yield return null;
+
+        var distStep = Vector3.Distance(transform.position, movePos) / 30;
+
+        var finalRot = Quaternion.LookRotation(lookPos - movePos);
+        var rotStep = Quaternion.Angle(transform.rotation, finalRot) / 30;
+        while (transform.position != movePos)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, finalRot, rotStep);
+            transform.position = Vector3.MoveTowards(transform.position, movePos, distStep);
+            yield return new WaitForSecondsRealtime(1f / 60f);
+        }
+
+
+        cameraMoving = false;
+
+        yield return null;
+    }
+
     /// <summary>
-    /// Looks at an object then moves dist from the front of it.
+    /// Looks at an object then moves the camera to a dist from the front of it.
     /// </summary>
     /// <param name="target">Object to look at and move in front of.</param>
     /// <param name="dist">Distance from the start of the object to move to.</param>
-    public void MoveLook(GameObject target, float dist)
+    public void ZoomLook(GameObject target, float dist)
     {
         inDefaultPos = false;
 
@@ -75,12 +110,13 @@ public class PlayerRotateToTarget : MonoBehaviour
             movePos = frontPos;
         else
             movePos = backPos;
+        lookPos = moveLookTarget.transform.position;
 
         this.target = target;
-        StartCoroutine(MoveLook());
+        StartCoroutine(ZoomLook());
     }
 
-    private IEnumerator MoveLook()
+    private IEnumerator ZoomLook()
     {
         while (target == moveLookTarget)
             yield return null;
@@ -88,7 +124,7 @@ public class PlayerRotateToTarget : MonoBehaviour
         var distStep = Vector3.Distance(transform.position, movePos) / 30;
         while (transform.position != movePos)
         {
-            transform.rotation = Quaternion.LookRotation(moveLookTarget.transform.position - transform.position);
+            transform.rotation = Quaternion.LookRotation(lookPos - transform.position);
             transform.position = Vector3.MoveTowards(transform.position, movePos, distStep);
             yield return new WaitForSecondsRealtime(1f / 60f);
         }

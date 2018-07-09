@@ -22,17 +22,17 @@ public class LookNode : MonoBehaviour
 
     public void MoveTo()
     {
-        myMoveTo.target = gameObject;
+        //myMoveTo.target = gameObject;
     }
 
     public void RotateNext()
     {
-        myRotateTo.target = next.gameObject;
+        //myRotateTo.target = next.gameObject;
     }
 
     public void RotateBehind()
     {
-        myRotateTo.target = behind.gameObject;
+        //myRotateTo.target = behind.gameObject;
     }
 
 }

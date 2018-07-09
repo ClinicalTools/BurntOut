@@ -32,7 +32,6 @@ public class CameraLookHere : MonoBehaviour
 
     public void Move()
     {
-
         if (myRotateTo.target != null && myRotateTo.target != gameObject)
             return;
 
