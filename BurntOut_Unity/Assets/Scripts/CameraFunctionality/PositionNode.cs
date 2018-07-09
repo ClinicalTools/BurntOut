@@ -11,13 +11,7 @@ public class PositionNode : MonoBehaviour
         foreach (var cameraLook in cameraLooks)
             cameraLook.enabled = false;
 
-
-        //CameraLook.gameObject.SetActive(true);
-        //CameraLook.enabled = true;
-
         PlayerRotateToTarget.Instance.MoveTo(CameraPosition.gameObject, CameraLook.gameObject);
-
-
 
         gameObject.SetActive(false);
     }
