@@ -661,12 +661,13 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Collab: 1
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
-  cloudProjectId: 
-  projectName: Template_3D
-  organizationId: 
+  apiCompatibilityLevel: 3
+  cloudProjectId: 7c0cc13e-17f9-4299-b460-50beb4d7de14
+  projectName: BurntOut_Unity
+  organizationId: voltcti
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
