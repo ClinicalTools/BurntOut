@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.4716981, g: 0.42948872, b: 0.3760235, a: 1}
+  m_AmbientSkyColor: {r: 0.49056602, g: 0.48767352, b: 0.48362404, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   m_AmbientIntensity: 0.94
@@ -14058,7 +14058,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: d8fc404dfbc25c843a90034210be8d04, type: 2}
     - target: {fileID: 100000, guid: 51765dcc89e378946ae9e92ad9998857, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 51765dcc89e378946ae9e92ad9998857, type: 3}
       propertyPath: m_IsActive
@@ -20747,7 +20747,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1670424030
 Transform:
@@ -21734,7 +21734,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 07b3b56dda554e545839787209c4c139, type: 2}
     - target: {fileID: 100000, guid: 51765dcc89e378946ae9e92ad9998857, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 51765dcc89e378946ae9e92ad9998857, type: 3}
       propertyPath: m_IsActive
@@ -25444,7 +25444,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2029942247
 Transform:
