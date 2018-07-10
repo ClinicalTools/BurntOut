@@ -159,6 +159,12 @@ namespace Narrative.Inspector
                 if (scenarioManager == null)
                     ResetScenarioManager();
 
+                if (scenarioManager == null || !scenarioManager.isActiveAndEnabled)
+                {
+                    initButton.Draw();
+                    return;
+                }
+
                 if (scenarioGeneralEditor == null || choiceList == null || sceneActorsEditor == null)
                     InitScenarioControls();
 
