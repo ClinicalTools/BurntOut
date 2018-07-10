@@ -10486,6 +10486,10 @@ Prefab:
       propertyPath: m_Name
       value: DialogueManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1596951647003544, guid: 3185ce54a684caa45aea7edb0a11dfc9, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3185ce54a684caa45aea7edb0a11dfc9, type: 2}
   m_IsPrefabParent: 0
