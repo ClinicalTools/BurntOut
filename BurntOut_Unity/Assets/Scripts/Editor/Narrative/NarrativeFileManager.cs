@@ -9,16 +9,21 @@ namespace Narrative.Inspector
 {
     public static class NarrativeFileManager
     {
+        // Folder where scene data is saved to and loaded from
+        // Must end with a '\'
+        private const string DEFAULT_PATH = 
+            @"P:\CTIInternal\Active\BurntOut\BurntOut - WriteUps\Scenarios\SceneData\";
+
         public static bool SaveScenario(Scenario scenario)
         {
             // Get the folder to save the scenario in
             string json = JsonUtility.ToJson(scenario);
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name;
+            var path = DEFAULT_PATH + SceneManager.GetActiveScene().name;
             Directory.CreateDirectory(path);
 
             // Name.yyyy.MM.dd.letter.json
-            string fileName = SceneManager.GetActiveScene().name + DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
+            string fileName = SceneManager.GetActiveScene().name + 
+                DateTime.Now.ToString("'.'yyyy'.'MM'.'dd");
 
             // Alphabetical character based on number of similar files saved today
             char lastLetter = 'a';
@@ -47,8 +52,7 @@ namespace Narrative.Inspector
         public static Scenario LoadScenario(List<Scenario> scenarios)
         {
             // Get the folder to load the scenario from
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            path += "\\BurntOut\\Narrative\\" + SceneManager.GetActiveScene().name + "\\Scenario";
+            var path = DEFAULT_PATH + SceneManager.GetActiveScene().name;
 
             path = EditorUtility.OpenFilePanel("Load Scenario", path, "json");
 
