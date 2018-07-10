@@ -9,18 +9,37 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1277152290782062}
+  m_RootGameObject: {fileID: 1105011537561384}
   m_IsPrefabParent: 1
---- !u!1 &1116158716998682
+--- !u!1 &1105011537561384
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4533261569244898}
-  - component: {fileID: 198259462290022010}
-  - component: {fileID: 199715815562089870}
+  - component: {fileID: 4665337176943900}
+  - component: {fileID: 136080321621000146}
+  - component: {fileID: 114528492980780568}
+  - component: {fileID: 114799959115035056}
+  - component: {fileID: 212076783779420626}
+  m_Layer: 0
+  m_Name: Dr. Nathan Turner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1142421611749030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4500381348174190}
+  - component: {fileID: 198543682443022212}
+  - component: {fileID: 199514171565879884}
   m_Layer: 0
   m_Name: Highlight (Iteract Patient) 1
   m_TagString: Untagged
@@ -28,90 +47,71 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1277152290782062
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4703572937978296}
-  - component: {fileID: 114773091362105420}
-  - component: {fileID: 136768195709181078}
-  - component: {fileID: 114219023401432206}
-  - component: {fileID: 212169966573370976}
-  m_Layer: 0
-  m_Name: Nurse
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4533261569244898
+--- !u!4 &4500381348174190
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1116158716998682}
+  m_GameObject: {fileID: 1142421611749030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.6, z: 0.7}
   m_Children: []
-  m_Father: {fileID: 4703572937978296}
+  m_Father: {fileID: 4665337176943900}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -43.785004}
---- !u!4 &4703572937978296
+--- !u!4 &4665337176943900
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1277152290782062}
-  m_LocalRotation: {x: 0, y: -0.50392467, z: 0, w: 0.86374766}
+  m_GameObject: {fileID: 1105011537561384}
+  m_LocalRotation: {x: -0, y: -0.50392467, z: -0, w: 0.86374766}
   m_LocalPosition: {x: -6.09, y: 0.77, z: -10.385}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 1}
+  m_LocalScale: {x: 0.07000001, y: 0.07, z: 1.0000002}
   m_Children:
-  - {fileID: 4533261569244898}
+  - {fileID: 4500381348174190}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114219023401432206
+--- !u!114 &114528492980780568
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1277152290782062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8db24f6fa4528ce4d8b67a5e3e1295da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ableToRunScript: 1
---- !u!114 &114773091362105420
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1277152290782062}
+  m_GameObject: {fileID: 1105011537561384}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164bfd657ef6ae54a8e3b06e93231168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actor:
-    id: -608044
-    name: Ms. Jefferson
-    icon: {fileID: 21300000, guid: 95e3a5b924e02b549b805747a0e2d689, type: 3}
-    neutral: {fileID: 21300000, guid: e14016d45bc52b24b87cb0872d21f550, type: 3}
+    id: 1644999686
+    name: Dr. Nathan Turner
+    icon: {fileID: 21300000, guid: 5b0b12d5679d07d40962a855599d1c55, type: 3}
+    neutral: {fileID: 21300000, guid: fba7d9405c6e6294680cf7345b439d04, type: 3}
     happy: {fileID: 0}
     sad: {fileID: 0}
     angry: {fileID: 0}
     scared: {fileID: 0}
---- !u!136 &136768195709181078
+--- !u!114 &114799959115035056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105011537561384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db24f6fa4528ce4d8b67a5e3e1295da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ableToRunScript: 1
+--- !u!136 &136080321621000146
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1277152290782062}
+  m_GameObject: {fileID: 1105011537561384}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -119,12 +119,12 @@ CapsuleCollider:
   m_Height: 18.1
   m_Direction: 1
   m_Center: {x: 0, y: -0.26, z: 0}
---- !u!198 &198259462290022010
+--- !u!198 &198543682443022212
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1116158716998682}
+  m_GameObject: {fileID: 1142421611749030}
   serializedVersion: 5
   lengthInSec: 5
   simulationSpeed: 1
@@ -4650,13 +4650,13 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &199715815562089870
+--- !u!199 &199514171565879884
 ParticleSystemRenderer:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1116158716998682}
+  m_GameObject: {fileID: 1142421611749030}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -4706,12 +4706,12 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!212 &212169966573370976
+--- !u!212 &212076783779420626
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1277152290782062}
+  m_GameObject: {fileID: 1105011537561384}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -4741,7 +4741,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5d4e81a69c16e447855502b47487e48, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4749,5 +4749,5 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
