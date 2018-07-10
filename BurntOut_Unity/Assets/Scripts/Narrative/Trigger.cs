@@ -10,5 +10,7 @@ namespace Narrative
         public TriggerType type;
 
         public int id;
+
+        public Interactable interactable;
     }
 }

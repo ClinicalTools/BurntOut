@@ -214,6 +214,16 @@ namespace Narrative
             }
         }
 
+        public void ObjectInteract(Interactable interactable)
+        {
+            if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
+                t => t.type == TriggerType.Interact && t.interactable == interactable))
+            {
+                PlayerRotateToTarget.Instance.ZoomLook(interactable.gameObject, 2);
+                StartDialogue();
+            }
+        }
+
         private void StartDialogue()
         {
             continueButton.gameObject.SetActive(true);

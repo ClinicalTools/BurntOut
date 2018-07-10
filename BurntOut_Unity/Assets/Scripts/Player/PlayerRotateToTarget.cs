@@ -65,7 +65,7 @@ public class PlayerRotateToTarget : MonoBehaviour
         movePos = moveTarget.transform.position;
         lookPos = lookTarget.transform.position;
 
-        target = moveTarget;
+        target = null;
         StartCoroutine(MoveTo());
     }
 
