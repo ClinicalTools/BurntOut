@@ -106,6 +106,20 @@ namespace Narrative
             switch (task.type)
             {
                 case TaskType.Action:
+                    switch (task.action)
+                    {
+                        case TaskAction.MoveTo:
+                            task.position.FadeTo();
+                            break;
+                        case TaskAction.Show:
+                            task.activatable.SetActive(true);
+                            break;
+                        case TaskAction.Hide:
+                            task.activatable.SetActive(false);
+                            break;
+                        case TaskAction.Script:
+                            break;
+                    }
                     ProgressNarrative();
                     break;
                 case TaskType.Emotion:

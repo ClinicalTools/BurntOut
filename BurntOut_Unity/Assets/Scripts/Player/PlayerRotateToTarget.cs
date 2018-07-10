@@ -53,6 +53,11 @@ public class PlayerRotateToTarget : MonoBehaviour
     private Vector3 oldPos, oldDir;
     private Quaternion oldRot;
 
+    /// <summary>
+    /// Looks at an object then moves the camera to it.
+    /// </summary>
+    /// <param name="moveTarget">Object to move to.</param>
+    /// <param name="lookTarget">Position to look at after the object moves.</param>
     public void MoveTo(GameObject moveTarget, GameObject lookTarget)
     {
         cameraMoving = true;
@@ -84,6 +89,38 @@ public class PlayerRotateToTarget : MonoBehaviour
         cameraMoving = false;
 
         yield return null;
+    }
+
+    private bool fading;
+    /// <summary>
+    /// Fades the camera to black, moves to a specific place, and then fades back in.
+    /// </summary>
+    /// <param name="moveTarget">Object to move to.</param>
+    /// <param name="lookTarget">Position to look at after the object moves.</param>
+    public void FadeTo(GameObject moveTarget, GameObject lookTarget)
+    {
+        movePos = moveTarget.transform.position;
+        lookPos = lookTarget.transform.position;
+
+        StartCoroutine(FadeTo());
+    }
+
+    private IEnumerator FadeTo()
+    {
+        fading = true;
+
+        Main_GameManager.Instance.screenfade.SetBool("fade", true);
+
+        yield return new WaitForSeconds(0.5f);
+        transform.position = movePos;
+        transform.rotation = Quaternion.LookRotation(lookPos - transform.position);
+        oldPos = transform.position;
+        oldDir = transform.forward;
+        oldRot = transform.rotation;
+
+        Main_GameManager.Instance.screenfade.SetBool("fade", false);
+
+        fading = false;
     }
 
     /// <summary>
@@ -134,7 +171,8 @@ public class PlayerRotateToTarget : MonoBehaviour
 
     public void ReturnPosition()
     {
-        StartCoroutine(ReturnPos());
+        if (!fading)
+            StartCoroutine(ReturnPos());
     }
 
     private IEnumerator ReturnPos()
