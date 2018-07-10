@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace Narrative
 {
-    public class ScenarioDialogueManager : MonoBehaviour
+    public class DialogueManager : MonoBehaviour
     {
-        public static ScenarioDialogueManager Instance { get; private set; }
+        public static DialogueManager Instance { get; private set; }
 
         private const string PLAYER_NAME = "Player";
         private const string NARRATOR_NAME = "NARRATOR";
@@ -209,7 +209,7 @@ namespace Narrative
             if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
                 t => t.type == TriggerType.Talk && t.id == actorObject.actor.id))
             {
-                PlayerRotateToTarget.Instance.ZoomLook(actorObject.gameObject, 2);
+                PlayerMovement.Instance.ZoomLook(actorObject.gameObject, 2);
                 StartDialogue();
             }
         }
@@ -219,7 +219,7 @@ namespace Narrative
             if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
                 t => t.type == TriggerType.Interact && t.interactable == interactable))
             {
-                PlayerRotateToTarget.Instance.ZoomLook(interactable.gameObject, 2);
+                PlayerMovement.Instance.ZoomLook(interactable.gameObject, 2);
                 StartDialogue();
             }
         }
@@ -260,7 +260,7 @@ namespace Narrative
 
             StartCoroutine(DisableDiaUI());
 
-            PlayerRotateToTarget.Instance.ReturnPosition();
+            PlayerMovement.Instance.ReturnPosition();
         }
 
         public IEnumerator DisableDiaUI()

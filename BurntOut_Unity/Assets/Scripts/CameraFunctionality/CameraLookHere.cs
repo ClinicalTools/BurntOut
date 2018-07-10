@@ -5,16 +5,16 @@ public class CameraLookHere : MonoBehaviour
 
     public float bounds = 1;
     private float xMax, yMax, xMin, yMin;
-    private PlayerRotateToTarget myRotateTo;
+    private PlayerMovement myRotateTo;
     
     // Use this for initialization
     void Start()
     {
         var playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        myRotateTo = playerCamera.GetComponent<PlayerRotateToTarget>();
+        myRotateTo = playerCamera.GetComponent<PlayerMovement>();
 
         myRotateTo.enabled = true;
-        myRotateTo.target = gameObject;
+        myRotateTo.rotationTarget = gameObject;
 
         xMax = transform.position.x + bounds;
         yMax = transform.position.y + bounds;
@@ -32,10 +32,10 @@ public class CameraLookHere : MonoBehaviour
 
     public void Move()
     {
-        if (myRotateTo.target != null && myRotateTo.target != gameObject)
+        if (myRotateTo.rotationTarget != null && myRotateTo.rotationTarget != gameObject)
             return;
 
-        myRotateTo.target = gameObject;
+        myRotateTo.rotationTarget = gameObject;
         
         var movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 

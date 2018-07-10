@@ -11360,6 +11360,11 @@ Prefab:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224787342419287492, guid: 3185ce54a684caa45aea7edb0a11dfc9,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: -50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3185ce54a684caa45aea7edb0a11dfc9, type: 2}
   m_IsPrefabParent: 0
@@ -14591,19 +14596,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1724883223}
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
---- !u!114 &1448730426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1448730419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92999ef861c2d5640a62b3008d37fa9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 3
 --- !u!1 &1449215394
 GameObject:
   m_ObjectHideFlags: 0
@@ -17565,6 +17557,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114892753350064428, guid: 5e9e851c0e142814dac026a256ba2ac0,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114497384694597832, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
     - {fileID: 114076502136018978, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -19974,6 +19971,7 @@ MonoBehaviour:
     sceneChangeTriggers:
     - type: 1
       id: -608044
+      interactable: {fileID: 0}
     choices:
     - name: Talking to Dr. Belmont
       text: 
@@ -19981,6 +19979,7 @@ MonoBehaviour:
       triggers:
       - type: 1
         id: -608044
+        interactable: {fileID: 0}
       events:
       - type: 0
         actorId: -608044
@@ -20018,6 +20017,7 @@ MonoBehaviour:
       triggers:
       - type: 1
         id: 1097336261
+        interactable: {fileID: 0}
       events:
       - type: 0
         actorId: 1
@@ -20123,6 +20123,7 @@ MonoBehaviour:
       triggers:
       - type: 1
         id: 1097336261
+        interactable: {fileID: 0}
       events:
       - type: 0
         actorId: 1097336261

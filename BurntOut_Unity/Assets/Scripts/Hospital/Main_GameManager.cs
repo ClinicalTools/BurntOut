@@ -145,7 +145,7 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
+        player.GetComponentInChildren<PlayerMovement>().enabled = true;
     }
 
     public void MinigameEnd()
@@ -154,7 +154,7 @@ public class Main_GameManager : MonoBehaviour
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        player.GetComponentInChildren<PlayerRotateToTarget>().enabled = false;
+        player.GetComponentInChildren<PlayerMovement>().enabled = false;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -188,7 +188,7 @@ public class Main_GameManager : MonoBehaviour
         if (scene.name == "Hospital" || scene.name == "VitalitySpace")
         {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
-            playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+            playerCam.GetComponent<PlayerMovement>().enabled = false;
         }
 
         isCurrentlyExamine = false;
@@ -203,12 +203,12 @@ public class Main_GameManager : MonoBehaviour
         if (roomsWon >= 3)
             hospitalwin = true;
 
-        playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+        playerCam.GetComponent<PlayerMovement>().enabled = false;
 
         //if (scene.name == "Hospital_Patient_SingleRoom")
         {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
-            playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
+            playerCam.GetComponent<PlayerMovement>().enabled = true;
             globalStats.GOOD_stars += 1;
             globalStats.isMrJohnsonCompleted = true;
         }
@@ -221,12 +221,12 @@ public class Main_GameManager : MonoBehaviour
         if (roomsLost >= 3)
             Lose();
 
-        playerCam.GetComponent<PlayerRotateToTarget>().enabled = false;
+        playerCam.GetComponent<PlayerMovement>().enabled = false;
 
         //if (scene.name == "Hospital_Patient_SingleRoom")
         {
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
-            playerCam.GetComponent<PlayerRotateToTarget>().enabled = true;
+            playerCam.GetComponent<PlayerMovement>().enabled = true;
             globalStats.BAD_stars += 1;
             globalStats.isMrJohnsonCompleted = true;
         }

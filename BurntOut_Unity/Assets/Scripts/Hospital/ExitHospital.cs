@@ -56,8 +56,8 @@ public class ExitHospital : MonoBehaviour {
 
             player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
 
-            player.GetComponentInChildren<PlayerRotateToTarget>().target = lookHere;
-            player.GetComponentInChildren<PlayerRotateToTarget>().enabled = true;
+            player.GetComponentInChildren<PlayerMovement>().rotationTarget = lookHere;
+            player.GetComponentInChildren<PlayerMovement>().enabled = true;
 
             globalstats.isHospitalCompleted = true;
             StartCoroutine(Transition());

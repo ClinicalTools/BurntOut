@@ -50,7 +50,7 @@ public class MinigameInteract : MonoBehaviour
             minigame.enabled = true;
 
             minigame.StartGame();
-            player.GetComponentInChildren<PlayerRotateToTarget>().target = gameObject;
+            player.GetComponentInChildren<PlayerMovement>().rotationTarget = gameObject;
             // make book move to screen and face player               
             // below works for just placing book infront of player
             //this.transform.position = playerCamera.transform.position + playerCamera.transform.forward * bookDistance;

@@ -18,7 +18,7 @@ namespace Narrative
         private void OnMouseUpAsButton()
         {
             if (!Main_GameManager.Instance.isCurrentlyExamine)
-                ScenarioDialogueManager.Instance.ActorInteract(this);
+                DialogueManager.Instance.ActorInteract(this);
         }
 
         public void Hide()

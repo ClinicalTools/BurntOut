@@ -8,7 +8,7 @@ namespace Narrative
         private void OnMouseUpAsButton()
         {
             if (!Main_GameManager.Instance.isCurrentlyExamine)
-                ScenarioDialogueManager.Instance.ObjectInteract(this);
+                DialogueManager.Instance.ObjectInteract(this);
         }
     }
 }

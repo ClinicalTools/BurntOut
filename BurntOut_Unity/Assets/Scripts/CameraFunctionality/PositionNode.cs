@@ -12,7 +12,7 @@ public class PositionNode : MonoBehaviour
         foreach (var cameraLook in cameraLooks)
             cameraLook.enabled = false;
 
-        PlayerRotateToTarget.Instance.MoveTo(CameraPosition.gameObject, CameraLook.gameObject);
+        PlayerMovement.Instance.MoveTo(CameraPosition.gameObject, CameraLook.gameObject);
 
         gameObject.SetActive(false);
     }
@@ -23,7 +23,7 @@ public class PositionNode : MonoBehaviour
         foreach (var cameraLook in cameraLooks)
             cameraLook.enabled = false;
 
-        PlayerRotateToTarget.Instance.FadeTo(CameraPosition.gameObject, CameraLook.gameObject);
+        PlayerMovement.Instance.FadeTo(CameraPosition.gameObject, CameraLook.gameObject);
 
         gameObject.SetActive(false);
     }

@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class PlayerRotateToTarget : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private const float TOLERANCE = .0001f;
 
-    public static PlayerRotateToTarget Instance { get; private set; }
-    public GameObject target;
+    public static PlayerMovement Instance { get; private set; }
+    public GameObject rotationTarget;
     public float speed;
 
     private bool inDefaultPos = true;
@@ -26,10 +26,10 @@ public class PlayerRotateToTarget : MonoBehaviour
 
     void Update()
     {
-        if (target == null)
+        if (rotationTarget == null)
             return;
 
-        Vector3 targetDirection = target.transform.position - transform.position;
+        Vector3 targetDirection = rotationTarget.transform.position - transform.position;
         Debug.DrawRay(transform.position, targetDirection, Color.red);
 
         float step = speed * Time.deltaTime;
@@ -43,10 +43,9 @@ public class PlayerRotateToTarget : MonoBehaviour
         if (Mathf.Abs(lastRotation.w - rotation.w) < TOLERANCE && Mathf.Abs(lastRotation.x - rotation.x) < TOLERANCE
             && Mathf.Abs(lastRotation.y - rotation.y) < TOLERANCE && Mathf.Abs(lastRotation.z - rotation.z) < TOLERANCE)
         {
-            target = null;
+            rotationTarget = null;
         }
     }
-
 
     private GameObject moveLookTarget;
     private Vector3 movePos, lookPos;
@@ -65,13 +64,13 @@ public class PlayerRotateToTarget : MonoBehaviour
         movePos = moveTarget.transform.position;
         lookPos = lookTarget.transform.position;
 
-        target = null;
+        rotationTarget = null;
         StartCoroutine(MoveTo());
     }
 
     private IEnumerator MoveTo()
     {
-        while (target == moveLookTarget)
+        while (rotationTarget == moveLookTarget)
             yield return null;
 
         var distStep = Vector3.Distance(transform.position, movePos) / 30;
@@ -149,13 +148,13 @@ public class PlayerRotateToTarget : MonoBehaviour
             movePos = backPos;
         lookPos = moveLookTarget.transform.position;
 
-        this.target = target;
+        rotationTarget = target;
         StartCoroutine(ZoomLook());
     }
 
     private IEnumerator ZoomLook()
     {
-        while (target == moveLookTarget)
+        while (rotationTarget == moveLookTarget)
             yield return null;
 
         var distStep = Vector3.Distance(transform.position, movePos) / 30;
