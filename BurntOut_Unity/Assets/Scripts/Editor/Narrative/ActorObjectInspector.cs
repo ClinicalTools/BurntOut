@@ -22,7 +22,6 @@ namespace Narrative.Inspector
 
                 obj.actor = new Actor(actorList.ToArray());
             }
-
         }
 
         public override void OnInspectorGUI()

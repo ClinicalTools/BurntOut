@@ -210,6 +210,7 @@ namespace Narrative
                 t => t.type == TriggerType.Talk && t.id == actorObject.actor.id))
             {
                 PlayerMovement.Instance.ZoomLook(actorObject.gameObject, 2);
+                actorImage.sprite = actorObject.actor.neutral;
                 StartDialogue();
             }
         }
@@ -220,6 +221,7 @@ namespace Narrative
                 t => t.type == TriggerType.Interact && t.interactable == interactable))
             {
                 PlayerMovement.Instance.ZoomLook(interactable.gameObject, 2);
+                actorImage.sprite = null;
                 StartDialogue();
             }
         }
