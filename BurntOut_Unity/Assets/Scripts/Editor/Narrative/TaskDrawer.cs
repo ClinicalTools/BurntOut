@@ -73,17 +73,17 @@ namespace Narrative.Inspector
                 Value.action = (TaskAction)e.Value;
             };
             positionPopup = new Popup(ScenePositions.GetIndex(Value.position),
-                ScenePositions.PositionNames)
+                ScenePositions.Names)
             {
                 FitWidth = true
             };
             positionPopup.Changed += (sender, e) =>
             {
                 if (e.Value >= 0)
-                    Value.position = ScenePositions.GetPositions(positionPopup.Options[e.Value]);
+                    Value.position = ScenePositions.GetPosition(positionPopup.Options[e.Value]);
             };
             activatablePopup = new Popup(SceneActivatables.GetIndex(Value.activatable),
-                SceneActivatables.ActivatableNames)
+                SceneActivatables.Names)
             {
                 FitWidth = true
             };
@@ -119,16 +119,16 @@ namespace Narrative.Inspector
                     switch (Value.action)
                     {
                         case TaskAction.MoveTo:
-                            positionPopup.Options = ScenePositions.PositionNames;
+                            positionPopup.Options = ScenePositions.Names;
                             positionPopup.Draw(ScenePositions.GetIndex(Value.position));
                             break;
                         case TaskAction.Show:
-                            activatablePopup.Options = SceneActivatables.ActivatableNames;
+                            activatablePopup.Options = SceneActivatables.Names;
                             activatablePopup.Draw(
                                 SceneActivatables.GetIndex(Value.activatable));
                             break;
                         case TaskAction.Hide:
-                            activatablePopup.Options = SceneActivatables.ActivatableNames;
+                            activatablePopup.Options = SceneActivatables.Names;
                             activatablePopup.Draw(SceneActivatables.GetIndex(Value.activatable));
                             break;
                     }

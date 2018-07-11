@@ -25,11 +25,11 @@ namespace Narrative.Inspector
                 for (var i = 0; i < curActivatables.Length; i++)
                     activatables[i] = curActivatables[i];
 
-            if (activatableNames == null || activatableNames.Length != activatables.Length)
-                activatableNames = new string[activatables.Length];
+            if (names == null || names.Length != activatables.Length)
+                names = new string[activatables.Length];
 
             for (int i = 0; i < activatables.Length; i++)
-                activatableNames[i] = activatables[i].name;
+                names[i] = activatables[i].name;
         }
 
         private static GameObject[] activatables;
@@ -49,15 +49,15 @@ namespace Narrative.Inspector
             return Activatables.FirstOrDefault(o => o.name == objectName);
         }
 
-        private static string[] activatableNames;
-        public static string[] ActivatableNames
+        private static string[] names;
+        public static string[] Names
         {
             get
             {
-                if (activatableNames == null)
+                if (names == null)
                     Init();
 
-                return activatableNames;
+                return names;
             }
         }
 

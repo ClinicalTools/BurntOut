@@ -1,16 +1,11 @@
 ﻿using OOEditor;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
 namespace Narrative.Inspector
 {
     public class TriggerDrawer : ClassDrawer<Trigger>
     {
         private readonly EnumPopup typePopup;
-        private readonly Popup actorPopup, locationPopup, objectPopup;
-
-        List<Actor> sceneActors = new List<Actor>();
+        private readonly Popup actorPopup, locationPopup, interactablePopup;
 
         public TriggerDrawer(Trigger value) : base(value)
         {
@@ -23,7 +18,7 @@ namespace Narrative.Inspector
                 Value.type = (TriggerType)e.Value;
             };
 
-            actorPopup = new Popup(GetActorIndex(Value.id), SceneActors.NpcNames)
+            actorPopup = new Popup(SceneActors.GetActorIndex(Value.id), SceneActors.NpcNames)
             {
                 FitWidth = true
             };
@@ -32,16 +27,20 @@ namespace Narrative.Inspector
                 if (e.Value >= 0)
                     Value.id = SceneActors.GetActorId(actorPopup.Options[e.Value]);
             };
-        }
 
-        private int GetActorIndex(int actorId)
-        {
-            var index = -1;
-            for (int i = 0; i < sceneActors.Count; i++)
-                if (sceneActors[i].id == actorId)
-                    index = i;
-
-            return index;
+            interactablePopup = new Popup(SceneInteractables.GetIndex(Value.interactable),
+                SceneInteractables.Names)
+            {
+                FitWidth = true
+            };
+            interactablePopup.Changed += (sender, e) =>
+            {
+                if (e.Value >= 0)
+                {
+                    Value.interactable = SceneInteractables.GetInteractable(
+                        interactablePopup.Options[e.Value]);
+                }
+            };
         }
 
         protected override void Display()
@@ -53,6 +52,8 @@ namespace Narrative.Inspector
                 case TriggerType.Enter:
                     break;
                 case TriggerType.Interact:
+                    interactablePopup.Options = SceneInteractables.Names;
+                    interactablePopup.Draw(SceneInteractables.GetIndex(Value.interactable));
                     break;
                 case TriggerType.Talk:
                     actorPopup.Options = SceneActors.NpcNames;

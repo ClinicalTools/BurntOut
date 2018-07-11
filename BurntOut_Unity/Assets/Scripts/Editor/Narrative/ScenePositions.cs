@@ -23,11 +23,11 @@ namespace Narrative.Inspector
                 for (var i = 0; i < curPositions.Length; i++)
                     positions[i] = curPositions[i];
 
-            if (positionNames == null || positionNames.Length != positions.Length)
-                positionNames = new string[positions.Length];
+            if (names == null || names.Length != positions.Length)
+                names = new string[positions.Length];
 
             for (int i = 0; i < positions.Length; i++)
-                positionNames[i] = positions[i].name;
+                names[i] = positions[i].name;
         }
 
         private static PositionNode[] positions;
@@ -42,20 +42,20 @@ namespace Narrative.Inspector
             }
         }
 
-        public static PositionNode GetPositions(string positionName)
+        public static PositionNode GetPosition(string name)
         {
-            return Positions.FirstOrDefault(n => n.name == positionName);
+            return Positions.FirstOrDefault(n => n.name == name);
         }
 
-        private static string[] positionNames;
-        public static string[] PositionNames
+        private static string[] names;
+        public static string[] Names
         {
             get
             {
-                if (positionNames == null)
+                if (names == null)
                     Init();
 
-                return positionNames;
+                return names;
             }
         }
 
