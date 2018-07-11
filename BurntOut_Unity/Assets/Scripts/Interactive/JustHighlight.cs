@@ -5,6 +5,14 @@ public class JustHighlight : MonoBehaviour
     private ParticleSystem myParticleSystem;
 
     public bool ableToRunScript;
+
+    public bool door;
+
+    // hide this if door true
+    public Material newDoorMaterial;
+    public Material oldDoorMaterial;
+    public GameObject myDoorMesh;
+
     // Use this for initialization
     void Start()
     {
@@ -16,21 +24,31 @@ public class JustHighlight : MonoBehaviour
     void Update()
     {
         ableToRunScript = !Main_GameManager.Instance.isCurrentlyExamine;
-        if (!ableToRunScript)
+        if (!ableToRunScript) {
             myParticleSystem.gameObject.SetActive(false);
-
+        }
     }
 
     private void OnMouseOver()
     {
-        if (ableToRunScript)
+        if (ableToRunScript) {
             myParticleSystem.gameObject.SetActive(true);
+
+            if (door == true) {
+                myDoorMesh.GetComponent<MeshRenderer>().material = newDoorMaterial;
+            }
+        }
     }
 
     private void OnMouseExit()
     {
-        if (ableToRunScript) 
+        if (ableToRunScript) {
             myParticleSystem.gameObject.SetActive(false);
+
+            if (door == true) {
+                myDoorMesh.GetComponent<MeshRenderer>().material = oldDoorMaterial;
+            }
+        }
     }
 
     private void OnMouseUpAsButton()

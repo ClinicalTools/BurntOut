@@ -1877,6 +1877,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ableToRunScript: 0
+  door: 0
+  newDoorMaterial: {fileID: 0}
+  oldDoorMaterial: {fileID: 0}
+  myDoorMesh: {fileID: 0}
 --- !u!65 &173996169
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6439,7 +6443,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1109213969}
+  - {fileID: 1860032572}
   m_Father: {fileID: 281196457}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10598,36 +10602,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 68694c8264cef214b841566b633587b5, type: 3}
   m_PrefabInternal: {fileID: 1104579976}
---- !u!1 &1109213968
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1109213969}
-  m_Layer: 0
-  m_Name: Door1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1109213969
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1109213968}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.70710677}
-  m_LocalPosition: {x: -5.332674, y: -1.277592, z: -7.776159}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1860032572}
-  - {fileID: 1417811650}
-  m_Father: {fileID: 583275424}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
 --- !u!1001 &1120566138
 Prefab:
   m_ObjectHideFlags: 0
@@ -13933,7 +13907,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1388971616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.057, z: 0.165}
+  m_LocalPosition: {x: -0, y: 1.057, z: 1.167}
   m_LocalScale: {x: 0.2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1860032572}
@@ -18675,9 +18649,9 @@ Transform:
   m_GameObject: {fileID: 1417811649}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.115491, y: 1.2319901, z: 1.1808722}
+  m_LocalScale: {x: 1, y: 1, z: 1.1808722}
   m_Children: []
-  m_Father: {fileID: 1109213969}
+  m_Father: {fileID: 1860032572}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1417811653
@@ -22853,12 +22827,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1860032571}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: -5.332674, y: -1.277592, z: -7.776159}
   m_LocalScale: {x: 1.115491, y: 1.2319901, z: 1}
   m_Children:
   - {fileID: 1388971617}
-  m_Father: {fileID: 1109213969}
+  - {fileID: 1417811650}
+  m_Father: {fileID: 583275424}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1860032573
@@ -22873,6 +22848,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ableToRunScript: 0
+  door: 1
+  newDoorMaterial: {fileID: 2100000, guid: 76efde95a99df734bb08a13829a5a47b, type: 2}
+  oldDoorMaterial: {fileID: 2100000, guid: 62cd20e40879f9c439db752915a65da4, type: 2}
+  myDoorMesh: {fileID: 1417811649}
 --- !u!114 &1860032574
 MonoBehaviour:
   m_ObjectHideFlags: 0
