@@ -12,9 +12,14 @@ public class PositionNode : MonoBehaviour
         foreach (var cameraLook in cameraLooks)
             cameraLook.enabled = false;
 
+
+        var positionNodes = FindObjectsOfType<PositionNode>();
+        foreach (var positionNode in positionNodes)
+            positionNode.gameObject.SetActive(false);
+
         PlayerMovement.Instance.MoveTo(CameraPosition.gameObject, CameraLook.gameObject);
 
-        //gameObject.SetActive(false);
+        gameObject.SetActive(true);
     }
 
     public void FadeTo()
