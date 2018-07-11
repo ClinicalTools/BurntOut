@@ -38,6 +38,10 @@ namespace Narrative.Inspector
         // Actors drawer
         private SceneActorsEditor sceneActorsEditor;
 
+        // Interactables drawer
+        private List<Interactable> interactables; 
+        private FoldoutList<Interactable, InteractableEditor> interactablesList;
+
         private static ScenarioEditorWindow window;
         // Add menu named "Scene Manager" to the Window menu
         [MenuItem("Window/Scenario Manager")]
@@ -109,7 +113,7 @@ namespace Narrative.Inspector
                 return;
             }
 
-            string[] tabNames = { "General", "Actors", "Events" };
+            string[] tabNames = { "General", "Actors", "Interactables", "Events" };
             tabs = new TabControl(0, tabNames);
 
             fontSizeSlider = new IntSlider(DEFAULT_FONT_SIZE, MIN_FONT_SIZE, MAX_FONT_SIZE)
@@ -132,6 +136,9 @@ namespace Narrative.Inspector
             scenarioGeneralEditor = new SceneGeneralEditor(scenarioManager.Scenario);
             choiceList = new FoldoutList<Choice, ChoiceEditor>(scenarioManager.Scenario.Choices);
             sceneActorsEditor = new SceneActorsEditor(scenarioManager.Scenario);
+
+            var interactables = new List<Interactable>(SceneInteractables.Interactables);
+            interactablesList = new FoldoutList<Interactable, InteractableEditor>(interactables, false, false, false);
         }
 
         private void SaveBtn_Pressed(object sender, EventArgs e)
@@ -190,12 +197,25 @@ namespace Narrative.Inspector
                 {
                     // Edit basic scene info
                     if (tabs.Value == 0)
+                    {
                         scenarioGeneralEditor.Draw(scenarioManager.Scenario);
-                    // Edit scenario
+                    }
+                    // Edit actors
                     else if (tabs.Value == 1)
+                    {
                         sceneActorsEditor.Draw(scenarioManager.Scenario);
+                    }
+                    // Edit interactables
                     else if (tabs.Value == 2)
+                    {
+                        var interactables = new List<Interactable>(SceneInteractables.Interactables);
+                        interactablesList.Draw(interactables);
+                    }
+                    // Edit events
+                    else if (tabs.Value == 3)
+                    {
                         choiceList.Draw(scenarioManager.Scenario.Choices);
+                    }
                 }
             }
         }

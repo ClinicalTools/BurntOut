@@ -20,7 +20,7 @@ public class ExamineObject_Canvas : MonoBehaviour
     {
         transform.position = mainCamera.transform.position + mainCamera.transform.forward * distanceFromCamera;
 
-        PlayerMovement.Instance.rotationTarget = gameObject;
+        PlayerMovement.Instance.rotationTarget = transform;
         yield return new WaitForSeconds(.2f);
     }
 

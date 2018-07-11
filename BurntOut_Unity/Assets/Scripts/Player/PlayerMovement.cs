@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private const float TOLERANCE = .0001f;
 
     public static PlayerMovement Instance { get; private set; }
-    public GameObject rotationTarget;
+    public Transform rotationTarget;
     public float speed;
 
     private bool inDefaultPos = true;
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         if (rotationTarget == null)
             return;
 
-        Vector3 targetDirection = rotationTarget.transform.position - transform.position;
+        Vector3 targetDirection = rotationTarget.position - transform.position;
         Debug.DrawRay(transform.position, targetDirection, Color.red);
 
         float step = speed * Time.deltaTime;
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private GameObject moveLookTarget;
+    private Transform moveLookTarget;
     private Vector3 movePos, lookPos;
     private Vector3 oldPos, oldDir;
     private Quaternion oldRot;
@@ -57,12 +57,12 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <param name="moveTarget">Object to move to.</param>
     /// <param name="lookTarget">Position to look at after the object moves.</param>
-    public void MoveTo(GameObject moveTarget, GameObject lookTarget)
+    public void MoveTo(Transform moveTarget, Transform lookTarget)
     {
         cameraMoving = true;
         moveLookTarget = moveTarget;
-        movePos = moveTarget.transform.position;
-        lookPos = lookTarget.transform.position;
+        movePos = moveTarget.position;
+        lookPos = lookTarget.position;
 
         rotationTarget = null;
         StartCoroutine(MoveTo());
@@ -96,10 +96,10 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <param name="moveTarget">Object to move to.</param>
     /// <param name="lookTarget">Position to look at after the object moves.</param>
-    public void FadeTo(GameObject moveTarget, GameObject lookTarget)
+    public void FadeTo(Transform moveTarget, Transform lookTarget)
     {
-        movePos = moveTarget.transform.position;
-        lookPos = lookTarget.transform.position;
+        movePos = moveTarget.position;
+        lookPos = lookTarget.position;
 
         StartCoroutine(FadeTo());
     }
@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <param name="target">Object to look at and move in front of.</param>
     /// <param name="dist">Distance from the start of the object to move to.</param>
-    public void ZoomLook(GameObject target, float dist)
+    public void ZoomLook(Transform target, float dist)
     {
         inDefaultPos = false;
 

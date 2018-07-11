@@ -30,9 +30,15 @@ namespace Narrative
         private Scenario scenario;
         private List<Choice> choices;
         private int eventSet = -1;
-        private bool inChoice, inDialogue = false;
+        private bool inChoice, inDialogue;
         private Option option;
-        
+
+        // Queue of tasks (actions, emotions, and dialogue) to perform in current choice or option
+        private Queue<Task> tasks = new Queue<Task>();
+        private Queue<Task> narrativeTasks;
+        private bool inSmallNarrative;
+
+
         // Use this for initialization
         private void Awake()
         {
@@ -66,8 +72,6 @@ namespace Narrative
         }
 
         // Indicates whether the auto progression should be running
-        // Queue of tasks (actions, emotions, and dialogue) to perform in current choice or option
-        private readonly Queue<Task> tasks = new Queue<Task>();
         private void ProgressNarrative()
         {
             if (dialogueTyper.Typing)
@@ -76,7 +80,14 @@ namespace Narrative
                 return;
             }
 
-            if (tasks.Count == 0 && choices[eventSet].isChoice && !inChoice)
+            if (tasks.Count == 0 && inSmallNarrative)
+            {
+                inSmallNarrative = false;
+                tasks = narrativeTasks;
+                EndDialogue();
+                return;
+            }
+            else if (tasks.Count == 0 && choices[eventSet].isChoice && !inChoice)
             {
                 ShowOptions();
             }
@@ -223,7 +234,7 @@ namespace Narrative
             if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
                 t => t.type == TriggerType.Talk && t.id == actorObject.actor.id))
             {
-                PlayerMovement.Instance.ZoomLook(actorObject.gameObject, 2);
+                PlayerMovement.Instance.ZoomLook(actorObject.transform, 2);
                 actorImage.sprite = actorObject.actor.neutral;
                 StartDialogue();
             }
@@ -234,7 +245,19 @@ namespace Narrative
             if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
                 t => t.type == TriggerType.Interact && t.interactable == interactable))
             {
-                PlayerMovement.Instance.ZoomLook(interactable.gameObject, 2);
+                PlayerMovement.Instance.ZoomLook(interactable.transform, 2);
+                actorImage.sprite = null;
+                StartDialogue();
+            }
+            else if (interactable.Events?.Count > 0)
+            {
+                narrativeTasks = tasks;
+                tasks = new Queue<Task>();
+                foreach (var task in interactable.Events)
+                    tasks.Enqueue(task);
+                inSmallNarrative = true;
+
+                PlayerMovement.Instance.ZoomLook(interactable.transform, 2);
                 actorImage.sprite = null;
                 StartDialogue();
             }

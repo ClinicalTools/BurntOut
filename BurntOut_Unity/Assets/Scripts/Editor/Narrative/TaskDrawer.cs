@@ -121,6 +121,8 @@ namespace Narrative.Inspector
                         case TaskAction.MoveTo:
                             positionPopup.Options = ScenePositions.Names;
                             positionPopup.Draw(ScenePositions.GetIndex(Value.position));
+                            npcPopup.Options = SceneActors.NpcNames;
+                            npcPopup.Draw(SceneActors.GetNpcIndex(Value.actorId));
                             break;
                         case TaskAction.Show:
                             activatablePopup.Options = SceneActivatables.Names;

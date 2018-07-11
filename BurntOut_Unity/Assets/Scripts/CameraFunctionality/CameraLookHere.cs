@@ -14,7 +14,7 @@ public class CameraLookHere : MonoBehaviour
         myRotateTo = playerCamera.GetComponent<PlayerMovement>();
 
         myRotateTo.enabled = true;
-        myRotateTo.rotationTarget = gameObject;
+        myRotateTo.rotationTarget = gameObject.transform;
 
         xMax = transform.position.x + bounds;
         yMax = transform.position.y + bounds;
@@ -35,7 +35,7 @@ public class CameraLookHere : MonoBehaviour
         if (myRotateTo.rotationTarget != null && myRotateTo.rotationTarget != gameObject)
             return;
 
-        myRotateTo.rotationTarget = gameObject;
+        myRotateTo.rotationTarget = gameObject.transform;
         
         var movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 
