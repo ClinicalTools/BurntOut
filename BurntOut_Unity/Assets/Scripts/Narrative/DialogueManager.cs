@@ -189,6 +189,20 @@ namespace Narrative
             }
         }
 
+        private void ShowOptions()
+        {
+            continueButton.gameObject.SetActive(false);
+
+            dialogueTyper.UpdateText(choices[eventSet].text);
+            for (int i = 0; i < choices[eventSet].Options.Count; i++)
+            {
+                optionButtons[i].gameObject.SetActive(true);
+                optionButtonsText[i].text = choices[eventSet].Options[i].text;
+            }
+
+            nameText.text = "";
+        }
+
         private void OptionClicked(int optionNum)
         {
             inChoice = true;
@@ -278,21 +292,6 @@ namespace Narrative
         private void ChangeScenes()
         {
             Main_GameManager.Instance.Transition(scenario.scenePath);
-        }
-
-        private void ShowOptions()
-        {
-            continueButton.gameObject.SetActive(false);
-
-            dialogueTyper.UpdateText(choices[eventSet].text);
-            for (int i = 0; i < choices[eventSet].Options.Count; i++)
-            {
-                optionButtons[i].gameObject.SetActive(true);
-                optionButtonsText[i].text = choices[eventSet].Options[i].text;
-            }
-
-
-            nameText.text = "";
         }
     }
 }
