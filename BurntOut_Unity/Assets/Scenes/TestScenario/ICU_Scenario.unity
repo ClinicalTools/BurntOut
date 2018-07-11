@@ -5581,8 +5581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9509,7 +9509,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 965771756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7823787, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1388971617}
@@ -9527,7 +9527,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.9639742, y: 2.032, z: 0.07524847}
-  m_Center: {x: -0.1698732, y: 0.7823787, z: -0.001700828}
+  m_Center: {x: -0.1698732, y: 0, z: -0.001700828}
 --- !u!114 &965771759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13978,8 +13978,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1388971616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.057, z: 1.1669998}
-  m_LocalScale: {x: 0.20000002, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.27462137, z: 1.1669998}
+  m_LocalScale: {x: 0.20000005, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 965771757}
   m_RootOrder: 0
@@ -22127,7 +22127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1769577497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22177,14 +22177,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1769577496}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.3764706}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -24355,6 +24355,9 @@ MonoBehaviour:
       - type: 1
         id: -608044
         interactable: {fileID: 0}
+      - type: 2
+        id: 0
+        interactable: {fileID: 965771759}
       events:
       - type: 0
         actorId: -608044
