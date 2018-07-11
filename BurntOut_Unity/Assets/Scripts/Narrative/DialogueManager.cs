@@ -288,6 +288,9 @@ namespace Narrative
                 optionButtons[i].gameObject.SetActive(true);
                 optionButtonsText[i].text = choices[eventSet].Options[i].text;
             }
+
+
+            nameText.text = "";
         }
     }
 }

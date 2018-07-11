@@ -14,7 +14,7 @@ public class PositionNode : MonoBehaviour
 
         PlayerMovement.Instance.MoveTo(CameraPosition.gameObject, CameraLook.gameObject);
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public void FadeTo()
