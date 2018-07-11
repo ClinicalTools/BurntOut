@@ -25094,16 +25094,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114056105414261372, guid: 3185ce54a684caa45aea7edb0a11dfc9,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114056105414261372, guid: 3185ce54a684caa45aea7edb0a11dfc9,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3185ce54a684caa45aea7edb0a11dfc9, type: 2}
   m_IsPrefabParent: 0
@@ -33706,40 +33696,519 @@ MonoBehaviour:
       id: -608044
       interactable: {fileID: 0}
     choices:
-    - name: Talking to Dr. Belmont
-      text: "How do you respond to Ms. Jefferson\u2019s request? "
+    - name: 'Talking to Dr. James (Scene 1: ICU clinic)'
+      text: 
       continueLast: 0
       triggers:
       - type: 1
-        id: -608044
-        interactable: {fileID: 0}
-      - type: 2
-        id: 0
+        id: -812679138
         interactable: {fileID: 0}
       events:
+      - type: 2
+        actorId: -812679138
+        emotion: 3
+        dialogue: 
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -812679138
+        emotion: 0
+        dialogue: Come on, you'll be shadowing me today. We have lots of patients
+          to see.
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -1
+        emotion: 0
+        dialogue: '[Later, after seeing 5 patients with Dr. James]'
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 2
+        actorId: -812679138
+        emotion: 0
+        dialogue: 
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -812679138
+        emotion: 0
+        dialogue: This is Mrs. Adams who has an unusual constellation of signs and
+          symptoms, including x, y, and z. Do you have other symptoms, Mrs. Adams?
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 2
+        actorId: 24987387
+        emotion: 0
+        dialogue: 
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: 24987387
+        emotion: 0
+        dialogue: A little heartburn
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -812679138
+        emotion: 0
+        dialogue: Thank you, Mrs. Adams.
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 3
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 2
+        actorId: -812679138
+        emotion: 0
+        dialogue: 
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -812679138
+        emotion: 0
+        dialogue: It may be a case of Rare Syndrome. Have you heard of it?
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: 1
+        emotion: 0
+        dialogue: I think so. Maybe. I'm not sure...
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 2
+        actorId: -812679138
+        emotion: 0
+        dialogue: 
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -812679138
+        emotion: 0
+        dialogue: Better look it up.
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -1
+        emotion: 0
+        dialogue: But there's no time to look it up as Dr. James moves onto the next
+          patient and keeps you busy most of the day seeing additional patients.
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -812679138
+        emotion: 0
+        dialogue: Okay, that wraps up my rounds. The nurse, Ms. Jefferson, will let
+          you know what else she needs you to do today.
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 3
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      isChoice: 0
+      options: []
+    - name: 'Set-Up EKG (Scene 1: ICU Clinic)'
+      text: How do you want to respond to Ms. Jefferson's request?
+      continueLast: 1
+      triggers: []
+      events:
+      - type: 2
+        actorId: -608044
+        emotion: 0
+        dialogue: 
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
       - type: 0
         actorId: -608044
         emotion: 0
-        dialogue: 'Please set up an EKG in bed #17 for Mr. Cochran'
+        dialogue: 'Please set up an EKG in bed #17 for Mr. Cochran.'
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 2
+        actorId: 1097336261
+        emotion: 0
+        dialogue: 
         action: 0
         position: {fileID: 0}
         activatable: {fileID: 0}
       isChoice: 1
       options:
-      - name: Autonomy at all costs
-        text: Look for the EKG cart on your own
-        events: []
-        result: 0
-        healthChange: 0
-        feedback: 
-      - name: 
-        text: Ask Ms. Jefferson where the cart is
+      - name: Very Bad Choice
+        text: Autonomy at all costs. Look for the EKG cart and start setting it up
+          on your own.
+        events:
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: '[You take a while to find the EKG cart.]'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 1
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: '[You begin untangling wires, but are unsure how to do it or what
+            to do with them after untangling them.]'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: -608044
+          emotion: 3
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -608044
+          emotion: 0
+          dialogue: Still working on that? Okay, I'll come back later.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: 1644999686
+          emotion: 1
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 1644999686
+          emotion: 0
+          dialogue: Dr. Shazam, the attending physician, likes to hold a quick afternoon
+            seminar in the chart room. It starts in 5 minutes.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 1
+          emotion: 0
+          dialogue: Okay, thanks.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: '[You struggle with figuring out how to untangle the wires and
+            what to do with each one.'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: -608044
+          emotion: 3
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -608044
+          emotion: 0
+          dialogue: Still not done?
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: '[You finally finish untangling wires.]'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: -608044
+          emotion: 0
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -608044
+          emotion: 0
+          dialogue: Okay, I'll take it from here.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: '[It is 10 minutes after the start time for the seminar.'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: 'By choosing to find the cart on your own without asking for help,
+            you waste previous time, frustrated Ms. Jefferson, and ended up being
+            late for the seminar. Some students might ahve made this choice because
+            they made assumptions about how others will respond or what they are thinking.
+            Others may have made this choice out of having unrealistic expectations
+            of themselves and feeling they should know everything already. Learn more
+            about problems with these two possible reasons:'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: 'The 3rd year clerkship students'' thoughts were incorrect if
+            they went something like this: "The 4th year clerkship students didn''t
+            even say hello or make eye contact. They really don''t seem to want me
+            here or want to be helpful. I''ll just find the cart on my own." "Listen"
+            in on the two 4th year students actual thoughts.'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 1644999686
+          emotion: 0
+          dialogue: '[Thoughts: My head hurts! I shouldn''t have had so much to drink
+            last night. I sure hope the 3rd year clerkship student is a hard worker.]'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 0
+          emotion: 0
+          dialogue: '[Thoughts: I''m glad I''m on rotation with Nathan. He''s so smart.
+            I always learn a lot when he''s around.'
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: 'Listen in on Dr. Shazam and Nurse Jefferson to learn the problem
+            with not asking for help when you need it:'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 0
+          emotion: 0
+          dialogue: One thing I hate is when a student tries to pretend they know
+            what they're doing and they don't. It's actually pretty dangerous.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -608044
+          emotion: 0
+          dialogue: I know what you mean! I'd rather they be upfront about what they
+            know and don't know. Everyone has to start at the beginning.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: Please rejoin the scenario at the seminar.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        result: 1
+        healthChange: -40
+        feedback: 'Possible goals in making this choice: Not revealing to anyone your
+          lack of knowledge. Relying on your faith in yourself to figure out on your
+          own. Short term outcome: This choice avoids revealing to superior that you
+          don''t know things and avoids asking for help from the other students after
+          assuming they will continue to be unhelpful. Long-term outcome: It takes
+          a while to find the cart. Struggles with figuring out what to do on oyour
+          own and so is late to the seminar. Also, the nurse, Ms. Jefferson, gets
+          frustrated with the delay.'
+      - name: OK Choice
+        text: Ask a peer for help. Ask the 4th year clerkship students even though
+          they have not been accomodating so far.
         events:
         - type: 0
           actorId: 1
           emotion: 0
-          dialogue: Okay. This is my first time setting up an EKG cart. Where do I
+          dialogue: Hi, Nathan. I have to set up my first EKG cart. Where do you find
+            them?
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: 1644999686
+          emotion: 1
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 1644999686
+          emotion: 0
+          dialogue: Use the Velcro to secure the wires in the loops after you get
+            them untangled.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 1
+          emotion: 0
+          dialogue: Okay. Thanks!
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 1
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: 1644999686
+          emotion: 1
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 1644999686
+          emotion: 0
+          dialogue: Dr. Shazam, the attending physician, likes to hold a quick afternoon
+            seminar in the chart room. It starts in 5 minutes
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: '[You fumble with getting the leads untangled, but finally get
+            them ready.'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: -608044
+          emotion: 0
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -608044
+          emotion: 0
+          dialogue: Thanks. I'll take it from here.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: '[It is only a few minutes past the seminar start time.'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        result: 0
+        healthChange: 10
+        feedback: 'Posslbe goal in making this choice: Finding out where the cart
+          is and how to start setting it up without revealing to superiors your lack
+          of knowledge. Short term outcome: Some discomfort because these students
+          have not been very helpful so far. They may or may not be helpful this time.
+          But if they are, it saves time. Long term outcome: Makes it clear to initially
+          unhelpful students an expectation of students cooperating in a team. If
+          they are helpful, you will be on time for the seminar.'
+      - name: Good Choice
+        text: Ask the person assigning the task. Ask the nurse, Ms. Jefferson, where
+          the cart is stored.
+        events:
+        - type: 0
+          actorId: 1
+          emotion: 0
+          dialogue: Okay. THis is my first time setting up an EKG cart. Where do I
             find them and is there anything special I should know?
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: -608044
+          emotion: 0
+          dialogue: 
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
@@ -33758,152 +34227,479 @@ MonoBehaviour:
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
-        result: 2
-        healthChange: 0
-        feedback: 
-      - name: 
-        text: Ask the 4th year clerkship students
-        events: []
-        result: 0
-        healthChange: 0
-        feedback: 
-    - name: Dr. Belmont asks a question
-      text: Question prompt
-      continueLast: 0
-      triggers:
-      - type: 1
-        id: 1097336261
-        interactable: {fileID: 0}
-      events:
-      - type: 0
-        actorId: 1
-        emotion: 0
-        dialogue: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-        action: 0
-        position: {fileID: 0}
-        activatable: {fileID: 0}
-      - type: 0
-        actorId: 1097336261
-        emotion: 0
-        dialogue: '?'
-        action: 0
-        position: {fileID: 0}
-        activatable: {fileID: 0}
-      isChoice: 1
-      options:
-      - name: Good choice
-        text: This is the right answer
-        events:
-        - type: 0
-          actorId: 1
+        - type: 1
+          actorId: 0
           emotion: 0
-          dialogue: 1
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 1
+          position: {fileID: 0}
+          activatable: {fileID: 173996166}
+        - type: 2
+          actorId: 1644999686
+          emotion: 1
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 1644999686
+          emotion: 0
+          dialogue: Dr. Shazam, the attending physician, likes to hold a quick afternoon
+            seminar in the chart room. It starts in 5 minutes.
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
         - type: 0
           actorId: -1
           emotion: 0
-          dialogue: 2
+          dialogue: '[You fumble with getting the leads untangled but finally get
+            them coiled in need loops secured with the Velcro]'
           action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
           position: {fileID: 0}
           activatable: {fileID: 0}
         - type: 0
           actorId: -608044
           emotion: 0
-          dialogue: 3
+          dialogue: Thanks, I'll take it from here.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: '[It is only a few seconds past the seminar.]'
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
         result: 2
         healthChange: 30
-        feedback: You picked the right choice
-      - name: Bad choice
-        text: Bad
+        feedback: 'Possible goal in making this choice: Getting the information the
+          most efficient way. Short term outcome: Some discomfort in having to reveal
+          not knowing something to a superior. Long term outcome: Find the cart quickly.
+          Arrive almost on time to the seminar.'
+    - name: 'Explaining Rare Syndrome to Dr. Shazam (Scene 2: Seminar room)'
+      text: How do you respond?
+      continueLast: 1
+      triggers: []
+      events:
+      - type: 2
+        actorId: 0
+        emotion: 3
+        dialogue: 
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: 0
+        emotion: 0
+        dialogue: Thanks for showing up. What can you tell us about Rare Syndrome,
+          which the patient, Mrs. Adams, may have?
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      isChoice: 1
+      options:
+      - name: OK Choice
+        text: 'Be honest: Admit you never heard about Rare Syndrome before and that
+          you haven''t had time to look it up.'
         events:
         - type: 0
-          actorId: 1097336261
+          actorId: 1
           emotion: 0
-          dialogue: 4
+          dialogue: I had never heard of Rare Syndrome before. I haven't had time
+            to look it up.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: 0
+          emotion: 0
+          dialogue: 
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
         - type: 0
           actorId: 0
           emotion: 0
-          dialogue: 5
+          dialogue: Okay. Well, Mrs. Adams needs us to understand Rare Syndrome if
+            we're going to be able to decide if she has it and then treat it. That's
+            your responsibility for each patient you see. Let's have you do a little
+            presentation for us on Rare Syndrome tomorrow morning then.
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
         - type: 0
-          actorId: 1097336261
+          actorId: -1
           emotion: 0
-          dialogue: 6
+          dialogue: With this choice, you have not made any major missteps and have
+            maintained your integrity. Being new to a complex situation, you encountered
+            the discomfort of not always knowing how to do something or all the answers,
+            which can be stressful, but is just part of learning anything new. Hang
+            in there! This will get better as you get further into your medical education.
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
         result: 0
-        healthChange: 0
-        feedback: You picked the bad choice
-      - name: Very bad choice
-        text: Very bad
+        healthChange: 5
+        feedback: 'Possible goal in making this choice: Honesty. Short term outcome:
+          Dr. Shazam appreciates your honesty but wonders about your initiative. Long
+          term outcome: You have not made any major missteps and have at least maintained
+          your integrity.'
+      - name: Good Choice
+        text: 'Schedule Time: Say you haven''t heard of Rare Syndrome, but will look
+          it up first chance you get.'
         events:
         - type: 0
-          actorId: -608044
+          actorId: 1
           emotion: 0
-          dialogue: 7
+          dialogue: I had never heard of Rare Syndrome before but will look it up
+            first chance I get.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: 0
+          emotion: 0
+          dialogue: 
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
         - type: 0
-          actorId: 1097336261
+          actorId: 0
           emotion: 0
-          dialogue: 8
+          dialogue: Okay. That's good because Mrs. Adams needs us to understand Rare
+            Syndrome very well if we're going to be able to decide if she has it and
+            then treat it. Let's have you do a little presentation for us on Rare
+            Syndrome tomorrow morning then.
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
         - type: 0
-          actorId: -608044
+          actorId: -1
           emotion: 0
-          dialogue: 9
+          dialogue: With this choice, you'll likely have a sense of integrity from
+            being honest, taking responsibility as appropriate to the situation, and
+            making the best of the stiuation. Being new to a complex situation, you
+            encountered the discomfort of not always knowing how to do something or
+            all the answers, which can be stressful, but is just part of learning
+            anything new. Hang in there! This will get better as you get further into
+            your medical education.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        result: 2
+        healthChange: 30
+        feedback: 'Possible goal in making this choice: Being upfront about what you
+          don''t know, while at the same time conveying that you understand it''s
+          your responsbility to learn. Short term outcome: A little discomfort at
+          admitting you didn''t do something you felt was your responsibility and
+          becoming aware that as the new kid on the block, you may not succeed in
+          your usual role of being close to perfect at everthing. Long term outcome:
+          You have a sense of integrity from being honest, taking responsibility as
+          appropriate to the situation, and making the best of the situation.'
+      - name: Very Bad Choice
+        text: 'Share the Blame: Explain you were going to look it up, but the nurse,
+          Ms. Jefferson, asked you to set up an EKG cart at Mr. Cochran''s bedside.'
+        events:
+        - type: 0
+          actorId: 1
+          emotion: 0
+          dialogue: I had never heard of Rare Syndrome before. Ms. Jefferson asked
+            me to set up an EKG right before seminar, so I haven't had time to look
+            it up.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 0
+          emotion: 0
+          dialogue: Okay. Let's have you do a little presentation for us on Rare Syndrome
+            tomorrow morning, then.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: With this choice, you'll likely have a sense of integrity from
+            being honest, taking responsibility as appropriate to the situation, and
+            making the best of the situation. Being new to a complex situation, you
+            encountered the discomfort of not always knowing how to do something or
+            all the answers, which can be stressful, but is just part of learning
+            anything new. Hang in there! This will get better as you get further into
+            your medical education.
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
         result: 1
-        healthChange: 0
-        feedback: You picked the very bad choice
-    - name: More talking with Dr. Belmont
-      text: 
-      continueLast: 0
-      triggers:
-      - type: 1
-        id: 1097336261
-        interactable: {fileID: 0}
+        healthChange: -40
+        feedback: 'Possible goal in making this choice: Shifting some of the blame
+          for not achieving perfection to someone else and avoiding facing the fact
+          that you did not succeed at something that was clearly expected of you,
+          whether it was reasonable or not. Short term outcome: Avoids facing the
+          fact that you are new and not very good at some things when starting out.
+          Long term outcome: Feels a little uncomfortable at having shifted the blame
+          to the nurse, Mrs. Jefferson. When blaming someone else, there can be reprecussions
+          if it gets back to them.'
+      - name: Very Bad Choice
+        text: Look like you know more than you do. Mention the usual constellation
+          of symptoms that led the resident to propose Rare Syndrome as the diagnosis.
+        events:
+        - type: 0
+          actorId: 1
+          emotion: 0
+          dialogue: I know that with Rare Syndrome you may see x, y, and z as well
+            as heartburn.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: 0
+          emotion: 3
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 0
+          emotion: 0
+          dialogue: You're part right. Are you sure it includes "heartburn" or esophageal
+            reflux?
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 1
+          emotion: 0
+          dialogue: Um, no.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 0
+          emotion: 0
+          dialogue: Right, it does not. Rare Syndrome does include x and y and test
+            result z, but it does not include heartburn. Mrs. Adams just happens to
+            also have heartburn. Be careful about assuming all symptoms a patient
+            has are related. What do you know about the prognosis of Rare Syndrome?
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 1
+          emotion: 0
+          dialogue: I'm not sure.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 2
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: 0
+          emotion: 0
+          dialogue: Okay, well. Mrs. Adams needs us to be sure. We need to understand
+            Rare Syndrome very well if we're going to be able to decide if Mrs. Adams
+            has it and then treat it. Let's have you do a little presentation for
+            us on Rare Syndrome tomorrow morning, then.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: Taking responsibility for your actions is highly valued in medicine.
+            Being new to a complex situation, you encountered the discomfort of not
+            always knowing how to do something or have all the answers, which can
+            be stressful, but is just part of learning anything new. Hang in there!
+            This will get better as you get further into your medical education.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        result: 1
+        healthChange: -40
+        feedback: 'Possible goal in making this choice: Look like you know something,
+          when in fact you know very little about Rare Syndrome. Short term outcome:
+          You may or may not succeed when you pretend to know more than you do. In
+          this case, it backfires. Looking like you know something, Dr. Shazam comes
+          back with a question, to which you don''t know the answer. Long term outcome:
+          This was an embarassment.'
+    - name: 'Work vs. Sleep (Scene 3: Empty Charting Room)'
+      text: How do you want to respond?
+      continueLast: 1
+      triggers: []
       events:
-      - type: 0
-        actorId: 1097336261
-        emotion: 0
-        dialogue: z
-        action: 0
-        position: {fileID: 0}
-        activatable: {fileID: 0}
-      - type: 0
-        actorId: -608044
-        emotion: 0
-        dialogue: y
-        action: 0
-        position: {fileID: 0}
-        activatable: {fileID: 0}
       - type: 0
         actorId: -1
         emotion: 0
-        dialogue: x
+        dialogue: Your first day of ICU clerkship ends with an assignment to give
+          a presentation on Rare Syndrome the next morning. You have to decide how
+          much time and effort to put into your talk on Rare Syndrome and how much
+          sleep to get.
         action: 0
         position: {fileID: 0}
         activatable: {fileID: 0}
-      isChoice: 0
-      options: []
+      - type: 0
+        actorId: 1
+        emotion: 0
+        dialogue: '[Talking to self] I know I wouldn''t be able to put together a
+          good talk on Rare Syndrome without staying up late. To make it really good,
+          I''d probably be up most of the night. I don''t want to sacrifice my health,
+          though.'
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      isChoice: 1
+      options:
+      - name: Good Choice
+        text: 'Strike a Balance: Stay up only late enough to prepare a report good
+          enough to help the team make the diagnosis.'
+        events:
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: You stayed up only late enough to prepare a report good enough
+            to help the team make the diagnosis. You get 6 hours of sleep and arrive
+            at the clinic just a little tired but fairly well-prepared to give a good
+            enough presentation.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: 'Short term outcome: You are a little sleepy the next day but
+            do a reasonably good job on the presentation. Long term outcome: This
+            approach helps you avoid burnout for the most part and still perform at
+            a level of which you feel proud.'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        result: 2
+        healthChange: 30
+        feedback: 'Possible goal in making this choice: Honor your desire to do as
+          good a job as possible but balance this against taking care of your health.
+          Short term outcome: You are a little sleepy the next day but do a reasonably
+          good job on the presentation. Long term outcome: This approach helps you
+          avoid burnout for the most part and still perform at a level which you feel
+          proud.'
+      - name: Good Choice
+        text: 'Set Strong Limits for Self-Care: Stopping at your bedtime, whether
+          you''re prepared for tomorrow''s seminar or not by then.'
+        events:
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: You start writing your presentation and stop in time to get a
+            good night's sleep. After 8 hours, you wake up with a good night's rest
+            and a brief report. You arrive at the clinic well-rested, but not very
+            well prepared for your talk.
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: 'Short term outcome: You feel a little stressed because your report
+            is not very good but feel good that you respected your limits for the
+            sake of your health. Long term outcome: You get through medical school
+            without sacrificing your health. There are times where your performance
+            suffers, and supervisors do not cosider you to be among the brightest,
+            but they appreciate your level-headedness and consistency.'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        result: 2
+        healthChange: 20
+        feedback: 'Possible goal in making this choice: You want to avoid burnout
+          and so sets limits on what you are willing to sacrifice. You decide one
+          of those is sleep. Short term outcome: You feel a little stressed because
+          your report is not very good but feel good that you respected your limits
+          for the sake of your health. Long term outcome: You get through medical
+          school without sacrificing your health. There are time where your performance
+          suggers, and supervisors do not consider you to be among the brightest,
+          but they appreciate your level-headedness and consistency.'
+      - name: Very Bad Choice
+        text: 'Dedication Before All Else: Staying up extra late researching everything
+          you can find on Rare Syndrome.'
+        events:
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 3
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: '[You stayed up very late to prepare an excellent presentation.
+            You get 2 hours of sleep and arrive at the clinic, pretty tired but well-prepared
+            to give an excellent presentation.]'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -1
+          emotion: 0
+          dialogue: 'Short term outcome: You do a great job on the presentation, but
+            your critical thinking and memory are not as sharp in the afternoon in
+            the clinic and you make a few minor mistakes as a result. Long term outcome:
+            Because there are many demands like this in medical school, more than
+            in undergradute, you soon burnout from trying to keep up and sacrificing
+            your sleep and having balance in your life.'
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        result: 1
+        healthChange: -60
+        feedback: 'Possible goal in making this choice: Follows the same path that
+          worked for you in undergraduate schoolwork: Work as hard as you need to
+          in order to always do a great job. Short term outcome: You do a great job
+          on the presentation, but your critical thinking and memory are not as sharp
+          in the afternooon in the clinic and you make a few minor mistakes as a result.
+          Long term outcome: Because there are many demands like this in medical school,
+          more than in undergraduate, you soon burn out from trying to keep up sacrificing
+          your sleep having balance in your life.'
     hasStartNarrative: 1
     startNarrative: Start narrative text
     hasEndNarrative: 1
