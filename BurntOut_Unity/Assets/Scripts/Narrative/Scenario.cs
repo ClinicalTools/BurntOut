@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Narrative.Vars;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -8,9 +9,42 @@ namespace Narrative
     [Serializable]
     public class Scenario
     {
-        // Number to represent this actor.
-        public int id;
+        // Basic narrative info
+        public bool hasStartNarrative;
+        public string startNarrative;
 
+        public bool hasEndNarrative;
+        public string endNarrative;
+
+        // Variable info
+        [SerializeField]
+        private List<NarrativeVar> vars;
+        public List<NarrativeVar> Vars
+        {
+            get
+            {
+                if (vars == null)
+                    vars = new List<NarrativeVar>();
+
+                return vars;
+            }
+        }
+
+        // Actor info
+        [SerializeField]
+        private List<ActorEvents> actorEventsList;
+        public List<ActorEvents> ActorEventsList
+        {
+            get
+            {
+                if (actorEventsList == null)
+                    actorEventsList = new List<ActorEvents>();
+
+                return actorEventsList;
+            }
+        }
+
+        // Scene change info
         public string scenePath;
         public bool sceneChange;
         public bool autoChangeScene = true;
@@ -27,6 +61,7 @@ namespace Narrative
             }
         }
 
+        // Event info
         [SerializeField]
         private List<Choice> choices;
         public List<Choice> Choices
@@ -38,54 +73,6 @@ namespace Narrative
 
                 return choices;
             }
-        }
-
-
-        [SerializeField]
-        private List<ActorEvents> actorEventsList;
-        public List<ActorEvents> ActorEventsList
-        {
-            get
-            {
-                if (actorEventsList == null)
-                    actorEventsList = new List<ActorEvents>();
-
-                return actorEventsList;
-            }
-        }
-
-        public bool hasStartNarrative;
-        public string startNarrative;
-
-        public bool hasEndNarrative;
-        public string endNarrative;
-
-        public Scenario(Scenario[] scenarios)
-        {
-            ResetHash(scenarios);
-        }
-
-        public void ResetHash(Scenario[] scenarios)
-        {
-            // Using hash of current time to get a number that will hopefully be unique
-            var hash = DateTime.Now.GetHashCode();
-
-            // Ensure no other scenario in the passed list has the same id
-            // a true flag means that the code hasn't hit another scenario with the same id
-            bool flag = false;
-            while (!flag)
-            {
-                flag = true;
-                foreach (var actor in scenarios)
-                    if (actor.id == hash)
-                    {
-                        hash++;
-                        flag = false;
-                        break;
-                    }
-            }
-
-            id = hash;
         }
     }
 }

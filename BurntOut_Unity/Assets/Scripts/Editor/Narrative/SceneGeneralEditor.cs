@@ -12,7 +12,7 @@ namespace Narrative.Inspector
         private readonly ObjectField<SceneAsset> sceneField;
         private readonly Toggle autoChangeSceneToggle, sceneChangeToggle;
         private readonly Foldout triggersFoldout;
-        private readonly ReorderableList<Trigger, TriggerDrawer> triggerList;
+        private readonly ReorderableList<Trigger, TriggerEditor> triggerList;
 
         public SceneGeneralEditor(Scenario value) : base(value)
         {
@@ -57,7 +57,7 @@ namespace Narrative.Inspector
             };
             triggersFoldout = new Foldout("Triggers");
             triggersFoldout.Style.FontStyle = FontStyle.Bold;
-            triggerList = new ReorderableList<Trigger, TriggerDrawer>(Value.SceneChangeTriggers);
+            triggerList = new ReorderableList<Trigger, TriggerEditor>(Value.SceneChangeTriggers);
         }
 
         protected override void Display()

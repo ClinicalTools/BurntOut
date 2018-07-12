@@ -12,13 +12,13 @@ namespace Narrative
         }
 
         [SerializeField]
-        private Scenario scenario = new Scenario(new Scenario[0]);
+        private Scenario scenario = new Scenario();
         public Scenario Scenario
         {
             get
             {
                 if (scenario == null)
-                    scenario = new Scenario(new Scenario[0]);
+                    scenario = new Scenario();
 
                 return scenario;
             }

@@ -2,7 +2,7 @@
 
 namespace Narrative.Vars
 {
-    public enum VarType { Bool, Int, String }
+    public enum VarType { Bool, Int }
 
     [Serializable]
     public class NarrativeVar
@@ -17,6 +17,5 @@ namespace Narrative.Vars
 
         public bool boolVal;
         public int intVal;
-        public string stringVal;
     }
 }

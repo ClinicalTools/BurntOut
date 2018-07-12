@@ -13,7 +13,7 @@ namespace Narrative.Inspector
 
         // Event related fields
         private readonly LabelField eventsLabel;
-        private readonly ReorderableList<Task, TaskDrawer> eventsList;
+        private readonly ReorderableList<Task, TaskEditor> eventsList;
 
         public InteractableEditor(Interactable value, int index) : base(value, index)
         {
@@ -26,7 +26,7 @@ namespace Narrative.Inspector
 
             eventsLabel = new LabelField("Events:");
             eventsLabel.Style.FontStyle = FontStyle.Bold;
-            eventsList = new ReorderableList<Task, TaskDrawer>(Value.Events);
+            eventsList = new ReorderableList<Task, TaskEditor>(Value.Events);
         }
 
         protected override void Display()

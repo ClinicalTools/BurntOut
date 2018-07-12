@@ -10,13 +10,13 @@ namespace Narrative.Inspector
     public class InteractableInspector : Editor
     {
         private Interactable interactable;
-        private ReorderableList<Task, TaskDrawer> tasks;
+        private ReorderableList<Task, TaskEditor> tasks;
 
         public void OnEnable()
         {
             interactable = (Interactable)target;
 
-            tasks = new ReorderableList<Task, TaskDrawer>(interactable.Events);
+            tasks = new ReorderableList<Task, TaskEditor>(interactable.Events);
         }
 
         public override void OnInspectorGUI()

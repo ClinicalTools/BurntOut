@@ -13,13 +13,23 @@ namespace OOEditor
 
         protected override float ReservedWidth { get; } = 14;
 
+        public override float Width
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Content.text))
+                    return ReservedWidth;
+                else
+                    return 0;
+            }
+        }
         /// <summary>
         /// Makes a toggle that starts unselected.
         /// </summary>
         /// <param name="text">Optional label in front of the control.</param>
         /// <param name="tooltip">Tooltip of the optional label in front of the control.</param>
         /// <param name="image">Image to display at the front of the optional label.</param>
-        public Toggle(string text = null, string tooltip = null, Texture image = null) 
+        public Toggle(string text = null, string tooltip = null, Texture image = null)
             : base(text, tooltip, image) { }
         /// <summary>
         /// Makes a toggle.
@@ -36,7 +46,7 @@ namespace OOEditor
 
         protected override void Display(Rect position)
         {
-            position.y += (position.height / 2) -6; 
+            position.y += Mathf.Max(0, (position.height / 2) - 9);
 
             Value = EditorGUI.Toggle(position, Value, GUIStyle);
 

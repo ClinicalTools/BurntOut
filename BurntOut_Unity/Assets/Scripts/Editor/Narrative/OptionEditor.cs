@@ -45,7 +45,7 @@ namespace Narrative.Inspector
         }
 
         private Foldout eventsFoldout;
-        private ReorderableList<Task, TaskDrawer> taskList;
+        private ReorderableList<Task, TaskEditor> taskList;
 
         private readonly TextField nameField;
         private readonly TextField textField;
@@ -83,7 +83,7 @@ namespace Narrative.Inspector
             eventsFoldout = new Foldout("Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
 
-            taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
+            taskList = new ReorderableList<Task, TaskEditor>(Value.Events);
 
             resultPopup = new EnumPopup(Value.result, "Result:");
             resultPopup.Style.FontColor = ResultColor;

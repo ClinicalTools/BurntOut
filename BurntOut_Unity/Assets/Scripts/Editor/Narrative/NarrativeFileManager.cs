@@ -49,7 +49,7 @@ namespace Narrative.Inspector
             return false;
         }
 
-        public static Scenario LoadScenario(List<Scenario> scenarios)
+        public static Scenario LoadScenario()
         {
             // Get the folder to load the scenario from
             var path = DEFAULT_PATH + SceneManager.GetActiveScene().name;
@@ -60,11 +60,7 @@ namespace Narrative.Inspector
             {
                 string json = File.ReadAllText(path);
 
-                var scenario = JsonUtility.FromJson<Scenario>(json);
-                for (int i = 0; i < scenarios.Count; i++)
-                    scenario.ResetHash(scenarios.ToArray());
-
-                return scenario;
+                return JsonUtility.FromJson<Scenario>(json);
             }
 
             return null;

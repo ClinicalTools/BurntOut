@@ -3,6 +3,8 @@ using UnityEditor;
 using System.Collections.Generic;
 using OOEditor;
 using System;
+using Narrative.Vars;
+using Narrative.Vars.Inspector;
 
 namespace Narrative.Inspector
 {
@@ -15,6 +17,11 @@ namespace Narrative.Inspector
         private const int MIN_FONT_SIZE = 10;
         private const int MAX_FONT_SIZE = 20;
         private const int TOOLBAR_FONT_SIZE = 12;
+
+        private enum ScenarioTab
+        {
+            General, Variables, Actors, Interactables, Events
+        }
 
         // Scene controls
         private ScrollView scrollView = new ScrollView();
@@ -34,6 +41,9 @@ namespace Narrative.Inspector
 
         // Choice drawer
         private FoldoutList<Choice, ChoiceEditor> choiceList;
+
+        // Vars drawer
+        private ReorderableList<NarrativeVar, NarrativeVarEditor> narrativeVars;
 
         // Actors drawer
         private SceneActorsEditor sceneActorsEditor;
@@ -85,7 +95,7 @@ namespace Narrative.Inspector
                 scenarioManager = scenarioManagerObj.AddComponent<ScenarioManager>();
 
             if (scenarioManager.Scenario == null)
-                scenarioManager.Scenario = new Scenario(new Scenario[0]);
+                scenarioManager.Scenario = new Scenario();
 
             InitScenarioControls();
         }
@@ -119,8 +129,7 @@ namespace Narrative.Inspector
                 return;
             }
 
-            string[] tabNames = { "General", "Actors", "Interactables", "Events" };
-            tabs = new TabControl(0, tabNames);
+            tabs = new TabControl(0, Enum.GetNames(typeof(ScenarioTab)));
 
             fontSizeSlider = new IntSlider(DEFAULT_FONT_SIZE, MIN_FONT_SIZE, MAX_FONT_SIZE)
             {
@@ -143,6 +152,8 @@ namespace Narrative.Inspector
             choiceList = new FoldoutList<Choice, ChoiceEditor>(scenarioManager.Scenario.Choices);
             sceneActorsEditor = new SceneActorsEditor(scenarioManager.Scenario);
 
+            narrativeVars = new ReorderableList<NarrativeVar, NarrativeVarEditor>(scenarioManager.Scenario.Vars);
+
             var interactables = new List<Interactable>(SceneInteractables.Interactables);
             interactablesList = new FoldoutList<Interactable, InteractableEditor>(interactables, false, false, false);
         }
@@ -154,7 +165,7 @@ namespace Narrative.Inspector
 
         private void LoadBtn_Pressed(object sender, EventArgs e)
         {
-            var scenario = NarrativeFileManager.LoadScenario(new List<Scenario>());
+            var scenario = NarrativeFileManager.LoadScenario();
             if (scenario == null)
                 return;
 
@@ -201,26 +212,25 @@ namespace Narrative.Inspector
                 using (textStyle.Draw())
                 using (scrollView.Draw())
                 {
-                    // Edit basic scene info
-                    if (tabs.Value == 0)
+                    switch ((ScenarioTab)tabs.Value)
                     {
-                        scenarioGeneralEditor.Draw(scenarioManager.Scenario);
-                    }
-                    // Edit actors
-                    else if (tabs.Value == 1)
-                    {
-                        sceneActorsEditor.Draw(scenarioManager.Scenario);
-                    }
-                    // Edit interactables
-                    else if (tabs.Value == 2)
-                    {
-                        var interactables = new List<Interactable>(SceneInteractables.Interactables);
-                        interactablesList.Draw(interactables);
-                    }
-                    // Edit events
-                    else if (tabs.Value == 3)
-                    {
-                        choiceList.Draw(scenarioManager.Scenario.Choices);
+                        case ScenarioTab.General:
+                            scenarioGeneralEditor.Draw(scenarioManager.Scenario);
+                            break;
+                        case ScenarioTab.Variables:
+                            narrativeVars.Draw(scenarioManager.Scenario.Vars);
+                            break;
+                        case ScenarioTab.Actors:
+                            sceneActorsEditor.Draw(scenarioManager.Scenario);
+                            break;
+                        case ScenarioTab.Interactables:
+                            var interactables = new List<Interactable>(SceneInteractables.Interactables);
+                            interactablesList.Draw(interactables);
+                            break;
+                        case ScenarioTab.Events:
+                            choiceList.Draw(scenarioManager.Scenario.Choices);
+                            break;
+
                     }
                 }
             }

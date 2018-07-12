@@ -2,12 +2,12 @@
 
 namespace Narrative.Inspector
 {
-    public class TriggerDrawer : ClassDrawer<Trigger>
+    public class TriggerEditor : ClassDrawer<Trigger>
     {
         private readonly EnumPopup typePopup;
         private readonly Popup actorPopup, locationPopup, interactablePopup;
 
-        public TriggerDrawer(Trigger value) : base(value)
+        public TriggerEditor(Trigger value) : base(value)
         {
             typePopup = new EnumPopup(value.type)
             {

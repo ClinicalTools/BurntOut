@@ -2,7 +2,7 @@
 
 namespace Narrative.Inspector
 {
-    public class TaskDrawer : ClassDrawer<Task>
+    public class TaskEditor : ClassDrawer<Task>
     {
         private readonly EnumPopup typePopup;
         // Dialogue
@@ -17,7 +17,7 @@ namespace Narrative.Inspector
         private readonly EnumPopup actionPopup;
         private readonly Popup positionPopup, activatablePopup;
 
-        public TaskDrawer(Task value) : base(value)
+        public TaskEditor(Task value) : base(value)
         {
             typePopup = new EnumPopup(Value.type)
             {

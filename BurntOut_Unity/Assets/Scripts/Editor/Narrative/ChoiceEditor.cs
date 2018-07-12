@@ -15,11 +15,11 @@ namespace Narrative.Inspector
         private readonly TextField nameField;
         private readonly Toggle continueLast;
         private readonly Foldout triggersFoldout;
-        private readonly ReorderableList<Trigger, TriggerDrawer> triggerList;
+        private readonly ReorderableList<Trigger, TriggerEditor> triggerList;
 
         // Actual event related fields
         private readonly Foldout eventsFoldout;
-        private readonly ReorderableList<Task, TaskDrawer> taskList;
+        private readonly ReorderableList<Task, TaskEditor> taskList;
 
         // Choice related fields
         private readonly Toggle choiceToggle;
@@ -52,11 +52,11 @@ namespace Narrative.Inspector
             };
             triggersFoldout = new Foldout("Triggers");
             triggersFoldout.Style.FontStyle = FontStyle.Bold;
-            triggerList = new ReorderableList<Trigger, TriggerDrawer>(Value.Triggers);
+            triggerList = new ReorderableList<Trigger, TriggerEditor>(Value.Triggers);
 
             eventsFoldout = new Foldout(false, "Events");
             eventsFoldout.Style.FontStyle = FontStyle.Bold;
-            taskList = new ReorderableList<Task, TaskDrawer>(Value.Events);
+            taskList = new ReorderableList<Task, TaskEditor>(Value.Events);
 
             choiceToggle = new Toggle(Value.isChoice, "Choice:");
             choiceToggle.Changed += (sender, e) =>
