@@ -118,7 +118,8 @@ namespace Narrative
                     switch (task.action)
                     {
                         case TaskAction.MoveTo:
-                            task.position.FadeTo();
+                            var actorObject = actorObjects.First(a => a.actor.id == task.actorId);
+                            task.position.FadeTo(actorObject);
                             break;
                         case TaskAction.Show:
                             task.activatable.SetActive(true);

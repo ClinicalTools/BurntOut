@@ -50,6 +50,5 @@ namespace Narrative
                 return options;
             }
         }
-
     }
 }

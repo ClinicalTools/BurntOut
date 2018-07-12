@@ -27,6 +27,11 @@ namespace Narrative.Inspector
         private readonly Foldout optionsFoldout;
         private readonly FoldoutList<Option, OptionEditor> optionList;
 
+        private readonly Toggle conditional = new Toggle("Conditional:");
+        private readonly Foldout ifFoldout = new Foldout("IF: AskedForHelp is 0");
+        private readonly Foldout elseIfFoldout = new Foldout("ELSE IF: AskedForHelp is 1");
+        private readonly Foldout elseFoldout = new Foldout("ELSE");
+
         public ChoiceEditor(Choice value, int index) : base(value, index)
         {
             Foldout = new Foldout(FoldoutName);
@@ -74,6 +79,10 @@ namespace Narrative.Inspector
             {
                 ResetFoldout();
             };
+
+            ifFoldout.Style.FontStyle = FontStyle.Bold;
+            elseIfFoldout.Style.FontStyle = FontStyle.Bold;
+            elseFoldout.Style.FontStyle = FontStyle.Bold;
         }
 
         private void ResetFoldout()
@@ -94,34 +103,81 @@ namespace Narrative.Inspector
         {
             nameField.Draw(Value.name);
 
-            // Trigger drawing
-            triggersFoldout.Draw();
-            if (triggersFoldout.Value)
-                using (Indent.Draw())
-                {
-                    continueLast.Draw(Value.continueLast);
-                    if (!Value.continueLast)
-                        triggerList.Draw(Value.Triggers);
-                }
+            /*
+            
+            conditional.Draw();
+            if (conditional.Value)
+            {
+                ifFoldout.Draw();
+                elseIfFoldout.Draw();
 
-            // Event drawing
-            eventsFoldout.Draw();
-            if (eventsFoldout.Value)
-                using (Indent.Draw())
-                    taskList.Draw(Value.Events);
+                if (elseIfFoldout.Value)
+                    using (Indent.Draw())
+                    {
+                        // Trigger drawing
+                        triggersFoldout.Draw();
+                        if (triggersFoldout.Value)
+                            using (Indent.Draw())
+                            {
+                                continueLast.Draw(Value.continueLast);
+                                if (!Value.continueLast)
+                                    triggerList.Draw(Value.Triggers);
+                            }
 
-            // Choice drawing
-            choiceToggle.Draw();
-            if (Value.isChoice)
-                using (Indent.Draw())
-                {
-                    textField.Draw(Value.text);
+                        // Event drawing
+                        eventsFoldout.Draw();
+                        if (eventsFoldout.Value)
+                            using (Indent.Draw())
+                                taskList.Draw(Value.Events);
 
-                    optionsFoldout.Draw();
-                    if (optionsFoldout.Value)
-                        using (Indent.Draw())
-                            optionList.Draw(Value.Options);
-                }
+                        // Choice drawing
+                        choiceToggle.Draw();
+                        if (Value.isChoice)
+                            using (Indent.Draw())
+                            {
+                                textField.Draw(Value.text);
+
+                                optionsFoldout.Draw();
+                                if (optionsFoldout.Value)
+                                    using (Indent.Draw())
+                                        optionList.Draw(Value.Options);
+                            }
+                    }
+
+                elseFoldout.Draw();
+            }
+            else//*/
+            {
+
+                // Trigger drawing
+                triggersFoldout.Draw();
+                if (triggersFoldout.Value)
+                    using (Indent.Draw())
+                    {
+                        continueLast.Draw(Value.continueLast);
+                        if (!Value.continueLast)
+                            triggerList.Draw(Value.Triggers);
+                    }
+
+                // Event drawing
+                eventsFoldout.Draw();
+                if (eventsFoldout.Value)
+                    using (Indent.Draw())
+                        taskList.Draw(Value.Events);
+
+                // Choice drawing
+                choiceToggle.Draw();
+                if (Value.isChoice)
+                    using (Indent.Draw())
+                    {
+                        textField.Draw(Value.text);
+
+                        optionsFoldout.Draw();
+                        if (optionsFoldout.Value)
+                            using (Indent.Draw())
+                                optionList.Draw(Value.Options);
+                    }
+            }
         }
     }
 }

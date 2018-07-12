@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Narrative;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -92,14 +93,32 @@ public class PlayerMovement : MonoBehaviour
 
     private bool fading;
     /// <summary>
-    /// Fades the camera to black, moves to a specific place, and then fades back in.
+    /// Fades the camera to black, moves to a distance from a transform, and then fades back in.
+    /// Side of the target and old position are based on the returnPosition.
     /// </summary>
     /// <param name="moveTarget">Object to move to.</param>
     /// <param name="lookTarget">Position to look at after the object moves.</param>
-    public void FadeTo(Transform moveTarget, Transform lookTarget)
+    public void FadeTo(Transform target, float dist, PositionNode returnPosition)
     {
-        movePos = moveTarget.position;
-        lookPos = lookTarget.position;
+        inDefaultPos = false;
+
+        moveLookTarget = target;
+
+        oldPos = returnPosition.CameraPosition.position;
+        oldRot = Quaternion.LookRotation(returnPosition.CameraLook.transform.position - returnPosition.CameraPosition.position);
+        oldDir = oldRot * Vector3.forward;
+
+        var frontPos = target.position + (target.forward * dist);
+        var frontDist = Vector3.Distance(frontPos, oldPos);
+        var backPos = target.transform.position - (target.forward * dist);
+        var backDist = Vector3.Distance(backPos, oldPos);
+
+        if (frontDist < backDist)
+            movePos = frontPos;
+        else
+            movePos = backPos;
+
+        lookPos = target.position;
 
         StartCoroutine(FadeTo());
     }
@@ -113,9 +132,6 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         transform.position = movePos;
         transform.rotation = Quaternion.LookRotation(lookPos - transform.position);
-        oldPos = transform.position;
-        oldDir = transform.forward;
-        oldRot = transform.rotation;
 
         Main_GameManager.Instance.screenfade.SetBool("fade", false);
 
