@@ -91,6 +91,14 @@ namespace OOEditor
                 position.x += width;
                 position.width -= width;
             }
+            else if (Content != null && !string.IsNullOrEmpty(Content.tooltip))
+            {
+                var tooltipContent = new GUIContent
+                {
+                    tooltip = Content.tooltip
+                };
+                EditorGUI.LabelField(position, tooltipContent);
+            }
 
             base.PrepareDisplay(position);
         }

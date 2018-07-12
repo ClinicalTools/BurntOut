@@ -44,7 +44,7 @@ namespace Narrative.Inspector
                 Value.sceneChange = e.Value;
             };
             sceneField = new ObjectField<SceneAsset>(
-                AssetDatabase.LoadAssetAtPath<SceneAsset>(Value.scenePath), false, "Scene:");
+                AssetDatabase.LoadAssetAtPath<SceneAsset>(Value.scenePath), false, "Scene:", "tooltip");
             sceneField.Changed += (sender, e) =>
             {
                 Value.scenePath = AssetDatabase.GetAssetPath(e.Value);

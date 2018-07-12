@@ -14,13 +14,13 @@ namespace Narrative.Vars.Inspector
 
         public NarrativeVarEditor(NarrativeVar value) : base(value)
         {
-            nameField = new TextField(value.name);
+            nameField = new TextField(value.name, null, "Variable name");
             nameField.Changed += (sender, e) =>
             {
                 Value.name = e.Value;
             };
 
-            typePopup = new EnumPopup(Value.type)
+            typePopup = new EnumPopup(Value.type, null, "Variable type")
             {
                 FitWidth = true
             };
@@ -29,7 +29,7 @@ namespace Narrative.Vars.Inspector
                 Value.type = (VarType)e.Value;
             };
 
-            boolValToggle = new Toggle(value.boolVal)
+            boolValToggle = new Toggle(value.boolVal, null, "Starting value")
             {
                 FitWidth = true
             };
@@ -37,7 +37,7 @@ namespace Narrative.Vars.Inspector
             {
                 Value.boolVal = e.Value;
             };
-            intValField = new IntField(value.intVal)
+            intValField = new IntField(value.intVal, null, "Starting value")
             {
                 MaxWidth = 50
             };
