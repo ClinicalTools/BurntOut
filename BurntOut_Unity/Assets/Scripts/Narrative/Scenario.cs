@@ -40,6 +40,20 @@ namespace Narrative
             }
         }
 
+
+        [SerializeField]
+        private List<ActorEvents> actorEventsList;
+        public List<ActorEvents> ActorEventsList
+        {
+            get
+            {
+                if (actorEventsList == null)
+                    actorEventsList = new List<ActorEvents>();
+
+                return actorEventsList;
+            }
+        }
+
         public bool hasStartNarrative;
         public string startNarrative;
 

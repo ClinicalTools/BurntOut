@@ -24378,7 +24378,7 @@ MonoBehaviour:
   - type: 0
     actorId: -1
     emotion: 0
-    dialogue: Incorrect door
+    dialogue: This is just a door.
     action: 0
     position: {fileID: 0}
     activatable: {fileID: 0}
@@ -35031,6 +35031,31 @@ MonoBehaviour:
           Long term outcome: Because there are many demands like this in medical school,
           more than in undergraduate, you soon burn out from trying to keep up sacrificing
           your sleep having balance in your life.'
+    actorEventsList:
+    - actorId: 1097336261
+      events:
+      - type: 0
+        actorId: 1097336261
+        emotion: 0
+        dialogue: This does not progress the narrative.
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+    - actorId: -812679138
+      events: []
+    - actorId: 24987387
+      events: []
+    - actorId: -608044
+      events:
+      - type: 0
+        actorId: -608044
+        emotion: 0
+        dialogue: Neither does this.
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+    - actorId: 1644999686
+      events: []
     hasStartNarrative: 1
     startNarrative: Start narrative text
     hasEndNarrative: 1

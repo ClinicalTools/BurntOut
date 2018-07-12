@@ -20,7 +20,8 @@ namespace Narrative.Inspector
             Foldout = new Foldout(Value.name);
             EditorApplication.hierarchyChanged += () => 
             {
-                Foldout.Content.text = Value?.name;
+                if (Value != null)
+                    Foldout.Content.text = Value?.name;
             };
 
             eventsLabel = new LabelField("Events:");

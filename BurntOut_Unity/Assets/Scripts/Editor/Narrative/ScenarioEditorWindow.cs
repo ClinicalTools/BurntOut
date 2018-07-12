@@ -39,7 +39,7 @@ namespace Narrative.Inspector
         private SceneActorsEditor sceneActorsEditor;
 
         // Interactables drawer
-        private List<Interactable> interactables; 
+        private List<Interactable> interactables;
         private FoldoutList<Interactable, InteractableEditor> interactablesList;
 
         private static ScenarioEditorWindow window;
@@ -102,6 +102,12 @@ namespace Narrative.Inspector
             initButton.Pressed += (o, sender) =>
             {
                 InitScenarioManager();
+            };
+
+            EditorApplication.playModeStateChanged += (stateChange) =>
+            {
+                scenarioManager = FindObjectOfType<ScenarioManager>();
+                InitScenarioControls();
             };
         }
 

@@ -137,9 +137,9 @@ public class PlayerMovement : MonoBehaviour
         oldDir = transform.forward;
         oldRot = transform.rotation;
 
-        var frontPos = target.transform.position + (target.transform.forward * dist);
+        var frontPos = target.position + (target.forward * dist);
         var frontDist = Vector3.Distance(frontPos, oldPos);
-        var backPos = target.transform.position - (target.transform.forward * dist);
+        var backPos = target.transform.position - (target.forward * dist);
         var backDist = Vector3.Distance(backPos, oldPos);
 
         if (frontDist < backDist)

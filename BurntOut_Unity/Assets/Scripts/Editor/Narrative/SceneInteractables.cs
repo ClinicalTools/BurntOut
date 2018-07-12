@@ -35,7 +35,7 @@ namespace Narrative.Inspector
         {
             get
             {
-                if (interactables == null)
+                if (interactables == null || (interactables.Length > 0 && interactables[0] == null))
                     Init();
 
                 return interactables;
@@ -52,7 +52,7 @@ namespace Narrative.Inspector
         {
             get
             {
-                if (interactableNames == null)
+                if (interactableNames == null || (interactables.Length > 0 && interactables[0] == null))
                     Init();
 
                 return interactableNames;

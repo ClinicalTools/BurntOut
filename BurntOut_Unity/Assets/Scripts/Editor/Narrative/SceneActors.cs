@@ -135,5 +135,14 @@ namespace Narrative.Inspector
             else
                 return -1;
         }
+
+        public static Actor GetActor(int actorId)
+        {
+            var index = GetNpcIndex(actorId);
+            if (index < 0)
+                return null;
+            else
+                return Actors[index];
+        }
     }
 }

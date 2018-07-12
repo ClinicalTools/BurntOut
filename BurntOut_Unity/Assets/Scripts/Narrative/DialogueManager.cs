@@ -50,8 +50,6 @@ namespace Narrative
             scenario = ScenarioManager.Instance.Scenario;
             choices = scenario.Choices;
 
-            actorObjects = FindObjectsOfType<ActorObject>();
-
             optionButtonsText = new Text[optionButtons.Length];
             for (int i = 0; i < optionButtons.Length; i++)
             {
@@ -143,17 +141,24 @@ namespace Narrative
         }
 
         private readonly Color darkenedCharColor = new Color(.8f, .8f, .8f);
+        private readonly Color invisible = new Color(0, 0, 0, 0);
         private void ProcessCharacterDialogue(int actorId, string dialogue)
         {
             if (actorId == Actor.NARRATOR_ID)
             {
                 nameText.text = NARRATOR_NAME;
-                actorImage.color = darkenedCharColor;
+                if (actorImage.sprite == null)
+                    actorImage.color = invisible;
+                else
+                    actorImage.color = darkenedCharColor;
             }
             else if (actorId == Actor.PLAYER_ID)
             {
                 nameText.text = PLAYER_NAME;
-                actorImage.color = darkenedCharColor;
+                if (actorImage.sprite == null)
+                    actorImage.color = invisible;
+                else
+                    actorImage.color = darkenedCharColor;
             }
             else
             {
@@ -237,6 +242,23 @@ namespace Narrative
                 PlayerMovement.Instance.ZoomLook(actorObject.transform, 2);
                 actorImage.sprite = actorObject.actor.neutral;
                 StartDialogue();
+            }
+            else
+            {
+                var actorEvents = scenario.ActorEventsList.FirstOrDefault(
+                    a => a.actorId == actorObject.actor.id);
+                if (actorEvents?.Events?.Count > 0)
+                {
+                    narrativeTasks = tasks;
+                    tasks = new Queue<Task>();
+                    foreach (var task in actorEvents.Events)
+                        tasks.Enqueue(task);
+                    inSmallNarrative = true;
+
+                    PlayerMovement.Instance.ZoomLook(actorObject.transform, 2);
+                    actorImage.sprite = actorObject.actor.neutral;
+                    StartDialogue();
+                }
             }
         }
 
