@@ -1,0 +1,57 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "Common Parameters": {
+                    "ao_intensity": 0.75,
+                    "emissive_intensity": 1,
+                    "horizonFade": 1.2999999523162842,
+                    "nbSamples": 16
+                },
+                "SSSColor": [
+                    0,
+                    0,
+                    0
+                ],
+                "use_Trans": false
+            },
+            "shader": "PBRSSS_alpha-blending",
+            "shaderInstance": "Main shader"
+        }
+    },
+    "texturesets": {
+        "aicornea01": {
+            "shader": "Main shader"
+        },
+        "aieye01": {
+            "shader": "Main shader"
+        },
+        "aihands7": {
+            "shader": "Main shader"
+        },
+        "aihead01": {
+            "shader": "Main shader"
+        },
+        "aipants01": {
+            "shader": "Main shader"
+        },
+        "aishoes8": {
+            "shader": "Main shader"
+        },
+        "aisweater01": {
+            "shader": "Main shader"
+        },
+        "aitshirt01": {
+            "shader": "Main shader"
+        },
+        "shoelaces": {
+            "shader": "Main shader"
+        },
+        "teeth": {
+            "shader": "Main shader"
+        }
+    }
+}

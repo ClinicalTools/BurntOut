@@ -1,0 +1,148 @@
+fileFormatVersion: 2
+guid: af3f785d82c20df498b242e99e431608
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: matest01:CMan0005_HD2_Hands
+    100002: matest01:CMan0005_HD2_Head1
+    100004: matest01:CMan0005_HD2_Left_Eye
+    100006: matest01:CMan0005_HD2_Pants
+    100008: matest01:CMan0005_HD2_Right_Eye
+    100010: matest01:CMan0005_HD2_Shoe_Left
+    100012: matest01:CMan0005_HD2_Shoe_Right
+    100014: matest01:CMan0005_HD2_Sweater
+    100016: matest01:CMan0005_HD2_Teeth
+    100018: matest01:TeethUpper
+    100020: //RootNode
+    400000: matest01:CMan0005_HD2_Hands
+    400002: matest01:CMan0005_HD2_Head1
+    400004: matest01:CMan0005_HD2_Left_Eye
+    400006: matest01:CMan0005_HD2_Pants
+    400008: matest01:CMan0005_HD2_Right_Eye
+    400010: matest01:CMan0005_HD2_Shoe_Left
+    400012: matest01:CMan0005_HD2_Shoe_Right
+    400014: matest01:CMan0005_HD2_Sweater
+    400016: matest01:CMan0005_HD2_Teeth
+    400018: matest01:TeethUpper
+    400020: //RootNode
+    2100000: matest01_wire_255211186
+    2100002: aieye01
+    2100004: aicornea01
+    2100006: aihead01
+    2100008: aiStandard7
+    2100010: aisweater01
+    2100012: aitshirt01
+    2100014: aiStandard8
+    2100016: lambert2
+    2100018: aipants01
+    2300000: matest01:CMan0005_HD2_Hands
+    2300002: matest01:CMan0005_HD2_Head1
+    2300004: matest01:CMan0005_HD2_Left_Eye
+    2300006: matest01:CMan0005_HD2_Pants
+    2300008: matest01:CMan0005_HD2_Right_Eye
+    2300010: matest01:CMan0005_HD2_Shoe_Left
+    2300012: matest01:CMan0005_HD2_Shoe_Right
+    2300014: matest01:CMan0005_HD2_Sweater
+    2300016: matest01:CMan0005_HD2_Teeth
+    2300018: matest01:TeethUpper
+    3300000: matest01:CMan0005_HD2_Hands
+    3300002: matest01:CMan0005_HD2_Head1
+    3300004: matest01:CMan0005_HD2_Left_Eye
+    3300006: matest01:CMan0005_HD2_Pants
+    3300008: matest01:CMan0005_HD2_Right_Eye
+    3300010: matest01:CMan0005_HD2_Shoe_Left
+    3300012: matest01:CMan0005_HD2_Shoe_Right
+    3300014: matest01:CMan0005_HD2_Sweater
+    3300016: matest01:CMan0005_HD2_Teeth
+    3300018: matest01:TeethUpper
+    4300000: matest01:TeethUpper
+    4300002: matest01:CMan0005_HD2_Teeth
+    4300004: matest01:CMan0005_HD2_Left_Eye
+    4300006: matest01:CMan0005_HD2_Head1
+    4300008: matest01:CMan0005_HD2_Right_Eye
+    4300010: matest01:CMan0005_HD2_Hands
+    4300012: matest01:CMan0005_HD2_Sweater
+    4300014: matest01:CMan0005_HD2_Shoe_Right
+    4300016: matest01:CMan0005_HD2_Shoe_Left
+    4300018: matest01:CMan0005_HD2_Pants
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
