@@ -149,21 +149,12 @@ namespace Narrative
         private void ProcessCharacterDialogue(int actorId, string dialogue)
         {
             foreach (var actor in actorObjects)
-            {
                 foreach (Transform child in actor.transform)
-                {
-                    if (child.tag != "Dialogue")
-                    {
+                    if (child.tag == "Scene")
                         child.gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        if (actor.actor.id == actorId)
-                            child.gameObject.SetActive(true);
-                    }
-                }
-            }
-
+                    else if (child.tag == "Dialogue")
+                        child.gameObject.SetActive(actor.actor.id == actorId);
+                
             if (actorId == Actor.NARRATOR_ID)
             {
                 nameText.text = NARRATOR_NAME;
@@ -319,9 +310,9 @@ namespace Narrative
 
             foreach (var actor in actorObjects)
                 foreach (Transform child in actor.transform)
-                    if (child.tag != "Dialogue")
+                    if (child.tag == "Scene")
                         child.gameObject.SetActive(false);
-            
+
             DialogueUI.SetActive(true);
             dialogueTyper.Wait = true;
             ProgressNarrative();
@@ -344,9 +335,9 @@ namespace Narrative
 
             foreach (var actor in actorObjects)
                 foreach (Transform child in actor.transform)
-                    if (child.tag != "Dialogue")
+                    if (child.tag == "Scene")
                         child.gameObject.SetActive(true);
-                    else
+                    else if (child.tag == "Dialogue")
                         child.gameObject.SetActive(false);
 
             myanim.SetBool("End", true);

@@ -14,13 +14,6 @@ namespace Narrative
             sprite = GetComponent<SpriteRenderer>();
         }
 
-        // for clicking mechanics
-        private void OnMouseUpAsButton()
-        {
-            if (!Main_GameManager.Instance.isCurrentlyExamine)
-                DialogueManager.Instance.ActorInteract(this);
-        }
-
         public void Hide()
         {
             StartCoroutine(FadeOut());
