@@ -77,7 +77,7 @@ public class PostEffectMask2 : MonoBehaviour {
         if (maskObjects != null && maskObjects.Count > 0) {
             m_stencilWriteMaterial.SetPass(0);
             foreach (var o in maskObjects) {
-                if (o == null) continue;
+                if (o == null || !o.gameObject.activeInHierarchy) continue;
                 Graphics.DrawMeshNow(o.sharedMesh, o.transform.localToWorldMatrix);
             }
         }
