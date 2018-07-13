@@ -29727,7 +29727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1485579938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30520,6 +30520,10 @@ Prefab:
     - target: {fileID: 400000, guid: 51d23085de342e94681e5f4653d6d92c, type: 3}
       propertyPath: m_LocalScale.y
       value: 1.1896042
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 51d23085de342e94681e5f4653d6d92c, type: 3}
+      propertyPath: m_TagString
+      value: Scene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51d23085de342e94681e5f4653d6d92c, type: 3}
@@ -33192,15 +33196,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 51d23085de342e94681e5f4653d6d92c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.22
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 51d23085de342e94681e5f4653d6d92c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.36
+      value: -2.68
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 51d23085de342e94681e5f4653d6d92c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -587.68
+      value: -483.52
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 51d23085de342e94681e5f4653d6d92c, type: 3}
       propertyPath: m_LocalRotation.x
@@ -34221,6 +34225,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1967814176}
+  - component: {fileID: 1967814177}
   m_Layer: 0
   m_Name: Dr. James2
   m_TagString: Untagged
@@ -34243,6 +34248,26 @@ Transform:
   m_Father: {fileID: 1804853767}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1967814177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1967814175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164bfd657ef6ae54a8e3b06e93231168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actor:
+    id: -812679138
+    name: Dr. James
+    icon: {fileID: 0}
+    neutral: {fileID: 0}
+    happy: {fileID: 0}
+    sad: {fileID: 0}
+    angry: {fileID: 0}
+    scared: {fileID: 0}
 --- !u!1001 &1984686323
 Prefab:
   m_ObjectHideFlags: 0
@@ -34326,18 +34351,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1987385039}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 164bfd657ef6ae54a8e3b06e93231168, type: 3}
+  m_Script: {fileID: 11500000, guid: e5e27d056e0d96e4cb707e988ec1ef5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actor:
-    id: -812679138
-    name: Dr. James
-    icon: {fileID: 0}
-    neutral: {fileID: 0}
-    happy: {fileID: 0}
-    sad: {fileID: 0}
-    angry: {fileID: 0}
-    scared: {fileID: 0}
+  actor: {fileID: 1967814177}
 --- !u!114 &1987385044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36641,26 +36658,6 @@ MonoBehaviour:
   newDoorMaterial: {fileID: 0}
   oldDoorMaterial: {fileID: 0}
   myDoorMesh: {fileID: 0}
---- !u!114 &2116866663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2116866660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 164bfd657ef6ae54a8e3b06e93231168, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actor:
-    id: -812679138
-    name: Dr. James
-    icon: {fileID: 0}
-    neutral: {fileID: 0}
-    happy: {fileID: 0}
-    sad: {fileID: 0}
-    angry: {fileID: 0}
-    scared: {fileID: 0}
 --- !u!64 &2116866664
 MeshCollider:
   m_ObjectHideFlags: 0
