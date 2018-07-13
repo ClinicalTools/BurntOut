@@ -7,18 +7,22 @@ namespace Narrative
     {
         public Actor actor;
 
+        public Transform ActorTransform
+        {
+            get
+            {
+                foreach (Transform child in transform)
+                    if (child.tag == "Scene")
+                        return child.transform;
+                return transform;
+            }
+        }
+
         private SpriteRenderer sprite;
 
         private void Start()
         {
             sprite = GetComponent<SpriteRenderer>();
-        }
-
-        // for clicking mechanics
-        private void OnMouseUpAsButton()
-        {
-            if (!Main_GameManager.Instance.isCurrentlyExamine)
-                DialogueManager.Instance.ActorInteract(this);
         }
 
         public void Hide()
