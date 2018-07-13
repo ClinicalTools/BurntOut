@@ -28,13 +28,14 @@ namespace Narrative
 
         private IEnumerator FadeOut()
         {
-            while (sprite.color.a > 0)
-            {
-                var color = sprite.color;
-                color.a -= .1f;
-                sprite.color = color;
-                yield return new WaitForSecondsRealtime(.05f);
-            }
+            if (sprite != null)
+                while (sprite.color.a > 0)
+                {
+                    var color = sprite.color;
+                    color.a -= .1f;
+                    sprite.color = color;
+                    yield return new WaitForSecondsRealtime(.05f);
+                }
         }
 
         public void Show()
@@ -43,13 +44,14 @@ namespace Narrative
         }
         private IEnumerator FadeIn()
         {
-            while (sprite.color.a < 1)
-            {
-                var color = sprite.color;
-                color.a += .1f;
-                sprite.color = color;
-                yield return new WaitForSecondsRealtime(.05f);
-            }
+            if (sprite != null)
+                while (sprite.color.a < 1)
+                {
+                    var color = sprite.color;
+                    color.a += .1f;
+                    sprite.color = color;
+                    yield return new WaitForSecondsRealtime(.05f);
+                }
         }
 
         public void SetSprite(TaskEmotion emotion)

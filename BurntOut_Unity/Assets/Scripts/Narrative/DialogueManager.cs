@@ -119,13 +119,16 @@ namespace Narrative
                     {
                         case TaskAction.MoveTo:
                             var actorObject = actorObjects.First(a => a.actor.id == task.actorId);
-                            task.position.FadeTo(actorObject);
+                            if (actorObject != null && task.position != null)
+                                task.position.FadeTo(actorObject);
                             break;
                         case TaskAction.Show:
-                            task.activatable.SetActive(true);
+                            if (task.activatable != null)
+                                task.activatable.SetActive(true);
                             break;
                         case TaskAction.Hide:
-                            task.activatable.SetActive(false);
+                            if (task.activatable != null)
+                                task.activatable.SetActive(false);
                             break;
                         case TaskAction.Script:
                             break;
@@ -145,13 +148,29 @@ namespace Narrative
         private readonly Color invisible = new Color(0, 0, 0, 0);
         private void ProcessCharacterDialogue(int actorId, string dialogue)
         {
+            foreach (var actor in actorObjects)
+            {
+                foreach (Transform child in actor.transform)
+                {
+                    if (child.tag != "Dialogue")
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        if (actor.actor.id == actorId)
+                            child.gameObject.SetActive(true);
+                    }
+                }
+            }
+
             if (actorId == Actor.NARRATOR_ID)
             {
                 nameText.text = NARRATOR_NAME;
                 if (actorImage.sprite == null)
                     actorImage.color = invisible;
                 else
-                    actorImage.color = darkenedCharColor;
+                    actorImage.color = invisible;// darkenedCharColor;
             }
             else if (actorId == Actor.PLAYER_ID)
             {
@@ -159,7 +178,7 @@ namespace Narrative
                 if (actorImage.sprite == null)
                     actorImage.color = invisible;
                 else
-                    actorImage.color = darkenedCharColor;
+                    actorImage.color = invisible;//darkenedCharColor;
             }
             else
             {
@@ -167,13 +186,13 @@ namespace Narrative
                 if (actor != null)
                 {
                     actorImage.sprite = actor.neutral;
-                    actorImage.color = Color.white;
+                    actorImage.color = invisible;//Color.white;
                     nameText.text = actor.name;
                 }
                 else
                 {
                     nameText.text = "?";
-                    actorImage.color = darkenedCharColor;
+                    actorImage.color = invisible;//darkenedCharColor;
                 }
             }
 
@@ -231,7 +250,7 @@ namespace Narrative
             option = choices[eventSet].Options[optionNum];
             foreach (var task in option.Events)
                 tasks.Enqueue(task);
-            
+
             ProgressNarrative();
         }
 
@@ -298,6 +317,11 @@ namespace Narrative
             Main_GameManager.Instance.ScreenBlur();
             Main_GameManager.Instance.isCurrentlyExamine = true;
 
+            foreach (var actor in actorObjects)
+                foreach (Transform child in actor.transform)
+                    if (child.tag != "Dialogue")
+                        child.gameObject.SetActive(false);
+            
             DialogueUI.SetActive(true);
             dialogueTyper.Wait = true;
             ProgressNarrative();
@@ -317,6 +341,14 @@ namespace Narrative
                 actorObject.Show();
 
             Main_GameManager.Instance.ScreenUnblur();
+
+            foreach (var actor in actorObjects)
+                foreach (Transform child in actor.transform)
+                    if (child.tag != "Dialogue")
+                        child.gameObject.SetActive(true);
+                    else
+                        child.gameObject.SetActive(false);
+
             myanim.SetBool("End", true);
 
 
