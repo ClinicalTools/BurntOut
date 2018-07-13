@@ -29037,6 +29037,20 @@ Camera:
   m_PrefabParentObject: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0,
     type: 2}
   m_PrefabInternal: {fileID: 1724883223}
+--- !u!114 &1448730426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1448730419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943b6fa1be683294ea48cda08b7fb351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maskObjects:
+  - {fileID: 2116866666}
+  invert: 1
 --- !u!1 &1449215394
 GameObject:
   m_ObjectHideFlags: 0
@@ -36661,6 +36675,11 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 51d23085de342e94681e5f4653d6d92c, type: 3}
+--- !u!33 &2116866666 stripped
+MeshFilter:
+  m_PrefabParentObject: {fileID: 3300000, guid: 51d23085de342e94681e5f4653d6d92c,
+    type: 3}
+  m_PrefabInternal: {fileID: 1856574973}
 --- !u!1001 &2123817948
 Prefab:
   m_ObjectHideFlags: 0
