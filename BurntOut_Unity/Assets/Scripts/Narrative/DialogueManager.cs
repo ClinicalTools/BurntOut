@@ -250,7 +250,7 @@ namespace Narrative
             if (eventSet < choices.Count && choices[eventSet].Triggers.Exists(
                 t => t.type == TriggerType.Talk && t.id == actorObject.actor.id))
             {
-                PlayerMovement.Instance.ZoomLook(actorObject.transform, 2);
+                PlayerMovement.Instance.ZoomLook(actorObject.ActorTransform, 2);
                 actorImage.sprite = actorObject.actor.neutral;
                 StartDialogue();
             }
@@ -266,7 +266,7 @@ namespace Narrative
                         tasks.Enqueue(task);
                     inSmallNarrative = true;
 
-                    PlayerMovement.Instance.ZoomLook(actorObject.transform, 2);
+                    PlayerMovement.Instance.ZoomLook(actorObject.ActorTransform, 2);
                     actorImage.sprite = actorObject.actor.neutral;
                     StartDialogue();
                 }

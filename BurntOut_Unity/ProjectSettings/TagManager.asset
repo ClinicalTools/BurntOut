@@ -10,6 +10,7 @@ TagManager:
   - CloseExamine
   - Activatable
   - Dialogue
+  - Scene
   layers:
   - Default
   - TransparentFX

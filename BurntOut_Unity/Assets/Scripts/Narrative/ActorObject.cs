@@ -7,6 +7,17 @@ namespace Narrative
     {
         public Actor actor;
 
+        public Transform ActorTransform
+        {
+            get
+            {
+                foreach (Transform child in transform)
+                    if (child.tag == "Scene")
+                        return child.transform;
+                return transform;
+            }
+        }
+
         private SpriteRenderer sprite;
 
         private void Start()
