@@ -9,6 +9,7 @@ public class GlobalStats : MonoBehaviour {
     public int currentHealth;
     public int GOOD_stars;
     public int BAD_stars;
+    public List<GlobalStats> myNodes;
 
     public static GlobalStats instance = null;
 
@@ -23,6 +24,5 @@ public class GlobalStats : MonoBehaviour {
         DontDestroyOnLoad(this);
 
     }
-
 
 }
