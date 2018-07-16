@@ -94,8 +94,8 @@ namespace Narrative.Inspector
             }
             else
             {
-                Foldout.Style.FontColor = EditorColors.Error;
-                Foldout.Content.tooltip = "No continue option";
+                //Foldout.Style.FontColor = EditorColors.Error;
+                //Foldout.Content.tooltip = "No continue option";
             }
         }
 

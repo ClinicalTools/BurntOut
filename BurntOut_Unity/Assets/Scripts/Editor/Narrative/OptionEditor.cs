@@ -60,7 +60,7 @@ namespace Narrative.Inspector
         public OptionEditor(Option value, int index) : base(value, index)
         {
             Foldout = new Foldout(FoldoutName);
-            Foldout.Style.FontColor = ResultColor;
+            Foldout.Style.FontColor = HealthColor;
 
             IndexChanged += (sender, e) =>
             {
@@ -101,6 +101,7 @@ namespace Narrative.Inspector
             healthChangeField.Changed += (sender, e) =>
             {
                 Value.HealthChangeStr = e.Value;
+                Foldout.Style.FontColor = HealthColor;
                 healthChangeField.Style.FontColor = HealthColor;
             };
 
@@ -122,7 +123,7 @@ namespace Narrative.Inspector
                 using (Indent.Draw())
                     taskList.Draw(Value.Events);
 
-            resultPopup.Draw(Value.result);
+            //resultPopup.Draw(Value.result);
             healthChangeField.Draw(Value.HealthChangeStr);
 
             feedbackLabel.Draw();
