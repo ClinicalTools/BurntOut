@@ -104,8 +104,8 @@ MonoBehaviour:
   actor:
     id: 24987387
     name: Mrs. Adams
-    icon: {fileID: 21300000, guid: a5d4e81a69c16e447855502b47487e48, type: 3}
-    neutral: {fileID: 21300000, guid: a5d4e81a69c16e447855502b47487e48, type: 3}
+    icon: {fileID: 21300000, guid: 42ec898d72acd9d41a39a5de6b4d8411, type: 3}
+    neutral: {fileID: 21300000, guid: b13dc5f57f5029743a2dc1e120cdd4ae, type: 3}
     happy: {fileID: 0}
     sad: {fileID: 0}
     angry: {fileID: 0}

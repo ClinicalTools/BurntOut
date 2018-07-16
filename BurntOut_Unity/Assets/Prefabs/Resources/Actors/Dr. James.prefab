@@ -88,7 +88,7 @@ MonoBehaviour:
   actor:
     id: -812679138
     name: Dr. James
-    icon: {fileID: 21300000, guid: 05013e1bd6eca5245a57e6ab4c596a0f, type: 3}
+    icon: {fileID: 21300000, guid: f813e417b0e250341a5f1e87a3098268, type: 3}
     neutral: {fileID: 21300000, guid: 05013e1bd6eca5245a57e6ab4c596a0f, type: 3}
     happy: {fileID: 21300000, guid: 6a6f37d6af9a17647a39dd313b75370d, type: 3}
     sad: {fileID: 0}

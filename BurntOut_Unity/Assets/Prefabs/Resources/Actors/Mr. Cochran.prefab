@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 136792222612499164}
   - component: {fileID: 114447862664531332}
   - component: {fileID: 212578885589361624}
+  - component: {fileID: 114822264011541920}
   m_Layer: 0
   m_Name: Mr. Cochran
   m_TagString: Untagged
@@ -66,14 +67,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1600184846242674}
-  m_LocalRotation: {x: 0, y: -0.08280819, z: 0, w: 0.9965655}
-  m_LocalPosition: {x: -5.44, y: 0.745, z: -8.908}
+  m_LocalRotation: {x: -0, y: 0.14555521, z: -0, w: 0.98935014}
+  m_LocalPosition: {x: -4.161, y: -0.43, z: -9.71}
   m_LocalScale: {x: 0.07, y: 0.07, z: 1}
   m_Children:
   - {fileID: 4048614916378446}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 16.739, z: 0}
 --- !u!114 &114447862664531332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,12 +105,24 @@ MonoBehaviour:
   actor:
     id: 1097336261
     name: Mr. Cochran
-    icon: {fileID: 21300000, guid: 84f7d9497e5f5ba4d96948ed78fddd78, type: 3}
+    icon: {fileID: 21300000, guid: 8b94910be4080ec4fa34022506af480c, type: 3}
     neutral: {fileID: 21300000, guid: 84f7d9497e5f5ba4d96948ed78fddd78, type: 3}
     happy: {fileID: 0}
     sad: {fileID: 0}
     angry: {fileID: 0}
     scared: {fileID: 0}
+--- !u!114 &114822264011541920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1600184846242674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e27d056e0d96e4cb707e988ec1ef5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actor: {fileID: 114761555340335788}
 --- !u!136 &136792222612499164
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -4745,7 +4758,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84f7d9497e5f5ba4d96948ed78fddd78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

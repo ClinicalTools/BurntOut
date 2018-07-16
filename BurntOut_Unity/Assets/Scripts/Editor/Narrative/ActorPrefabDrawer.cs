@@ -14,9 +14,12 @@ namespace Narrative.Inspector
         private readonly Button deleteButton;
 
         public override Foldout Foldout { get; }
+        private SpriteRenderer sprite;
 
         public ActorPrefabDrawer(ActorObject value, int index) : base(value, index)
         {
+            sprite = Value.GetComponent<SpriteRenderer>();
+
             if (Value.actor.icon != null)
                 Foldout = new Foldout(Value.actor.name, null, Value.actor.icon.texture);
             else
@@ -119,6 +122,9 @@ namespace Narrative.Inspector
         protected override void Display()
         {
             actorNameField.Draw(Value.actor.name);
+
+            if (sprite.sprite != Value.actor.neutral)
+                sprite.sprite = Value.actor.neutral;
 
             using (Horizontal.Draw())
             {

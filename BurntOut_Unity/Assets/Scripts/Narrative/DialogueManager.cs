@@ -266,6 +266,7 @@ namespace Narrative
             {
                 var actorEvents = scenario.ActorEventsList.FirstOrDefault(
                     a => a.actorId == actorObject.actor.id);
+                
                 if (actorEvents?.Events?.Count > 0)
                 {
                     narrativeTasks = tasks;

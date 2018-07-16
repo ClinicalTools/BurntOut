@@ -292,29 +292,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d723cdbad854a74b8b95bd5325cc238, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &15391349 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1600184846242674, guid: a70dc32d0de15b54bad66290fa581c3c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1385425570}
---- !u!114 &15391353 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114761555340335788, guid: a70dc32d0de15b54bad66290fa581c3c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1385425570}
-  m_Script: {fileID: 11500000, guid: 164bfd657ef6ae54a8e3b06e93231168, type: 3}
---- !u!114 &15391354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 15391349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5e27d056e0d96e4cb707e988ec1ef5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actor: {fileID: 15391353}
 --- !u!1001 &16561612
 Prefab:
   m_ObjectHideFlags: 0
@@ -332,7 +309,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4665337176943900, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.98
+      value: 0.667
       objectReference: {fileID: 0}
     - target: {fileID: 4665337176943900, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
       propertyPath: m_LocalRotation.x
@@ -354,40 +331,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1105011537561384, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212076783779420626, guid: ab3e08075e7236e48adf8615757ca696,
+    - target: {fileID: 114837462495040106, guid: ab3e08075e7236e48adf8615757ca696,
         type: 2}
-      propertyPath: m_Sprite
+      propertyPath: actor
       value: 
-      objectReference: {fileID: 21300000, guid: 84f7d9497e5f5ba4d96948ed78fddd78,
-        type: 3}
-    - target: {fileID: 4665337176943900, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.04643359
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665337176943900, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.046433587
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665337176943900, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.6633371
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665337176943900, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -84.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665337176943900, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 10.952001
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665337176943900, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -7.51
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1823582552}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab3e08075e7236e48adf8615757ca696, type: 2}
   m_IsPrefabParent: 0
@@ -26591,23 +26539,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4531967485447090, guid: 5f164a3cd5553ee41b83929b92044e1f,
     type: 2}
   m_PrefabInternal: {fileID: 1220761213}
---- !u!1 &1221424655 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1105011537561384, guid: ab3e08075e7236e48adf8615757ca696,
-    type: 2}
-  m_PrefabInternal: {fileID: 16561612}
---- !u!114 &1221424660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1221424655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5e27d056e0d96e4cb707e988ec1ef5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actor: {fileID: 1823582552}
 --- !u!1 &1221940801
 GameObject:
   m_ObjectHideFlags: 0
@@ -28425,10 +28356,6 @@ Prefab:
     - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4807099045401782, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 16.739
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a70dc32d0de15b54bad66290fa581c3c, type: 2}
@@ -34317,7 +34244,14 @@ MonoBehaviour:
     vars: []
     actorEventsList:
     - actorId: 1097336261
-      events: []
+      events:
+      - type: 0
+        actorId: 1097336261
+        emotion: 0
+        dialogue: I can't wait to get back to my family.
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
     - actorId: -812679138
       events: []
     - actorId: 24987387
@@ -34871,6 +34805,13 @@ MonoBehaviour:
         - type: 0
           actorId: -608044
           emotion: 0
+          dialogue: 'The EKG cart is in the closet next to the patient. '
+          action: 0
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 0
+          actorId: -608044
+          emotion: 0
           dialogue: Use the Velcro to secure the different wires in loops after you
             get them untangled.
           action: 0
@@ -34887,16 +34828,23 @@ MonoBehaviour:
           actorId: 0
           emotion: 0
           dialogue: 
-          action: 3
+          action: 1
           position: {fileID: 0}
-          activatable: {fileID: 0}
+          activatable: {fileID: 1076780822}
         - type: 1
           actorId: 0
           emotion: 0
           dialogue: 
           action: 1
           position: {fileID: 0}
-          activatable: {fileID: 0}
+          activatable: {fileID: 708393910}
+        - type: 1
+          actorId: 0
+          emotion: 0
+          dialogue: 
+          action: 1
+          position: {fileID: 0}
+          activatable: {fileID: 643162139}
         - type: 2
           actorId: 1644999686
           emotion: 1
@@ -34956,7 +34904,7 @@ MonoBehaviour:
           most efficient way. Short term outcome: Some discomfort in having to reveal
           not knowing something to a superior. Long term outcome: Find the cart quickly.
           Arrive almost on time to the seminar.'
-    - name: 
+    - name: EKG cart
       text: 
       continueLast: 0
       triggers:
@@ -34976,7 +34924,7 @@ MonoBehaviour:
         actorId: -1
         emotion: 0
         dialogue: '[You fumble with getting the leads untangled but finally get them
-          coiled in need loops secured with the Velcro].'
+          coiled in need loops secured with the Velcro]'
         action: 0
         position: {fileID: 0}
         activatable: {fileID: 0}
@@ -34991,9 +34939,9 @@ MonoBehaviour:
         actorId: 1644999686
         emotion: 0
         dialogue: 
-        action: 0
+        action: 1
         position: {fileID: 352448405}
-        activatable: {fileID: 0}
+        activatable: {fileID: 143142442}
       isChoice: 0
       options: []
 --- !u!1001 &2025148331

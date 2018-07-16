@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114528492980780568}
   - component: {fileID: 114799959115035056}
   - component: {fileID: 212076783779420626}
+  - component: {fileID: 114837462495040106}
   m_Layer: 0
   m_Name: Dr. Nathan Turner
   m_TagString: Untagged
@@ -66,14 +67,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1105011537561384}
-  m_LocalRotation: {x: -0, y: -0.50392467, z: -0, w: 0.86374766}
-  m_LocalPosition: {x: -7.989, y: 0.199, z: -10.385}
-  m_LocalScale: {x: 0.07000001, y: 0.07, z: 1.0000002}
+  m_LocalRotation: {x: 0.114381485, y: -0.6600693, z: 0.015282241, w: 0.74228835}
+  m_LocalPosition: {x: -10.40987, y: -0.200025, z: 0.667}
+  m_LocalScale: {x: 0.04643359, y: 0.046433587, z: 0.6633371}
   m_Children:
   - {fileID: 4500381348174190}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.952001, y: -84.01, z: -7.51}
 --- !u!114 &114528492980780568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,7 +89,7 @@ MonoBehaviour:
   actor:
     id: 1644999686
     name: Dr. Nathan Turner
-    icon: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
+    icon: {fileID: 21300000, guid: 7fbe7ce84676bbd4e9fe08c7086c8066, type: 3}
     neutral: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
     happy: {fileID: 0}
     sad: {fileID: 0}
@@ -110,6 +111,18 @@ MonoBehaviour:
   newDoorMaterial: {fileID: 0}
   oldDoorMaterial: {fileID: 0}
   myDoorMesh: {fileID: 0}
+--- !u!114 &114837462495040106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105011537561384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e27d056e0d96e4cb707e988ec1ef5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actor: {fileID: 0}
 --- !u!136 &136080321621000146
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -4745,7 +4758,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fba7d9405c6e6294680cf7345b439d04, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
