@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Narrative.Inspector
 {
@@ -19,7 +20,7 @@ namespace Narrative.Inspector
 
         private static void ResetActors()
         {
-            var curActorObjects = Object.FindObjectsOfType<ActorObject>();
+            var curActorObjects = SceneObjects.FindObjectsOfType<ActorObject>();
             // Use the previous array reference when possible
             if (actorObjects == null || actorObjects.Length != curActorObjects.Length)
                 actorObjects = curActorObjects;

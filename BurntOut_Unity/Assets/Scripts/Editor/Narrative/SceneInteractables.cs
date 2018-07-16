@@ -15,7 +15,7 @@ namespace Narrative.Inspector
 
         private static void ResetInteractables()
         {
-            var curInteractables = Object.FindObjectsOfType<Interactable>();
+            var curInteractables = SceneObjects.FindObjectsOfType<Interactable>();
             // Use the previous array reference when possible
             if (interactables == null || interactables.Length != curInteractables.Length)
                 interactables = curInteractables;

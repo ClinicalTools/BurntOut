@@ -17,7 +17,7 @@ namespace Narrative.Inspector
 
         private static void ResetActivatables()
         {
-            var curActivatables = GameObject.FindGameObjectsWithTag(ACTIVATABLE_TAG);
+            var curActivatables = SceneObjects.FindGameObjectsWithTag(ACTIVATABLE_TAG);
             // Use the previous array reference when possible
             if (activatables == null || activatables.Length != curActivatables.Length)
                 activatables = curActivatables;

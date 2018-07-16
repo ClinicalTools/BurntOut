@@ -15,7 +15,7 @@ namespace Narrative.Inspector
 
         private static void ResetPositions()
         {
-            var curPositions = Object.FindObjectsOfType<PositionNode>();
+            var curPositions = SceneObjects.FindObjectsOfType<PositionNode>();
             // Use the previous array reference when possible
             if (positions == null || positions.Length != curPositions.Length)
                 positions = curPositions;
