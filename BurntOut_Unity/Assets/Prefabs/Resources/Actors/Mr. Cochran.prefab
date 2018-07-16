@@ -86,6 +86,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ableToRunScript: 1
+  door: 0
+  newDoorMaterial: {fileID: 0}
+  oldDoorMaterial: {fileID: 0}
+  myDoorMesh: {fileID: 0}
 --- !u!114 &114761555340335788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,8 +104,8 @@ MonoBehaviour:
   actor:
     id: 1097336261
     name: Mr. Cochran
-    icon: {fileID: 21300000, guid: 7fbe7ce84676bbd4e9fe08c7086c8066, type: 3}
-    neutral: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
+    icon: {fileID: 21300000, guid: 84f7d9497e5f5ba4d96948ed78fddd78, type: 3}
+    neutral: {fileID: 21300000, guid: 84f7d9497e5f5ba4d96948ed78fddd78, type: 3}
     happy: {fileID: 0}
     sad: {fileID: 0}
     angry: {fileID: 0}

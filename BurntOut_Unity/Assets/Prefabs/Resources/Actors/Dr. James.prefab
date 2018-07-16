@@ -88,9 +88,9 @@ MonoBehaviour:
   actor:
     id: -812679138
     name: Dr. James
-    icon: {fileID: 21300000, guid: 384a259887996664190113f968ef3fff, type: 3}
-    neutral: {fileID: 21300000, guid: fd0448ea1b0f08647b2fe4062f4efaf9, type: 3}
-    happy: {fileID: 0}
+    icon: {fileID: 21300000, guid: 05013e1bd6eca5245a57e6ab4c596a0f, type: 3}
+    neutral: {fileID: 21300000, guid: 05013e1bd6eca5245a57e6ab4c596a0f, type: 3}
+    happy: {fileID: 21300000, guid: 6a6f37d6af9a17647a39dd313b75370d, type: 3}
     sad: {fileID: 0}
     angry: {fileID: 0}
     scared: {fileID: 0}
@@ -106,6 +106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ableToRunScript: 1
+  door: 0
+  newDoorMaterial: {fileID: 0}
+  oldDoorMaterial: {fileID: 0}
+  myDoorMesh: {fileID: 0}
 --- !u!136 &136056194720589876
 CapsuleCollider:
   m_ObjectHideFlags: 1

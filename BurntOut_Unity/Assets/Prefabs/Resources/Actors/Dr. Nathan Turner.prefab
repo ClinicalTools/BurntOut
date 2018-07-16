@@ -88,8 +88,8 @@ MonoBehaviour:
   actor:
     id: 1644999686
     name: Dr. Nathan Turner
-    icon: {fileID: 21300000, guid: 5b0b12d5679d07d40962a855599d1c55, type: 3}
-    neutral: {fileID: 21300000, guid: fba7d9405c6e6294680cf7345b439d04, type: 3}
+    icon: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
+    neutral: {fileID: 21300000, guid: 9c10ab7c014131941952cd34ddbe5297, type: 3}
     happy: {fileID: 0}
     sad: {fileID: 0}
     angry: {fileID: 0}
@@ -106,6 +106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ableToRunScript: 1
+  door: 0
+  newDoorMaterial: {fileID: 0}
+  oldDoorMaterial: {fileID: 0}
+  myDoorMesh: {fileID: 0}
 --- !u!136 &136080321621000146
 CapsuleCollider:
   m_ObjectHideFlags: 1

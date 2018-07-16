@@ -86,6 +86,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ableToRunScript: 1
+  door: 0
+  newDoorMaterial: {fileID: 0}
+  oldDoorMaterial: {fileID: 0}
+  myDoorMesh: {fileID: 0}
 --- !u!114 &114773091362105420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,7 +104,7 @@ MonoBehaviour:
   actor:
     id: -608044
     name: Ms. Jefferson
-    icon: {fileID: 21300000, guid: 95e3a5b924e02b549b805747a0e2d689, type: 3}
+    icon: {fileID: 21300000, guid: 4be77ce7a0f6a1b4dadbc167f5eecf9f, type: 3}
     neutral: {fileID: 21300000, guid: e14016d45bc52b24b87cb0872d21f550, type: 3}
     happy: {fileID: 0}
     sad: {fileID: 0}
