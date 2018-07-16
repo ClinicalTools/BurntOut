@@ -15,7 +15,7 @@ namespace Narrative
 
     public enum TaskAction
     {
-        MoveTo, Show, Hide, Script
+        MoveTo, Show, Hide, Script, Sprite
     }
 
     [Serializable]

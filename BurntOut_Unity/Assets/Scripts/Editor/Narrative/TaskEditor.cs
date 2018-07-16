@@ -133,6 +133,10 @@ namespace Narrative.Inspector
                             activatablePopup.Options = SceneActivatables.Names;
                             activatablePopup.Draw(SceneActivatables.GetIndex(Value.activatable));
                             break;
+                        case TaskAction.Sprite:
+                            actorPopup.Options = SceneActors.ActorNames;
+                            actorPopup.Draw(SceneActors.GetActorIndex(Value.actorId));
+                            break;
                     }
 
                     break;

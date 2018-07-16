@@ -132,6 +132,14 @@ namespace Narrative
                             if (task.activatable != null)
                                 task.activatable.SetActive(false);
                             break;
+                        case TaskAction.Sprite:
+                            var actor = actorObjects.FirstOrDefault(a => a.actor.id == task.actorId)
+                                ?.actor;
+                            if (actor != null)
+                                actorImage.sprite = actor.neutral;
+                            else
+                                actorImage.sprite = null;
+                            break;
                         case TaskAction.Script:
                             break;
                     }
