@@ -34568,6 +34568,13 @@ MonoBehaviour:
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
+        - type: 1
+          actorId: -1
+          emotion: 0
+          dialogue: 
+          action: 4
+          position: {fileID: 0}
+          activatable: {fileID: 0}
         - type: 0
           actorId: -1
           emotion: 0

@@ -125,7 +125,7 @@ namespace Narrative.Inspector
         {
             if (scenarioManager?.Scenario == null)
             {
-                Debug.LogError("Scenario Manager and its scenario should not be null.");
+                //Debug.LogError("Scenario Manager and its scenario should not be null.");
                 return;
             }
 
