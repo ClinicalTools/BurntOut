@@ -161,7 +161,7 @@ namespace Narrative
                 if (actorImage.sprite == null)
                     actorImage.color = invisible;
                 else
-                    actorImage.color = invisible;// darkenedCharColor;
+                    actorImage.color =  darkenedCharColor;
             }
             else if (actorId == Actor.PLAYER_ID)
             {
@@ -169,7 +169,7 @@ namespace Narrative
                 if (actorImage.sprite == null)
                     actorImage.color = invisible;
                 else
-                    actorImage.color = invisible;//darkenedCharColor;
+                    actorImage.color = darkenedCharColor;
             }
             else
             {
@@ -177,13 +177,19 @@ namespace Narrative
                 if (actor != null)
                 {
                     actorImage.sprite = actor.neutral;
-                    actorImage.color = invisible;//Color.white;
+                    if (actorImage.sprite == null)
+                        actorImage.color = invisible;
+                    else
+                        actorImage.color = Color.white;
                     nameText.text = actor.name;
                 }
                 else
                 {
                     nameText.text = "?";
-                    actorImage.color = invisible;//darkenedCharColor;
+                    if (actorImage.sprite == null)
+                        actorImage.color = invisible;
+                    else
+                        actorImage.color = darkenedCharColor;
                 }
             }
 
