@@ -9,7 +9,7 @@ public static class SceneObjects
         var list = new List<T>();
         var rootObjs = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (var rootObj in rootObjs)
-            list.AddRange(rootObj.GetComponentsInChildren<T>());
+            list.AddRange(rootObj.GetComponentsInChildren<T>(true));
 
         return list.ToArray();
     }

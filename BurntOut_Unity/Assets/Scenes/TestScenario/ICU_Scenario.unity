@@ -856,7 +856,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1277152290782062, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533261569244898, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_LocalPosition.x
@@ -869,6 +869,10 @@ Prefab:
     - target: {fileID: 4533261569244898, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
       propertyPath: m_LocalPosition.y
       value: -6.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1277152290782062, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
+      propertyPath: m_TagString
+      value: Activatable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b2e34fbcd6f81438df0488356e60df, type: 2}
@@ -3681,7 +3685,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4244861794685134, guid: ff60bf09ca63ae141ab069117199635c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.16
+      value: -3.923
       objectReference: {fileID: 0}
     - target: {fileID: 4244861794685134, guid: ff60bf09ca63ae141ab069117199635c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3689,7 +3693,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4244861794685134, guid: ff60bf09ca63ae141ab069117199635c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -11.893
+      value: -11.363
       objectReference: {fileID: 0}
     - target: {fileID: 4244861794685134, guid: ff60bf09ca63ae141ab069117199635c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3752,6 +3756,10 @@ Prefab:
     - target: {fileID: 4244861794685134, guid: ff60bf09ca63ae141ab069117199635c, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.615
+      objectReference: {fileID: 0}
+    - target: {fileID: 1876474209730410, guid: ff60bf09ca63ae141ab069117199635c, type: 2}
+      propertyPath: m_TagString
+      value: Activatable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ff60bf09ca63ae141ab069117199635c, type: 2}
@@ -3868,7 +3876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &352448405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6856,7 +6864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &643162140
 Transform:
   m_ObjectHideFlags: 0
@@ -7581,7 +7589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &708393911
 Transform:
   m_ObjectHideFlags: 0
@@ -7623,7 +7631,7 @@ MonoBehaviour:
   - type: 0
     actorId: -1
     emotion: 0
-    dialogue: Incorrect door
+    dialogue: The door is locked.
     action: 0
     position: {fileID: 0}
     activatable: {fileID: 0}
@@ -24444,7 +24452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1076780823
 Transform:
   m_ObjectHideFlags: 0
@@ -24486,7 +24494,8 @@ MonoBehaviour:
   - type: 0
     actorId: -1
     emotion: 0
-    dialogue: This is just a door.
+    dialogue: You waste a bit of time checking, but much to your dismay, the closet
+      contains only brooms.
     action: 0
     position: {fileID: 0}
     activatable: {fileID: 0}
@@ -29169,6 +29178,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b4cdc592d63fbc64fa4e737bb064e9a9, type: 2}
+    - target: {fileID: 100000, guid: f519472056d013d4fbcccdb78c316d14, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f519472056d013d4fbcccdb78c316d14, type: 3}
   m_IsPrefabParent: 0
@@ -34309,7 +34322,7 @@ MonoBehaviour:
       - type: 0
         actorId: 1644999686
         emotion: 0
-        dialogue: Zzzzz...
+        dialogue: sample dialogue
         action: 0
         position: {fileID: 0}
         activatable: {fileID: 0}
@@ -34452,6 +34465,20 @@ MonoBehaviour:
         action: 0
         position: {fileID: 0}
         activatable: {fileID: 0}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 1
+        position: {fileID: 0}
+        activatable: {fileID: 916682935}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 2
+        position: {fileID: 0}
+        activatable: {fileID: 1452091295}
       isChoice: 0
       options:
       - name: 
@@ -34495,6 +34522,27 @@ MonoBehaviour:
         action: 0
         position: {fileID: 0}
         activatable: {fileID: 0}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 1
+        position: {fileID: 0}
+        activatable: {fileID: 1076780822}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 1
+        position: {fileID: 0}
+        activatable: {fileID: 708393910}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 1
+        position: {fileID: 0}
+        activatable: {fileID: 643162139}
       isChoice: 1
       options:
       - name: Autonomy at all costs
@@ -34531,177 +34579,6 @@ MonoBehaviour:
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 3
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 1
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -1
-          emotion: 0
-          dialogue: '[You begin untangling wires, but are unsure how to do it or what
-            to do with them after untangling them.]'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 2
-          actorId: -608044
-          emotion: 3
-          dialogue: 
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -608044
-          emotion: 0
-          dialogue: Still working on that? Okay, I'll come back later.
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: 1
-          emotion: 0
-          dialogue: Okay, thanks.
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -1
-          emotion: 0
-          dialogue: '[You struggle with figuring out how to untangle the wires and
-            what to do with each one.'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 2
-          actorId: -608044
-          emotion: 3
-          dialogue: 
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -608044
-          emotion: 0
-          dialogue: Still not done?
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -1
-          emotion: 0
-          dialogue: '[You finally finish untangling wires.]'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 3
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 2
-          actorId: -608044
-          emotion: 0
-          dialogue: 
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -608044
-          emotion: 0
-          dialogue: Okay, I'll take it from here.
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -1
-          emotion: 0
-          dialogue: 'By choosing to find the cart on your own without asking for help,
-            you waste previous time, frustrated Ms. Jefferson, and ended up being
-            late for the seminar. Some students might ahve made this choice because
-            they made assumptions about how others will respond or what they are thinking.
-            Others may have made this choice out of having unrealistic expectations
-            of themselves and feeling they should know everything already. Learn more
-            about problems with these two possible reasons:'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -1
-          emotion: 0
-          dialogue: 'The 3rd year clerkship students'' thoughts were incorrect if
-            they went something like this: "The 4th year clerkship students didn''t
-            even say hello or make eye contact. They really don''t seem to want me
-            here or want to be helpful. I''ll just find the cart on my own." "Listen"
-            in on the two 4th year students actual thoughts.'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: 1644999686
-          emotion: 0
-          dialogue: '[Thoughts: My head hurts! I shouldn''t have had so much to drink
-            last night. I sure hope the 3rd year clerkship student is a hard worker.]'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: 0
-          emotion: 0
-          dialogue: '[Thoughts: I''m glad I''m on rotation with Nathan. He''s so smart.
-            I always learn a lot when he''s around.'
-          action: 3
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 3
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -1
-          emotion: 0
-          dialogue: 'Listen in on Dr. Shazam and Nurse Jefferson to learn the problem
-            with not asking for help when you need it:'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: 0
-          emotion: 0
-          dialogue: One thing I hate is when a student tries to pretend they know
-            what they're doing and they don't. It's actually pretty dangerous.
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -608044
-          emotion: 0
-          dialogue: I know what you mean! I'd rather they be upfront about what they
-            know and don't know. Everyone has to start at the beginning.
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -1
-          emotion: 0
-          dialogue: Please rejoin the scenario at the seminar.
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
         result: 2
         healthChange: -40
         feedback: 'Possible goals in making this choice: Not revealing to anyone your
@@ -34716,19 +34593,26 @@ MonoBehaviour:
         text: Ask a peer for help. Ask the 4th year clerkship students even though
           they have not been accomodating so far.
         events:
+        - type: 1
+          actorId: 1644999686
+          emotion: 0
+          dialogue: 
+          action: 0
+          position: {fileID: 1560649420}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: 1644999686
+          emotion: 0
+          dialogue: 
+          action: 4
+          position: {fileID: 0}
+          activatable: {fileID: 0}
         - type: 0
           actorId: 1
           emotion: 0
           dialogue: Hi, Nathan. I have to set up my first EKG cart. Where do you find
             them?
           action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 3
           position: {fileID: 0}
           activatable: {fileID: 0}
         - type: 2
@@ -34741,8 +34625,7 @@ MonoBehaviour:
         - type: 0
           actorId: 1644999686
           emotion: 0
-          dialogue: Use the Velcro to secure the wires in the loops after you get
-            them untangled.
+          dialogue: 'The EKG cart is in the closet next to the patient. '
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
@@ -34753,70 +34636,34 @@ MonoBehaviour:
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 3
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 1
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 2
-          actorId: 1644999686
-          emotion: 1
-          dialogue: 
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
         - type: 0
           actorId: 1644999686
           emotion: 0
-          dialogue: Dr. Shazam, the attending physician, likes to hold a quick afternoon
-            seminar in the chart room. It starts in 5 minutes
+          dialogue: Also, Dr. Shazam, the attending physician, likes to hold a quick
+            afternoon seminar in the chart room. It starts in 5 minutes.
           action: 0
           position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: -1
+          emotion: 0
+          dialogue: 
+          action: 4
+          position: {fileID: 0}
+          activatable: {fileID: 0}
+        - type: 1
+          actorId: -608044
+          emotion: 0
+          dialogue: 
+          action: 0
+          position: {fileID: 1560649420}
           activatable: {fileID: 0}
         - type: 0
           actorId: 1
           emotion: 0
-          dialogue: '[To self] I don''t know how they like these wires set up. I wish
-            I had asked Nathan what to do with them. Now I''m going to be a little
-            late for the seminar.'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -1
-          emotion: 0
-          dialogue: '[You fumble with getting the leads untangled, but finally get
-            them ready.'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 3
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 2
-          actorId: -608044
-          emotion: 0
-          dialogue: 
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -608044
-          emotion: 0
-          dialogue: Thanks. I'll take it from here.
+          dialogue: '[To self] I just realized I don''t know how they like the wires
+            set up. I wish I had asked Nathan what to do with them. Now I''m going
+            to be a little late for the seminar.'
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
@@ -34877,27 +34724,6 @@ MonoBehaviour:
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 1
-          position: {fileID: 0}
-          activatable: {fileID: 1076780822}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 1
-          position: {fileID: 0}
-          activatable: {fileID: 708393910}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 1
-          position: {fileID: 0}
-          activatable: {fileID: 643162139}
         - type: 2
           actorId: 1644999686
           emotion: 1
@@ -34913,44 +34739,6 @@ MonoBehaviour:
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
-        - type: 0
-          actorId: -1
-          emotion: 0
-          dialogue: '[You fumble with getting the leads untangled but finally get
-            them coiled in need loops secured with the Velcro]'
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 3
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: -608044
-          emotion: 0
-          dialogue: Thanks, I'll take it from here.
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 0
-          actorId: 1
-          emotion: 0
-          dialogue: I think I did pretty well with the EKG cart. I did the best I
-            could and asked for help when I needed it, and I may only be a few seconds
-            late for the seminar. Not bad!
-          action: 0
-          position: {fileID: 0}
-          activatable: {fileID: 0}
-        - type: 1
-          actorId: 0
-          emotion: 0
-          dialogue: 
-          action: 1
-          position: {fileID: 0}
-          activatable: {fileID: 143142442}
         result: 2
         healthChange: 30
         feedback: 'Possible goal in making this choice: Getting the information the
@@ -34973,6 +34761,27 @@ MonoBehaviour:
         action: 0
         position: {fileID: 0}
         activatable: {fileID: 0}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 1
+        position: {fileID: 0}
+        activatable: {fileID: 1460357626}
+      - type: 1
+        actorId: 1097336261
+        emotion: 0
+        dialogue: 
+        action: 0
+        position: {fileID: 352448405}
+        activatable: {fileID: 0}
+      - type: 1
+        actorId: -1
+        emotion: 0
+        dialogue: 
+        action: 4
+        position: {fileID: 0}
+        activatable: {fileID: 0}
       - type: 0
         actorId: -1
         emotion: 0
@@ -34993,8 +34802,36 @@ MonoBehaviour:
         emotion: 0
         dialogue: 
         action: 1
-        position: {fileID: 352448405}
+        position: {fileID: 0}
         activatable: {fileID: 143142442}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 2
+        position: {fileID: 0}
+        activatable: {fileID: 1076780822}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 2
+        position: {fileID: 0}
+        activatable: {fileID: 708393910}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 2
+        position: {fileID: 0}
+        activatable: {fileID: 643162139}
+      - type: 1
+        actorId: 0
+        emotion: 0
+        dialogue: 
+        action: 2
+        position: {fileID: 0}
+        activatable: {fileID: 916682935}
       isChoice: 0
       options: []
 --- !u!1001 &2025148331

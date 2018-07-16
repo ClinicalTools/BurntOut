@@ -27,7 +27,8 @@ namespace Narrative
 
         public void Hide()
         {
-            StartCoroutine(FadeOut());
+            if (gameObject.activeInHierarchy)
+                StartCoroutine(FadeOut());
         }
 
         private IEnumerator FadeOut()
@@ -44,7 +45,8 @@ namespace Narrative
 
         public void Show()
         {
-            StartCoroutine(FadeIn());
+            if (gameObject.activeInHierarchy)
+                StartCoroutine(FadeIn());
         }
         private IEnumerator FadeIn()
         {

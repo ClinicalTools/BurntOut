@@ -62,7 +62,7 @@ namespace Narrative
             continueButton.onClick.AddListener(delegate { ProgressNarrative(); });
 
 
-            actorObjects = FindObjectsOfType<ActorObject>();
+            actorObjects = SceneObjects.FindObjectsOfType<ActorObject>();
 
             QueueNextEvents();
 
