@@ -31,6 +31,8 @@ namespace Narrative.Inspector
         private void ResetFoldout()
         {
             var actor = SceneActors.GetActor(Value.actorId);
+            if (actor == null)
+                return;
             Foldout.Content.text = actor.name;
             if (actor.icon != null)
                 Foldout.Content.image = actor.icon.texture;
