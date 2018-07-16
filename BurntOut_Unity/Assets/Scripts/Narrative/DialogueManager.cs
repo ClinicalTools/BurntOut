@@ -93,8 +93,10 @@ namespace Narrative
             {
                 if (inChoice)
                 {
+                    /*
                     if (option.result == OptionResult.TRY_AGAIN || option.result == OptionResult.END)
                         eventSet--;
+                    //*/
 
                     if (!string.IsNullOrEmpty(option.feedback))
                         Main_GameManager.Instance.FeedbackTyper.UpdateText(option.feedback);

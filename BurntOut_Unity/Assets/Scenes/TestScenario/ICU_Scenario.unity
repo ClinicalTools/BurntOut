@@ -34699,7 +34699,19 @@ MonoBehaviour:
         position: {fileID: 0}
         activatable: {fileID: 0}
       isChoice: 0
-      options: []
+      options:
+      - name: 
+        text: 
+        events: []
+        result: 0
+        healthChange: 0
+        feedback: 
+      - name: 
+        text: 
+        events: []
+        result: 0
+        healthChange: 0
+        feedback: 
     - name: 'Set-Up EKG (Scene 1: ICU Clinic)'
       text: How do you want to respond to Ms. Jefferson's request?
       continueLast: 0
@@ -34731,7 +34743,7 @@ MonoBehaviour:
         activatable: {fileID: 0}
       isChoice: 1
       options:
-      - name: Very Bad Choice
+      - name: Autonomy at all costs
         text: Autonomy at all costs. Look for the EKG cart and start setting it up
           on your own.
         events:
@@ -34753,7 +34765,7 @@ MonoBehaviour:
         - type: 0
           actorId: -1
           emotion: 0
-          dialogue: '[You take a while to find the EKG cart.]'
+          dialogue: '[You realize that you are unsure where the EKG carts are]'
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
@@ -34936,7 +34948,7 @@ MonoBehaviour:
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
-        result: 1
+        result: 2
         healthChange: -40
         feedback: 'Possible goals in making this choice: Not revealing to anyone your
           lack of knowledge. Relying on your faith in yourself to figure out on your
@@ -34946,7 +34958,7 @@ MonoBehaviour:
           a while to find the cart. Struggles with figuring out what to do on oyour
           own and so is late to the seminar. Also, the nurse, Ms. Jefferson, gets
           frustrated with the delay.'
-      - name: OK Choice
+      - name: Ask a peer for help
         text: Ask a peer for help. Ask the 4th year clerkship students even though
           they have not been accomodating so far.
         events:
@@ -35054,7 +35066,7 @@ MonoBehaviour:
           action: 0
           position: {fileID: 0}
           activatable: {fileID: 0}
-        result: 0
+        result: 2
         healthChange: 10
         feedback: 'Posslbe goal in making this choice: Finding out where the cart
           is and how to start setting it up without revealing to superiors your lack
@@ -35063,7 +35075,7 @@ MonoBehaviour:
           But if they are, it saves time. Long term outcome: Makes it clear to initially
           unhelpful students an expectation of students cooperating in a team. If
           they are helpful, you will be on time for the seminar.'
-      - name: Good Choice
+      - name: Ask the person assigning the task
         text: Ask the person assigning the task. Ask the nurse, Ms. Jefferson, where
           the cart is stored.
         events:
@@ -35177,6 +35189,46 @@ MonoBehaviour:
           most efficient way. Short term outcome: Some discomfort in having to reveal
           not knowing something to a superior. Long term outcome: Find the cart quickly.
           Arrive almost on time to the seminar.'
+    - name: 
+      text: 
+      continueLast: 0
+      triggers:
+      - type: 2
+        id: 0
+        interactable: {fileID: 643162142}
+      events:
+      - type: 0
+        actorId: -1
+        emotion: 0
+        dialogue: '[Inside the closet, you find an EKG cart, which you move next to
+          the patient]'
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -1
+        emotion: 0
+        dialogue: '[You fumble with getting the leads untangled but finally get them
+          coiled in need loops secured with the Velcro].'
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 0
+        actorId: -608044
+        emotion: 0
+        dialogue: "Thanks, I\u2019ll take it from here."
+        action: 0
+        position: {fileID: 0}
+        activatable: {fileID: 0}
+      - type: 1
+        actorId: 1644999686
+        emotion: 0
+        dialogue: 
+        action: 0
+        position: {fileID: 352448405}
+        activatable: {fileID: 0}
+      isChoice: 0
+      options: []
 --- !u!1001 &2025148331
 Prefab:
   m_ObjectHideFlags: 0
