@@ -29,9 +29,13 @@ namespace Narrative
             foreach (var cameraLook in cameraLooks)
                 cameraLook.enabled = false;
 
+            var positionNodes = FindObjectsOfType<PositionNode>();
+            foreach (var positionNode in positionNodes)
+                positionNode.gameObject.SetActive(false);
+
             PlayerMovement.Instance.FadeTo(actor.transform, 2, this);
 
-            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
     }
 }
