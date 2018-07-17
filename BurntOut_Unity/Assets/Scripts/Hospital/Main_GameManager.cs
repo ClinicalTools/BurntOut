@@ -102,7 +102,7 @@ public class Main_GameManager : MonoBehaviour
     void Update()
     {
         // pause screen 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gamePaused == true)
             {
@@ -110,6 +110,9 @@ public class Main_GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 gamePaused = false;
                 Canvas_Paused.SetActive(false);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
 
                 if (scene.name == "VitalitySpace" || scene.name == "Hospital" || scene.name == "Central")
                     player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
@@ -123,6 +126,10 @@ public class Main_GameManager : MonoBehaviour
                 gamePaused = true;
                 Canvas_Paused.SetActive(true);
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
+
+
+                //Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
 
                 ScreenBlur();
             }
@@ -212,6 +219,10 @@ public class Main_GameManager : MonoBehaviour
             globalStats.GOOD_stars += 1;
             globalStats.isMrJohnsonCompleted = true;
         }
+    }
+
+    public void ExitGame() {
+        Application.Quit();
     }
 
     public void RoomLost()
