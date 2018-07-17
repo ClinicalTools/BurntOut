@@ -111,8 +111,8 @@ public class Main_GameManager : MonoBehaviour
                 gamePaused = false;
                 Canvas_Paused.SetActive(false);
 
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
 
                 if (scene.name == "VitalitySpace" || scene.name == "Hospital" || scene.name == "Central")
                     player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
@@ -127,9 +127,8 @@ public class Main_GameManager : MonoBehaviour
                 Canvas_Paused.SetActive(true);
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = false;
 
-
-                //Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
 
                 ScreenBlur();
             }
